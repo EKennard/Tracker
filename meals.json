@@ -1,0 +1,5473 @@
+[
+  {
+    "name": "Courgette & Chickpea Stir-Fry",
+    "ingredients": [
+      {
+        "name": "courgette",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "cooked chickpeas",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "arlic",
+        "amount": null,
+        "unit": "g"
+      },
+      {
+        "name": "emon juice",
+        "amount": null,
+        "unit": "l"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 295,
+    "protein": 9.0,
+    "carbs": 20.0,
+    "fat": 18.0,
+    "fibre": 6.0,
+    "calcium": 60.0,
+    "iron": 2.2,
+    "vit_d": 0.0,
+    "folate": 80.0,
+    "potassium": 480.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Poached Egg on Spinach Toast",
+    "ingredients": [
+      {
+        "name": "wholemeal toast (40g)",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "poached egg",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "steamed spinach",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 300,
+    "protein": 12.0,
+    "carbs": 20.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 130.0,
+    "iron": 2.5,
+    "vit_d": 1.5,
+    "folate": 100.0,
+    "potassium": 520.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Tomato & Lentil Soup",
+    "ingredients": [
+      {
+        "name": "homemade tomato-onion soup base",
+        "amount": 250.0,
+        "unit": "ml"
+      },
+      {
+        "name": "cooked red lentils",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 290,
+    "protein": 14.0,
+    "carbs": 30.0,
+    "fat": 6.0,
+    "fibre": 7.0,
+    "calcium": 80.0,
+    "iron": 3.0,
+    "vit_d": 0.0,
+    "folate": 120.0,
+    "potassium": 510.0,
+    "magnesium": 75.0
+  },
+  {
+    "name": "Grilled Sardines on Salad",
+    "ingredients": [
+      {
+        "name": "grilled sardines",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "balsamic vinegar",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 300,
+    "protein": 18.0,
+    "carbs": 4.0,
+    "fat": 22.0,
+    "fibre": 2.0,
+    "calcium": 150.0,
+    "iron": 1.8,
+    "vit_d": 4.5,
+    "folate": 30.0,
+    "potassium": 420.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Stuffed Peppers",
+    "ingredients": [
+      {
+        "name": "medium pepper stuffed with 100g cooked quinoa",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "chopped tomatoes",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "arlic",
+        "amount": null,
+        "unit": "g"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 295,
+    "protein": 9.0,
+    "carbs": 35.0,
+    "fat": 10.0,
+    "fibre": 5.0,
+    "calcium": 60.0,
+    "iron": 2.0,
+    "vit_d": 0.0,
+    "folate": 90.0,
+    "potassium": 480.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Mushroom & Leek Omelette",
+    "ingredients": [
+      {
+        "name": "s",
+        "amount": 2.0,
+        "unit": "egg"
+      },
+      {
+        "name": "mushrooms",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "leeks",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 300,
+    "protein": 14.0,
+    "carbs": 6.0,
+    "fat": 22.0,
+    "fibre": 2.0,
+    "calcium": 120.0,
+    "iron": 1.5,
+    "vit_d": 1.8,
+    "folate": 50.0,
+    "potassium": 430.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Ricotta & Tomato Toast",
+    "ingredients": [
+      {
+        "name": "wholemeal toast",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "ricotta",
+        "amount": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "cherry tomatoes",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "basil",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 300,
+    "protein": 12.0,
+    "carbs": 22.0,
+    "fat": 16.0,
+    "fibre": 3.0,
+    "calcium": 180.0,
+    "iron": 1.2,
+    "vit_d": 0.5,
+    "folate": 40.0,
+    "potassium": 400.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Courgetti with Pesto",
+    "ingredients": [
+      {
+        "name": "courgette noodles",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "pesto",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "pine nuts",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "arlic",
+        "amount": null,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 295,
+    "protein": 8.0,
+    "carbs": 10.0,
+    "fat": 24.0,
+    "fibre": 2.0,
+    "calcium": 90.0,
+    "iron": 1.0,
+    "vit_d": 0.0,
+    "folate": 35.0,
+    "potassium": 390.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Squash & Feta Salad",
+    "ingredients": [
+      {
+        "name": "roasted butternut squash",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "feta",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "rocket",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 300,
+    "protein": 9.0,
+    "carbs": 20.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 160.0,
+    "iron": 1.6,
+    "vit_d": 0.2,
+    "folate": 60.0,
+    "potassium": 470.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Sardines on Rye Crispbread",
+    "ingredients": [
+      {
+        "name": "rye crispbreads",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "sardines",
+        "amount": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "cucumber slices",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "emon zest",
+        "amount": null,
+        "unit": "l"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 300,
+    "protein": 16.0,
+    "carbs": 14.0,
+    "fat": 20.0,
+    "fibre": 3.0,
+    "calcium": 140.0,
+    "iron": 2.0,
+    "vit_d": 3.8,
+    "folate": 25.0,
+    "potassium": 410.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Grilled Chicken & Tomato Pasta",
+    "ingredients": [
+      {
+        "name": "wholewheat pasta",
+        "amount": 75.0,
+        "unit": "g"
+      },
+      {
+        "name": "grilled chicken breast",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato-onion sauce",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "arlic",
+        "amount": null,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 400,
+    "protein": 30.0,
+    "carbs": 30.0,
+    "fat": 12.0,
+    "fibre": 5.0,
+    "calcium": 60.0,
+    "iron": 2.5,
+    "vit_d": 0.2,
+    "folate": 90.0,
+    "potassium": 550.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Salmon & Broccoli Traybake",
+    "ingredients": [
+      {
+        "name": "salmon fillet",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "broccoli",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "emon",
+        "amount": null,
+        "unit": "l"
+      },
+      {
+        "name": "dill",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 400,
+    "protein": 28.0,
+    "carbs": 10.0,
+    "fat": 24.0,
+    "fibre": 4.0,
+    "calcium": 100.0,
+    "iron": 1.8,
+    "vit_d": 5.0,
+    "folate": 80.0,
+    "potassium": 600.0,
+    "magnesium": 75.0
+  },
+  {
+    "name": "Vegetable & Bean Stew",
+    "ingredients": [
+      {
+        "name": "mixed vegetables",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "cooked cannellini beans",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 400,
+    "protein": 16.0,
+    "carbs": 30.0,
+    "fat": 16.0,
+    "fibre": 8.0,
+    "calcium": 90.0,
+    "iron": 3.2,
+    "vit_d": 0.0,
+    "folate": 120.0,
+    "potassium": 580.0,
+    "magnesium": 80.0
+  },
+  {
+    "name": "Stuffed Aubergine",
+    "ingredients": [
+      {
+        "name": "small aubergine",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "cooked lentils",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "chopped tomatoes",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "arlic",
+        "amount": null,
+        "unit": "g"
+      },
+      {
+        "name": "parsley",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 400,
+    "protein": 15.0,
+    "carbs": 28.0,
+    "fat": 18.0,
+    "fibre": 7.0,
+    "calcium": 85.0,
+    "iron": 2.8,
+    "vit_d": 0.0,
+    "folate": 110.0,
+    "potassium": 540.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Tuna & Sweetcorn Jacket Potato",
+    "ingredients": [
+      {
+        "name": "baked potato",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "tuna in spring water",
+        "amount": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "sweetcorn",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 400,
+    "protein": 22.0,
+    "carbs": 35.0,
+    "fat": 12.0,
+    "fibre": 5.0,
+    "calcium": 70.0,
+    "iron": 2.0,
+    "vit_d": 0.5,
+    "folate": 60.0,
+    "potassium": 520.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Chickpea & Spinach Curry",
+    "ingredients": [
+      {
+        "name": "chickpeas",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "spinach",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "chopped tomatoes",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "spices",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 400,
+    "protein": 16.0,
+    "carbs": 30.0,
+    "fat": 18.0,
+    "fibre": 7.0,
+    "calcium": 100.0,
+    "iron": 3.0,
+    "vit_d": 0.0,
+    "folate": 130.0,
+    "potassium": 590.0,
+    "magnesium": 75.0
+  },
+  {
+    "name": "Grilled Mackerel Salad",
+    "ingredients": [
+      {
+        "name": "grilled mackerel",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "beetroot",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 400,
+    "protein": 20.0,
+    "carbs": 10.0,
+    "fat": 26.0,
+    "fibre": 3.0,
+    "calcium": 120.0,
+    "iron": 2.2,
+    "vit_d": 4.2,
+    "folate": 40.0,
+    "potassium": 510.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Prawn Stir-Fry",
+    "ingredients": [
+      {
+        "name": "prawns",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed stir-fry veg",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "sesame oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "soy sauce",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 400,
+    "protein": 25.0,
+    "carbs": 20.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 80.0,
+    "iron": 1.5,
+    "vit_d": 1.2,
+    "folate": 70.0,
+    "potassium": 560.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Tomato & Garlic Pasta",
+    "ingredients": [
+      {
+        "name": "wholewheat pasta",
+        "amount": 75.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato sauce with garlic and onion",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 400,
+    "protein": 12.0,
+    "carbs": 40.0,
+    "fat": 14.0,
+    "fibre": 5.0,
+    "calcium": 90.0,
+    "iron": 2.0,
+    "vit_d": 0.3,
+    "folate": 100.0,
+    "potassium": 530.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Leek & Potato Soup with Rye Bread",
+    "ingredients": [
+      {
+        "name": "leek-potato soup",
+        "amount": 250.0,
+        "unit": "ml"
+      },
+      {
+        "name": "rye bread (40g)",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 400,
+    "protein": 10.0,
+    "carbs": 35.0,
+    "fat": 16.0,
+    "fibre": 6.0,
+    "calcium": 110.0,
+    "iron": 2.5,
+    "vit_d": 0.2,
+    "folate": 90.0,
+    "potassium": 500.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Grilled Chicken & Quinoa Salad",
+    "ingredients": [
+      {
+        "name": "grilled chicken",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "cooked quinoa",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil dressing",
+        "amount": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 32.0,
+    "carbs": 30.0,
+    "fat": 20.0,
+    "fibre": 6.0,
+    "calcium": 80.0,
+    "iron": 2.8,
+    "vit_d": 0.2,
+    "folate": 100.0,
+    "potassium": 620.0,
+    "magnesium": 80.0
+  },
+  {
+    "name": "Baked Cod with Tomato Sauce & New Potatoes",
+    "ingredients": [
+      {
+        "name": "cod fillet",
+        "amount": 120.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato-onion sauce",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "boiled new potatoes",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 30.0,
+    "carbs": 35.0,
+    "fat": 18.0,
+    "fibre": 5.0,
+    "calcium": 90.0,
+    "iron": 2.0,
+    "vit_d": 2.5,
+    "folate": 80.0,
+    "potassium": 580.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Vegetable Lasagne",
+    "ingredients": [
+      {
+        "name": "portion with layers of courgette",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "aubergine",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "tomato sauce",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "and ricotta",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 40.0,
+    "fat": 22.0,
+    "fibre": 6.0,
+    "calcium": 180.0,
+    "iron": 2.5,
+    "vit_d": 0.5,
+    "folate": 90.0,
+    "potassium": 600.0,
+    "magnesium": 75.0
+  },
+  {
+    "name": "Chickpea & Sweet Potato Curry",
+    "ingredients": [
+      {
+        "name": "chickpeas",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "sweet potato",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "chopped tomatoes",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "spices",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 40.0,
+    "fat": 20.0,
+    "fibre": 8.0,
+    "calcium": 110.0,
+    "iron": 3.2,
+    "vit_d": 0.0,
+    "folate": 130.0,
+    "potassium": 640.0,
+    "magnesium": 80.0
+  },
+  {
+    "name": "Oily Fish & Roasted Veg",
+    "ingredients": [
+      {
+        "name": "grilled salmon",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "roasted veg (peppers",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "courgette",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "onion)",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 28.0,
+    "carbs": 20.0,
+    "fat": 28.0,
+    "fibre": 5.0,
+    "calcium": 130.0,
+    "iron": 2.5,
+    "vit_d": 5.0,
+    "folate": 70.0,
+    "potassium": 610.0,
+    "magnesium": 75.0
+  },
+  {
+    "name": "Lentil Shepherd’s Pie",
+    "ingredients": [
+      {
+        "name": "cooked lentils",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "mashed potato",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed veg",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 20.0,
+    "carbs": 35.0,
+    "fat": 18.0,
+    "fibre": 7.0,
+    "calcium": 100.0,
+    "iron": 3.0,
+    "vit_d": 0.0,
+    "folate": 120.0,
+    "potassium": 590.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Chicken Stir-Fry with Brown Rice",
+    "ingredients": [
+      {
+        "name": "chicken breast",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "stir-fry veg",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "cooked brown rice",
+        "amount": 75.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 30.0,
+    "carbs": 35.0,
+    "fat": 16.0,
+    "fibre": 5.0,
+    "calcium": 80.0,
+    "iron": 2.5,
+    "vit_d": 0.2,
+    "folate": 90.0,
+    "potassium": 570.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Stuffed Courgette Boats",
+    "ingredients": [
+      {
+        "name": "courgette halves stuffed with 100g turkey mince",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "tomato sauce",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "arlic",
+        "amount": null,
+        "unit": "g"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 26.0,
+    "carbs": 25.0,
+    "fat": 22.0,
+    "fibre": 4.0,
+    "calcium": 90.0,
+    "iron": 2.2,
+    "vit_d": 0.3,
+    "folate": 80.0,
+    "potassium": 540.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Pasta with Sardines & Tomato Sauce",
+    "ingredients": [
+      {
+        "name": "wholewheat pasta",
+        "amount": 75.0,
+        "unit": "g"
+      },
+      {
+        "name": "sardines",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato sauce",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 24.0,
+    "carbs": 35.0,
+    "fat": 22.0,
+    "fibre": 4.0,
+    "calcium": 140.0,
+    "iron": 2.8,
+    "vit_d": 4.0,
+    "folate": 60.0,
+    "potassium": 580.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Vegetable & Nut Pilaf",
+    "ingredients": [
+      {
+        "name": "cooked rice",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed veg",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed nuts",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "spices",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 16.0,
+    "carbs": 40.0,
+    "fat": 24.0,
+    "fibre": 6.0,
+    "calcium": 110.0,
+    "iron": 2.5,
+    "vit_d": 0.0,
+    "folate": 100.0,
+    "potassium": 600.0,
+    "magnesium": 80.0
+  },
+  {
+    "name": "Greek Yogurt & Berries",
+    "ingredients": [
+      {
+        "name": "low-fat Greek yogurt",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed berries",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "chopped walnuts",
+        "amount": 10.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 300,
+    "protein": 15.0,
+    "carbs": 20.0,
+    "fat": 14.0,
+    "fibre": 3.0,
+    "calcium": 180.0,
+    "iron": 0.8,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 280.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Boiled Egg & Soldiers",
+    "ingredients": [
+      {
+        "name": "boiled egg",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "wholemeal toast (40g)",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "olive oil spread",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 300,
+    "protein": 10.0,
+    "carbs": 20.0,
+    "fat": 16.0,
+    "fibre": 2.0,
+    "calcium": 120.0,
+    "iron": 1.2,
+    "vit_d": 1.0,
+    "folate": 30.0,
+    "potassium": 250.0,
+    "magnesium": 35.0
+  },
+  {
+    "name": "Banana & Peanut Butter Toast",
+    "ingredients": [
+      {
+        "name": "wholemeal toast",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "small banana (100g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "peanut butter",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 320,
+    "protein": 8.0,
+    "carbs": 30.0,
+    "fat": 14.0,
+    "fibre": 3.0,
+    "calcium": 60.0,
+    "iron": 0.9,
+    "vit_d": 0.0,
+    "folate": 25.0,
+    "potassium": 300.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Tomato & Mushroom Scramble",
+    "ingredients": [
+      {
+        "name": "s",
+        "amount": 2.0,
+        "unit": "egg"
+      },
+      {
+        "name": "cherry tomatoes",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "mushrooms",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 320,
+    "protein": 14.0,
+    "carbs": 6.0,
+    "fat": 24.0,
+    "fibre": 2.0,
+    "calcium": 100.0,
+    "iron": 1.5,
+    "vit_d": 1.8,
+    "folate": 40.0,
+    "potassium": 270.0,
+    "magnesium": 35.0
+  },
+  {
+    "name": "Oat Porridge with Apple",
+    "ingredients": [
+      {
+        "name": "oats",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "semi-skimmed milk",
+        "amount": 150.0,
+        "unit": "ml"
+      },
+      {
+        "name": "grated apple",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "cinnamon",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 320,
+    "protein": 9.0,
+    "carbs": 35.0,
+    "fat": 10.0,
+    "fibre": 4.0,
+    "calcium": 180.0,
+    "iron": 1.0,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 310.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Avocado Rye Crispbread",
+    "ingredients": [
+      {
+        "name": "rye crispbreads",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "mashed avocado",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "emon juice",
+        "amount": null,
+        "unit": "l"
+      },
+      {
+        "name": "black pepper",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 300,
+    "protein": 5.0,
+    "carbs": 20.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 40.0,
+    "iron": 1.2,
+    "vit_d": 0.0,
+    "folate": 20.0,
+    "potassium": 260.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Ricotta & Honey Toast",
+    "ingredients": [
+      {
+        "name": "wholemeal toast",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "ricotta",
+        "amount": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "honey",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "almonds",
+        "amount": 10.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 330,
+    "protein": 10.0,
+    "carbs": 25.0,
+    "fat": 16.0,
+    "fibre": 2.0,
+    "calcium": 150.0,
+    "iron": 0.8,
+    "vit_d": 0.1,
+    "folate": 20.0,
+    "potassium": 240.0,
+    "magnesium": 35.0
+  },
+  {
+    "name": "Berry Smoothie",
+    "ingredients": [
+      {
+        "name": "almond milk",
+        "amount": 150.0,
+        "unit": "ml"
+      },
+      {
+        "name": "frozen berries",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "chia seeds",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "½ banana",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 300,
+    "protein": 6.0,
+    "carbs": 25.0,
+    "fat": 12.0,
+    "fibre": 5.0,
+    "calcium": 200.0,
+    "iron": 1.0,
+    "vit_d": 0.2,
+    "folate": 40.0,
+    "potassium": 280.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Tomato & Basil Omelette",
+    "ingredients": [
+      {
+        "name": "s",
+        "amount": 2.0,
+        "unit": "egg"
+      },
+      {
+        "name": "chopped tomatoes",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "fresh basil",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 320,
+    "protein": 14.0,
+    "carbs": 5.0,
+    "fat": 24.0,
+    "fibre": 2.0,
+    "calcium": 100.0,
+    "iron": 1.5,
+    "vit_d": 1.8,
+    "folate": 40.0,
+    "potassium": 270.0,
+    "magnesium": 35.0
+  },
+  {
+    "name": "Fruit & Nut Muesli",
+    "ingredients": [
+      {
+        "name": "muesli",
+        "amount": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "semi-skimmed milk",
+        "amount": 100.0,
+        "unit": "ml"
+      },
+      {
+        "name": "mixed nuts",
+        "amount": 10.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 330,
+    "protein": 8.0,
+    "carbs": 30.0,
+    "fat": 14.0,
+    "fibre": 4.0,
+    "calcium": 180.0,
+    "iron": 1.2,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 290.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Smoked Salmon & Cream Cheese Bagel",
+    "ingredients": [
+      {
+        "name": "½ wholemeal bagel (60g)",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "smoked salmon",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "low-fat cream cheese",
+        "amount": 30.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 400,
+    "protein": 18.0,
+    "carbs": 30.0,
+    "fat": 20.0,
+    "fibre": 3.0,
+    "calcium": 120.0,
+    "iron": 1.2,
+    "vit_d": 3.5,
+    "folate": 30.0,
+    "potassium": 320.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Avocado & Egg Toast",
+    "ingredients": [
+      {
+        "name": "wholemeal toast",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "avocado",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "poached egg",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 400,
+    "protein": 12.0,
+    "carbs": 20.0,
+    "fat": 24.0,
+    "fibre": 4.0,
+    "calcium": 100.0,
+    "iron": 1.5,
+    "vit_d": 1.0,
+    "folate": 40.0,
+    "potassium": 350.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Oat Porridge with Nuts & Fruit",
+    "ingredients": [
+      {
+        "name": "oats",
+        "amount": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "milk",
+        "amount": 150.0,
+        "unit": "ml"
+      },
+      {
+        "name": "walnuts",
+        "amount": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "berries",
+        "amount": 80.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 400,
+    "protein": 10.0,
+    "carbs": 35.0,
+    "fat": 16.0,
+    "fibre": 5.0,
+    "calcium": 200.0,
+    "iron": 1.2,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 330.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Vegetable Frittata",
+    "ingredients": [
+      {
+        "name": "s",
+        "amount": 2.0,
+        "unit": "egg"
+      },
+      {
+        "name": "spinach",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "mushrooms",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 400,
+    "protein": 14.0,
+    "carbs": 6.0,
+    "fat": 26.0,
+    "fibre": 3.0,
+    "calcium": 120.0,
+    "iron": 1.8,
+    "vit_d": 1.8,
+    "folate": 40.0,
+    "potassium": 310.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Greek Yogurt Parfait",
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "granola",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "fruit",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "honey",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 400,
+    "protein": 15.0,
+    "carbs": 30.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 200.0,
+    "iron": 1.0,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 320.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Peanut Butter & Banana Toast",
+    "ingredients": [
+      {
+        "name": "s wholemeal toast",
+        "amount": 2.0,
+        "unit": "slice"
+      },
+      {
+        "name": "peanut butter",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "small banana",
+        "amount": 1.0,
+        "unit": ""
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 400,
+    "protein": 10.0,
+    "carbs": 35.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 80.0,
+    "iron": 1.0,
+    "vit_d": 0.0,
+    "folate": 30.0,
+    "potassium": 340.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Tomato & Mozzarella Muffin",
+    "ingredients": [
+      {
+        "name": "wholemeal English muffin",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "mozzarella",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "basil",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 400,
+    "protein": 14.0,
+    "carbs": 25.0,
+    "fat": 20.0,
+    "fibre": 3.0,
+    "calcium": 180.0,
+    "iron": 1.2,
+    "vit_d": 0.5,
+    "folate": 30.0,
+    "potassium": 310.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Berry & Almond Smoothie Bowl",
+    "ingredients": [
+      {
+        "name": "almond milk",
+        "amount": 150.0,
+        "unit": "ml"
+      },
+      {
+        "name": "berries",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "ground almonds",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "oats",
+        "amount": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 400,
+    "protein": 10.0,
+    "carbs": 30.0,
+    "fat": 20.0,
+    "fibre": 5.0,
+    "calcium": 200.0,
+    "iron": 1.2,
+    "vit_d": 0.2,
+    "folate": 40.0,
+    "potassium": 330.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Scrambled Eggs with Spinach & Toast",
+    "ingredients": [
+      {
+        "name": "s",
+        "amount": 2.0,
+        "unit": "egg"
+      },
+      {
+        "name": "spinach",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "wholemeal toast",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 400,
+    "protein": 14.0,
+    "carbs": 20.0,
+    "fat": 22.0,
+    "fibre": 3.0,
+    "calcium": 120.0,
+    "iron": 1.5,
+    "vit_d": 1.8,
+    "folate": 40.0,
+    "potassium": 320.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Cottage Cheese & Fruit Plate",
+    "ingredients": [
+      {
+        "name": "cottage cheese",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "apple slices",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "walnuts",
+        "amount": 10.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 400,
+    "protein": 16.0,
+    "carbs": 25.0,
+    "fat": 18.0,
+    "fibre": 3.0,
+    "calcium": 180.0,
+    "iron": 1.0,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 310.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Full Mediterranean Breakfast",
+    "ingredients": [
+      {
+        "name": "poached egg",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "grilled tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "mushrooms",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "toast",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "avocado",
+        "amount": 30.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 500,
+    "protein": 16.0,
+    "carbs": 25.0,
+    "fat": 28.0,
+    "fibre": 5.0,
+    "calcium": 140.0,
+    "iron": 2.0,
+    "vit_d": 1.0,
+    "folate": 40.0,
+    "potassium": 360.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Smoked Mackerel & Rye Toast",
+    "ingredients": [
+      {
+        "name": "smoked mackerel",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "rye crispbreads",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "cucumber",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "emon juice",
+        "amount": null,
+        "unit": "l"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 500,
+    "protein": 20.0,
+    "carbs": 20.0,
+    "fat": 30.0,
+    "fibre": 4.0,
+    "calcium": 160.0,
+    "iron": 2.2,
+    "vit_d": 5.0,
+    "folate": 30.0,
+    "potassium": 340.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Oat Porridge with Banana & Nuts",
+    "ingredients": [
+      {
+        "name": "oats",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "milk",
+        "amount": 200.0,
+        "unit": "ml"
+      },
+      {
+        "name": "small banana",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "almonds",
+        "amount": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "cinnamon",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 500,
+    "protein": 12.0,
+    "carbs": 40.0,
+    "fat": 20.0,
+    "fibre": 6.0,
+    "calcium": 220.0,
+    "iron": 1.5,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 350.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Spinach & Feta Omelette with Toast",
+    "ingredients": [
+      {
+        "name": "s",
+        "amount": 2.0,
+        "unit": "egg"
+      },
+      {
+        "name": "spinach",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "feta",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "wholemeal toast",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 20.0,
+    "fat": 26.0,
+    "fibre": 4.0,
+    "calcium": 180.0,
+    "iron": 2.0,
+    "vit_d": 1.8,
+    "folate": 40.0,
+    "potassium": 330.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Avocado & Salmon Bagel",
+    "ingredients": [
+      {
+        "name": "½ wholemeal bagel",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "smoked salmon",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "avocado",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "emon",
+        "amount": null,
+        "unit": "l"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 500,
+    "protein": 20.0,
+    "carbs": 25.0,
+    "fat": 28.0,
+    "fibre": 4.0,
+    "calcium": 160.0,
+    "iron": 1.8,
+    "vit_d": 3.5,
+    "folate": 30.0,
+    "potassium": 340.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Greek Yogurt Bowl with Granola & Fruit",
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "granola",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "berries",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "seeds",
+        "amount": 10.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 35.0,
+    "fat": 22.0,
+    "fibre": 5.0,
+    "calcium": 220.0,
+    "iron": 1.2,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 340.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Vegetable Breakfast Wrap",
+    "ingredients": [
+      {
+        "name": "wholemeal wrap",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "s",
+        "amount": 2.0,
+        "unit": "egg"
+      },
+      {
+        "name": "spinach",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 500,
+    "protein": 20.0,
+    "carbs": 30.0,
+    "fat": 22.0,
+    "fibre": 5.0,
+    "calcium": 160.0,
+    "iron": 2.0,
+    "vit_d": 1.8,
+    "folate": 40.0,
+    "potassium": 350.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Nut Butter & Fruit Toast",
+    "ingredients": [
+      {
+        "name": "s wholemeal toast",
+        "amount": 2.0,
+        "unit": "slice"
+      },
+      {
+        "name": "almond butter",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "apple slices",
+        "amount": 100.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 500,
+    "protein": 12.0,
+    "carbs": 40.0,
+    "fat": 24.0,
+    "fibre": 5.0,
+    "calcium": 100.0,
+    "iron": 1.2,
+    "vit_d": 0.0,
+    "folate": 30.0,
+    "potassium": 340.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Tomato & Mozzarella Toastie",
+    "ingredients": [
+      {
+        "name": "s wholemeal bread",
+        "amount": 2.0,
+        "unit": "slice"
+      },
+      {
+        "name": "mozzarella",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "basil",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 500,
+    "protein": 16.0,
+    "carbs": 30.0,
+    "fat": 24.0,
+    "fibre": 4.0,
+    "calcium": 200.0,
+    "iron": 1.5,
+    "vit_d": 0.5,
+    "folate": 30.0,
+    "potassium": 330.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Smoothie Bowl with Seeds & Fruit",
+    "ingredients": [
+      {
+        "name": "almond milk",
+        "amount": 150.0,
+        "unit": "ml"
+      },
+      {
+        "name": "berries",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "½ banana",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "flaxseed",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "oats",
+        "amount": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "meal_type": "BREAKFAST",
+    "kcal": 500,
+    "protein": 12.0,
+    "carbs": 35.0,
+    "fat": 24.0,
+    "fibre": 6.0,
+    "calcium": 220.0,
+    "iron": 1.5,
+    "vit_d": 0.2,
+    "folate": 40.0,
+    "potassium": 350.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Tomato & Lentil Soup",
+    "ingredients": [
+      {
+        "name": "homemade tomato-onion soup",
+        "amount": 250.0,
+        "unit": "ml"
+      },
+      {
+        "name": "cooked lentils",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 300,
+    "protein": 14.0,
+    "carbs": 30.0,
+    "fat": 8.0,
+    "fibre": 6.0,
+    "calcium": 80.0,
+    "iron": 2.5,
+    "vit_d": 0.0,
+    "folate": 120.0,
+    "potassium": 520.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Sardine Salad",
+    "ingredients": [
+      {
+        "name": "sardines",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "emon",
+        "amount": null,
+        "unit": "l"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 300,
+    "protein": 18.0,
+    "carbs": 6.0,
+    "fat": 20.0,
+    "fibre": 2.0,
+    "calcium": 120.0,
+    "iron": 2.0,
+    "vit_d": 4.5,
+    "folate": 40.0,
+    "potassium": 480.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Hummus & Veg Wrap",
+    "ingredients": [
+      {
+        "name": "small wholemeal wrap",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed raw veg",
+        "amount": 100.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 300,
+    "protein": 10.0,
+    "carbs": 28.0,
+    "fat": 14.0,
+    "fibre": 5.0,
+    "calcium": 90.0,
+    "iron": 2.2,
+    "vit_d": 0.0,
+    "folate": 100.0,
+    "potassium": 500.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Tuna Salad Plate",
+    "ingredients": [
+      {
+        "name": "tuna",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "cucumber",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 300,
+    "protein": 20.0,
+    "carbs": 8.0,
+    "fat": 16.0,
+    "fibre": 2.0,
+    "calcium": 100.0,
+    "iron": 1.5,
+    "vit_d": 0.5,
+    "folate": 40.0,
+    "potassium": 470.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Tomato & Mozzarella Salad",
+    "ingredients": [
+      {
+        "name": "mozzarella",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomatoes",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "basil",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 300,
+    "protein": 12.0,
+    "carbs": 6.0,
+    "fat": 22.0,
+    "fibre": 2.0,
+    "calcium": 180.0,
+    "iron": 1.2,
+    "vit_d": 0.5,
+    "folate": 30.0,
+    "potassium": 460.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Egg & Spinach Sandwich",
+    "ingredients": [
+      {
+        "name": "s wholemeal bread",
+        "amount": 2.0,
+        "unit": "slice"
+      },
+      {
+        "name": "boiled egg",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "spinach",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "mustard",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 300,
+    "protein": 14.0,
+    "carbs": 24.0,
+    "fat": 12.0,
+    "fibre": 4.0,
+    "calcium": 120.0,
+    "iron": 2.0,
+    "vit_d": 1.0,
+    "folate": 60.0,
+    "potassium": 490.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Chickpea & Rocket Salad",
+    "ingredients": [
+      {
+        "name": "chickpeas",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "rocket",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "emon juice",
+        "amount": null,
+        "unit": "l"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 300,
+    "protein": 12.0,
+    "carbs": 20.0,
+    "fat": 14.0,
+    "fibre": 5.0,
+    "calcium": 100.0,
+    "iron": 2.5,
+    "vit_d": 0.0,
+    "folate": 110.0,
+    "potassium": 510.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Vegetable Soup & Crispbread",
+    "ingredients": [
+      {
+        "name": "veg soup",
+        "amount": 250.0,
+        "unit": "ml"
+      },
+      {
+        "name": "rye crispbreads",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 300,
+    "protein": 10.0,
+    "carbs": 25.0,
+    "fat": 12.0,
+    "fibre": 5.0,
+    "calcium": 90.0,
+    "iron": 2.0,
+    "vit_d": 0.0,
+    "folate": 100.0,
+    "potassium": 480.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Avocado & Tomato Toast",
+    "ingredients": [
+      {
+        "name": "wholemeal toast",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "avocado",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "black pepper",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 300,
+    "protein": 6.0,
+    "carbs": 20.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 60.0,
+    "iron": 1.2,
+    "vit_d": 0.0,
+    "folate": 80.0,
+    "potassium": 470.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Grilled Chicken Salad",
+    "ingredients": [
+      {
+        "name": "grilled chicken",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil dressing",
+        "amount": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 400,
+    "protein": 28.0,
+    "carbs": 10.0,
+    "fat": 22.0,
+    "fibre": 3.0,
+    "calcium": 80.0,
+    "iron": 1.8,
+    "vit_d": 0.2,
+    "folate": 40.0,
+    "potassium": 520.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Tuna & Sweetcorn Jacket Potato",
+    "ingredients": [
+      {
+        "name": "baked potato",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "tuna",
+        "amount": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "sweetcorn",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 400,
+    "protein": 22.0,
+    "carbs": 35.0,
+    "fat": 12.0,
+    "fibre": 5.0,
+    "calcium": 70.0,
+    "iron": 2.0,
+    "vit_d": 0.5,
+    "folate": 60.0,
+    "potassium": 520.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Vegetable & Bean Stew",
+    "ingredients": [
+      {
+        "name": "mixed veg",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "cannellini beans",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 400,
+    "protein": 16.0,
+    "carbs": 30.0,
+    "fat": 16.0,
+    "fibre": 8.0,
+    "calcium": 90.0,
+    "iron": 3.2,
+    "vit_d": 0.0,
+    "folate": 120.0,
+    "potassium": 580.0,
+    "magnesium": 80.0
+  },
+  {
+    "name": "Falafel Wrap",
+    "ingredients": [
+      {
+        "name": "small wholemeal wrap",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "falafel (60g)",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "salad",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "yogurt dressing",
+        "amount": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 400,
+    "protein": 14.0,
+    "carbs": 30.0,
+    "fat": 18.0,
+    "fibre": 5.0,
+    "calcium": 100.0,
+    "iron": 2.5,
+    "vit_d": 0.0,
+    "folate": 90.0,
+    "potassium": 540.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Prawn & Avocado Salad",
+    "ingredients": [
+      {
+        "name": "prawns",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "avocado",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "emon juice",
+        "amount": null,
+        "unit": "l"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 400,
+    "protein": 20.0,
+    "carbs": 10.0,
+    "fat": 24.0,
+    "fibre": 3.0,
+    "calcium": 100.0,
+    "iron": 1.5,
+    "vit_d": 1.2,
+    "folate": 40.0,
+    "potassium": 510.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Tomato Pasta Bowl",
+    "ingredients": [
+      {
+        "name": "wholewheat pasta",
+        "amount": 75.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato sauce",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "arlic",
+        "amount": null,
+        "unit": "g"
+      },
+      {
+        "name": "basil",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 400,
+    "protein": 12.0,
+    "carbs": 40.0,
+    "fat": 14.0,
+    "fibre": 5.0,
+    "calcium": 90.0,
+    "iron": 2.0,
+    "vit_d": 0.3,
+    "folate": 100.0,
+    "potassium": 530.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Stuffed Peppers",
+    "ingredients": [
+      {
+        "name": "pepper stuffed with 100g quinoa",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 400,
+    "protein": 12.0,
+    "carbs": 30.0,
+    "fat": 14.0,
+    "fibre": 6.0,
+    "calcium": 80.0,
+    "iron": 2.2,
+    "vit_d": 0.0,
+    "folate": 110.0,
+    "potassium": 540.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Mackerel & Beetroot Salad",
+    "ingredients": [
+      {
+        "name": "mackerel",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "beetroot",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 400,
+    "protein": 20.0,
+    "carbs": 10.0,
+    "fat": 26.0,
+    "fibre": 3.0,
+    "calcium": 120.0,
+    "iron": 2.2,
+    "vit_d": 4.2,
+    "folate": 40.0,
+    "potassium": 510.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Vegetable Stir-Fry with Rice",
+    "ingredients": [
+      {
+        "name": "stir-fry veg",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "cooked brown rice",
+        "amount": 75.0,
+        "unit": "g"
+      },
+      {
+        "name": "sesame oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 400,
+    "protein": 10.0,
+    "carbs": 35.0,
+    "fat": 14.0,
+    "fibre": 5.0,
+    "calcium": 90.0,
+    "iron": 2.0,
+    "vit_d": 0.2,
+    "folate": 100.0,
+    "potassium": 520.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Egg Salad Sandwich",
+    "ingredients": [
+      {
+        "name": "s wholemeal bread",
+        "amount": 2.0,
+        "unit": "slice"
+      },
+      {
+        "name": "boiled egg",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "olive oil mayo",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "ettuce",
+        "amount": null,
+        "unit": "l"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 400,
+    "protein": 14.0,
+    "carbs": 25.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 120.0,
+    "iron": 2.0,
+    "vit_d": 1.0,
+    "folate": 60.0,
+    "potassium": 500.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Grilled Salmon & Quinoa Bowl",
+    "ingredients": [
+      {
+        "name": "grilled salmon",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "cooked quinoa",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil dressing",
+        "amount": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 500,
+    "protein": 30.0,
+    "carbs": 25.0,
+    "fat": 26.0,
+    "fibre": 5.0,
+    "calcium": 120.0,
+    "iron": 2.5,
+    "vit_d": 5.0,
+    "folate": 60.0,
+    "potassium": 580.0,
+    "magnesium": 75.0
+  },
+  {
+    "name": "Chicken & Veg Stir-Fry with Rice",
+    "ingredients": [
+      {
+        "name": "chicken breast",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed stir-fry veg",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "cooked brown rice",
+        "amount": 75.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 500,
+    "protein": 30.0,
+    "carbs": 35.0,
+    "fat": 16.0,
+    "fibre": 5.0,
+    "calcium": 80.0,
+    "iron": 2.5,
+    "vit_d": 0.2,
+    "folate": 90.0,
+    "potassium": 570.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Lentil Shepherd’s Pie",
+    "ingredients": [
+      {
+        "name": "cooked lentils",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "mashed potato",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed veg",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 500,
+    "protein": 20.0,
+    "carbs": 35.0,
+    "fat": 18.0,
+    "fibre": 7.0,
+    "calcium": 100.0,
+    "iron": 3.0,
+    "vit_d": 0.0,
+    "folate": 120.0,
+    "potassium": 590.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Stuffed Aubergine",
+    "ingredients": [
+      {
+        "name": "aubergine",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "turkey mince",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "tomato sauce",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "arlic",
+        "amount": null,
+        "unit": "g"
+      },
+      {
+        "name": "onion",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "olive oil",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 500,
+    "protein": 26.0,
+    "carbs": 25.0,
+    "fat": 22.0,
+    "fibre": 4.0,
+    "calcium": 90.0,
+    "iron": 2.2,
+    "vit_d": 0.3,
+    "folate": 80.0,
+    "potassium": 540.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Vegetable Lasagne",
+    "ingredients": [
+      {
+        "name": "portion with layers of courgette",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "aubergine",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "tomato sauce",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "ricotta",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "and wholemeal pasta sheets",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 40.0,
+    "fat": 22.0,
+    "fibre": 6.0,
+    "calcium": 180.0,
+    "iron": 2.5,
+    "vit_d": 0.5,
+    "folate": 90.0,
+    "potassium": 600.0,
+    "magnesium": 75.0
+  },
+  {
+    "name": "Grilled Mackerel & Beetroot Salad",
+    "ingredients": [
+      {
+        "name": "grilled mackerel",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "beetroot",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil dressing",
+        "amount": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 500,
+    "protein": 24.0,
+    "carbs": 10.0,
+    "fat": 30.0,
+    "fibre": 4.0,
+    "calcium": 140.0,
+    "iron": 2.5,
+    "vit_d": 5.0,
+    "folate": 50.0,
+    "potassium": 530.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Falafel & Couscous Bowl",
+    "ingredients": [
+      {
+        "name": "falafel (90g)",
+        "amount": 3.0,
+        "unit": ""
+      },
+      {
+        "name": "cooked couscous",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "chopped tomato-cucumber salad",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "tahini dressing",
+        "amount": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 35.0,
+    "fat": 22.0,
+    "fibre": 6.0,
+    "calcium": 110.0,
+    "iron": 2.8,
+    "vit_d": 0.0,
+    "folate": 100.0,
+    "potassium": 560.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Tuna & Bean Salad",
+    "ingredients": [
+      {
+        "name": "tuna",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "cannellini beans",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "emon juice",
+        "amount": null,
+        "unit": "l"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 500,
+    "protein": 24.0,
+    "carbs": 20.0,
+    "fat": 26.0,
+    "fibre": 5.0,
+    "calcium": 120.0,
+    "iron": 2.5,
+    "vit_d": 0.5,
+    "folate": 80.0,
+    "potassium": 550.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Chickpea & Sweet Potato Curry",
+    "ingredients": [
+      {
+        "name": "chickpeas",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "sweet potato",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "chopped tomatoes",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "spices",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 40.0,
+    "fat": 20.0,
+    "fibre": 8.0,
+    "calcium": 110.0,
+    "iron": 3.2,
+    "vit_d": 0.0,
+    "folate": 130.0,
+    "potassium": 640.0,
+    "magnesium": 80.0
+  },
+  {
+    "name": "Wholemeal Pitta with Hummus & Grilled Veg",
+    "ingredients": [
+      {
+        "name": "wholemeal pitta (60g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "grilled peppers and courgette",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "LUNCH",
+    "kcal": 500,
+    "protein": 14.0,
+    "carbs": 35.0,
+    "fat": 24.0,
+    "fibre": 6.0,
+    "calcium": 100.0,
+    "iron": 2.5,
+    "vit_d": 0.0,
+    "folate": 90.0,
+    "potassium": 560.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Greek Yogurt & Blueberries",
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "blueberries",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "flaxseed",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 300,
+    "protein": 15.0,
+    "carbs": 20.0,
+    "fat": 14.0,
+    "fibre": 4.0,
+    "calcium": 180.0,
+    "iron": 0.8,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 280.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Peanut Butter Toast with Banana",
+    "ingredients": [
+      {
+        "name": "wholemeal toast (~40g)",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "peanut butter (~5g)",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "½ banana (~60g)",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 300,
+    "protein": 8.0,
+    "carbs": 28.0,
+    "fat": 14.0,
+    "fibre": 3.0,
+    "calcium": 60.0,
+    "iron": 0.9,
+    "vit_d": 0.0,
+    "folate": 25.0,
+    "potassium": 300.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Cottage Cheese & Tomato with Oatcakes",
+    "ingredients": [
+      {
+        "name": "cottage cheese",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "sliced tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "oatcakes (~12g each)",
+        "amount": 2.0,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 300,
+    "protein": 14.0,
+    "carbs": 20.0,
+    "fat": 12.0,
+    "fibre": 3.0,
+    "calcium": 160.0,
+    "iron": 1.2,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 270.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Cinnamon Overnight Oats",
+    "ingredients": [
+      {
+        "name": "oats",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "semi-skimmed milk",
+        "amount": 100.0,
+        "unit": "ml"
+      },
+      {
+        "name": "of cinnamon",
+        "amount": null,
+        "unit": "pinch"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 300,
+    "protein": 9.0,
+    "carbs": 30.0,
+    "fat": 10.0,
+    "fibre": 4.0,
+    "calcium": 180.0,
+    "iron": 1.0,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 310.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Boiled Egg with Avocado & Tomatoes",
+    "ingredients": [
+      {
+        "name": "boiled egg (~60g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "¼ avocado (~50g)",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "cherry tomatoes",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 300,
+    "protein": 12.0,
+    "carbs": 6.0,
+    "fat": 20.0,
+    "fibre": 3.0,
+    "calcium": 100.0,
+    "iron": 1.5,
+    "vit_d": 1.0,
+    "folate": 40.0,
+    "potassium": 270.0,
+    "magnesium": 35.0
+  },
+  {
+    "name": "Berry & Spinach Smoothie",
+    "ingredients": [
+      {
+        "name": "almond milk",
+        "amount": 150.0,
+        "unit": "ml"
+      },
+      {
+        "name": "spinach",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "frozen berries",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "chia seeds",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 300,
+    "protein": 6.0,
+    "carbs": 25.0,
+    "fat": 12.0,
+    "fibre": 5.0,
+    "calcium": 200.0,
+    "iron": 1.0,
+    "vit_d": 0.2,
+    "folate": 40.0,
+    "potassium": 280.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Apple with Almond Butter & Walnuts",
+    "ingredients": [
+      {
+        "name": "small apple (~100g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "almond butter (~15g)",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "walnuts",
+        "amount": 10.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 300,
+    "protein": 6.0,
+    "carbs": 20.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 60.0,
+    "iron": 1.2,
+    "vit_d": 0.0,
+    "folate": 30.0,
+    "potassium": 260.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Rice Cakes with Hummus & Cucumber",
+    "ingredients": [
+      {
+        "name": "rice cakes (~7g each)",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus (~40g)",
+        "amount": 2.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "cucumber slices",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 300,
+    "protein": 7.0,
+    "carbs": 22.0,
+    "fat": 14.0,
+    "fibre": 4.0,
+    "calcium": 80.0,
+    "iron": 1.5,
+    "vit_d": 0.0,
+    "folate": 40.0,
+    "potassium": 250.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Fromage Frais with Pear & Seeds",
+    "ingredients": [
+      {
+        "name": "low-fat fromage frais",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "small pear (~100g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "sunflower seeds",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 300,
+    "protein": 10.0,
+    "carbs": 25.0,
+    "fat": 12.0,
+    "fibre": 3.0,
+    "calcium": 160.0,
+    "iron": 1.0,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 270.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Muesli with Milk & Raspberries",
+    "ingredients": [
+      {
+        "name": "muesli",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "semi-skimmed milk",
+        "amount": 100.0,
+        "unit": "ml"
+      },
+      {
+        "name": "raspberries",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 300,
+    "protein": 8.0,
+    "carbs": 30.0,
+    "fat": 10.0,
+    "fibre": 4.0,
+    "calcium": 180.0,
+    "iron": 1.2,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 290.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Berry Overnight Oats with Greek Yogurt",
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "oats",
+        "amount": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "berries",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 400,
+    "protein": 16.0,
+    "carbs": 35.0,
+    "fat": 16.0,
+    "fibre": 5.0,
+    "calcium": 200.0,
+    "iron": 1.2,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 320.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Hummus Wrap with Spinach & Carrot",
+    "ingredients": [
+      {
+        "name": "wholemeal wrap (~50g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus (~40g)",
+        "amount": 2.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "spinach",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "grated carrot",
+        "amount": 30.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 400,
+    "protein": 10.0,
+    "carbs": 30.0,
+    "fat": 18.0,
+    "fibre": 5.0,
+    "calcium": 100.0,
+    "iron": 2.0,
+    "vit_d": 0.0,
+    "folate": 90.0,
+    "potassium": 340.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Banana & Oat Smoothie",
+    "ingredients": [
+      {
+        "name": "medium banana (~120g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "oats",
+        "amount": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "almond milk",
+        "amount": 200.0,
+        "unit": "ml"
+      },
+      {
+        "name": "flaxseed",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 400,
+    "protein": 8.0,
+    "carbs": 35.0,
+    "fat": 16.0,
+    "fibre": 5.0,
+    "calcium": 180.0,
+    "iron": 1.2,
+    "vit_d": 0.2,
+    "folate": 40.0,
+    "potassium": 310.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Cottage Cheese with Oatcakes & Grapes",
+    "ingredients": [
+      {
+        "name": "cottage cheese",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "oatcakes (~12g each)",
+        "amount": 3.0,
+        "unit": ""
+      },
+      {
+        "name": "grapes",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 400,
+    "protein": 16.0,
+    "carbs": 30.0,
+    "fat": 14.0,
+    "fibre": 4.0,
+    "calcium": 200.0,
+    "iron": 1.5,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 300.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Boiled Eggs with Avocado & Toast",
+    "ingredients": [
+      {
+        "name": "boiled eggs (~120g)",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "¼ avocado (~50g)",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "wholemeal toast (~40g)",
+        "amount": 1.0,
+        "unit": "slice"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 400,
+    "protein": 14.0,
+    "carbs": 20.0,
+    "fat": 22.0,
+    "fibre": 4.0,
+    "calcium": 120.0,
+    "iron": 2.0,
+    "vit_d": 1.0,
+    "folate": 40.0,
+    "potassium": 350.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Apple Muesli with Milk",
+    "ingredients": [
+      {
+        "name": "muesli",
+        "amount": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "semi-skimmed milk",
+        "amount": 150.0,
+        "unit": "ml"
+      },
+      {
+        "name": "½ apple (~75g)",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 400,
+    "protein": 10.0,
+    "carbs": 35.0,
+    "fat": 14.0,
+    "fibre": 5.0,
+    "calcium": 200.0,
+    "iron": 1.2,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 330.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Rice Cakes with Peanut Butter & Banana",
+    "ingredients": [
+      {
+        "name": "rice cakes (~7g each)",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "peanut butter (~15g)",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "½ banana (~60g)",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 400,
+    "protein": 8.0,
+    "carbs": 30.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 80.0,
+    "iron": 1.0,
+    "vit_d": 0.0,
+    "folate": 30.0,
+    "potassium": 340.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Greek Yogurt with Granola & Strawberries",
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "granola",
+        "amount": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "strawberries",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 400,
+    "protein": 15.0,
+    "carbs": 30.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 200.0,
+    "iron": 1.0,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 320.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Chia Pudding with Kiwi & Seeds\tChia pudding",
+    "ingredients": [
+      {
+        "name": "almond milk",
+        "amount": 150.0,
+        "unit": "ml"
+      },
+      {
+        "name": "kiwi (~70g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "pumpkin seeds",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 400,
+    "protein": 10.0,
+    "carbs": 25.0,
+    "fat": 20.0,
+    "fibre": 6.0,
+    "calcium": 220.0,
+    "iron": 1.5,
+    "vit_d": 0.2,
+    "folate": 40.0,
+    "potassium": 330.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Smoked Salmon & Cream Cheese on Crispbread",
+    "ingredients": [
+      {
+        "name": "low-fat cream cheese",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "smoked salmon",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "rye crispbreads (~10g each)",
+        "amount": 2.0,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 400,
+    "protein": 18.0,
+    "carbs": 20.0,
+    "fat": 22.0,
+    "fibre": 3.0,
+    "calcium": 160.0,
+    "iron": 2.0,
+    "vit_d": 3.5,
+    "folate": 30.0,
+    "potassium": 320.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Peanut Butter Overnight Oats with Banana",
+    "ingredients": [
+      {
+        "name": "oats",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "semi-skimmed milk",
+        "amount": 150.0,
+        "unit": "ml"
+      },
+      {
+        "name": "medium banana (~120g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "peanut butter (~15g)",
+        "amount": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 500,
+    "protein": 12.0,
+    "carbs": 40.0,
+    "fat": 22.0,
+    "fibre": 6.0,
+    "calcium": 220.0,
+    "iron": 1.5,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 350.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Bagel with Cream Cheese & Smoked Salmon",
+    "ingredients": [
+      {
+        "name": "wholemeal bagel (~90g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "cream cheese",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "smoked salmon",
+        "amount": 60.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 500,
+    "protein": 20.0,
+    "carbs": 30.0,
+    "fat": 26.0,
+    "fibre": 3.0,
+    "calcium": 180.0,
+    "iron": 2.2,
+    "vit_d": 3.5,
+    "folate": 30.0,
+    "potassium": 340.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Nutty Smoothie with Oats & Banana",
+    "ingredients": [
+      {
+        "name": "oats",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "medium banana (~120g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "almond milk",
+        "amount": 250.0,
+        "unit": "ml"
+      },
+      {
+        "name": "nut butter (~15g)",
+        "amount": 1.0,
+        "unit": "tbsp"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 500,
+    "protein": 10.0,
+    "carbs": 40.0,
+    "fat": 24.0,
+    "fibre": 6.0,
+    "calcium": 220.0,
+    "iron": 1.5,
+    "vit_d": 0.2,
+    "folate": 40.0,
+    "potassium": 350.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Greek Yogurt with Granola & Mixed Berries",
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "amount": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "granola",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed berries",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 35.0,
+    "fat": 22.0,
+    "fibre": 5.0,
+    "calcium": 220.0,
+    "iron": 1.2,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 340.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Avocado Toast with Egg",
+    "ingredients": [
+      {
+        "name": "s wholemeal bread (~80g)",
+        "amount": 2.0,
+        "unit": "slice"
+      },
+      {
+        "name": "½ avocado (~100g)",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "boiled egg (~60g)",
+        "amount": 1.0,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 500,
+    "protein": 16.0,
+    "carbs": 30.0,
+    "fat": 26.0,
+    "fibre": 5.0,
+    "calcium": 180.0,
+    "iron": 2.0,
+    "vit_d": 1.0,
+    "folate": 40.0,
+    "potassium": 330.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Cottage Cheese with Oatcakes & Grapes",
+    "ingredients": [
+      {
+        "name": "cottage cheese",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "oatcakes (~12g each)",
+        "amount": 4.0,
+        "unit": ""
+      },
+      {
+        "name": "grapes",
+        "amount": 75.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 500,
+    "protein": 20.0,
+    "carbs": 35.0,
+    "fat": 18.0,
+    "fibre": 5.0,
+    "calcium": 220.0,
+    "iron": 1.5,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 320.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Pear Muesli with Milk",
+    "ingredients": [
+      {
+        "name": "muesli",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "semi-skimmed milk",
+        "amount": 200.0,
+        "unit": "ml"
+      },
+      {
+        "name": "small pear (~100g)",
+        "amount": 1.0,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 500,
+    "protein": 12.0,
+    "carbs": 40.0,
+    "fat": 20.0,
+    "fibre": 6.0,
+    "calcium": 220.0,
+    "iron": 1.5,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 350.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Rice Cakes with Hummus & Tomatoes",
+    "ingredients": [
+      {
+        "name": "rice cakes (~7g each)",
+        "amount": 3.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus (~60g)",
+        "amount": 3.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "cherry tomatoes",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 500,
+    "protein": 10.0,
+    "carbs": 30.0,
+    "fat": 24.0,
+    "fibre": 5.0,
+    "calcium": 180.0,
+    "iron": 1.5,
+    "vit_d": 0.0,
+    "folate": 40.0,
+    "potassium": 320.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Chia Pudding with Banana & Almond Butter",
+    "ingredients": [
+      {
+        "name": "~200ml almond milk",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "medium banana (~120g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "almond butter (~15g)",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "mixed seeds",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 500,
+    "protein": 12.0,
+    "carbs": 35.0,
+    "fat": 26.0,
+    "fibre": 6.0,
+    "calcium": 240.0,
+    "iron": 1.8,
+    "vit_d": 0.2,
+    "folate": 40.0,
+    "potassium": 360.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Apple Wrap with Peanut Butter & Cinnamon",
+    "ingredients": [
+      {
+        "name": "wholemeal wrap (~50g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "peanut butter (~15g)",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "½ apple (~75g)",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "of cinnamon",
+        "amount": null,
+        "unit": "pinch"
+      }
+    ],
+    "meal_type": "NO COOK BREAKFASTS",
+    "kcal": 500,
+    "protein": 10.0,
+    "carbs": 40.0,
+    "fat": 24.0,
+    "fibre": 5.0,
+    "calcium": 180.0,
+    "iron": 1.2,
+    "vit_d": 0.0,
+    "folate": 30.0,
+    "potassium": 340.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Hummus Pitta with Cucumber",
+    "ingredients": [
+      {
+        "name": "wholemeal pitta (~60g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus (~40g)",
+        "amount": 2.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "cucumber slices",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 300,
+    "protein": 8.0,
+    "carbs": 25.0,
+    "fat": 14.0,
+    "fibre": 4.0,
+    "calcium": 80.0,
+    "iron": 1.5,
+    "vit_d": 0.0,
+    "folate": 40.0,
+    "potassium": 250.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Tuna Salad with Balsamic",
+    "ingredients": [
+      {
+        "name": "canned tuna",
+        "amount": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "balsamic vinegar",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 300,
+    "protein": 20.0,
+    "carbs": 6.0,
+    "fat": 16.0,
+    "fibre": 2.0,
+    "calcium": 100.0,
+    "iron": 1.5,
+    "vit_d": 0.5,
+    "folate": 40.0,
+    "potassium": 470.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Boiled Egg with Oatcakes & Tomatoes",
+    "ingredients": [
+      {
+        "name": "boiled egg (~60g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "oatcakes (~12g each)",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "cherry tomatoes",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 300,
+    "protein": 12.0,
+    "carbs": 20.0,
+    "fat": 14.0,
+    "fibre": 3.0,
+    "calcium": 100.0,
+    "iron": 1.5,
+    "vit_d": 1.0,
+    "folate": 40.0,
+    "potassium": 270.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Cottage Cheese with Pepper & Rice Cakes",
+    "ingredients": [
+      {
+        "name": "cottage cheese",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "sliced pepper",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "rice cakes (~7g each)",
+        "amount": 2.0,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 300,
+    "protein": 14.0,
+    "carbs": 20.0,
+    "fat": 12.0,
+    "fibre": 3.0,
+    "calcium": 160.0,
+    "iron": 1.2,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 270.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Lentil & Tomato Salad",
+    "ingredients": [
+      {
+        "name": "cooked lentils",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "chopped tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "onion",
+        "amount": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "fresh herbs",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 300,
+    "protein": 12.0,
+    "carbs": 25.0,
+    "fat": 10.0,
+    "fibre": 6.0,
+    "calcium": 90.0,
+    "iron": 2.5,
+    "vit_d": 0.0,
+    "folate": 120.0,
+    "potassium": 520.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Greek Yogurt with Walnuts & Grapes",
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "walnuts",
+        "amount": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "grapes",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 300,
+    "protein": 12.0,
+    "carbs": 20.0,
+    "fat": 14.0,
+    "fibre": 3.0,
+    "calcium": 180.0,
+    "iron": 0.8,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 280.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Avocado Wrap with Spinach",
+    "ingredients": [
+      {
+        "name": "wholemeal wrap (~50g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "¼ avocado (~50g)",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "spinach",
+        "amount": 30.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 300,
+    "protein": 8.0,
+    "carbs": 22.0,
+    "fat": 16.0,
+    "fibre": 4.0,
+    "calcium": 80.0,
+    "iron": 1.5,
+    "vit_d": 0.0,
+    "folate": 40.0,
+    "potassium": 260.0,
+    "magnesium": 40.0
+  },
+  {
+    "name": "Chickpea & Cucumber Salad",
+    "ingredients": [
+      {
+        "name": "chickpeas",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "cucumber",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "lemon juice",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "fresh parsley",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 300,
+    "protein": 12.0,
+    "carbs": 20.0,
+    "fat": 14.0,
+    "fibre": 5.0,
+    "calcium": 100.0,
+    "iron": 2.5,
+    "vit_d": 0.0,
+    "folate": 110.0,
+    "potassium": 510.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Smoked Mackerel with Beetroot",
+    "ingredients": [
+      {
+        "name": "smoked mackerel",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "beetroot",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 40.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 300,
+    "protein": 18.0,
+    "carbs": 6.0,
+    "fat": 20.0,
+    "fibre": 2.0,
+    "calcium": 120.0,
+    "iron": 2.0,
+    "vit_d": 4.5,
+    "folate": 40.0,
+    "potassium": 480.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Egg & Hummus Snack Plate",
+    "ingredients": [
+      {
+        "name": "hard-boiled egg (~60g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus (~20g)",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "carrot sticks",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "oatcakes (~12g each)",
+        "amount": 2.0,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 300,
+    "protein": 12.0,
+    "carbs": 18.0,
+    "fat": 14.0,
+    "fibre": 4.0,
+    "calcium": 100.0,
+    "iron": 1.5,
+    "vit_d": 1.0,
+    "folate": 40.0,
+    "potassium": 270.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Hummus Wrap with Carrot & Spinach",
+    "ingredients": [
+      {
+        "name": "wholemeal wrap (~50g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus (~40g)",
+        "amount": 2.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "grated carrot",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "spinach",
+        "amount": 30.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 400,
+    "protein": 10.0,
+    "carbs": 30.0,
+    "fat": 18.0,
+    "fibre": 5.0,
+    "calcium": 100.0,
+    "iron": 2.0,
+    "vit_d": 0.0,
+    "folate": 90.0,
+    "potassium": 340.0,
+    "magnesium": 60.0
+  },
+  {
+    "name": "Tuna & Bean Salad",
+    "ingredients": [
+      {
+        "name": "canned tuna",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "cannellini beans",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 400,
+    "protein": 24.0,
+    "carbs": 20.0,
+    "fat": 20.0,
+    "fibre": 5.0,
+    "calcium": 120.0,
+    "iron": 2.5,
+    "vit_d": 0.5,
+    "folate": 80.0,
+    "potassium": 550.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Cottage Cheese with Oatcakes & Grapes",
+    "ingredients": [
+      {
+        "name": "cottage cheese",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "oatcakes (~12g each)",
+        "amount": 3.0,
+        "unit": ""
+      },
+      {
+        "name": "grapes",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 400,
+    "protein": 16.0,
+    "carbs": 30.0,
+    "fat": 14.0,
+    "fibre": 4.0,
+    "calcium": 200.0,
+    "iron": 1.5,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 300.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Chickpea Salad with Avocado & Tomato",
+    "ingredients": [
+      {
+        "name": "chickpeas",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "¼ avocado (~50g)",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "chopped tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "lemon dressing",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 400,
+    "protein": 14.0,
+    "carbs": 25.0,
+    "fat": 20.0,
+    "fibre": 6.0,
+    "calcium": 120.0,
+    "iron": 2.8,
+    "vit_d": 0.0,
+    "folate": 100.0,
+    "potassium": 540.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Boiled Eggs with Toast & Tomato",
+    "ingredients": [
+      {
+        "name": "boiled eggs (~120g)",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "wholemeal toast (~40g)",
+        "amount": 1.0,
+        "unit": "slice"
+      },
+      {
+        "name": "tomato",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 400,
+    "protein": 14.0,
+    "carbs": 20.0,
+    "fat": 22.0,
+    "fibre": 4.0,
+    "calcium": 120.0,
+    "iron": 2.0,
+    "vit_d": 1.0,
+    "folate": 40.0,
+    "potassium": 320.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Smoked Salmon & Cream Cheese on Crispbread",
+    "ingredients": [
+      {
+        "name": "smoked salmon",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "cream cheese",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "rye crispbreads (~10g each)",
+        "amount": 2.0,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 400,
+    "protein": 18.0,
+    "carbs": 20.0,
+    "fat": 22.0,
+    "fibre": 3.0,
+    "calcium": 160.0,
+    "iron": 2.0,
+    "vit_d": 3.5,
+    "folate": 30.0,
+    "potassium": 320.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Lentil Salad with Beetroot & Spinach",
+    "ingredients": [
+      {
+        "name": "cooked lentils",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "beetroot",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "spinach",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "vinaigrette",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 400,
+    "protein": 16.0,
+    "carbs": 30.0,
+    "fat": 14.0,
+    "fibre": 6.0,
+    "calcium": 100.0,
+    "iron": 2.8,
+    "vit_d": 0.0,
+    "folate": 120.0,
+    "potassium": 560.0,
+    "magnesium": 75.0
+  },
+  {
+    "name": "Rice Cakes with Peanut Butter & Apple",
+    "ingredients": [
+      {
+        "name": "rice cakes (~7g each)",
+        "amount": 3.0,
+        "unit": ""
+      },
+      {
+        "name": "peanut butter (~15g)",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "apple slices",
+        "amount": 75.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 400,
+    "protein": 8.0,
+    "carbs": 30.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 80.0,
+    "iron": 1.0,
+    "vit_d": 0.0,
+    "folate": 30.0,
+    "potassium": 340.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Greek Yogurt with Granola & Berries",
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "granola",
+        "amount": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed berries",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 400,
+    "protein": 15.0,
+    "carbs": 30.0,
+    "fat": 18.0,
+    "fibre": 4.0,
+    "calcium": 200.0,
+    "iron": 1.0,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 320.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Falafel Pitta with Hummus & Salad",
+    "ingredients": [
+      {
+        "name": "wholemeal pitta (~60g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus (~40g)",
+        "amount": 2.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "falafel (~40g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "salad",
+        "amount": 40.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 400,
+    "protein": 14.0,
+    "carbs": 30.0,
+    "fat": 18.0,
+    "fibre": 5.0,
+    "calcium": 110.0,
+    "iron": 2.5,
+    "vit_d": 0.0,
+    "folate": 90.0,
+    "potassium": 540.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Falafel Wrap with Hummus & Salad",
+    "ingredients": [
+      {
+        "name": "wholemeal wrap (~50g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus (~40g)",
+        "amount": 2.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "falafel (~80g)",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "salad",
+        "amount": 40.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 35.0,
+    "fat": 24.0,
+    "fibre": 6.0,
+    "calcium": 120.0,
+    "iron": 2.8,
+    "vit_d": 0.0,
+    "folate": 100.0,
+    "potassium": 560.0,
+    "magnesium": 75.0
+  },
+  {
+    "name": "Tuna & Bean Salad with Olive Oil",
+    "ingredients": [
+      {
+        "name": "canned tuna",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed beans",
+        "amount": 75.0,
+        "unit": "g"
+      },
+      {
+        "name": "salad leaves",
+        "amount": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 500,
+    "protein": 26.0,
+    "carbs": 25.0,
+    "fat": 24.0,
+    "fibre": 6.0,
+    "calcium": 130.0,
+    "iron": 2.8,
+    "vit_d": 0.5,
+    "folate": 90.0,
+    "potassium": 580.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Cottage Cheese with Oatcakes & Grapes",
+    "ingredients": [
+      {
+        "name": "cottage cheese",
+        "amount": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "oatcakes (~12g each)",
+        "amount": 4.0,
+        "unit": ""
+      },
+      {
+        "name": "grapes",
+        "amount": 75.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 500,
+    "protein": 20.0,
+    "carbs": 35.0,
+    "fat": 18.0,
+    "fibre": 5.0,
+    "calcium": 220.0,
+    "iron": 1.5,
+    "vit_d": 0.1,
+    "folate": 30.0,
+    "potassium": 320.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Chickpea Salad with Avocado & Tomato",
+    "ingredients": [
+      {
+        "name": "chickpeas",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "½ avocado (~100g)",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "chopped tomato",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "lemon dressing",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 500,
+    "protein": 16.0,
+    "carbs": 30.0,
+    "fat": 26.0,
+    "fibre": 7.0,
+    "calcium": 140.0,
+    "iron": 3.0,
+    "vit_d": 0.0,
+    "folate": 110.0,
+    "potassium": 580.0,
+    "magnesium": 80.0
+  },
+  {
+    "name": "Smoked Salmon Bagel with Cream Cheese",
+    "ingredients": [
+      {
+        "name": "smoked salmon",
+        "amount": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "cream cheese",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "½ wholemeal bagel (~45g)",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 500,
+    "protein": 20.0,
+    "carbs": 30.0,
+    "fat": 26.0,
+    "fibre": 3.0,
+    "calcium": 180.0,
+    "iron": 2.2,
+    "vit_d": 3.5,
+    "folate": 30.0,
+    "potassium": 340.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Lentil Salad with Beetroot & Spinach",
+    "ingredients": [
+      {
+        "name": "cooked lentils",
+        "amount": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "beetroot",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "spinach",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "vinaigrette",
+        "amount": 1.0,
+        "unit": "tsp"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 35.0,
+    "fat": 20.0,
+    "fibre": 7.0,
+    "calcium": 120.0,
+    "iron": 3.0,
+    "vit_d": 0.0,
+    "folate": 130.0,
+    "potassium": 600.0,
+    "magnesium": 80.0
+  },
+  {
+    "name": "Rice Cakes with Peanut Butter & Banana",
+    "ingredients": [
+      {
+        "name": "rice cakes (~7g each)",
+        "amount": 3.0,
+        "unit": ""
+      },
+      {
+        "name": "peanut butter (~15g)",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "banana slices",
+        "amount": 75.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 500,
+    "protein": 10.0,
+    "carbs": 35.0,
+    "fat": 24.0,
+    "fibre": 5.0,
+    "calcium": 100.0,
+    "iron": 1.2,
+    "vit_d": 0.0,
+    "folate": 30.0,
+    "potassium": 350.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Greek Yogurt with Granola & Berries",
+    "ingredients": [
+      {
+        "name": "Greek yogurt",
+        "amount": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "granola",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "mixed berries",
+        "amount": 75.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 500,
+    "protein": 18.0,
+    "carbs": 35.0,
+    "fat": 22.0,
+    "fibre": 5.0,
+    "calcium": 220.0,
+    "iron": 1.2,
+    "vit_d": 0.1,
+    "folate": 40.0,
+    "potassium": 340.0,
+    "magnesium": 50.0
+  },
+  {
+    "name": "Hummus Pitta with Grilled Veg",
+    "ingredients": [
+      {
+        "name": "wholemeal pitta (~60g)",
+        "amount": 1.0,
+        "unit": ""
+      },
+      {
+        "name": "hummus (~60g)",
+        "amount": 3.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "grilled peppers and courgette",
+        "amount": 100.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 500,
+    "protein": 14.0,
+    "carbs": 35.0,
+    "fat": 24.0,
+    "fibre": 6.0,
+    "calcium": 100.0,
+    "iron": 2.5,
+    "vit_d": 0.0,
+    "folate": 90.0,
+    "potassium": 560.0,
+    "magnesium": 70.0
+  },
+  {
+    "name": "Boiled Eggs with Avocado & Toast",
+    "ingredients": [
+      {
+        "name": "boiled eggs (~120g)",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "½ avocado (~100g)",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "wholemeal toast (~40g)",
+        "amount": 1.0,
+        "unit": "slice"
+      }
+    ],
+    "meal_type": "NO COOK LUNCHES",
+    "kcal": 500,
+    "protein": 16.0,
+    "carbs": 30.0,
+    "fat": 26.0,
+    "fibre": 5.0,
+    "calcium": 180.0,
+    "iron": 2.0,
+    "vit_d": 1.0,
+    "folate": 40.0,
+    "potassium": 330.0,
+    "magnesium": 45.0
+  },
+  {
+    "name": "Bolognese with Jacket Potato",
+    "ingredients": [
+      {
+        "name": "≤15% fat beef mince",
+        "amount": 500.0,
+        "unit": "g"
+      },
+      {
+        "name": "×400g chopped tomatoes",
+        "amount": 3.0,
+        "unit": ""
+      },
+      {
+        "name": "arlic",
+        "amount": null,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "Knorr stock pot — divided into 6 servings",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 420,
+    "protein": 25.0,
+    "carbs": 40.0,
+    "fat": 18.2,
+    "fibre": 6.0,
+    "calcium": 70.0,
+    "iron": 3.4,
+    "vit_d": 0.2,
+    "folate": 60.0,
+    "potassium": 1170.0,
+    "magnesium": 65.0
+  },
+  {
+    "name": "Bolognese with Courgetti Spaghetti",
+    "ingredients": [
+      {
+        "name": "(150g courgette)\t500g ≤15% fat beef mince",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "×400g chopped tomatoes",
+        "amount": 3.0,
+        "unit": ""
+      },
+      {
+        "name": "arlic",
+        "amount": null,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": null,
+        "unit": ""
+      },
+      {
+        "name": "Knorr stock pot — divided into 6 servings",
+        "amount": null,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 315,
+    "protein": 23.0,
+    "carbs": 14.0,
+    "fat": 18.2,
+    "fibre": 4.5,
+    "calcium": 75.0,
+    "iron": 3.1,
+    "vit_d": 0.2,
+    "folate": 65.0,
+    "potassium": 880.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Cumberland Sausages, Chips & Egg",
+    "ingredients": [
+      {
+        "name": "Tesco Finest Cumberland sausages (110g)",
+        "amount": 2.0,
+        "unit": ""
+      },
+      {
+        "name": "oven chips",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "medium egg",
+        "amount": 1.0,
+        "unit": ""
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 260,
+    "protein": 26.0,
+    "carbs": 30.0,
+    "fat": 40.0,
+    "fibre": 3.0,
+    "calcium": 70.0,
+    "iron": 2.5,
+    "vit_d": 1.8,
+    "folate": 40.0,
+    "potassium": 650.0,
+    "magnesium": 55.0
+  },
+  {
+    "name": "Grilled Salmon, Boiled Potatoes & Steamed Broccoli",
+    "ingredients": [
+      {
+        "name": "salmon fillet",
+        "amount": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "boiled new potatoes",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "broccoli",
+        "amount": 100.0,
+        "unit": "g"
+      }
+    ],
+    "meal_type": "DINNER",
+    "kcal": 500,
+    "protein": 30.0,
+    "carbs": 25.0,
+    "fat": 26.0,
+    "fibre": 5.0,
+    "calcium": 120.0,
+    "iron": 2.2,
+    "vit_d": 5.0,
+    "folate": 80.0,
+    "potassium": 700.0,
+    "magnesium": 75.0
+  }
+]
