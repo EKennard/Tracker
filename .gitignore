@@ -35,7 +35,6 @@ staticfiles/
 static_root/
 # Heroku/Deployment
 .heroku/
-Procfile
 runtime.txt
 CheckpointMe Copilot Deep Project.txt
 COPILOT_README.md
