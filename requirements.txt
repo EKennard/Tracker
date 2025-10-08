@@ -12,3 +12,4 @@ packaging
 typing_extensions
 tzdata
 whitenoise
+django-environ
