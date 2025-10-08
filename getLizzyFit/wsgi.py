@@ -8,9 +8,9 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
 """
 
 import os
-# WSGI config for getlizzyfit project.
+# WSGI config for getLizzyFit project.
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'getlizzyfit.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'getLizzyFit.settings')
 
 application = get_wsgi_application()
