@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'getlizzyfit.wsgi.application'
 import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://neondb_owner:npg_IKVEayOT0b8M@ep-summer-hall-a23iiu3y.eu-central-1.aws.neon.tech/finch_daily_rice_886150',
+        default=env('DATABASE_URL', default=''),
         conn_max_age=600,
         ssl_require=True
     )
