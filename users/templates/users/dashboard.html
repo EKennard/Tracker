@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Welcome to your Dashboard</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-lg font-semibold mb-2">Recent Meals</h2>
+    <ul>
+      {% for meal in recent_meals %}
+      <li class="border-b py-1">{{ meal.date }}: {{ meal.get_meal_type_display }} ({{ meal.calories }} kcal)</li>
+      {% empty %}
+      <li>No meals logged yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-lg font-semibold mb-2">Recent Metrics</h2>
+    <ul>
+      {% for m in recent_metrics %}
+      <li class="border-b py-1">{{ m.date }}: {{ m.weight }}kg, {{ m.height }}cm, BF: {{ m.body_fat_percentage }}%</li>
+      {% empty %}
+      <li>No metrics logged yet.</li>
+      {% endfor %}
+    </ul>
+    <h2 class="text-lg font-semibold mt-4 mb-2">Recent Measurements</h2>
+    <ul>
+      {% for meas in recent_measurements %}
+      <li class="border-b py-1">{{ meas.date }}: {{ meas.body_part }} - {{ meas.value }} {{ meas.unit }}</li>
+      {% empty %}
+      <li>No measurements logged yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-lg font-semibold mb-2">Recent Milestones</h2>
+    <ul>
+      {% for ms in recent_milestones %}
+      <li class="border-b py-1">{{ ms.title }} ({{ ms.get_milestone_type_display }}) {% if ms.date_achieved %}- Achieved: {{ ms.date_achieved }}{% endif %}</li>
+      {% empty %}
+      <li>No milestones yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-lg font-semibold mb-2">Recent Habits</h2>
+    <ul>
+      {% for h in recent_habits %}
+      <li class="border-b py-1">{{ h.date }}: {{ h.habit_name }} {% if h.value %}- {{ h.value }} {{ h.unit }}{% endif %}</li>
+      {% empty %}
+      <li>No habit logs yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-lg font-semibold mb-2">Recent Exercise</h2>
+    <ul>
+      {% for ex in recent_exercise %}
+      <li class="border-b py-1">{{ ex.date }}: {{ ex.get_exercise_type_display }} ({{ ex.duration_minutes }} min)</li>
+      {% empty %}
+      <li>No exercise logs yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-lg font-semibold mb-2">Recent Fertility Logs</h2>
+    <ul>
+      {% for f in recent_fertility %}
+      <li class="border-b py-1">{{ f.date }}: Cycle Day {{ f.cycle_day }} {% if f.temperature %}- Temp: {{ f.temperature }}°C{% endif %}</li>
+      {% empty %}
+      <li>No fertility logs yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

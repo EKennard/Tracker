@@ -1,6 +1,14 @@
+
 Django>=4.2,<5.0
 Pillow>=10.0
 gunicorn
 psycopg2-binary
 django-heroku
 python-dotenv
+djangorestframework
+bleach
+sqlparse
+packaging
+typing_extensions
+tzdata
+whitenoise

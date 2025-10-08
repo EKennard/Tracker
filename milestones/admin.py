@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import Milestone, Streak, Badge, Achievement, VictoryLog
 
-# Register your models here.
+admin.site.register(Milestone)
+admin.site.register(Streak)
+admin.site.register(Badge)
+admin.site.register(Achievement)
+admin.site.register(VictoryLog)

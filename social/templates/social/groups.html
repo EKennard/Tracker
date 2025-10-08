@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Groups{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Groups</h1>
+<div class="mb-6 bg-white p-4 rounded shadow">
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    <h2 class="text-lg font-semibold mb-2">Create Group</h2>
+    {{ form.non_field_errors }}
+    <div class="grid grid-cols-2 gap-4">
+      <div>{{ form.name.label_tag }}<br>{{ form.name }}</div>
+      <div class="col-span-2">{{ form.description.label_tag }}<br>{{ form.description }}</div>
+    </div>
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Create Group</button>
+  </form>
+</div>
+<div class="bg-white p-4 rounded shadow">
+  <h2 class="text-xl font-semibold mb-2">Your Groups</h2>
+  <table class="min-w-full table-auto">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="px-2 py-1">Name</th>
+        <th class="px-2 py-1">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for group in groups %}
+      <tr class="border-b">
+        <td class="px-2 py-1">{{ group.name }}</td>
+        <td class="px-2 py-1">{{ group.description }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="2" class="text-center py-2">You are not in any groups yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

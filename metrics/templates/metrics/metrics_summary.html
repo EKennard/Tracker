@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Metrics Summary{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Metrics Summary</h1>
+<div class="mb-6 bg-white p-4 rounded shadow">
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    <h2 class="text-lg font-semibold mb-2">Add Health Metrics</h2>
+    {{ metrics_form.non_field_errors }}
+    <div class="grid grid-cols-2 gap-4">
+      <div>{{ metrics_form.date.label_tag }}<br>{{ metrics_form.date }}</div>
+      <div>{{ metrics_form.height.label_tag }}<br>{{ metrics_form.height }}</div>
+      <div>{{ metrics_form.weight.label_tag }}<br>{{ metrics_form.weight }}</div>
+      <div>{{ metrics_form.basal_metabolic_rate.label_tag }}<br>{{ metrics_form.basal_metabolic_rate }}</div>
+      <div>{{ metrics_form.daily_caloric_needs.label_tag }}<br>{{ metrics_form.daily_caloric_needs }}</div>
+      <div>{{ metrics_form.body_fat_percentage.label_tag }}<br>{{ metrics_form.body_fat_percentage }}</div>
+    </div>
+    <button type="submit" name="metrics_submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Metrics</button>
+  </form>
+</div>
+<div class="mb-6 bg-white p-4 rounded shadow">
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    <h2 class="text-lg font-semibold mb-2">Add Measurement</h2>
+    {{ measurement_form.non_field_errors }}
+    <div class="grid grid-cols-2 gap-4">
+      <div>{{ measurement_form.date.label_tag }}<br>{{ measurement_form.date }}</div>
+      <div>{{ measurement_form.body_part.label_tag }}<br>{{ measurement_form.body_part }}</div>
+      <div>{{ measurement_form.value.label_tag }}<br>{{ measurement_form.value }}</div>
+      <div>{{ measurement_form.unit.label_tag }}<br>{{ measurement_form.unit }}</div>
+    </div>
+    <button type="submit" name="measurement_submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Measurement</button>
+  </form>
+</div>
+<div class="bg-white p-4 rounded shadow mb-6">
+  <h2 class="text-xl font-semibold mb-2">Your Health Metrics</h2>
+  <table class="min-w-full table-auto">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="px-2 py-1">Date</th>
+        <th class="px-2 py-1">Height</th>
+        <th class="px-2 py-1">Weight</th>
+        <th class="px-2 py-1">BMR</th>
+        <th class="px-2 py-1">Calories</th>
+        <th class="px-2 py-1">Body Fat %</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in metrics %}
+      <tr class="border-b">
+        <td class="px-2 py-1">{{ m.date }}</td>
+        <td class="px-2 py-1">{{ m.height }}</td>
+        <td class="px-2 py-1">{{ m.weight }}</td>
+        <td class="px-2 py-1">{{ m.basal_metabolic_rate }}</td>
+        <td class="px-2 py-1">{{ m.daily_caloric_needs }}</td>
+        <td class="px-2 py-1">{{ m.body_fat_percentage }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6" class="text-center py-2">No metrics logged yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="bg-white p-4 rounded shadow">
+  <h2 class="text-xl font-semibold mb-2">Your Measurements</h2>
+  <table class="min-w-full table-auto">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="px-2 py-1">Date</th>
+        <th class="px-2 py-1">Body Part</th>
+        <th class="px-2 py-1">Value</th>
+        <th class="px-2 py-1">Unit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for meas in measurements %}
+      <tr class="border-b">
+        <td class="px-2 py-1">{{ meas.date }}</td>
+        <td class="px-2 py-1">{{ meas.body_part }}</td>
+        <td class="px-2 py-1">{{ meas.value }}</td>
+        <td class="px-2 py-1">{{ meas.unit }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4" class="text-center py-2">No measurements logged yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

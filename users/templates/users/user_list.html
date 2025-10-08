@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Find Friends{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Find Friends</h1>
+<div class="bg-white p-4 rounded shadow mb-6">
+  <h2 class="text-lg font-semibold mb-2">Other Users</h2>
+  <ul>
+    {% for user in users %}
+      <li class="flex items-center justify-between border-b py-2">
+        <span>{{ user.user.username }}</span>
+        <form method="post" action="/users/send_friend_request/{{ user.user.id }}/">
+          {% csrf_token %}
+          <button type="submit" class="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700">Send Friend Request</button>
+        </form>
+      </li>
+    {% empty %}
+      <li>No other users found.</li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="bg-white p-4 rounded shadow mb-6">
+  <h2 class="text-lg font-semibold mb-2">Friend Requests Sent</h2>
+  <ul>
+    {% for f in sent %}
+      <li>{{ f.to_user.user.username }} - {% if f.is_active %}Accepted{% else %}Pending{% endif %}</li>
+    {% empty %}
+      <li>No friend requests sent.</li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="bg-white p-4 rounded shadow">
+  <h2 class="text-lg font-semibold mb-2">Friend Requests Received</h2>
+  <ul>
+    {% for f in received %}
+      <li>{{ f.from_user.user.username }} - {% if not f.is_active %}
+        <form method="post" action="/users/accept_friend_request/{{ f.id }}/" class="inline">
+          {% csrf_token %}
+          <button type="submit" class="bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700">Accept</button>
+        </form>
+      {% else %}Accepted{% endif %}</li>
+    {% empty %}
+      <li>No friend requests received.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

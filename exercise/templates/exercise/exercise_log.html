@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Exercise Log{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Exercise Log</h1>
+<div class="mb-6 bg-white p-4 rounded shadow">
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    <h2 class="text-lg font-semibold mb-2">Add Exercise Log</h2>
+    {{ form.non_field_errors }}
+    <div class="grid grid-cols-2 gap-4">
+      <div>{{ form.date.label_tag }}<br>{{ form.date }}</div>
+      <div>{{ form.exercise_type.label_tag }}<br>{{ form.exercise_type }}</div>
+      <div>{{ form.duration_minutes.label_tag }}<br>{{ form.duration_minutes }}</div>
+      <div>{{ form.distance_logged.label_tag }}<br>{{ form.distance_logged }}</div>
+      <div>{{ form.distance_unit.label_tag }}<br>{{ form.distance_unit }}</div>
+      <div>{{ form.rating.label_tag }}<br>{{ form.rating }}</div>
+      <div>{{ form.intensity.label_tag }}<br>{{ form.intensity }}</div>
+      <div>{{ form.emoji.label_tag }}<br>{{ form.emoji }}</div>
+      <div>{{ form.calories_burned.label_tag }}<br>{{ form.calories_burned }}</div>
+      <div class="col-span-2">{{ form.notes.label_tag }}<br>{{ form.notes }}</div>
+    </div>
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Exercise Log</button>
+  </form>
+</div>
+<div class="bg-white p-4 rounded shadow">
+  <h2 class="text-xl font-semibold mb-2">Your Exercise Logs</h2>
+  <table class="min-w-full table-auto">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="px-2 py-1">Date</th>
+        <th class="px-2 py-1">Type</th>
+        <th class="px-2 py-1">Duration (min)</th>
+        <th class="px-2 py-1">Distance</th>
+        <th class="px-2 py-1">Unit</th>
+        <th class="px-2 py-1">Rating</th>
+        <th class="px-2 py-1">Intensity</th>
+        <th class="px-2 py-1">Emoji</th>
+        <th class="px-2 py-1">Calories</th>
+        <th class="px-2 py-1">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in logs %}
+      <tr class="border-b">
+        <td class="px-2 py-1">{{ log.date }}</td>
+        <td class="px-2 py-1">{{ log.get_exercise_type_display }}</td>
+        <td class="px-2 py-1">{{ log.duration_minutes }}</td>
+        <td class="px-2 py-1">{{ log.distance_logged }}</td>
+        <td class="px-2 py-1">{{ log.get_distance_unit_display }}</td>
+        <td class="px-2 py-1">{{ log.rating }}</td>
+        <td class="px-2 py-1">{{ log.get_intensity_display }}</td>
+        <td class="px-2 py-1">{{ log.emoji }}</td>
+        <td class="px-2 py-1">{{ log.calories_burned }}</td>
+        <td class="px-2 py-1">{{ log.notes }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="10" class="text-center py-2">No exercise logs yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
