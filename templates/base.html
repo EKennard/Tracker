@@ -76,13 +76,17 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-        <header class="card" style="display:flex;align-items:center;gap:1rem;">
-            <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
-            <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
-            <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
-            <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
-            <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
-            <h1 style="margin-left:1rem;">GetLizzyFit</h1>
+        <header class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;text-align:center;">
+            <div style="display:flex;justify-content:center;align-items:center;gap:2.5rem;">
+                <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
+                <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
+                <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
+                <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
+                <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
+            </div>
+            <h1 style="margin-top:1rem;margin-bottom:0;font-family:'Fredoka One','Comic Neue',sans-serif;font-size:2.5rem;">
+                <a href="/" style="color:#4FC3F7;text-decoration:none;">GetLizzyFit</a>
+            </h1>
         </header>
         <nav class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;margin-bottom:2rem;">
             <a href="/users/dashboard/" class="button">Dashboard</a>
@@ -98,13 +102,17 @@
             <a href="/accounts/logout/" class="button">Logout</a>
         </nav>
     {% else %}
-        <header class="card" style="display:flex;align-items:center;gap:1rem;">
-            <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
-            <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
-            <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
-            <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
-            <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
-            <h1 style="margin-left:1rem;">GetLizzyFit</h1>
+        <header class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;text-align:center;">
+            <div style="display:flex;justify-content:center;align-items:center;gap:2.5rem;">
+                <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
+                <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
+                <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
+                <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
+                <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
+            </div>
+            <h1 style="margin-top:1rem;margin-bottom:0;font-family:'Fredoka One','Comic Neue',sans-serif;font-size:2.5rem;">
+                <a href="/" style="color:#4FC3F7;text-decoration:none;">GetLizzyFit</a>
+            </h1>
         </header>
         <nav class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;margin-bottom:2rem;">
             <a href="/accounts/login/" class="button">Login</a>
