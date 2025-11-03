@@ -18,17 +18,17 @@
         <h1 style="margin-left:1rem;">GetLizzyFit</h1>
     </header>
     <nav class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;margin-bottom:2rem;">
-        <a href="/users/dashboard/" class="button">Dashboard</a>
-        <a href="/users/users/" class="button">Find Friends</a>
-        <a href="/meals/log/" class="button">Meals</a>
-        <a href="/metrics/summary/" class="button">Metrics</a>
-        <a href="/milestones/list/" class="button">Milestones</a>
-        <a href="/social/groups/" class="button">Social</a>
-        <a href="/notifications/list/" class="button">Notifications</a>
-        <a href="/habits/log/" class="button">Habits</a>
-        <a href="/exercise/log/" class="button">Exercise</a>
-        <a href="/fertility/" class="button">Fertility</a>
         {% if user.is_authenticated %}
+            <a href="/users/dashboard/" class="button">Dashboard</a>
+            <a href="/users/users/" class="button">Find Friends</a>
+            <a href="/meals/log/" class="button">Meals</a>
+            <a href="/metrics/summary/" class="button">Metrics</a>
+            <a href="/milestones/list/" class="button">Milestones</a>
+            <a href="/social/groups/" class="button">Social</a>
+            <a href="/notifications/list/" class="button">Notifications</a>
+            <a href="/habits/log/" class="button">Habits</a>
+            <a href="/exercise/log/" class="button">Exercise</a>
+            <a href="/fertility/" class="button">Fertility</a>
             <a href="/accounts/logout/" class="button">Logout</a>
         {% else %}
             <a href="/accounts/login/" class="button">Login</a>
@@ -36,7 +36,14 @@
         {% endif %}
     </nav>
     <main>
-        {% block content %}Hello from GetLizzyFit!{% endblock %}
+        {% block content %}
+            {% if user.is_authenticated %}
+                Welcome back, {{ user.username }}!
+            {% else %}
+                <h2>Welcome to GetLizzyFit!</h2>
+                <p>Please <a href="/accounts/login/">login</a> or <a href="/accounts/signup/">register</a> to get started.</p>
+            {% endif %}
+        {% endblock %}
     </main>
 </body>
 </html>

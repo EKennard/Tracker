@@ -25,6 +25,8 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
+    # Allauth URLs
+    path('accounts/', include('allauth.urls')),
 ]
 
 urlpatterns += [
@@ -37,7 +39,6 @@ urlpatterns += [
     path('notifications/', include('notifications.urls')),
     path('habits/', include('habits.urls')),
     path('exercise/', include('exercise.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
