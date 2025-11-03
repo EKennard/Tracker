@@ -9,16 +9,16 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <header class="card" style="display:flex;align-items:center;gap:1rem;">
-        <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
-        <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
-        <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
-        <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
-        <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
-        <h1 style="margin-left:1rem;">GetLizzyFit</h1>
-    </header>
-    <nav class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;margin-bottom:2rem;">
-        {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
+        <header class="card" style="display:flex;align-items:center;gap:1rem;">
+            <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
+            <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
+            <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
+            <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
+            <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
+            <h1 style="margin-left:1rem;">GetLizzyFit</h1>
+        </header>
+        <nav class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;margin-bottom:2rem;">
             <a href="/users/dashboard/" class="button">Dashboard</a>
             <a href="/users/users/" class="button">Find Friends</a>
             <a href="/meals/log/" class="button">Meals</a>
@@ -30,11 +30,21 @@
             <a href="/exercise/log/" class="button">Exercise</a>
             <a href="/fertility/" class="button">Fertility</a>
             <a href="/accounts/logout/" class="button">Logout</a>
-        {% else %}
+        </nav>
+    {% else %}
+        <header class="card" style="display:flex;align-items:center;gap:1rem;">
+            <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
+            <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
+            <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
+            <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
+            <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
+            <h1 style="margin-left:1rem;">GetLizzyFit</h1>
+        </header>
+        <nav class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;margin-bottom:2rem;">
             <a href="/accounts/login/" class="button">Login</a>
             <a href="/accounts/signup/" class="button">Register</a>
-        {% endif %}
-    </nav>
+        </nav>
+    {% endif %}
     <main>
         {% block content %}
             {% if user.is_authenticated %}
