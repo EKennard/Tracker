@@ -51,9 +51,19 @@
                 Welcome back, {{ user.username }}!
             {% else %}
                 <h2>Welcome to GetLizzyFit!</h2>
+                <p>GetLizzyFit is your all-in-one health, fitness, and wellness tracker. Log your meals, track your habits, monitor your health metrics, and connect with friends for motivation. Our app helps you build healthy routines, celebrate milestones, and stay on top of your goals in a fun, supportive environment.</p>
+                <ul>
+                    <li>Track meals, exercise, and habits</li>
+                    <li>Monitor fertility and health metrics</li>
+                    <li>Connect with friends and join groups</li>
+                    <li>Receive notifications and celebrate milestones</li>
+                </ul>
                 <p>Please <a href="/accounts/login/">login</a> or <a href="/accounts/signup/">register</a> to get started.</p>
             {% endif %}
         {% endblock %}
     </main>
+    <footer style="text-align:center;margin-top:2rem;color:#81C784;font-size:1rem;">
+        &copy; {{ now.year }} GetLizzyFit. All rights reserved.
+    </footer>
 </body>
 </html>
