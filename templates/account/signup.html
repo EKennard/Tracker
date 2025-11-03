@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="main-section" style="max-width:500px;margin:auto;">
+    <div class="welcome-title" style="text-align:center;">Register</div>
+    <form method="post" class="card" style="margin:auto;">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div style="margin-bottom:1rem;">
+            {{ form.username.label_tag }}<br>{{ form.username }}
+        </div>
+        <div style="margin-bottom:1rem;">
+            {{ form.email.label_tag }}<br>{{ form.email }}
+        </div>
+        <div style="margin-bottom:1rem;">
+            {{ form.password1.label_tag }}<br>{{ form.password1 }}
+        </div>
+        <div style="margin-bottom:1rem;">
+            {{ form.password2.label_tag }}<br>{{ form.password2 }}
+        </div>
+        <button type="submit" class="button" style="width:100%;">Register</button>
+    </form>
+    <div class="cta" style="margin-top:2rem;">
+        <span>Already have an account?</span>
+        <a href="{% url 'account_login' %}" class="button">Sign In</a>
+    </div>
+</div>
+{% endblock %}

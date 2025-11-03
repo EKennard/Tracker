@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Sign In{% endblock %}
+{% block content %}
+<div class="main-section" style="max-width:500px;margin:auto;">
+    <div class="welcome-title" style="text-align:center;">Sign In</div>
+    <form method="post" class="card" style="margin:auto;">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div style="margin-bottom:1rem;">
+            {{ form.login.label_tag }}<br>{{ form.login }}
+        </div>
+        <div style="margin-bottom:1rem;">
+            {{ form.password.label_tag }}<br>{{ form.password }}
+        </div>
+        <div style="margin-bottom:1rem;">
+            <label>{{ form.remember.label_tag }} {{ form.remember }}</label>
+        </div>
+        <button type="submit" class="button" style="width:100%;">Sign In</button>
+        <div style="margin-top:1rem;text-align:center;">
+            <a href="{% url 'account_reset_password' %}" style="color:#4FC3F7;">Forgot your password?</a>
+        </div>
+    </form>
+    <div class="cta" style="margin-top:2rem;">
+        <span>Don't have an account?</span>
+        <a href="{% url 'account_signup' %}" class="button">Register</a>
+    </div>
+</div>
+{% endblock %}
