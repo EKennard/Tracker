@@ -4,7 +4,7 @@
 {% block content %}
 <div class="main-section" style="max-width:500px;margin:auto;">
     <div class="welcome-title" style="text-align:center;">Sign In</div>
-    <form method="post" class="card" style="margin:auto;">
+    <form method="post" action="{% url 'account_login' %}" class="card" style="margin:auto;">
         {% csrf_token %}
         {{ form.non_field_errors }}
         <div style="margin-bottom:1rem;">

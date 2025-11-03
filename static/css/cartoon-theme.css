@@ -28,8 +28,14 @@ body {
   box-shadow: 0 2px 8px rgba(255,213,79,0.12);
   cursor: pointer;
   transition: background 0.2s;
+  text-decoration: none;
+  display: inline-block;
 }
 .button:hover {
   background: #FFD54F;
   color: #4FC3F7;
+}
+button.button {
+  border: 2px dashed #4FC3F7;
+  font-family: inherit;
 }
