@@ -1,0 +1,35 @@
+body {
+  background: #FFF8F0;
+  font-family: 'Comic Neue', 'Quicksand', 'Fredoka One', sans-serif;
+  color: #4FC3F7;
+}
+.card {
+  background: #FFFFFF;
+  border: 2px dashed #FFD54F;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 12px rgba(186,104,200,0.08);
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+.icon {
+  width: 48px;
+  height: 48px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  filter: drop-shadow(0 2px 2px #BA68C8);
+}
+.button {
+  background: #81C784;
+  color: #FFF8F0;
+  border: 2px dashed #4FC3F7;
+  border-radius: 1rem;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255,213,79,0.12);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.button:hover {
+  background: #FFD54F;
+  color: #4FC3F7;
+}

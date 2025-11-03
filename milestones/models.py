@@ -4,7 +4,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Milestone(models.Model):
-    profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='milestones')
+    profile = models.ForeignKey('users.UserProfile', on_delete=models.CASCADE, related_name='milestones')
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     date_achieved = models.DateField(blank=True, null=True)
@@ -29,7 +29,7 @@ class Milestone(models.Model):
 
 
 class Streak(models.Model):
-    profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='streaks')
+    profile = models.ForeignKey('users.UserProfile', on_delete=models.CASCADE, related_name='streaks')
     habit_name = models.CharField(max_length=100)
     start_date = models.DateField(default=timezone.now)
     end_date = models.DateField(blank=True, null=True)
@@ -49,7 +49,7 @@ class Badge(models.Model):
         return self.name
 
 class Achievement(models.Model):
-    profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='achievements')
+    profile = models.ForeignKey('users.UserProfile', on_delete=models.CASCADE, related_name='achievements')
     badge = models.ForeignKey('Badge', on_delete=models.CASCADE)
     date_earned = models.DateField(default=timezone.now)
     modified_at = models.DateTimeField(auto_now=True)
@@ -58,7 +58,7 @@ class Achievement(models.Model):
         return f"{self.profile.user.username} earned {self.badge.name}"
 
 class VictoryLog(models.Model):
-    profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='victories')
+    profile = models.ForeignKey('users.UserProfile', on_delete=models.CASCADE, related_name='victories')
     description = models.CharField(max_length=255)
     date = models.DateField(default=timezone.now)
     modified_at = models.DateTimeField(auto_now=True)

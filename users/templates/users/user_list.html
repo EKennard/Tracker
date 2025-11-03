@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}Find Friends{% endblock %}
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">Find Friends</h1>
-<div class="bg-white p-4 rounded shadow mb-6">
+<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">Find Friends</h1>
+<div class="card" style="margin-bottom:1.5rem;">
   <h2 class="text-lg font-semibold mb-2">Other Users</h2>
   <ul>
     {% for user in users %}
@@ -10,7 +10,7 @@
         <span>{{ user.user.username }}</span>
         <form method="post" action="/users/send_friend_request/{{ user.user.id }}/">
           {% csrf_token %}
-          <button type="submit" class="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700">Send Friend Request</button>
+          <button type="submit" class="button" style="padding:0.25rem 1rem;">Send Friend Request</button>
         </form>
       </li>
     {% empty %}

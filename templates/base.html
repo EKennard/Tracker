@@ -1,35 +1,41 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}GetLizzyFit{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/cartoon-theme.css' %}">
     {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-gray-100 min-h-screen">
-    <nav class="bg-blue-600 p-4 text-white flex justify-between">
-    <div class="font-bold text-xl">GetLizzyFit</div>
-        <div>
-            <a href="/users/dashboard/" class="mx-2 hover:underline">Dashboard</a>
-            <a href="/users/users/" class="mx-2 hover:underline">Find Friends</a>
-            <a href="/meals/log/" class="mx-2 hover:underline">Meals</a>
-            <a href="/metrics/summary/" class="mx-2 hover:underline">Metrics</a>
-            <a href="/milestones/list/" class="mx-2 hover:underline">Milestones</a>
-            <a href="/social/groups/" class="mx-2 hover:underline">Social</a>
-            <a href="/notifications/list/" class="mx-2 hover:underline">Notifications</a>
-            <a href="/habits/log/" class="mx-2 hover:underline">Habits</a>
-            <a href="/exercise/log/" class="mx-2 hover:underline">Exercise</a>
-            <a href="/fertility/" class="mx-2 hover:underline">Fertility</a>
-            {% if user.is_authenticated %}
-                <a href="/accounts/logout/" class="mx-2 hover:underline">Logout</a>
-            {% else %}
-                <a href="/accounts/login/" class="mx-2 hover:underline">Login</a>
-                <a href="/accounts/signup/" class="mx-2 hover:underline">Register</a>
-            {% endif %}
-        </div>
+<body>
+    <header class="card" style="display:flex;align-items:center;gap:1rem;">
+        <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
+        <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
+        <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
+        <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
+        <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
+        <h1 style="margin-left:1rem;">GetLizzyFit</h1>
+    </header>
+    <nav class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;margin-bottom:2rem;">
+        <a href="/users/dashboard/" class="button">Dashboard</a>
+        <a href="/users/users/" class="button">Find Friends</a>
+        <a href="/meals/log/" class="button">Meals</a>
+        <a href="/metrics/summary/" class="button">Metrics</a>
+        <a href="/milestones/list/" class="button">Milestones</a>
+        <a href="/social/groups/" class="button">Social</a>
+        <a href="/notifications/list/" class="button">Notifications</a>
+        <a href="/habits/log/" class="button">Habits</a>
+        <a href="/exercise/log/" class="button">Exercise</a>
+        <a href="/fertility/" class="button">Fertility</a>
+        {% if user.is_authenticated %}
+            <a href="/accounts/logout/" class="button">Logout</a>
+        {% else %}
+            <a href="/accounts/login/" class="button">Login</a>
+            <a href="/accounts/signup/" class="button">Register</a>
+        {% endif %}
     </nav>
-    <main class="container mx-auto p-4">
+    <main>
         {% block content %}{% endblock %}
     </main>
 </body>

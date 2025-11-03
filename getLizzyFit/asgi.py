@@ -1,5 +1,7 @@
+
+
 """
-ASGI config for getlizzyfit project.
+ASGI config for getLizzyFit project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

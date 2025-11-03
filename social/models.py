@@ -9,7 +9,7 @@ class Group(models.Model):
     is_active = models.BooleanField(default=True)
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    members = models.ManyToManyField('UserProfile', related_name='groups')
+    members = models.ManyToManyField('users.UserProfile', related_name='groups')
     def __str__(self):
         return self.name
 

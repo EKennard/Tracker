@@ -12,7 +12,7 @@ class HealthMetrics(models.Model):
     is_active = models.BooleanField(default=True)
     height = models.DecimalField(max_digits=5, decimal_places=2)
     weight = models.DecimalField(max_digits=5, decimal_places=2)
-    activity_level = models.ForeignKey('users.ActivityLevel', on_delete=models.CASCADE)
+        # activity_level field removed: no users.ActivityLevel model exists
     basal_metabolic_rate = models.FloatField()
     daily_caloric_needs = models.FloatField()
     body_fat_percentage = models.FloatField()

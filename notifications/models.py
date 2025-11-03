@@ -4,7 +4,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Notification(models.Model):
-    profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='notifications')
+    profile = models.ForeignKey('users.UserProfile', on_delete=models.CASCADE, related_name='notifications')
     message = models.CharField(max_length=255)
     created_at = models.DateTimeField(default=timezone.now)
     modified_at = models.DateTimeField(auto_now=True)
