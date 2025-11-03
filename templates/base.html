@@ -11,6 +11,7 @@
             min-height: 100vh;
             margin: 0;
             padding: 0;
+            background: #FFF8F0;
         }
         .main-section {
             max-width: 900px;
@@ -20,28 +21,55 @@
             box-shadow: 0 4px 24px rgba(186,104,200,0.08);
             padding: 2.5rem 2rem 2rem 2rem;
         }
-        .feature-list {
-            margin: 1.5rem 0 2rem 0;
-            padding-left: 1.5rem;
+        .feature-card {
+            display: flex;
+            align-items: center;
+            background: #FFFFFF;
+            border: 2px dashed #FFD54F;
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 8px rgba(255,213,79,0.12);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            transition: transform 0.2s;
         }
-        .feature-list li {
-            margin-bottom: 0.75rem;
-            font-size: 1.15rem;
+        .feature-card:hover {
+            transform: scale(1.03) rotate(-2deg);
+            box-shadow: 0 8px 24px rgba(79,195,247,0.15);
+        }
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 1.5rem;
+            filter: drop-shadow(0 2px 2px #BA68C8);
+        }
+        .feature-info {
+            flex: 1;
+        }
+        .feature-title {
             color: #4FC3F7;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Fredoka One', 'Comic Neue', sans-serif;
         }
-        .section-title {
-            color: #4FC3F7;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        .section-desc {
-            font-size: 1.2rem;
+        .feature-desc {
+            font-size: 1.1rem;
             color: #333;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         .cta {
             margin-top: 2rem;
             text-align: center;
+        }
+        .welcome-title {
+            color: #4FC3F7;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-family: 'Fredoka One', 'Comic Neue', sans-serif;
+        }
+        .welcome-desc {
+            font-size: 1.25rem;
+            color: #333;
+            margin-bottom: 2rem;
         }
     </style>
     {% block extra_head %}{% endblock %}
@@ -88,20 +116,44 @@
             {% if user.is_authenticated %}
                 <div class="section-title">Welcome back, {{ user.username }}!</div>
             {% else %}
-                <div class="section-title">Welcome to GetLizzyFit!</div>
-                <div class="section-desc">
+                <div class="welcome-title">Welcome to GetLizzyFit!</div>
+                <div class="welcome-desc">
                     GetLizzyFit is your all-in-one health, fitness, and wellness tracker. Log your meals, track your habits, monitor your health metrics, and connect with friends for motivation. Our app helps you build healthy routines, celebrate milestones, and stay on top of your goals in a fun, supportive environment.
                 </div>
-                <div class="section-title" style="font-size:1.5rem;">Key Features</div>
-                <ul class="feature-list">
-                    <li>Track meals, exercise, and habits</li>
-                    <li>Monitor fertility and health metrics</li>
-                    <li>Connect with friends and join groups</li>
-                    <li>Receive notifications and celebrate milestones</li>
-                </ul>
-                <div class="cta">
-                    <a href="/accounts/login/" class="button">Login</a>
-                    <a href="/accounts/signup/" class="button">Register</a>
+                <div class="feature-card">
+                    <img src="{% static 'icons/apple-doodle.svg' %}" class="feature-icon" alt="Meals">
+                    <div class="feature-info">
+                        <div class="feature-title">Meal Logging</div>
+                        <div class="feature-desc">Easily log your daily meals, track nutrition, and spot healthy eating patterns.</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <img src="{% static 'icons/heart-doodle.svg' %}" class="feature-icon" alt="Health">
+                    <div class="feature-info">
+                        <div class="feature-title">Health Metrics</div>
+                        <div class="feature-desc">Monitor your health stats, including weight, heart rate, and more, all in one place.</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <img src="{% static 'icons/checklist-doodle.svg' %}" class="feature-icon" alt="Habits">
+                    <div class="feature-info">
+                        <div class="feature-title">Habit Tracking</div>
+                        <div class="feature-desc">Build and maintain healthy habits with daily tracking and reminders.</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <img src="{% static 'icons/calendar-doodle.svg' %}" class="feature-icon" alt="Fertility">
+                    <div class="feature-info">
+                        <div class="feature-title">Fertility & Calendar</div>
+                        <div class="feature-desc">Track fertility cycles and important dates with our integrated calendar.</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <img src="{% static 'icons/user-doodle.svg' %}" class="feature-icon" alt="Profile">
+                    <div class="feature-info">
+                        <div class="feature-title">Social & Community</div>
+                        <div class="feature-desc">Connect with friends, join groups, and celebrate milestones together.</div>
+                    </div>
                 </div>
             {% endif %}
         {% endblock %}
