@@ -3,10 +3,12 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import ExerciseLogForm
 from .models import ExerciseLog
+from users.decorators import profile_required
 
 # Create your views here.
 
 @login_required
+@profile_required
 def exercise_log(request):
     profile = request.user.userprofile
     logs = ExerciseLog.objects.filter(profile=profile).order_by('-date')

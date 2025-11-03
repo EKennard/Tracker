@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from .models import FertilityLog
 from .forms import FertilityLogForm
 from django.contrib.auth.decorators import login_required
+from users.decorators import profile_required
 
 @login_required
+@profile_required
 def fertility_log(request):
     profile = request.user.userprofile
     logs = profile.fertility_logs.all().order_by('-date')

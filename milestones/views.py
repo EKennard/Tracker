@@ -4,10 +4,12 @@ from .forms import MilestoneForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from .models import Milestone
+from users.decorators import profile_required
 
 # Create your views here.
 
 @login_required
+@profile_required
 def milestones_list(request):
     profile = request.user.userprofile
     milestones = Milestone.objects.filter(profile=profile).order_by('-target_date')

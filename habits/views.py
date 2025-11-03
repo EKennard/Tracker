@@ -4,10 +4,12 @@ from .forms import HabitLogForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from .models import HabitLog
+from users.decorators import profile_required
 
 # Create your views here.
 
 @login_required
+@profile_required
 def habits_log(request):
     profile = request.user.userprofile
     logs = HabitLog.objects.filter(profile=profile).order_by('-date')

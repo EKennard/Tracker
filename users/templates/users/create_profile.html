@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Create Your Profile{% endblock %}
+{% block content %}
+<div class="main-section" style="max-width:600px;margin:auto;">
+    <div class="welcome-title" style="text-align:center;">Create Your Profile</div>
+    <div class="welcome-desc" style="text-align:center;margin-bottom:2rem;">
+        Tell us a bit about yourself to personalize your GetLizzyFit experience!
+    </div>
+    <form method="post" enctype="multipart/form-data" class="card" style="margin:auto;">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+            <div style="color:#E57373;margin-bottom:1rem;">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Age *</label>
+            {{ form.age }}
+            {% if form.age.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.age.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Sex *</label>
+            {{ form.sex }}
+            {% if form.sex.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.sex.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Starting Weight *</label>
+            {{ form.starting_weight }}
+            {% if form.starting_weight.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.starting_weight.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height *</label>
+            {{ form.height }}
+            {% if form.height.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.height.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Activity Level *</label>
+            {{ form.activity_level }}
+            {% if form.activity_level.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.activity_level.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Goal</label>
+            {{ form.goal }}
+            {% if form.goal.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.goal.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Goal Deadline</label>
+            {{ form.deadline }}
+            {% if form.deadline.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.deadline.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Weight Unit</label>
+            {{ form.weight_unit }}
+            {% if form.weight_unit.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.weight_unit.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Distance Unit</label>
+            {{ form.distance_unit }}
+            {% if form.distance_unit.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.distance_unit.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height Unit</label>
+            {{ form.height_unit }}
+            {% if form.height_unit.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.height_unit.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:flex;align-items:center;">
+                {{ form.is_public }}
+                <span style="margin-left:0.5rem;color:#4FC3F7;">Make my profile public (allow others to view my progress)</span>
+            </label>
+            {% if form.is_public.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.is_public.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="button" style="width:100%;font-size:1.2rem;">Create Profile & Continue</button>
+    </form>
+</div>
+{% endblock %}

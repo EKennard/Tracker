@@ -4,10 +4,12 @@ from .forms import NotificationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from .models import Notification
+from users.decorators import profile_required
 
 # Create your views here.
 
 @login_required
+@profile_required
 def notifications_list(request):
     profile = request.user.userprofile
     notifications = Notification.objects.filter(profile=profile).order_by('-created_at')

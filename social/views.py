@@ -3,10 +3,12 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from .forms import GroupForm
+from users.decorators import profile_required
 
 # Create your views here.
 
 @login_required
+@profile_required
 def groups(request):
     profile = request.user.userprofile
     groups = profile.groups.all().order_by('name')

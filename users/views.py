@@ -14,13 +14,19 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import UserProfile, Friendship
-from .forms import FriendRequestForm
+from .forms import FriendRequestForm, UserProfileForm
+from .decorators import profile_required
 
 # Create your views here.
 
 @login_required
 def dashboard(request):
-    profile = request.user.userprofile
+    # Check if user has a profile, if not redirect to profile creation
+    try:
+        profile = request.user.userprofile
+    except UserProfile.DoesNotExist:
+        return redirect('create_profile')
+    
     recent_meals = NutritionLog.objects.filter(profile=profile).order_by('-date')[:5]
     recent_metrics = HealthMetrics.objects.filter(user_profile=profile).order_by('-date')[:3]
     recent_measurements = Measurement.objects.filter(profile=profile).order_by('-date')[:3]
@@ -51,6 +57,30 @@ def register(request):
 
 
 @login_required
+def create_profile(request):
+    """Create a UserProfile for a new user"""
+    # Check if profile already exists
+    try:
+        profile = request.user.userprofile
+        return redirect('user_dashboard')
+    except UserProfile.DoesNotExist:
+        pass
+    
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('user_dashboard')
+    else:
+        form = UserProfileForm()
+    
+    return render(request, 'users/create_profile.html', {'form': form})
+
+
+@login_required
+@profile_required
 def send_friend_request(request, user_id):
     to_user = UserProfile.objects.get(user__id=user_id)
     from_user = request.user.userprofile
@@ -59,6 +89,7 @@ def send_friend_request(request, user_id):
     return redirect('user_list')
 
 @login_required
+@profile_required
 def accept_friend_request(request, friendship_id):
     friendship = Friendship.objects.get(id=friendship_id, to_user=request.user.userprofile)
     friendship.is_active = True
@@ -66,6 +97,7 @@ def accept_friend_request(request, friendship_id):
     return redirect('user_list')
 
 @login_required
+@profile_required
 def user_list(request):
     users = UserProfile.objects.exclude(user=request.user)
     my_profile = request.user.userprofile

@@ -4,10 +4,12 @@ from .forms import NutritionLogForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from .models import NutritionLog
+from users.decorators import profile_required
 
 # Create your views here.
 
 @login_required
+@profile_required
 def meal_log(request):
     profile = request.user.userprofile
     logs = NutritionLog.objects.filter(profile=profile).order_by('-date')

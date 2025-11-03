@@ -4,10 +4,12 @@ from .forms import HealthMetricsForm, MeasurementForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from .models import HealthMetrics, Measurement
+from users.decorators import profile_required
 
 # Create your views here.
 
 @login_required
+@profile_required
 def metrics_summary(request):
     profile = request.user.userprofile
     metrics = HealthMetrics.objects.filter(user_profile=profile).order_by('-date')
