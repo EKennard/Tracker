@@ -6,18 +6,36 @@
     <div class="welcome-title" style="text-align:center;">Register</div>
     <form method="post" action="{% url 'account_signup' %}" class="card" style="margin:auto;">
         {% csrf_token %}
-        {{ form.non_field_errors }}
+        
+        {% if form.errors %}
+            <div style="background:#ffebee;border:2px solid #e57373;border-radius:0.5rem;padding:1rem;margin-bottom:1rem;">
+                <strong style="color:#d32f2f;">Please correct the errors below:</strong>
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div style="color:#d32f2f;margin-top:0.5rem;">
+                            <strong>{{ field.label }}:</strong> {{ field.errors|striptags }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        
         <div style="margin-bottom:1rem;">
             {{ form.username.label_tag }}<br>{{ form.username }}
+            {{ form.username.errors }}
         </div>
         <div style="margin-bottom:1rem;">
             {{ form.email.label_tag }}<br>{{ form.email }}
+            {{ form.email.errors }}
         </div>
         <div style="margin-bottom:1rem;">
             {{ form.password1.label_tag }}<br>{{ form.password1 }}
+            {{ form.password1.errors }}
         </div>
         <div style="margin-bottom:1rem;">
             {{ form.password2.label_tag }}<br>{{ form.password2 }}
+            {{ form.password2.errors }}
         </div>
         <button type="submit" class="button" style="width:100%;">Register</button>
     </form>

@@ -196,6 +196,7 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_LOGOUT_ON_GET = True
 
 # Security settings for production
+CSRF_TRUSTED_ORIGINS = ['https://getlizzyfit-9edf02a24cc5.herokuapp.com', 'https://*.herokuapp.com']
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
