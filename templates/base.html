@@ -78,6 +78,72 @@
             margin-bottom: 2rem;
         }
         
+        /* Logout button hover effect */
+        .logout-button:hover {
+            background: #E74C3C !important;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(231,76,60,0.4) !important;
+        }
+        
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-btn {
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 1rem;
+            z-index: 100;
+            border: 2px dashed #FFD54F;
+            margin-top: 0.5rem;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 0.75rem 1.25rem;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s;
+            border-radius: 0.8rem;
+            margin: 0.25rem;
+        }
+        
+        .dropdown-content a:hover {
+            background: #E1F5FE;
+            transform: translateX(5px);
+        }
+        
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+        
+        /* Burger menu animations */
+        .burger-menu.active {
+            background: #BA68C8 !important;
+        }
+        
+        .burger-menu.active .burger-icon span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+        
+        .burger-menu.active .burger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .burger-menu.active .burger-icon span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        
         /* Mobile responsive styles */
         @media (max-width: 768px) {
             .main-section {
@@ -107,20 +173,45 @@
             .feature-desc {
                 font-size: 1rem;
             }
-            nav.card {
-                flex-direction: column;
-                gap: 0.5rem !important;
-            }
-            .button {
-                width: 100% !important;
-                max-width: 300px;
-            }
             header .icon {
                 width: 36px !important;
                 height: 36px !important;
             }
             header h1 {
                 font-size: 1.8rem !important;
+            }
+            
+            /* Mobile menu styles */
+            #burger-menu {
+                display: block !important;
+            }
+            
+            .main-nav {
+                display: none !important;
+                position: fixed;
+                top: 80px;
+                right: 1rem;
+                width: calc(100% - 2rem);
+                max-width: 300px;
+                flex-direction: column !important;
+                z-index: 999;
+                padding: 1rem !important;
+            }
+            
+            .main-nav.active {
+                display: flex !important;
+            }
+            
+            .main-nav .button,
+            .main-nav .dropdown {
+                width: 100%;
+            }
+            
+            .dropdown-content {
+                position: relative;
+                margin-top: 0.5rem;
+                box-shadow: none;
+                border: 2px solid #4FC3F7;
             }
         }
     </style>
@@ -139,19 +230,54 @@
             <h1 style="margin-top:1rem;margin-bottom:0;font-family:'Fredoka One','Comic Neue',sans-serif;font-size:2.5rem;">
                 <a href="/" style="color:#4FC3F7;text-decoration:none;">GetLizzyFit</a>
             </h1>
+            <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+                <span style="color:#BA68C8;font-size:1.1rem;font-weight:bold;">👤 {{ user.username }}</span>
+                <a href="/accounts/logout/" class="logout-button" style="background:#FF6B6B;color:white;padding:0.5rem 1.5rem;border-radius:1rem;text-decoration:none;font-weight:bold;box-shadow:0 2px 8px rgba(255,107,107,0.3);transition:all 0.3s;">🚪 Logout</a>
+            </div>
         </header>
-        <nav class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;margin-bottom:2rem;">
-            <a href="/users/dashboard/" class="button">Dashboard</a>
-            <a href="/users/users/" class="button">Find Friends</a>
-            <a href="/meals/log/" class="button">Meals</a>
-            <a href="/metrics/summary/" class="button">Metrics</a>
-            <a href="/milestones/list/" class="button">Milestones</a>
-            <a href="/social/groups/" class="button">Social</a>
-            <a href="/notifications/list/" class="button">Notifications</a>
-            <a href="/habits/log/" class="button">Habits</a>
-            <a href="/exercise/log/" class="button">Exercise</a>
-            <a href="/fertility/" class="button">Fertility</a>
-            <a href="/accounts/logout/" class="button">Logout</a>
+        
+        <!-- Burger Menu Button (Mobile) -->
+        <button id="burger-menu" class="burger-menu" onclick="toggleMenu()" style="display:none;position:fixed;top:1rem;right:1rem;z-index:1000;background:#4FC3F7;border:3px solid #BA68C8;border-radius:50%;width:60px;height:60px;cursor:pointer;box-shadow:0 4px 12px rgba(79,195,247,0.4);transition:all 0.3s;">
+            <div class="burger-icon">
+                <span style="display:block;width:30px;height:3px;background:white;margin:5px auto;border-radius:2px;transition:all 0.3s;"></span>
+                <span style="display:block;width:30px;height:3px;background:white;margin:5px auto;border-radius:2px;transition:all 0.3s;"></span>
+                <span style="display:block;width:30px;height:3px;background:white;margin:5px auto;border-radius:2px;transition:all 0.3s;"></span>
+            </div>
+        </button>
+        
+        <!-- Navigation Menu -->
+        <nav id="main-nav" class="card main-nav" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;margin-bottom:2rem;">
+            <a href="/users/dashboard/" class="button">🏠 Dashboard</a>
+            
+            <!-- Tracking Dropdown -->
+            <div class="dropdown">
+                <button class="button dropdown-btn" onclick="toggleDropdown(event, 'tracking-menu')">📊 Tracking ▼</button>
+                <div id="tracking-menu" class="dropdown-content">
+                    <a href="/meals/log/">🍎 Meals</a>
+                    <a href="/exercise/log/">💪 Exercise</a>
+                    <a href="/habits/log/">✅ Habits</a>
+                    <a href="/fertility/">🌸 Fertility</a>
+                </div>
+            </div>
+            
+            <!-- Progress Dropdown -->
+            <div class="dropdown">
+                <button class="button dropdown-btn" onclick="toggleDropdown(event, 'progress-menu')">📈 Progress ▼</button>
+                <div id="progress-menu" class="dropdown-content">
+                    <a href="/metrics/summary/">📏 Metrics</a>
+                    <a href="/milestones/list/">🎯 Milestones</a>
+                </div>
+            </div>
+            
+            <!-- Social Dropdown -->
+            <div class="dropdown">
+                <button class="button dropdown-btn" onclick="toggleDropdown(event, 'social-menu')">👥 Social ▼</button>
+                <div id="social-menu" class="dropdown-content">
+                    <a href="/users/users/">🔍 Find Friends</a>
+                    <a href="/social/groups/">👫 Groups</a>
+                    <a href="/notifications/list/">🔔 Notifications</a>
+                </div>
+            </div>
         </nav>
     {% else %}
         <header class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;text-align:center;">
@@ -240,5 +366,54 @@
     <footer style="text-align:center;margin-top:2rem;color:#81C784;font-size:1rem;">
         &copy; {{ now.year }} GetLizzyFit. All rights reserved.
     </footer>
+    
+    <script>
+        // Toggle burger menu
+        function toggleMenu() {
+            const nav = document.getElementById('main-nav');
+            const burger = document.getElementById('burger-menu');
+            nav.classList.toggle('active');
+            burger.classList.toggle('active');
+        }
+        
+        // Toggle dropdown menus
+        function toggleDropdown(event, menuId) {
+            event.stopPropagation();
+            const dropdown = event.target.closest('.dropdown');
+            const allDropdowns = document.querySelectorAll('.dropdown');
+            
+            // Close other dropdowns
+            allDropdowns.forEach(d => {
+                if (d !== dropdown) {
+                    d.classList.remove('active');
+                }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('active');
+        }
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(d => {
+                    d.classList.remove('active');
+                });
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('main-nav');
+            const burger = document.getElementById('burger-menu');
+            
+            if (nav && burger && nav.classList.contains('active')) {
+                if (!nav.contains(event.target) && !burger.contains(event.target)) {
+                    nav.classList.remove('active');
+                    burger.classList.remove('active');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
