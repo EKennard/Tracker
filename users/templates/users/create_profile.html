@@ -710,26 +710,17 @@
         setWeightUnit('kg');
         setHeightUnit('cm');
         
-        // Debug: Log form submission data
+        // Log form submission data for debugging
         const form = document.getElementById('profile-form');
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // TEMPORARILY PREVENT SUBMISSION TO SEE LOGS
-            
             console.log('========== FORM SUBMITTING ==========');
-            console.log('Weight input (kg) - name:', document.getElementById('weight-input-kg').name, 'value:', document.getElementById('weight-input-kg').value);
-            console.log('Weight input (lb) - name:', document.getElementById('weight-input-lb').name, 'value:', document.getElementById('weight-input-lb').value);
-            console.log('Weight input (stones) - name:', document.getElementById('weight-stones-input').name, 'value:', document.getElementById('weight-stones-input').value);
-            console.log('Height input (cm) - name:', document.getElementById('height-input-cm').name, 'value:', document.getElementById('height-input-cm').value);
-            console.log('Height input (feet) - name:', document.getElementById('height-feet-input').name, 'value:', document.getElementById('height-feet-input').value);
-            console.log('Height input (inches) - name:', document.getElementById('height-inches-input').name, 'value:', document.getElementById('height-inches-input').value);
-            console.log('All form data being submitted:');
+            console.log('Weight unit:', document.querySelector('select[name="weight_unit"]').value);
+            console.log('Height unit:', document.querySelector('select[name="height_unit"]').value);
             const formData = new FormData(form);
             for (let pair of formData.entries()) {
                 console.log('  ' + pair[0] + ': ' + pair[1]);
             }
             console.log('=====================================');
-            
-            alert('Form submission prevented for debugging. Check console logs. Click OK to see the data.');
         });
     });
 </script>

@@ -42,6 +42,12 @@ class UserProfileForm(forms.ModelForm):
         label='Inches'
     )
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Make starting_weight and height not required since they're conditionally required
+        self.fields['starting_weight'].required = False
+        self.fields['height'].required = False
+    
     class Meta:
         model = UserProfile
         fields = ['date_of_birth', 'sex', 'starting_weight', 'weight_unit', 
@@ -71,27 +77,35 @@ class UserProfileForm(forms.ModelForm):
             age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
             cleaned_data['age'] = age
         
-        # Handle stones and pounds for weight
+        # Handle weight based on unit
         if weight_unit == 'st':
+            # Using stones - convert to pounds for storage
             stones = cleaned_data.get('weight_stones')
             pounds = cleaned_data.get('weight_pounds_extra', 0)
-            if stones is None:
+            if stones is None or stones == '':
                 raise forms.ValidationError('Please enter weight in stones.')
             # Convert to total pounds, then store
             total_pounds = (stones * 14) + (pounds or 0)
             cleaned_data['starting_weight'] = total_pounds
+        else:
+            # Using kg or lb - require starting_weight field
+            if not cleaned_data.get('starting_weight'):
+                raise forms.ValidationError('Please enter your starting weight.')
         
-        # Handle feet and inches for height
+        # Handle height based on unit
         if height_unit == 'in':
-            # Check if user is using feet/inches or just inches
+            # Using feet/inches - convert to inches for storage
             feet = cleaned_data.get('height_feet')
             inches = cleaned_data.get('height_inches', 0)
-            
-            if feet is not None:
-                # User is using feet and inches
-                total_inches = (feet * 12) + (inches or 0)
-                cleaned_data['height'] = total_inches
-            # else: user entered height directly in the main field
+            if feet is None or feet == '':
+                raise forms.ValidationError('Please enter height in feet.')
+            # Convert to total inches
+            total_inches = (feet * 12) + (inches or 0)
+            cleaned_data['height'] = total_inches
+        else:
+            # Using cm - require height field
+            if not cleaned_data.get('height'):
+                raise forms.ValidationError('Please enter your height.')
         
         return cleaned_data
     
