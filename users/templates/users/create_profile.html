@@ -536,16 +536,19 @@
         document.querySelector('select[name="weight_unit"]').value = unit;
         
         // Update button styles - only for weight buttons
-        const weightContainer = document.querySelector('label:has-text("Weight Unit")').nextElementSibling || 
-                                Array.from(document.querySelectorAll('label')).find(l => l.textContent.includes('Weight Unit')).nextElementSibling;
-        const weightButtons = weightContainer.querySelectorAll('button[data-unit]');
-        weightButtons.forEach(btn => {
-            if (btn.getAttribute('data-unit') === unit) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
+        const allLabels = Array.from(document.querySelectorAll('label'));
+        const weightLabel = allLabels.find(l => l.textContent.trim() === 'Weight Unit *');
+        if (weightLabel) {
+            const weightContainer = weightLabel.nextElementSibling;
+            const weightButtons = weightContainer.querySelectorAll('button[data-unit]');
+            weightButtons.forEach(btn => {
+                if (btn.getAttribute('data-unit') === unit) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
         
         // Show/hide appropriate inputs
         document.querySelectorAll('.weight-input').forEach(div => {
@@ -555,8 +558,8 @@
         
         // Update unit labels
         const unitLabel = unit === 'st' ? '' : (unit === 'kg' ? 'kg' : 'lb');
-        const labels = document.querySelectorAll('#weight-' + unit + ' .unit-label');
-        labels.forEach(label => label.textContent = unitLabel);
+        const unitLabels = document.querySelectorAll('#weight-' + unit + ' .unit-label');
+        unitLabels.forEach(label => label.textContent = unitLabel);
         
         // Update goal weight unit label
         const goalWeightLabel = document.getElementById('goal-weight-unit');
