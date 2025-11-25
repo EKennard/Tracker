@@ -3,6 +3,32 @@
 {% block title %}Create Your Profile{% endblock %}
 {% block content %}
 <style>
+    /* Reduce spacing on profile creation page */
+    body {
+        padding-top: 0 !important;
+    }
+    
+    .main-section {
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+        padding: 1.5rem !important;
+    }
+    
+    header.card {
+        margin-bottom: 0.5rem !important;
+        padding: 0.75rem 1rem !important;
+    }
+    
+    header h1 {
+        font-size: 1.8rem !important;
+        margin-top: 0.5rem !important;
+    }
+    
+    header .icon {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    
     .form-input {
         width: 100%;
         padding: 0.5rem;
@@ -141,13 +167,41 @@
         display: flex;
         justify-content: space-between;
         gap: 1rem;
-        margin-top: 2rem;
+        margin-top: 1.5rem;
+    }
+    
+    .welcome-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .welcome-desc {
+        font-size: 1rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .step-indicator {
+        margin-bottom: 1rem !important;
+    }
+    
+    .form-step h3 {
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+        font-size: 1.3rem !important;
+    }
+    
+    .form-step > div {
+        margin-bottom: 1rem !important;
+    }
+    
+    .form-step label {
+        margin-bottom: 0.3rem !important;
     }
 </style>
 
 <div class="main-section" style="max-width:600px;margin:auto;">
     <div class="welcome-title" style="text-align:center;">Create Your Profile</div>
-    <div class="welcome-desc" style="text-align:center;margin-bottom:1rem;">
+    <div class="welcome-desc" style="text-align:center;margin-bottom:0.5rem;">
         Tell us a bit about yourself to personalize your GetLizzyFit experience!
     </div>
     
@@ -157,7 +211,6 @@
         <div class="step-dot" data-step="2"></div>
         <div class="step-dot" data-step="3"></div>
         <div class="step-dot" data-step="4"></div>
-        <div class="step-dot" data-step="5"></div>
     </div>
     
     <form method="post" enctype="multipart/form-data" class="card" style="margin:auto;" id="profile-form">
@@ -196,9 +249,9 @@
             </div>
         </div>
         
-        <!-- Step 2: Preferred Units -->
+        <!-- Step 2: Body Metrics -->
         <div class="form-step" data-step="2">
-            <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">⚙️ Preferred Units</h3>
+            <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">📏 Body Metrics</h3>
             
             <div style="margin-bottom:1.5rem;">
                 <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Weight Unit *</label>
@@ -212,36 +265,6 @@
                     <div style="color:#E57373;font-size:0.9rem;">{{ form.weight_unit.errors }}</div>
                 {% endif %}
             </div>
-            
-            <div style="margin-bottom:1.5rem;">
-                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height Unit *</label>
-                <div class="unit-toggle">
-                    <button type="button" class="unit-option active" data-unit="cm" onclick="setHeightUnit('cm')">Centimeters (cm)</button>
-                    <button type="button" class="unit-option" data-unit="in" onclick="setHeightUnit('in')">Inches (in)</button>
-                </div>
-                {{ form.height_unit }}
-                {% if form.height_unit.errors %}
-                    <div style="color:#E57373;font-size:0.9rem;">{{ form.height_unit.errors }}</div>
-                {% endif %}
-            </div>
-            
-            <div style="margin-bottom:1.5rem;">
-                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Distance Unit *</label>
-                {{ form.distance_unit }}
-                {% if form.distance_unit.errors %}
-                    <div style="color:#E57373;font-size:0.9rem;">{{ form.distance_unit.errors }}</div>
-                {% endif %}
-            </div>
-            
-            <div class="nav-buttons">
-                <button type="button" class="btn-nav btn-prev" onclick="prevStep()">← Previous</button>
-                <button type="button" class="btn-nav btn-next" onclick="nextStep()">Next →</button>
-            </div>
-        </div>
-        
-        <!-- Step 3: Body Metrics -->
-        <div class="form-step" data-step="3">
-            <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">📏 Body Metrics</h3>
             
             <div style="margin-bottom:1.5rem;">
                 <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Starting Weight *</label>
@@ -275,6 +298,18 @@
             </div>
             
             <div style="margin-bottom:1.5rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height Unit *</label>
+                <div class="unit-toggle">
+                    <button type="button" class="unit-option active" data-unit="cm" onclick="setHeightUnit('cm')">Centimeters (cm)</button>
+                    <button type="button" class="unit-option" data-unit="in" onclick="setHeightUnit('in')">Inches (in)</button>
+                </div>
+                {{ form.height_unit }}
+                {% if form.height_unit.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.height_unit.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div style="margin-bottom:1.5rem;">
                 <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height *</label>
                 
                 <div id="height-cm" class="height-input">
@@ -304,9 +339,17 @@
             </div>
         </div>
         
-        <!-- Step 4: Activity Level -->
-        <div class="form-step" data-step="4">
+        <!-- Step 3: Activity Level -->
+        <div class="form-step" data-step="3">
             <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">💪 Activity Level</h3>
+            
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Distance Unit *</label>
+                {{ form.distance_unit }}
+                {% if form.distance_unit.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.distance_unit.errors }}</div>
+                {% endif %}
+            </div>
             
             <div style="margin-bottom:1.5rem;">
                 <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Activity Level *</label>
@@ -322,8 +365,8 @@
             </div>
         </div>
         
-        <!-- Step 5: Goals (Optional) -->
-        <div class="form-step" data-step="5">
+        <!-- Step 4: Goals (Optional) -->
+        <div class="form-step" data-step="4">
             <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">🎯 Your Goals (Optional)</h3>
             <p style="color:#666;margin-bottom:1.5rem;font-size:0.95rem;">Set your health and fitness goals to track your progress.</p>
             
@@ -492,8 +535,10 @@
         // Update hidden select
         document.querySelector('select[name="weight_unit"]').value = unit;
         
-        // Update button styles
-        const weightButtons = document.querySelectorAll('.unit-toggle button[data-unit]');
+        // Update button styles - only for weight buttons
+        const weightContainer = document.querySelector('label:has-text("Weight Unit")').nextElementSibling || 
+                                Array.from(document.querySelectorAll('label')).find(l => l.textContent.includes('Weight Unit')).nextElementSibling;
+        const weightButtons = weightContainer.querySelectorAll('button[data-unit]');
         weightButtons.forEach(btn => {
             if (btn.getAttribute('data-unit') === unit) {
                 btn.classList.add('active');
@@ -525,8 +570,9 @@
         // Update hidden select
         document.querySelector('select[name="height_unit"]').value = unit;
         
-        // Update button styles
-        const heightButtons = document.querySelectorAll('.unit-toggle button[data-unit]');
+        // Update button styles - only for height buttons
+        const heightContainer = Array.from(document.querySelectorAll('label')).find(l => l.textContent.includes('Height Unit')).nextElementSibling;
+        const heightButtons = heightContainer.querySelectorAll('button[data-unit]');
         heightButtons.forEach(btn => {
             if (btn.getAttribute('data-unit') === unit) {
                 btn.classList.add('active');

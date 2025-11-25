@@ -292,6 +292,7 @@
             </div>
         </header>
         
+        {% if request.path != '/users/create-profile/' %}
         <!-- Burger Menu Button (Mobile) -->
         <button id="burger-menu" class="burger-menu" onclick="toggleMenu()" style="display:none;position:fixed;top:0.5rem;right:0.5rem;z-index:1001;background:#4FC3F7;border:3px solid #BA68C8;border-radius:50%;width:50px;height:50px;cursor:pointer;box-shadow:0 4px 12px rgba(79,195,247,0.4);transition:all 0.3s;padding:0;">
             <div class="burger-icon">
@@ -335,6 +336,7 @@
                 </div>
             </div>
         </nav>
+        {% endif %}
     {% else %}
         <header class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;text-align:center;">
             <div style="display:flex;justify-content:center;align-items:center;gap:2.5rem;">
