@@ -271,23 +271,23 @@
                 
                 <div id="weight-kg" class="weight-input">
                     <div class="input-with-unit">
-                        {{ form.starting_weight }}
+                        <input type="number" step="0.01" class="form-input" id="weight-input-kg">
                         <span class="unit-label">kg</span>
                     </div>
                 </div>
                 
                 <div id="weight-lb" class="weight-input hidden">
                     <div class="input-with-unit">
-                        {{ form.starting_weight }}
+                        <input type="number" step="0.01" class="form-input" id="weight-input-lb">
                         <span class="unit-label">lb</span>
                     </div>
                 </div>
                 
                 <div id="weight-st" class="weight-input hidden">
                     <div class="input-group">
-                        {{ form.weight_stones }}
+                        <input type="number" class="form-input" id="weight-stones-input" placeholder="Stones" style="width:48%;">
                         <span>st</span>
-                        {{ form.weight_pounds_extra }}
+                        <input type="number" step="0.1" class="form-input" id="weight-pounds-input" placeholder="Pounds" style="width:48%;">
                         <span>lb</span>
                     </div>
                 </div>
@@ -314,16 +314,16 @@
                 
                 <div id="height-cm" class="height-input">
                     <div class="input-with-unit">
-                        {{ form.height }}
+                        <input type="number" step="0.01" class="form-input" id="height-input-cm">
                         <span class="unit-label">cm</span>
                     </div>
                 </div>
                 
                 <div id="height-in" class="height-input hidden">
                     <div class="input-group">
-                        {{ form.height_feet }}
+                        <input type="number" class="form-input" id="height-feet-input" placeholder="Feet" style="width:48%;">
                         <span>ft</span>
-                        {{ form.height_inches }}
+                        <input type="number" step="0.1" class="form-input" id="height-inches-input" placeholder="Inches" style="width:48%;">
                         <span>in</span>
                     </div>
                 </div>
@@ -463,8 +463,8 @@
         // Check all visible required inputs and selects
         const requiredInputs = currentStepElement.querySelectorAll('input[required], select[required]');
         requiredInputs.forEach(input => {
-            // Only validate if input is visible (not in hidden parent)
-            const isVisible = !input.closest('.hidden');
+            // Only validate if input is visible (has a name attribute and not in hidden parent)
+            const isVisible = !input.closest('.hidden') && input.hasAttribute('name');
             if (isVisible) {
                 if (!input.value || input.value.trim() === '' || input.value === '-------') {
                     isValid = false;
@@ -569,34 +569,45 @@
             });
         }
         
-        // Show/hide appropriate inputs and disable hidden ones
+        // Hide all weight input containers
         document.querySelectorAll('.weight-input').forEach(div => {
             div.classList.add('hidden');
-            // Disable all inputs in hidden divs
-            div.querySelectorAll('input').forEach(input => {
-                input.disabled = true;
-                input.removeAttribute('required');
-            });
-        });
-        const activeWeightDiv = document.getElementById('weight-' + unit);
-        activeWeightDiv.classList.remove('hidden');
-        // Enable inputs in active div
-        activeWeightDiv.querySelectorAll('input').forEach(input => {
-            input.disabled = false;
-            if (input.name === 'starting_weight' || input.name === 'weight_stones') {
-                input.setAttribute('required', 'required');
-            }
         });
         
-        // Update unit labels
-        const unitLabel = unit === 'st' ? '' : (unit === 'kg' ? 'kg' : 'lb');
-        const unitLabels = document.querySelectorAll('#weight-' + unit + ' .unit-label');
-        unitLabels.forEach(label => label.textContent = unitLabel);
+        // Remove name attribute from all weight inputs (so they won't submit)
+        const kgInput = document.getElementById('weight-input-kg');
+        const lbInput = document.getElementById('weight-input-lb');
+        const stonesInput = document.getElementById('weight-stones-input');
+        const poundsInput = document.getElementById('weight-pounds-input');
+        
+        kgInput.removeAttribute('name');
+        kgInput.removeAttribute('required');
+        lbInput.removeAttribute('name');
+        lbInput.removeAttribute('required');
+        stonesInput.removeAttribute('name');
+        stonesInput.removeAttribute('required');
+        poundsInput.removeAttribute('name');
+        
+        // Show and enable the appropriate input with name attribute
+        if (unit === 'kg') {
+            document.getElementById('weight-kg').classList.remove('hidden');
+            kgInput.setAttribute('name', 'starting_weight');
+            kgInput.setAttribute('required', 'required');
+        } else if (unit === 'lb') {
+            document.getElementById('weight-lb').classList.remove('hidden');
+            lbInput.setAttribute('name', 'starting_weight');
+            lbInput.setAttribute('required', 'required');
+        } else if (unit === 'st') {
+            document.getElementById('weight-st').classList.remove('hidden');
+            stonesInput.setAttribute('name', 'weight_stones');
+            stonesInput.setAttribute('required', 'required');
+            poundsInput.setAttribute('name', 'weight_pounds_extra');
+        }
         
         // Update goal weight unit label
         const goalWeightLabel = document.getElementById('goal-weight-unit');
         if (goalWeightLabel) {
-            goalWeightLabel.textContent = unit === 'st' ? 'st' : unitLabel;
+            goalWeightLabel.textContent = unit === 'st' ? 'st' : (unit === 'kg' ? 'kg' : 'lb');
         }
     }
     
@@ -616,29 +627,33 @@
             }
         });
         
-        // Show/hide appropriate inputs and disable hidden ones
+        // Hide all height input containers
         document.querySelectorAll('.height-input').forEach(div => {
             div.classList.add('hidden');
-            // Disable all inputs in hidden divs
-            div.querySelectorAll('input').forEach(input => {
-                input.disabled = true;
-                input.removeAttribute('required');
-            });
-        });
-        const activeHeightDiv = document.getElementById('height-' + unit);
-        activeHeightDiv.classList.remove('hidden');
-        // Enable inputs in active div
-        activeHeightDiv.querySelectorAll('input').forEach(input => {
-            input.disabled = false;
-            if (input.name === 'height' || input.name === 'height_feet') {
-                input.setAttribute('required', 'required');
-            }
         });
         
-        // Update unit labels
-        const unitLabel = unit === 'cm' ? 'cm' : 'in';
-        const labels = document.querySelectorAll('#height-' + unit + ' .unit-label');
-        labels.forEach(label => label.textContent = unitLabel);
+        // Remove name attribute from all height inputs
+        const cmInput = document.getElementById('height-input-cm');
+        const feetInput = document.getElementById('height-feet-input');
+        const inchesInput = document.getElementById('height-inches-input');
+        
+        cmInput.removeAttribute('name');
+        cmInput.removeAttribute('required');
+        feetInput.removeAttribute('name');
+        feetInput.removeAttribute('required');
+        inchesInput.removeAttribute('name');
+        
+        // Show and enable the appropriate input with name attribute
+        if (unit === 'cm') {
+            document.getElementById('height-cm').classList.remove('hidden');
+            cmInput.setAttribute('name', 'height');
+            cmInput.setAttribute('required', 'required');
+        } else if (unit === 'in') {
+            document.getElementById('height-in').classList.remove('hidden');
+            feetInput.setAttribute('name', 'height_feet');
+            feetInput.setAttribute('required', 'required');
+            inchesInput.setAttribute('name', 'height_inches');
+        }
     }
     
     // Hide the select dropdowns (they're controlled by buttons)
