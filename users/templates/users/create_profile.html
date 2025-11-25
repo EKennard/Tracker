@@ -353,6 +353,17 @@
             
             <div style="margin-bottom:1.5rem;">
                 <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Activity Level *</label>
+                <div style="background:#E1F5FE;border:2px dashed #4FC3F7;border-radius:0.5rem;padding:0.75rem;margin-bottom:0.75rem;font-size:0.85rem;">
+                    <strong style="color:#4FC3F7;">📋 Guide:</strong>
+                    <ul style="margin:0.5rem 0 0 1.25rem;padding:0;line-height:1.6;">
+                        <li><strong>Sedentary:</strong> Little to no exercise, desk job</li>
+                        <li><strong>Lightly Active:</strong> Light exercise 1-3 days/week</li>
+                        <li><strong>Moderately Active:</strong> Moderate exercise 3-5 days/week</li>
+                        <li><strong>Very Active:</strong> Hard exercise 6-7 days/week</li>
+                        <li><strong>Extra Active:</strong> Very hard exercise, physical job or training twice/day</li>
+                        <li><strong>Professional Athlete:</strong> Training multiple times daily at elite level</li>
+                    </ul>
+                </div>
                 {{ form.activity_level }}
                 {% if form.activity_level.errors %}
                     <div style="color:#E57373;font-size:0.9rem;">{{ form.activity_level.errors }}</div>
