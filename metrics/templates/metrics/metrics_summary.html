@@ -9,8 +9,8 @@
     {{ metrics_form.non_field_errors }}
     <div class="grid grid-cols-2 gap-4">
       <div>{{ metrics_form.date.label_tag }}<br>{{ metrics_form.date }}</div>
-      <div>{{ metrics_form.height.label_tag }}<br>{{ metrics_form.height }}</div>
-      <div>{{ metrics_form.weight.label_tag }}<br>{{ metrics_form.weight }}</div>
+      <div><label>Height ({{ height_unit }})</label><br>{{ metrics_form.height }}</div>
+      <div><label>Weight ({{ weight_unit }})</label><br>{{ metrics_form.weight }}</div>
       <div>{{ metrics_form.basal_metabolic_rate.label_tag }}<br>{{ metrics_form.basal_metabolic_rate }}</div>
       <div>{{ metrics_form.daily_caloric_needs.label_tag }}<br>{{ metrics_form.daily_caloric_needs }}</div>
       <div>{{ metrics_form.body_fat_percentage.label_tag }}<br>{{ metrics_form.body_fat_percentage }}</div>
@@ -38,8 +38,8 @@
     <thead>
       <tr class="bg-gray-200">
         <th class="px-2 py-1">Date</th>
-        <th class="px-2 py-1">Height</th>
-        <th class="px-2 py-1">Weight</th>
+        <th class="px-2 py-1">Height ({{ height_unit }})</th>
+        <th class="px-2 py-1">Weight ({{ weight_unit }})</th>
         <th class="px-2 py-1">BMR</th>
         <th class="px-2 py-1">Calories</th>
         <th class="px-2 py-1">Body Fat %</th>
@@ -49,8 +49,8 @@
       {% for m in metrics %}
       <tr class="border-b">
         <td class="px-2 py-1">{{ m.date }}</td>
-        <td class="px-2 py-1">{{ m.height }}</td>
-        <td class="px-2 py-1">{{ m.weight }}</td>
+        <td class="px-2 py-1">{{ m.height }} {{ height_unit }}</td>
+        <td class="px-2 py-1">{{ m.weight }} {{ weight_unit }}</td>
         <td class="px-2 py-1">{{ m.basal_metabolic_rate }}</td>
         <td class="px-2 py-1">{{ m.daily_caloric_needs }}</td>
         <td class="px-2 py-1">{{ m.body_fat_percentage }}</td>

@@ -35,4 +35,6 @@ def metrics_summary(request):
         'measurement_form': measurement_form,
         'metrics': metrics,
         'measurements': measurements,
+        'weight_unit': profile.weight_unit,
+        'height_unit': profile.height_unit,
     })

@@ -17,7 +17,7 @@
     <h2 class="text-lg font-semibold mb-2">Recent Metrics</h2>
     <ul>
       {% for m in recent_metrics %}
-      <li class="border-b py-1">{{ m.date }}: {{ m.weight }}kg, {{ m.height }}cm, BF: {{ m.body_fat_percentage }}%</li>
+      <li class="border-b py-1">{{ m.date }}: {{ m.weight }} {{ weight_unit }}, {{ m.height }} {{ height_unit }}, BF: {{ m.body_fat_percentage }}%</li>
       {% empty %}
       <li>No metrics logged yet.</li>
       {% endfor %}

@@ -65,6 +65,8 @@ def dashboard(request):
         'recent_habits': recent_habits,
         'recent_exercise': recent_exercise,
         'recent_fertility': recent_fertility,
+        'weight_unit': profile.weight_unit,
+        'height_unit': profile.height_unit,
     })
 
 

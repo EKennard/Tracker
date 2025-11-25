@@ -11,8 +11,8 @@
       <div>{{ form.date.label_tag }}<br>{{ form.date }}</div>
       <div>{{ form.exercise_type.label_tag }}<br>{{ form.exercise_type }}</div>
       <div>{{ form.duration_minutes.label_tag }}<br>{{ form.duration_minutes }}</div>
-      <div>{{ form.distance_logged.label_tag }}<br>{{ form.distance_logged }}</div>
-      <div>{{ form.distance_unit.label_tag }}<br>{{ form.distance_unit }}</div>
+      <div><label>Distance ({{ distance_unit }})</label><br>{{ form.distance_logged }}</div>
+      <div style="display:none;">{{ form.distance_unit }}</div>
       <div>{{ form.rating.label_tag }}<br>{{ form.rating }}</div>
       <div>{{ form.intensity.label_tag }}<br>{{ form.intensity }}</div>
       <div>{{ form.emoji.label_tag }}<br>{{ form.emoji }}</div>
@@ -30,8 +30,7 @@
         <th class="px-2 py-1">Date</th>
         <th class="px-2 py-1">Type</th>
         <th class="px-2 py-1">Duration (min)</th>
-        <th class="px-2 py-1">Distance</th>
-        <th class="px-2 py-1">Unit</th>
+        <th class="px-2 py-1">Distance ({{ distance_unit }})</th>
         <th class="px-2 py-1">Rating</th>
         <th class="px-2 py-1">Intensity</th>
         <th class="px-2 py-1">Emoji</th>
@@ -46,7 +45,6 @@
         <td class="px-2 py-1">{{ log.get_exercise_type_display }}</td>
         <td class="px-2 py-1">{{ log.duration_minutes }}</td>
         <td class="px-2 py-1">{{ log.distance_logged }}</td>
-        <td class="px-2 py-1">{{ log.get_distance_unit_display }}</td>
         <td class="px-2 py-1">{{ log.rating }}</td>
         <td class="px-2 py-1">{{ log.get_intensity_display }}</td>
         <td class="px-2 py-1">{{ log.emoji }}</td>
@@ -54,7 +52,7 @@
         <td class="px-2 py-1">{{ log.notes }}</td>
       </tr>
       {% empty %}
-      <tr><td colspan="10" class="text-center py-2">No exercise logs yet.</td></tr>
+      <tr><td colspan="9" class="text-center py-2">No exercise logs yet.</td></tr>
       {% endfor %}
     </tbody>
   </table>

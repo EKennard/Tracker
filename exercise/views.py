@@ -20,5 +20,10 @@ def exercise_log(request):
             log.save()
             return redirect('exercise_log')
     else:
-        form = ExerciseLogForm()
-    return render(request, 'exercise/exercise_log.html', {'form': form, 'logs': logs})
+        # Pre-populate form with user's preferred distance unit
+        form = ExerciseLogForm(initial={'distance_unit': profile.distance_unit})
+    return render(request, 'exercise/exercise_log.html', {
+        'form': form, 
+        'logs': logs,
+        'distance_unit': profile.distance_unit,
+    })

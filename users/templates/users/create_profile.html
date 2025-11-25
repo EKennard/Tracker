@@ -626,6 +626,12 @@
         if (heightSelect) {
             heightSelect.style.display = 'none';
         }
+        
+        // Initialize goal weight unit label to match default weight unit (kg)
+        const goalWeightLabel = document.getElementById('goal-weight-unit');
+        if (goalWeightLabel) {
+            goalWeightLabel.textContent = 'kg';
+        }
     });
 </script>
 {% endblock %}
