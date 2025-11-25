@@ -569,11 +569,24 @@
             });
         }
         
-        // Show/hide appropriate inputs
+        // Show/hide appropriate inputs and disable hidden ones
         document.querySelectorAll('.weight-input').forEach(div => {
             div.classList.add('hidden');
+            // Disable all inputs in hidden divs
+            div.querySelectorAll('input').forEach(input => {
+                input.disabled = true;
+                input.removeAttribute('required');
+            });
         });
-        document.getElementById('weight-' + unit).classList.remove('hidden');
+        const activeWeightDiv = document.getElementById('weight-' + unit);
+        activeWeightDiv.classList.remove('hidden');
+        // Enable inputs in active div
+        activeWeightDiv.querySelectorAll('input').forEach(input => {
+            input.disabled = false;
+            if (input.name === 'starting_weight' || input.name === 'weight_stones') {
+                input.setAttribute('required', 'required');
+            }
+        });
         
         // Update unit labels
         const unitLabel = unit === 'st' ? '' : (unit === 'kg' ? 'kg' : 'lb');
@@ -603,11 +616,24 @@
             }
         });
         
-        // Show/hide appropriate inputs
+        // Show/hide appropriate inputs and disable hidden ones
         document.querySelectorAll('.height-input').forEach(div => {
             div.classList.add('hidden');
+            // Disable all inputs in hidden divs
+            div.querySelectorAll('input').forEach(input => {
+                input.disabled = true;
+                input.removeAttribute('required');
+            });
         });
-        document.getElementById('height-' + unit).classList.remove('hidden');
+        const activeHeightDiv = document.getElementById('height-' + unit);
+        activeHeightDiv.classList.remove('hidden');
+        // Enable inputs in active div
+        activeHeightDiv.querySelectorAll('input').forEach(input => {
+            input.disabled = false;
+            if (input.name === 'height' || input.name === 'height_feet') {
+                input.setAttribute('required', 'required');
+            }
+        });
         
         // Update unit labels
         const unitLabel = unit === 'cm' ? 'cm' : 'in';
@@ -632,6 +658,10 @@
         if (goalWeightLabel) {
             goalWeightLabel.textContent = 'kg';
         }
+        
+        // Initialize weight and height inputs - disable hidden ones
+        setWeightUnit('kg');
+        setHeightUnit('cm');
     });
 </script>
 {% endblock %}
