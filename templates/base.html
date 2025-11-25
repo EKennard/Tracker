@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             background: #FFF8F0;
+            overflow-x: hidden;
         }
         .main-section {
             max-width: 900px;
@@ -20,6 +21,8 @@
             border-radius: 2rem;
             box-shadow: 0 4px 24px rgba(186,104,200,0.08);
             padding: 2.5rem 2rem 2rem 2rem;
+            width: 90%;
+            box-sizing: border-box;
         }
         .feature-card {
             display: flex;
@@ -31,6 +34,7 @@
             padding: 1.5rem;
             margin: 2rem 0;
             transition: transform 0.2s;
+            flex-wrap: wrap;
         }
         .feature-card:hover {
             transform: scale(1.03) rotate(-2deg);
@@ -41,9 +45,11 @@
             height: 60px;
             margin-right: 1.5rem;
             filter: drop-shadow(0 2px 2px #BA68C8);
+            flex-shrink: 0;
         }
         .feature-info {
             flex: 1;
+            min-width: 200px;
         }
         .feature-title {
             color: #4FC3F7;
@@ -70,6 +76,52 @@
             font-size: 1.25rem;
             color: #333;
             margin-bottom: 2rem;
+        }
+        
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .main-section {
+                margin: 1rem auto;
+                padding: 1.5rem 1rem;
+                width: 95%;
+                border-radius: 1rem;
+            }
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+            .welcome-desc {
+                font-size: 1rem;
+            }
+            .feature-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+            .feature-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            .feature-title {
+                font-size: 1.3rem;
+            }
+            .feature-desc {
+                font-size: 1rem;
+            }
+            nav.card {
+                flex-direction: column;
+                gap: 0.5rem !important;
+            }
+            .button {
+                width: 100% !important;
+                max-width: 300px;
+            }
+            header .icon {
+                width: 36px !important;
+                height: 36px !important;
+            }
+            header h1 {
+                font-size: 1.8rem !important;
+            }
         }
     </style>
     {% block extra_head %}{% endblock %}
@@ -116,9 +168,28 @@
         </header>
         <nav class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;margin-bottom:2rem;">
             <a href="/accounts/login/" class="button">Login</a>
-            <a href="/accounts/signup/" class="button">Register</a>
         </nav>
     {% endif %}
+    
+    <!-- Django Messages -->
+    {% if messages %}
+        <div style="max-width: 900px; margin: 1rem auto; width: 90%;">
+            {% for message in messages %}
+                <div class="{% if message.tags %}message-{{ message.tags }}{% endif %}" 
+                     style="background: {% if message.level_tag == 'success' %}#C8E6C9{% elif message.level_tag == 'error' %}#FFCDD2{% elif message.level_tag == 'warning' %}#FFF9C4{% else %}#BBDEFB{% endif %}; 
+                            border: 2px solid {% if message.level_tag == 'success' %}#81C784{% elif message.level_tag == 'error' %}#E57373{% elif message.level_tag == 'warning' %}#FFD54F{% else %}#64B5F6{% endif %}; 
+                            border-radius: 1rem; 
+                            padding: 1rem 1.5rem; 
+                            margin-bottom: 1rem; 
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                            font-size: 1.1rem;
+                            color: #333;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
     <main class="main-section">
         {% block content %}
             {% if user.is_authenticated %}

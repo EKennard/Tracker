@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from meals.models import NutritionLog
 from metrics.models import HealthMetrics, Measurement
@@ -24,6 +25,28 @@ def dashboard(request):
     # Check if user has a profile, if not redirect to profile creation
     try:
         profile = request.user.userprofile
+        
+        # Check if this is the user's first login by checking if they have any activity
+        has_activity = (
+            NutritionLog.objects.filter(profile=profile).exists() or
+            HealthMetrics.objects.filter(user_profile=profile).exists() or
+            Measurement.objects.filter(profile=profile).exists() or
+            Milestone.objects.filter(profile=profile).exists() or
+            HabitLog.objects.filter(profile=profile).exists() or
+            ExerciseLog.objects.filter(profile=profile).exists() or
+            FertilityLog.objects.filter(profile=profile).exists()
+        )
+        
+        # Show welcome message only if they have no activity yet
+        if not has_activity and not request.session.get('welcomed', False):
+            messages.success(
+                request, 
+                f'Welcome to GetLizzyFit, {request.user.username}! 🎉 '
+                'Start your wellness journey by logging your first meal, workout, or metric. '
+                'Explore the navigation menu to track your progress!'
+            )
+            request.session['welcomed'] = True
+            
     except UserProfile.DoesNotExist:
         return redirect('create_profile')
     
@@ -71,10 +94,21 @@ def create_profile(request):
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
+            # DOB is saved from the form, age is calculated in form.clean()
+            profile.date_of_birth = form.cleaned_data.get('date_of_birth')
             profile.save()
+            messages.success(
+                request, 
+                f'Profile created successfully! Welcome to GetLizzyFit, {request.user.username}! 🎉'
+            )
             return redirect('user_dashboard')
     else:
         form = UserProfileForm()
+        # Show welcome message for first-time profile creation
+        messages.info(
+            request,
+            f'Welcome {request.user.username}! 👋 Let\'s set up your profile to get started with your wellness journey.'
+        )
     
     return render(request, 'users/create_profile.html', {'form': form})
 

@@ -2,6 +2,41 @@
 {% load static %}
 {% block title %}Create Your Profile{% endblock %}
 {% block content %}
+<style>
+    .form-input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 2px solid #4FC3F7;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+    }
+    .unit-toggle {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .unit-option {
+        padding: 0.5rem 1rem;
+        border: 2px solid #4FC3F7;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        background: white;
+        transition: all 0.3s;
+    }
+    .unit-option.active {
+        background: #4FC3F7;
+        color: white;
+    }
+    .input-group {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    .hidden {
+        display: none;
+    }
+</style>
+
 <div class="main-section" style="max-width:600px;margin:auto;">
     <div class="welcome-title" style="text-align:center;">Create Your Profile</div>
     <div class="welcome-desc" style="text-align:center;margin-bottom:2rem;">
@@ -17,11 +52,12 @@
         {% endif %}
         
         <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Age *</label>
-            {{ form.age }}
-            {% if form.age.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.age.errors }}</div>
+            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Date of Birth *</label>
+            {{ form.date_of_birth }}
+            {% if form.date_of_birth.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.date_of_birth.errors }}</div>
             {% endif %}
+            <div id="age-display" style="margin-top:0.5rem;color:#81C784;font-size:0.9rem;"></div>
         </div>
         
         <div style="margin-bottom:1.5rem;">
@@ -34,17 +70,65 @@
         
         <div style="margin-bottom:1.5rem;">
             <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Starting Weight *</label>
-            {{ form.starting_weight }}
+            <div class="unit-toggle">
+                <button type="button" class="unit-option active" data-unit="kg" onclick="setWeightUnit('kg')">kg</button>
+                <button type="button" class="unit-option" data-unit="lb" onclick="setWeightUnit('lb')">lb</button>
+                <button type="button" class="unit-option" data-unit="st" onclick="setWeightUnit('st')">st</button>
+            </div>
+            {{ form.weight_unit }}
+            
+            <div id="weight-kg" class="weight-input">
+                {{ form.starting_weight }}
+            </div>
+            
+            <div id="weight-lb" class="weight-input hidden">
+                {{ form.starting_weight }}
+            </div>
+            
+            <div id="weight-st" class="weight-input hidden">
+                <div class="input-group">
+                    {{ form.weight_stones }}
+                    <span>st</span>
+                    {{ form.weight_pounds_extra }}
+                    <span>lb</span>
+                </div>
+            </div>
+            
             {% if form.starting_weight.errors %}
                 <div style="color:#E57373;font-size:0.9rem;">{{ form.starting_weight.errors }}</div>
+            {% endif %}
+            {% if form.weight_unit.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.weight_unit.errors }}</div>
             {% endif %}
         </div>
         
         <div style="margin-bottom:1.5rem;">
             <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height *</label>
-            {{ form.height }}
+            <div class="unit-toggle">
+                <button type="button" class="unit-option active" data-unit="cm" onclick="setHeightUnit('cm')">cm</button>
+                <button type="button" class="unit-option" data-unit="in" onclick="setHeightUnit('in')">inches</button>
+            </div>
+            {{ form.height_unit }}
+            
+            <div id="height-cm" class="height-input">
+                {{ form.height }}
+            </div>
+            
+            <div id="height-in" class="height-input hidden">
+                <div class="input-group">
+                    {{ form.height_feet }}
+                    <span>ft</span>
+                    {{ form.height_inches }}
+                    <span>in</span>
+                </div>
+                <div style="margin-top:0.5rem;font-size:0.9rem;color:#666;">Or enter total inches: {{ form.height }}</div>
+            </div>
+            
             {% if form.height.errors %}
                 <div style="color:#E57373;font-size:0.9rem;">{{ form.height.errors }}</div>
+            {% endif %}
+            {% if form.height_unit.errors %}
+                <div style="color:#E57373;font-size:0.9rem;">{{ form.height_unit.errors }}</div>
             {% endif %}
         </div>
         
@@ -73,26 +157,10 @@
         </div>
         
         <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Weight Unit</label>
-            {{ form.weight_unit }}
-            {% if form.weight_unit.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.weight_unit.errors }}</div>
-            {% endif %}
-        </div>
-        
-        <div style="margin-bottom:1.5rem;">
             <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Distance Unit</label>
             {{ form.distance_unit }}
             {% if form.distance_unit.errors %}
                 <div style="color:#E57373;font-size:0.9rem;">{{ form.distance_unit.errors }}</div>
-            {% endif %}
-        </div>
-        
-        <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height Unit</label>
-            {{ form.height_unit }}
-            {% if form.height_unit.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.height_unit.errors }}</div>
             {% endif %}
         </div>
         
@@ -109,4 +177,99 @@
         <button type="submit" class="button" style="width:100%;font-size:1.2rem;">Create Profile & Continue</button>
     </form>
 </div>
+
+<script>
+    // Calculate and display age from date of birth
+    function calculateAge() {
+        const dobInput = document.querySelector('input[name="date_of_birth"]');
+        const ageDisplay = document.getElementById('age-display');
+        
+        if (dobInput && dobInput.value) {
+            const dob = new Date(dobInput.value);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            
+            if (age >= 0 && age < 150) {
+                ageDisplay.textContent = `Age: ${age} years old`;
+            } else {
+                ageDisplay.textContent = '';
+            }
+        }
+    }
+    
+    // Set up DOB listener
+    document.addEventListener('DOMContentLoaded', function() {
+        const dobInput = document.querySelector('input[name="date_of_birth"]');
+        if (dobInput) {
+            dobInput.addEventListener('change', calculateAge);
+            dobInput.addEventListener('input', calculateAge);
+        }
+    });
+    
+    // Weight unit toggle
+    function setWeightUnit(unit) {
+        // Update hidden select
+        document.querySelector('select[name="weight_unit"]').value = unit;
+        
+        // Update button styles
+        document.querySelectorAll('.unit-toggle button[data-unit]').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        // Show/hide appropriate inputs
+        document.querySelectorAll('.weight-input').forEach(div => {
+            div.classList.add('hidden');
+        });
+        document.getElementById('weight-' + unit).classList.remove('hidden');
+        
+        // Clear other weight inputs
+        if (unit !== 'st') {
+            document.querySelector('input[name="weight_stones"]').value = '';
+            document.querySelector('input[name="weight_pounds_extra"]').value = '';
+        }
+    }
+    
+    // Height unit toggle
+    function setHeightUnit(unit) {
+        // Update hidden select
+        document.querySelector('select[name="height_unit"]').value = unit;
+        
+        // Update button styles
+        document.querySelectorAll('.unit-toggle button[data-unit]').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        // Show/hide appropriate inputs
+        document.querySelectorAll('.height-input').forEach(div => {
+            div.classList.add('hidden');
+        });
+        document.getElementById('height-' + unit).classList.remove('hidden');
+        
+        // Clear other height inputs
+        if (unit === 'cm') {
+            document.querySelector('input[name="height_feet"]').value = '';
+            document.querySelector('input[name="height_inches"]').value = '';
+        }
+    }
+    
+    // Hide the select dropdowns (they're controlled by buttons)
+    document.addEventListener('DOMContentLoaded', function() {
+        const weightSelect = document.querySelector('select[name="weight_unit"]');
+        const heightSelect = document.querySelector('select[name="height_unit"]');
+        
+        if (weightSelect) {
+            weightSelect.style.display = 'none';
+        }
+        if (heightSelect) {
+            heightSelect.style.display = 'none';
+        }
+    });
+</script>
 {% endblock %}

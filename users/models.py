@@ -15,6 +15,7 @@ ACTIVITY_LEVEL_CHOICES = [
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    date_of_birth = models.DateField(null=True, blank=True)
     age = models.IntegerField()
     SEX_CHOICES = [('male', 'Male'), ('female', 'Female')]
     sex = models.CharField(max_length=10, choices=SEX_CHOICES)
@@ -24,9 +25,9 @@ class UserProfile(models.Model):
     goal = models.CharField(max_length=50, blank=True, null=True)
     deadline = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    WEIGHT_UNIT_CHOICES = [('kg', 'Kilograms'), ('lb', 'Pounds')]
+    WEIGHT_UNIT_CHOICES = [('kg', 'Kilograms'), ('lb', 'Pounds'), ('st', 'Stones')]
     DISTANCE_UNIT_CHOICES = [('km', 'Kilometres'), ('mi', 'Miles')]
-    HEIGHT_UNIT_CHOICES = [('cm', 'Centimetres'), ('ft', 'Feet/Inches')]
+    HEIGHT_UNIT_CHOICES = [('cm', 'Centimetres'), ('in', 'Inches')]
     weight_unit = models.CharField(max_length=10, choices=WEIGHT_UNIT_CHOICES, default='kg')
     distance_unit = models.CharField(max_length=10, choices=DISTANCE_UNIT_CHOICES, default='km')
     height_unit = models.CharField(max_length=10, choices=HEIGHT_UNIT_CHOICES, default='cm')

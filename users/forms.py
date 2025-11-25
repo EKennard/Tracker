@@ -1,5 +1,6 @@
 from django import forms
 from users.models import Friendship, UserProfile
+from datetime import date
 
 class FriendRequestForm(forms.ModelForm):
     class Meta:
@@ -7,11 +8,98 @@ class FriendRequestForm(forms.ModelForm):
         fields = []
 
 class UserProfileForm(forms.ModelForm):
+    date_of_birth = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-input'}),
+        label='Date of Birth',
+        required=True
+    )
+    
+    # Weight fields for stones/pounds
+    weight_stones = forms.IntegerField(
+        required=False,
+        widget=forms.NumberInput(attrs={'class': 'form-input', 'placeholder': 'Stones'}),
+        label='Stones'
+    )
+    weight_pounds_extra = forms.DecimalField(
+        required=False,
+        max_digits=4,
+        decimal_places=1,
+        widget=forms.NumberInput(attrs={'class': 'form-input', 'placeholder': 'Pounds', 'step': '0.1'}),
+        label='Pounds'
+    )
+    
+    # Height fields for feet/inches
+    height_feet = forms.IntegerField(
+        required=False,
+        widget=forms.NumberInput(attrs={'class': 'form-input', 'placeholder': 'Feet'}),
+        label='Feet'
+    )
+    height_inches = forms.DecimalField(
+        required=False,
+        max_digits=4,
+        decimal_places=1,
+        widget=forms.NumberInput(attrs={'class': 'form-input', 'placeholder': 'Inches', 'step': '0.1'}),
+        label='Inches'
+    )
+    
     class Meta:
         model = UserProfile
-        fields = ['age', 'sex', 'starting_weight', 'height', 'activity_level', 'goal', 
-                  'deadline', 'weight_unit', 'distance_unit', 'height_unit', 'is_public']
+        fields = ['date_of_birth', 'sex', 'starting_weight', 'weight_unit', 
+                  'height', 'height_unit', 'activity_level', 'goal', 
+                  'deadline', 'distance_unit', 'is_public']
         widgets = {
-            'deadline': forms.DateInput(attrs={'type': 'date'}),
-            'goal': forms.TextInput(attrs={'placeholder': 'e.g., Lose 10kg, Run 5km'}),
+            'starting_weight': forms.NumberInput(attrs={'class': 'form-input', 'step': '0.01'}),
+            'height': forms.NumberInput(attrs={'class': 'form-input', 'step': '0.01'}),
+            'deadline': forms.DateInput(attrs={'type': 'date', 'class': 'form-input'}),
+            'goal': forms.TextInput(attrs={'placeholder': 'e.g., Lose 10kg, Run 5km', 'class': 'form-input'}),
+            'weight_unit': forms.Select(attrs={'class': 'form-input'}),
+            'height_unit': forms.Select(attrs={'class': 'form-input'}),
+            'distance_unit': forms.Select(attrs={'class': 'form-input'}),
+            'sex': forms.Select(attrs={'class': 'form-input'}),
+            'activity_level': forms.Select(attrs={'class': 'form-input'}),
         }
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        dob = cleaned_data.get('date_of_birth')
+        weight_unit = cleaned_data.get('weight_unit')
+        height_unit = cleaned_data.get('height_unit')
+        
+        # Calculate age from DOB
+        if dob:
+            today = date.today()
+            age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
+            cleaned_data['age'] = age
+        
+        # Handle stones and pounds for weight
+        if weight_unit == 'st':
+            stones = cleaned_data.get('weight_stones')
+            pounds = cleaned_data.get('weight_pounds_extra', 0)
+            if stones is None:
+                raise forms.ValidationError('Please enter weight in stones.')
+            # Convert to total pounds, then store
+            total_pounds = (stones * 14) + (pounds or 0)
+            cleaned_data['starting_weight'] = total_pounds
+        
+        # Handle feet and inches for height
+        if height_unit == 'in':
+            # Check if user is using feet/inches or just inches
+            feet = cleaned_data.get('height_feet')
+            inches = cleaned_data.get('height_inches', 0)
+            
+            if feet is not None:
+                # User is using feet and inches
+                total_inches = (feet * 12) + (inches or 0)
+                cleaned_data['height'] = total_inches
+            # else: user entered height directly in the main field
+        
+        return cleaned_data
+    
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        # Age is set in clean()
+        if hasattr(self, 'cleaned_data'):
+            instance.age = self.cleaned_data.get('age', instance.age)
+        if commit:
+            instance.save()
+        return instance
