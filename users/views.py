@@ -93,6 +93,12 @@ def create_profile(request):
     
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES)
+        
+        # Debug: Print what data was received
+        print("POST Data received:")
+        for key, value in request.POST.items():
+            print(f"  {key}: {value}")
+        
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
@@ -104,6 +110,12 @@ def create_profile(request):
                 f'Profile created successfully! Welcome to GetLizzyFit, {request.user.username}! 🎉'
             )
             return redirect('user_dashboard')
+        else:
+            # Debug: Print form errors
+            print("Form validation errors:")
+            print(form.errors)
+            print("Non-field errors:")
+            print(form.non_field_errors())
     else:
         form = UserProfileForm()
         # Show welcome message for first-time profile creation

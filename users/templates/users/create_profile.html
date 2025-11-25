@@ -677,6 +677,16 @@
         // Initialize weight and height inputs - disable hidden ones
         setWeightUnit('kg');
         setHeightUnit('cm');
+        
+        // Debug: Log form submission data
+        const form = document.getElementById('profile-form');
+        form.addEventListener('submit', function(e) {
+            console.log('Form submitting with data:');
+            const formData = new FormData(form);
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+        });
     });
 </script>
 {% endblock %}
