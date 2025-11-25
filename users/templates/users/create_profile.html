@@ -590,17 +590,18 @@
             });
         }
         
-        // Hide all weight input containers
-        document.querySelectorAll('.weight-input').forEach(div => {
-            div.classList.add('hidden');
-        });
-        
-        // Remove name attribute from all weight inputs (so they won't submit)
+        // Get references to all inputs
         const kgInput = document.getElementById('weight-input-kg');
         const lbInput = document.getElementById('weight-input-lb');
         const stonesInput = document.getElementById('weight-stones-input');
         const poundsInput = document.getElementById('weight-pounds-input');
         
+        // Hide all weight input containers
+        document.querySelectorAll('.weight-input').forEach(div => {
+            div.classList.add('hidden');
+        });
+        
+        // Remove name and required from ALL inputs first
         kgInput.removeAttribute('name');
         kgInput.removeAttribute('required');
         lbInput.removeAttribute('name');
@@ -608,24 +609,25 @@
         stonesInput.removeAttribute('name');
         stonesInput.removeAttribute('required');
         poundsInput.removeAttribute('name');
+        poundsInput.removeAttribute('required');
         
         // Show and enable the appropriate input with name attribute
         if (unit === 'kg') {
             document.getElementById('weight-kg').classList.remove('hidden');
-            kgInput.setAttribute('name', 'starting_weight');
-            kgInput.setAttribute('required', 'required');
-            console.log('Enabled kg input, has name:', kgInput.hasAttribute('name'), 'has required:', kgInput.hasAttribute('required'));
+            kgInput.name = 'starting_weight';
+            kgInput.required = true;
+            console.log('Enabled kg input, name:', kgInput.name, 'value:', kgInput.value, 'required:', kgInput.required);
         } else if (unit === 'lb') {
             document.getElementById('weight-lb').classList.remove('hidden');
-            lbInput.setAttribute('name', 'starting_weight');
-            lbInput.setAttribute('required', 'required');
-            console.log('Enabled lb input, has name:', lbInput.hasAttribute('name'));
+            lbInput.name = 'starting_weight';
+            lbInput.required = true;
+            console.log('Enabled lb input, name:', lbInput.name, 'value:', lbInput.value);
         } else if (unit === 'st') {
             document.getElementById('weight-st').classList.remove('hidden');
-            stonesInput.setAttribute('name', 'weight_stones');
-            stonesInput.setAttribute('required', 'required');
-            poundsInput.setAttribute('name', 'weight_pounds_extra');
-            console.log('Enabled stones inputs');
+            stonesInput.name = 'weight_stones';
+            stonesInput.required = true;
+            poundsInput.name = 'weight_pounds_extra';
+            console.log('Enabled stones inputs, stones value:', stonesInput.value, 'pounds value:', poundsInput.value);
         }
         
         // Update goal weight unit label
@@ -653,34 +655,36 @@
             }
         });
         
+        // Get references to all inputs
+        const cmInput = document.getElementById('height-input-cm');
+        const feetInput = document.getElementById('height-feet-input');
+        const inchesInput = document.getElementById('height-inches-input');
+        
         // Hide all height input containers
         document.querySelectorAll('.height-input').forEach(div => {
             div.classList.add('hidden');
         });
         
-        // Remove name attribute from all height inputs
-        const cmInput = document.getElementById('height-input-cm');
-        const feetInput = document.getElementById('height-feet-input');
-        const inchesInput = document.getElementById('height-inches-input');
-        
+        // Remove name and required from ALL inputs first
         cmInput.removeAttribute('name');
         cmInput.removeAttribute('required');
         feetInput.removeAttribute('name');
         feetInput.removeAttribute('required');
         inchesInput.removeAttribute('name');
+        inchesInput.removeAttribute('required');
         
         // Show and enable the appropriate input with name attribute
         if (unit === 'cm') {
             document.getElementById('height-cm').classList.remove('hidden');
-            cmInput.setAttribute('name', 'height');
-            cmInput.setAttribute('required', 'required');
-            console.log('Enabled cm input, has name:', cmInput.hasAttribute('name'), 'has required:', cmInput.hasAttribute('required'));
+            cmInput.name = 'height';
+            cmInput.required = true;
+            console.log('Enabled cm input, name:', cmInput.name, 'value:', cmInput.value, 'required:', cmInput.required);
         } else if (unit === 'in') {
             document.getElementById('height-in').classList.remove('hidden');
-            feetInput.setAttribute('name', 'height_feet');
-            feetInput.setAttribute('required', 'required');
-            inchesInput.setAttribute('name', 'height_inches');
-            console.log('Enabled inches inputs');
+            feetInput.name = 'height_feet';
+            feetInput.required = true;
+            inchesInput.name = 'height_inches';
+            console.log('Enabled inches inputs, feet value:', feetInput.value, 'inches value:', inchesInput.value);
         }
     }
     
@@ -709,11 +713,15 @@
         // Debug: Log form submission data
         const form = document.getElementById('profile-form');
         form.addEventListener('submit', function(e) {
-            console.log('Form submitting with data:');
+            console.log('========== FORM SUBMITTING ==========');
+            console.log('Weight input (kg) - name:', document.getElementById('weight-input-kg').name, 'value:', document.getElementById('weight-input-kg').value);
+            console.log('Height input (cm) - name:', document.getElementById('height-input-cm').name, 'value:', document.getElementById('height-input-cm').value);
+            console.log('All form data being submitted:');
             const formData = new FormData(form);
             for (let pair of formData.entries()) {
-                console.log(pair[0] + ': ' + pair[1]);
+                console.log('  ' + pair[0] + ': ' + pair[1]);
             }
+            console.log('=====================================');
         });
     });
 </script>
