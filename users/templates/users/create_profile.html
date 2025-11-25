@@ -216,9 +216,21 @@
     <form method="post" enctype="multipart/form-data" class="card" style="margin:auto;" id="profile-form">
         {% csrf_token %}
         
-        {% if form.non_field_errors %}
-            <div style="color:#E57373;margin-bottom:1rem;">
-                {{ form.non_field_errors }}
+        {% if form.errors %}
+            <div style="background:#FFCDD2;border:2px solid #E57373;border-radius:0.5rem;padding:1rem;margin-bottom:1rem;">
+                <h4 style="color:#E57373;margin:0 0 0.5rem 0;">⚠️ Form Errors:</h4>
+                {% if form.non_field_errors %}
+                    <div style="color:#E57373;margin-bottom:0.5rem;">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div style="color:#E57373;margin-bottom:0.25rem;">
+                            <strong>{{ field.label }}:</strong> {{ field.errors|join:", " }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         {% endif %}
         
