@@ -311,7 +311,7 @@
         <!-- Step 5: Goals (Optional) -->
         <div class="form-step" data-step="5">
             <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">🎯 Your Goals (Optional)</h3>
-            <p style="color:#666;margin-bottom:1.5rem;font-size:0.95rem;">You can skip this step and set goals later if you prefer.</p>
+            <p style="color:#666;margin-bottom:1.5rem;font-size:0.95rem;">Set your health and fitness goals to track your progress.</p>
             
             <div style="margin-bottom:1.5rem;">
                 <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Goal Description</label>
@@ -320,6 +320,15 @@
                     <div style="color:#E57373;font-size:0.9rem;">{{ form.goal.errors }}</div>
                 {% endif %}
                 <div style="font-size:0.85rem;color:#999;margin-top:0.25rem;">e.g., "Lose 10kg" or "Run 5km"</div>
+            </div>
+            
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Goal Weight (Optional)</label>
+                <div class="input-with-unit" id="goal-weight-wrapper">
+                    <input type="number" step="0.01" name="goal_weight" class="form-input" placeholder="Enter your target weight">
+                    <span class="unit-label" id="goal-weight-unit">kg</span>
+                </div>
+                <div style="font-size:0.85rem;color:#999;margin-top:0.25rem;">What weight do you want to reach?</div>
             </div>
             
             <div style="margin-bottom:1.5rem;">
@@ -343,10 +352,7 @@
             
             <div class="nav-buttons">
                 <button type="button" class="btn-nav btn-prev" onclick="prevStep()">← Previous</button>
-                <div style="display:flex;gap:1rem;">
-                    <button type="button" class="btn-nav btn-skip" onclick="document.getElementById('profile-form').submit();">Skip Goals →</button>
-                    <button type="submit" class="btn-nav btn-next">Create Profile ✓</button>
-                </div>
+                <button type="submit" class="btn-nav btn-next">Create Profile ✓</button>
             </div>
         </div>
     </form>
@@ -356,8 +362,13 @@
     let currentStep = 1;
     const totalSteps = 5;
     
-    // Multi-step form navigation
+    // Multi-step form navigation with validation
     function nextStep() {
+        // Validate current step before proceeding
+        if (!validateCurrentStep()) {
+            return;
+        }
+        
         if (currentStep < totalSteps) {
             // Hide current step
             document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
@@ -374,6 +385,43 @@
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+    }
+    
+    // Validate required fields in current step
+    function validateCurrentStep() {
+        const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+        const requiredInputs = currentStepElement.querySelectorAll('input[required], select[required]');
+        let isValid = true;
+        
+        requiredInputs.forEach(input => {
+            if (!input.value || input.value.trim() === '' || input.value === '-------') {
+                isValid = false;
+                input.style.borderColor = '#E57373';
+                input.style.borderWidth = '2px';
+            } else {
+                input.style.borderColor = '#4FC3F7';
+            }
+        });
+        
+        if (!isValid) {
+            // Show error message
+            let errorDiv = currentStepElement.querySelector('.validation-error');
+            if (!errorDiv) {
+                errorDiv = document.createElement('div');
+                errorDiv.className = 'validation-error';
+                errorDiv.style.cssText = 'color:#E57373;background:#FFCDD2;padding:0.75rem;border-radius:0.5rem;margin-top:1rem;font-size:0.95rem;';
+                errorDiv.textContent = '⚠️ Please fill in all required fields before continuing.';
+                currentStepElement.insertBefore(errorDiv, currentStepElement.querySelector('.nav-buttons'));
+            }
+        } else {
+            // Remove error message if exists
+            const errorDiv = currentStepElement.querySelector('.validation-error');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+        }
+        
+        return isValid;
     }
     
     function prevStep() {
@@ -450,6 +498,12 @@
         const unitLabel = unit === 'st' ? '' : (unit === 'kg' ? 'kg' : 'lb');
         const labels = document.querySelectorAll('#weight-' + unit + ' .unit-label');
         labels.forEach(label => label.textContent = unitLabel);
+        
+        // Update goal weight unit label
+        const goalWeightLabel = document.getElementById('goal-weight-unit');
+        if (goalWeightLabel) {
+            goalWeightLabel.textContent = unit === 'st' ? 'st' : unitLabel;
+        }
     }
     
     // Height unit toggle
