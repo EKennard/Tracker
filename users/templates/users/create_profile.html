@@ -447,16 +447,24 @@
     // Validate required fields in current step
     function validateCurrentStep() {
         const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
-        const requiredInputs = currentStepElement.querySelectorAll('input[required], select[required]');
         let isValid = true;
         
+        // Check all visible required inputs and selects
+        const requiredInputs = currentStepElement.querySelectorAll('input[required], select[required]');
         requiredInputs.forEach(input => {
-            if (!input.value || input.value.trim() === '' || input.value === '-------') {
-                isValid = false;
-                input.style.borderColor = '#E57373';
-                input.style.borderWidth = '2px';
-            } else {
-                input.style.borderColor = '#4FC3F7';
+            // Only validate if input is visible (not in hidden parent)
+            const isVisible = !input.closest('.hidden');
+            if (isVisible) {
+                if (!input.value || input.value.trim() === '' || input.value === '-------') {
+                    isValid = false;
+                    input.style.borderColor = '#E57373';
+                    input.style.borderWidth = '3px';
+                    input.style.boxShadow = '0 0 0 2px rgba(229,115,115,0.2)';
+                } else {
+                    input.style.borderColor = '#4FC3F7';
+                    input.style.borderWidth = '2px';
+                    input.style.boxShadow = 'none';
+                }
             }
         });
         
