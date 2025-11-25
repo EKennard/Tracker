@@ -44,17 +44,109 @@
         gap: 0.5rem;
         align-items: center;
     }
+    .input-with-unit {
+        position: relative;
+    }
+    .unit-label {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        font-size: 0.95rem;
+        pointer-events: none;
+    }
     .hidden {
         display: none;
+    }
+    .form-step {
+        display: none;
+    }
+    .form-step.active {
+        display: block;
+        animation: fadeIn 0.3s;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .step-indicator {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+    .step-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ddd;
+        transition: all 0.3s;
+    }
+    .step-dot.active {
+        background: #4FC3F7;
+        width: 24px;
+        border-radius: 6px;
+    }
+    .step-dot.completed {
+        background: #81C784;
+    }
+    .btn-nav {
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+        font-size: 1rem;
+    }
+    .btn-next {
+        background: #4FC3F7;
+        color: white;
+    }
+    .btn-next:hover {
+        background: #3BA5D8;
+        transform: scale(1.05);
+    }
+    .btn-prev {
+        background: #E1F5FE;
+        color: #4FC3F7;
+    }
+    .btn-prev:hover {
+        background: #B3E5FC;
+    }
+    .btn-skip {
+        background: transparent;
+        color: #999;
+        text-decoration: underline;
+    }
+    .btn-skip:hover {
+        color: #666;
+    }
+    .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 2rem;
     }
 </style>
 
 <div class="main-section" style="max-width:600px;margin:auto;">
     <div class="welcome-title" style="text-align:center;">Create Your Profile</div>
-    <div class="welcome-desc" style="text-align:center;margin-bottom:2rem;">
+    <div class="welcome-desc" style="text-align:center;margin-bottom:1rem;">
         Tell us a bit about yourself to personalize your GetLizzyFit experience!
     </div>
-    <form method="post" enctype="multipart/form-data" class="card" style="margin:auto;">
+    
+    <!-- Step Indicator -->
+    <div class="step-indicator">
+        <div class="step-dot active" data-step="1"></div>
+        <div class="step-dot" data-step="2"></div>
+        <div class="step-dot" data-step="3"></div>
+        <div class="step-dot" data-step="4"></div>
+        <div class="step-dot" data-step="5"></div>
+    </div>
+    
+    <form method="post" enctype="multipart/form-data" class="card" style="margin:auto;" id="profile-form">
         {% csrf_token %}
         
         {% if form.non_field_errors %}
@@ -63,11 +155,38 @@
             </div>
         {% endif %}
         
-        <!-- Preferred Units Section -->
-        <div style="background:#E1F5FE;border:2px dashed #4FC3F7;border-radius:1rem;padding:1.5rem;margin-bottom:2rem;">
-            <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1rem;font-size:1.3rem;">⚙️ Preferred Units</h3>
+        <!-- Step 1: Basic Information -->
+        <div class="form-step active" data-step="1">
+            <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">📋 Basic Information</h3>
             
-            <div style="margin-bottom:1rem;">
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Date of Birth *</label>
+                {{ form.date_of_birth }}
+                {% if form.date_of_birth.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.date_of_birth.errors }}</div>
+                {% endif %}
+                <div id="age-display" style="margin-top:0.5rem;color:#81C784;font-size:0.9rem;"></div>
+            </div>
+            
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Sex *</label>
+                {{ form.sex }}
+                {% if form.sex.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.sex.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="nav-buttons">
+                <div></div>
+                <button type="button" class="btn-nav btn-next" onclick="nextStep()">Next →</button>
+            </div>
+        </div>
+        
+        <!-- Step 2: Preferred Units -->
+        <div class="form-step" data-step="2">
+            <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">⚙️ Preferred Units</h3>
+            
+            <div style="margin-bottom:1.5rem;">
                 <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Weight Unit *</label>
                 <div class="unit-toggle">
                     <button type="button" class="unit-option active" data-unit="kg" onclick="setWeightUnit('kg')">Kilograms (kg)</button>
@@ -80,7 +199,7 @@
                 {% endif %}
             </div>
             
-            <div style="margin-bottom:1rem;">
+            <div style="margin-bottom:1.5rem;">
                 <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height Unit *</label>
                 <div class="unit-toggle">
                     <button type="button" class="unit-option active" data-unit="cm" onclick="setHeightUnit('cm')">Centimeters (cm)</button>
@@ -92,120 +211,188 @@
                 {% endif %}
             </div>
             
-            <div style="margin-bottom:0;">
+            <div style="margin-bottom:1.5rem;">
                 <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Distance Unit *</label>
                 {{ form.distance_unit }}
                 {% if form.distance_unit.errors %}
                     <div style="color:#E57373;font-size:0.9rem;">{{ form.distance_unit.errors }}</div>
                 {% endif %}
             </div>
-        </div>
-        
-        <!-- Personal Information Section -->
-        <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Date of Birth *</label>
-            {{ form.date_of_birth }}
-            {% if form.date_of_birth.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.date_of_birth.errors }}</div>
-            {% endif %}
-            <div id="age-display" style="margin-top:0.5rem;color:#81C784;font-size:0.9rem;"></div>
-        </div>
-        
-        <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Sex *</label>
-            {{ form.sex }}
-            {% if form.sex.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.sex.errors }}</div>
-            {% endif %}
-        </div>
-        
-        <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Starting Weight *</label>
             
-            <div id="weight-kg" class="weight-input">
-                {{ form.starting_weight }}
+            <div class="nav-buttons">
+                <button type="button" class="btn-nav btn-prev" onclick="prevStep()">← Previous</button>
+                <button type="button" class="btn-nav btn-next" onclick="nextStep()">Next →</button>
+            </div>
+        </div>
+        
+        <!-- Step 3: Body Metrics -->
+        <div class="form-step" data-step="3">
+            <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">📏 Body Metrics</h3>
+            
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Starting Weight *</label>
+                
+                <div id="weight-kg" class="weight-input">
+                    <div class="input-with-unit">
+                        {{ form.starting_weight }}
+                        <span class="unit-label">kg</span>
+                    </div>
+                </div>
+                
+                <div id="weight-lb" class="weight-input hidden">
+                    <div class="input-with-unit">
+                        {{ form.starting_weight }}
+                        <span class="unit-label">lb</span>
+                    </div>
+                </div>
+                
+                <div id="weight-st" class="weight-input hidden">
+                    <div class="input-group">
+                        {{ form.weight_stones }}
+                        <span>st</span>
+                        {{ form.weight_pounds_extra }}
+                        <span>lb</span>
+                    </div>
+                </div>
+                
+                {% if form.starting_weight.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.starting_weight.errors }}</div>
+                {% endif %}
             </div>
             
-            <div id="weight-lb" class="weight-input hidden">
-                {{ form.starting_weight }}
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height *</label>
+                
+                <div id="height-cm" class="height-input">
+                    <div class="input-with-unit">
+                        {{ form.height }}
+                        <span class="unit-label">cm</span>
+                    </div>
+                </div>
+                
+                <div id="height-in" class="height-input hidden">
+                    <div class="input-group">
+                        {{ form.height_feet }}
+                        <span>ft</span>
+                        {{ form.height_inches }}
+                        <span>in</span>
+                    </div>
+                </div>
+                
+                {% if form.height.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.height.errors }}</div>
+                {% endif %}
             </div>
             
-            <div id="weight-st" class="weight-input hidden">
-                <div class="input-group">
-                    {{ form.weight_stones }}
-                    <span>st</span>
-                    {{ form.weight_pounds_extra }}
-                    <span>lb</span>
+            <div class="nav-buttons">
+                <button type="button" class="btn-nav btn-prev" onclick="prevStep()">← Previous</button>
+                <button type="button" class="btn-nav btn-next" onclick="nextStep()">Next →</button>
+            </div>
+        </div>
+        
+        <!-- Step 4: Activity Level -->
+        <div class="form-step" data-step="4">
+            <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">💪 Activity Level</h3>
+            
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Activity Level *</label>
+                {{ form.activity_level }}
+                {% if form.activity_level.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.activity_level.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="nav-buttons">
+                <button type="button" class="btn-nav btn-prev" onclick="prevStep()">← Previous</button>
+                <button type="button" class="btn-nav btn-next" onclick="nextStep()">Next →</button>
+            </div>
+        </div>
+        
+        <!-- Step 5: Goals (Optional) -->
+        <div class="form-step" data-step="5">
+            <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1.5rem;">🎯 Your Goals (Optional)</h3>
+            <p style="color:#666;margin-bottom:1.5rem;font-size:0.95rem;">You can skip this step and set goals later if you prefer.</p>
+            
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Goal Description</label>
+                {{ form.goal }}
+                {% if form.goal.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.goal.errors }}</div>
+                {% endif %}
+                <div style="font-size:0.85rem;color:#999;margin-top:0.25rem;">e.g., "Lose 10kg" or "Run 5km"</div>
+            </div>
+            
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Goal Deadline (Optional)</label>
+                {{ form.deadline }}
+                {% if form.deadline.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.deadline.errors }}</div>
+                {% endif %}
+                <div style="font-size:0.85rem;color:#999;margin-top:0.25rem;">When do you want to achieve this goal?</div>
+            </div>
+            
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:flex;align-items:center;">
+                    {{ form.is_public }}
+                    <span style="margin-left:0.5rem;color:#4FC3F7;">Make my profile public (allow others to view my progress)</span>
+                </label>
+                {% if form.is_public.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.is_public.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="nav-buttons">
+                <button type="button" class="btn-nav btn-prev" onclick="prevStep()">← Previous</button>
+                <div style="display:flex;gap:1rem;">
+                    <button type="button" class="btn-nav btn-skip" onclick="document.getElementById('profile-form').submit();">Skip Goals →</button>
+                    <button type="submit" class="btn-nav btn-next">Create Profile ✓</button>
                 </div>
             </div>
-            
-            {% if form.starting_weight.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.starting_weight.errors }}</div>
-            {% endif %}
         </div>
-        
-        <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height *</label>
-            
-            <div id="height-cm" class="height-input">
-                {{ form.height }}
-            </div>
-            
-            <div id="height-in" class="height-input hidden">
-                <div class="input-group" style="margin-bottom:0.5rem;">
-                    {{ form.height_feet }}
-                    <span>ft</span>
-                    {{ form.height_inches }}
-                    <span>in</span>
-                </div>
-                <div style="font-size:0.9rem;color:#666;margin-bottom:0.25rem;">Or enter total inches (optional):</div>
-                <div>{{ form.height }}</div>
-            </div>
-            
-            {% if form.height.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.height.errors }}</div>
-            {% endif %}
-        </div>
-        
-        <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Activity Level *</label>
-            {{ form.activity_level }}
-            {% if form.activity_level.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.activity_level.errors }}</div>
-            {% endif %}
-        </div>
-        
-        <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Goal</label>
-            {{ form.goal }}
-            {% if form.goal.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.goal.errors }}</div>
-            {% endif %}
-        </div>
-        
-        <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Goal Deadline</label>
-            {{ form.deadline }}
-            {% if form.deadline.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.deadline.errors }}</div>
-            {% endif %}
-        </div>
-        
-        <div style="margin-bottom:1.5rem;">
-            <label style="display:flex;align-items:center;">
-                {{ form.is_public }}
-                <span style="margin-left:0.5rem;color:#4FC3F7;">Make my profile public (allow others to view my progress)</span>
-            </label>
-            {% if form.is_public.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.is_public.errors }}</div>
-            {% endif %}
-        </div>
-        
-        <button type="submit" class="button" style="width:100%;font-size:1.2rem;">Create Profile & Continue</button>
     </form>
 </div>
 
 <script>
+    let currentStep = 1;
+    const totalSteps = 5;
+    
+    // Multi-step form navigation
+    function nextStep() {
+        if (currentStep < totalSteps) {
+            // Hide current step
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+            
+            // Mark current as completed
+            document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.add('completed');
+            document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.remove('active');
+            
+            // Show next step
+            currentStep++;
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
+            document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+    
+    function prevStep() {
+        if (currentStep > 1) {
+            // Hide current step
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.remove('active');
+            
+            // Show previous step
+            currentStep--;
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
+            document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.add('active');
+            document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.remove('completed');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+    
     // Calculate and display age from date of birth
     function calculateAge() {
         const dobInput = document.querySelector('input[name="date_of_birth"]');
@@ -244,10 +431,14 @@
         document.querySelector('select[name="weight_unit"]').value = unit;
         
         // Update button styles
-        document.querySelectorAll('.unit-toggle button[data-unit]').forEach(btn => {
-            btn.classList.remove('active');
+        const weightButtons = document.querySelectorAll('.unit-toggle button[data-unit]');
+        weightButtons.forEach(btn => {
+            if (btn.getAttribute('data-unit') === unit) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
         });
-        event.target.classList.add('active');
         
         // Show/hide appropriate inputs
         document.querySelectorAll('.weight-input').forEach(div => {
@@ -255,11 +446,10 @@
         });
         document.getElementById('weight-' + unit).classList.remove('hidden');
         
-        // Clear other weight inputs
-        if (unit !== 'st') {
-            document.querySelector('input[name="weight_stones"]').value = '';
-            document.querySelector('input[name="weight_pounds_extra"]').value = '';
-        }
+        // Update unit labels
+        const unitLabel = unit === 'st' ? '' : (unit === 'kg' ? 'kg' : 'lb');
+        const labels = document.querySelectorAll('#weight-' + unit + ' .unit-label');
+        labels.forEach(label => label.textContent = unitLabel);
     }
     
     // Height unit toggle
@@ -268,10 +458,14 @@
         document.querySelector('select[name="height_unit"]').value = unit;
         
         // Update button styles
-        document.querySelectorAll('.unit-toggle button[data-unit]').forEach(btn => {
-            btn.classList.remove('active');
+        const heightButtons = document.querySelectorAll('.unit-toggle button[data-unit]');
+        heightButtons.forEach(btn => {
+            if (btn.getAttribute('data-unit') === unit) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
         });
-        event.target.classList.add('active');
         
         // Show/hide appropriate inputs
         document.querySelectorAll('.height-input').forEach(div => {
@@ -279,11 +473,10 @@
         });
         document.getElementById('height-' + unit).classList.remove('hidden');
         
-        // Clear other height inputs
-        if (unit === 'cm') {
-            document.querySelector('input[name="height_feet"]').value = '';
-            document.querySelector('input[name="height_inches"]').value = '';
-        }
+        // Update unit labels
+        const unitLabel = unit === 'cm' ? 'cm' : 'in';
+        const labels = document.querySelectorAll('#height-' + unit + ' .unit-label');
+        labels.forEach(label => label.textContent = unitLabel);
     }
     
     // Hide the select dropdowns (they're controlled by buttons)
