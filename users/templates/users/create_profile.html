@@ -460,17 +460,24 @@
         const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
         let isValid = true;
         
-        // Check all visible required inputs and selects
-        const requiredInputs = currentStepElement.querySelectorAll('input[required], select[required]');
-        requiredInputs.forEach(input => {
-            // Only validate if input is visible (has a name attribute and not in hidden parent)
-            const isVisible = !input.closest('.hidden') && input.hasAttribute('name');
-            if (isVisible) {
+        // Get all inputs and selects that have the 'required' attribute AND a 'name' attribute
+        const allInputs = currentStepElement.querySelectorAll('input, select');
+        allInputs.forEach(input => {
+            // Only validate if:
+            // 1. Has a name attribute (meaning it will be submitted)
+            // 2. Has required attribute
+            // 3. Is not in a hidden parent
+            const hasName = input.hasAttribute('name');
+            const isRequired = input.hasAttribute('required') || input.required;
+            const isHidden = input.closest('.hidden') !== null;
+            
+            if (hasName && isRequired && !isHidden) {
                 if (!input.value || input.value.trim() === '' || input.value === '-------') {
                     isValid = false;
                     input.style.borderColor = '#E57373';
                     input.style.borderWidth = '3px';
                     input.style.boxShadow = '0 0 0 2px rgba(229,115,115,0.2)';
+                    console.log('Validation failed for:', input.name, 'value:', input.value);
                 } else {
                     input.style.borderColor = '#4FC3F7';
                     input.style.borderWidth = '2px';
@@ -551,6 +558,8 @@
     
     // Weight unit toggle
     function setWeightUnit(unit) {
+        console.log('Setting weight unit to:', unit);
+        
         // Update hidden select
         document.querySelector('select[name="weight_unit"]').value = unit;
         
@@ -593,15 +602,18 @@
             document.getElementById('weight-kg').classList.remove('hidden');
             kgInput.setAttribute('name', 'starting_weight');
             kgInput.setAttribute('required', 'required');
+            console.log('Enabled kg input, has name:', kgInput.hasAttribute('name'), 'has required:', kgInput.hasAttribute('required'));
         } else if (unit === 'lb') {
             document.getElementById('weight-lb').classList.remove('hidden');
             lbInput.setAttribute('name', 'starting_weight');
             lbInput.setAttribute('required', 'required');
+            console.log('Enabled lb input, has name:', lbInput.hasAttribute('name'));
         } else if (unit === 'st') {
             document.getElementById('weight-st').classList.remove('hidden');
             stonesInput.setAttribute('name', 'weight_stones');
             stonesInput.setAttribute('required', 'required');
             poundsInput.setAttribute('name', 'weight_pounds_extra');
+            console.log('Enabled stones inputs');
         }
         
         // Update goal weight unit label
@@ -613,6 +625,8 @@
     
     // Height unit toggle
     function setHeightUnit(unit) {
+        console.log('Setting height unit to:', unit);
+        
         // Update hidden select
         document.querySelector('select[name="height_unit"]').value = unit;
         
@@ -648,11 +662,13 @@
             document.getElementById('height-cm').classList.remove('hidden');
             cmInput.setAttribute('name', 'height');
             cmInput.setAttribute('required', 'required');
+            console.log('Enabled cm input, has name:', cmInput.hasAttribute('name'), 'has required:', cmInput.hasAttribute('required'));
         } else if (unit === 'in') {
             document.getElementById('height-in').classList.remove('hidden');
             feetInput.setAttribute('name', 'height_feet');
             feetInput.setAttribute('required', 'required');
             inchesInput.setAttribute('name', 'height_inches');
+            console.log('Enabled inches inputs');
         }
     }
     
