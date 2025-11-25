@@ -14,6 +14,7 @@
         display: flex;
         gap: 0.5rem;
         margin-bottom: 0.5rem;
+        flex-wrap: wrap;
     }
     .unit-option {
         padding: 0.5rem 1rem;
@@ -22,10 +23,21 @@
         cursor: pointer;
         background: white;
         transition: all 0.3s;
+        font-size: 0.95rem;
+        flex: 1;
+        min-width: 120px;
     }
     .unit-option.active {
         background: #4FC3F7;
         color: white;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(79,195,247,0.3);
+    }
+    .unit-option:hover {
+        background: #E1F5FE;
+    }
+    .unit-option.active:hover {
+        background: #4FC3F7;
     }
     .input-group {
         display: flex;
@@ -51,6 +63,45 @@
             </div>
         {% endif %}
         
+        <!-- Preferred Units Section -->
+        <div style="background:#E1F5FE;border:2px dashed #4FC3F7;border-radius:1rem;padding:1.5rem;margin-bottom:2rem;">
+            <h3 style="color:#4FC3F7;margin-top:0;margin-bottom:1rem;font-size:1.3rem;">⚙️ Preferred Units</h3>
+            
+            <div style="margin-bottom:1rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Weight Unit *</label>
+                <div class="unit-toggle">
+                    <button type="button" class="unit-option active" data-unit="kg" onclick="setWeightUnit('kg')">Kilograms (kg)</button>
+                    <button type="button" class="unit-option" data-unit="lb" onclick="setWeightUnit('lb')">Pounds (lb)</button>
+                    <button type="button" class="unit-option" data-unit="st" onclick="setWeightUnit('st')">Stones (st)</button>
+                </div>
+                {{ form.weight_unit }}
+                {% if form.weight_unit.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.weight_unit.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div style="margin-bottom:1rem;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height Unit *</label>
+                <div class="unit-toggle">
+                    <button type="button" class="unit-option active" data-unit="cm" onclick="setHeightUnit('cm')">Centimeters (cm)</button>
+                    <button type="button" class="unit-option" data-unit="in" onclick="setHeightUnit('in')">Inches (in)</button>
+                </div>
+                {{ form.height_unit }}
+                {% if form.height_unit.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.height_unit.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div style="margin-bottom:0;">
+                <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Distance Unit *</label>
+                {{ form.distance_unit }}
+                {% if form.distance_unit.errors %}
+                    <div style="color:#E57373;font-size:0.9rem;">{{ form.distance_unit.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Personal Information Section -->
         <div style="margin-bottom:1.5rem;">
             <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Date of Birth *</label>
             {{ form.date_of_birth }}
@@ -70,12 +121,6 @@
         
         <div style="margin-bottom:1.5rem;">
             <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Starting Weight *</label>
-            <div class="unit-toggle">
-                <button type="button" class="unit-option active" data-unit="kg" onclick="setWeightUnit('kg')">kg</button>
-                <button type="button" class="unit-option" data-unit="lb" onclick="setWeightUnit('lb')">lb</button>
-                <button type="button" class="unit-option" data-unit="st" onclick="setWeightUnit('st')">st</button>
-            </div>
-            {{ form.weight_unit }}
             
             <div id="weight-kg" class="weight-input">
                 {{ form.starting_weight }}
@@ -97,38 +142,28 @@
             {% if form.starting_weight.errors %}
                 <div style="color:#E57373;font-size:0.9rem;">{{ form.starting_weight.errors }}</div>
             {% endif %}
-            {% if form.weight_unit.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.weight_unit.errors }}</div>
-            {% endif %}
         </div>
         
         <div style="margin-bottom:1.5rem;">
             <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height *</label>
-            <div class="unit-toggle">
-                <button type="button" class="unit-option active" data-unit="cm" onclick="setHeightUnit('cm')">cm</button>
-                <button type="button" class="unit-option" data-unit="in" onclick="setHeightUnit('in')">inches</button>
-            </div>
-            {{ form.height_unit }}
             
             <div id="height-cm" class="height-input">
                 {{ form.height }}
             </div>
             
             <div id="height-in" class="height-input hidden">
-                <div class="input-group">
+                <div class="input-group" style="margin-bottom:0.5rem;">
                     {{ form.height_feet }}
                     <span>ft</span>
                     {{ form.height_inches }}
                     <span>in</span>
                 </div>
-                <div style="margin-top:0.5rem;font-size:0.9rem;color:#666;">Or enter total inches: {{ form.height }}</div>
+                <div style="font-size:0.9rem;color:#666;margin-bottom:0.25rem;">Or enter total inches (optional):</div>
+                <div>{{ form.height }}</div>
             </div>
             
             {% if form.height.errors %}
                 <div style="color:#E57373;font-size:0.9rem;">{{ form.height.errors }}</div>
-            {% endif %}
-            {% if form.height_unit.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.height_unit.errors }}</div>
             {% endif %}
         </div>
         
@@ -153,14 +188,6 @@
             {{ form.deadline }}
             {% if form.deadline.errors %}
                 <div style="color:#E57373;font-size:0.9rem;">{{ form.deadline.errors }}</div>
-            {% endif %}
-        </div>
-        
-        <div style="margin-bottom:1.5rem;">
-            <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Distance Unit</label>
-            {{ form.distance_unit }}
-            {% if form.distance_unit.errors %}
-                <div style="color:#E57373;font-size:0.9rem;">{{ form.distance_unit.errors }}</div>
             {% endif %}
         </div>
         
