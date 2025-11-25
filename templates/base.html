@@ -71,11 +71,23 @@
             font-size: 2.2rem;
             margin-bottom: 1rem;
             font-family: 'Fredoka One', 'Comic Neue', sans-serif;
+            word-wrap: break-word;
         }
         .welcome-desc {
             font-size: 1.25rem;
             color: #333;
             margin-bottom: 2rem;
+            word-wrap: break-word;
+        }
+        
+        /* Header icon row */
+        header .icon {
+            width: 48px;
+            height: 48px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
         }
         
         /* Logout button hover effect */
@@ -153,10 +165,25 @@
                 border-radius: 1rem;
             }
             .welcome-title {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
             .welcome-desc {
                 font-size: 1rem;
+            }
+            
+            /* Header responsive on mobile */
+            header h1 {
+                font-size: 1.8rem !important;
+            }
+            
+            header .icon {
+                width: 32px !important;
+                height: 32px !important;
+            }
+            
+            header div[style*="gap:2.5rem"] {
+                gap: 1rem !important;
+                flex-wrap: wrap;
             }
             .feature-card {
                 flex-direction: column;
