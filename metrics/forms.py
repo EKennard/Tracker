@@ -4,15 +4,50 @@ from .models import HealthMetrics, Measurement
 class HealthMetricsForm(forms.ModelForm):
     class Meta:
         model = HealthMetrics
-        fields = ['date', 'height', 'weight', 'basal_metabolic_rate', 'daily_caloric_needs', 'body_fat_percentage']
+        fields = ['date', 'weight', 'height', 'body_fat_percentage', 'basal_metabolic_rate', 'daily_caloric_needs']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date', 'class': 'border rounded p-2'}),
-            'height': forms.NumberInput(attrs={'class': 'border rounded p-2'}),
-            'weight': forms.NumberInput(attrs={'class': 'border rounded p-2'}),
-            'basal_metabolic_rate': forms.NumberInput(attrs={'class': 'border rounded p-2'}),
-            'daily_caloric_needs': forms.NumberInput(attrs={'class': 'border rounded p-2'}),
-            'body_fat_percentage': forms.NumberInput(attrs={'class': 'border rounded p-2'}),
+            'date': forms.DateInput(attrs={
+                'type': 'date', 
+                'class': 'border rounded p-2',
+                'title': 'Select any date - perfect for adding historic data!'
+            }),
+            'weight': forms.NumberInput(attrs={
+                'class': 'border rounded p-2',
+                'step': '0.1',
+                'placeholder': 'Required'
+            }),
+            'height': forms.NumberInput(attrs={
+                'class': 'border rounded p-2',
+                'step': '0.1',
+                'placeholder': 'Optional'
+            }),
+            'body_fat_percentage': forms.NumberInput(attrs={
+                'class': 'border rounded p-2',
+                'step': '0.1',
+                'placeholder': 'Optional'
+            }),
+            'basal_metabolic_rate': forms.NumberInput(attrs={
+                'class': 'border rounded p-2',
+                'placeholder': 'Optional'
+            }),
+            'daily_caloric_needs': forms.NumberInput(attrs={
+                'class': 'border rounded p-2',
+                'placeholder': 'Optional'
+            }),
         }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set today's date as default
+        if not self.instance.pk and 'date' not in self.data:
+            from datetime import date
+            self.initial['date'] = date.today()
+        
+        # Make most fields optional - only weight is required
+        self.fields['height'].required = False
+        self.fields['basal_metabolic_rate'].required = False
+        self.fields['daily_caloric_needs'].required = False
+        self.fields['body_fat_percentage'].required = False
 
 class MeasurementForm(forms.ModelForm):
     class Meta:

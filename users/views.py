@@ -100,9 +100,15 @@ def dashboard(request):
     # Get weight data for chart - use ALL HealthMetrics entries ordered by date
     weight_data = list(all_metrics.values('date', 'weight').order_by('date'))
     
+    # Debug: Print weight data
+    print(f"DEBUG: Found {len(weight_data)} weight entries")
+    for entry in weight_data:
+        print(f"  Date: {entry['date']}, Weight (lb): {entry['weight']}")
+    
     # Convert all weights for display based on user preference
     for entry in weight_data:
         entry['weight'] = convert_weight_for_display(entry['weight'])
+        print(f"  After conversion: Date: {entry['date']}, Weight: {entry['weight']} {display_unit}")
     
     # If no weight data exists, show starting weight as a placeholder
     if not weight_data and profile.starting_weight:
