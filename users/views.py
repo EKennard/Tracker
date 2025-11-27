@@ -50,21 +50,54 @@ def dashboard(request):
     except UserProfile.DoesNotExist:
         return redirect('create_profile')
     
+    # Get all metrics for progress tracking
+    all_metrics = HealthMetrics.objects.filter(user_profile=profile).order_by('date')
+    
+    # Calculate weight progress
+    current_weight = None
+    weight_lost = 0
+    weight_progress_percent = 0
+    if all_metrics.exists():
+        latest_metric = all_metrics.last()
+        current_weight = latest_metric.weight
+        weight_lost = profile.starting_weight - current_weight
+        
+        # Calculate progress percentage if goal weight exists
+        if hasattr(profile, 'goal_weight') and profile.goal_weight:
+            total_to_lose = profile.starting_weight - profile.goal_weight
+            if total_to_lose > 0:
+                weight_progress_percent = (weight_lost / total_to_lose) * 100
+    
+    # Get weight data for chart (last 30 entries or all if less)
+    weight_data = list(all_metrics.values('date', 'weight').order_by('-date')[:30])
+    weight_data.reverse()  # Oldest to newest for chart
+    
+    # Recent activity
     recent_meals = NutritionLog.objects.filter(profile=profile).order_by('-date')[:5]
-    recent_metrics = HealthMetrics.objects.filter(user_profile=profile).order_by('-date')[:3]
-    recent_measurements = Measurement.objects.filter(profile=profile).order_by('-date')[:3]
-    recent_milestones = Milestone.objects.filter(profile=profile).order_by('-target_date')[:3]
+    recent_metrics = all_metrics.order_by('-date')[:5]
+    recent_measurements = Measurement.objects.filter(profile=profile).order_by('-date')[:5]
     recent_habits = HabitLog.objects.filter(profile=profile).order_by('-date')[:5]
     recent_exercise = ExerciseLog.objects.filter(profile=profile).order_by('-date')[:5]
-    recent_fertility = FertilityLog.objects.filter(profile=profile).order_by('-date')[:5]
+    
+    # Activity counts
+    total_meals = NutritionLog.objects.filter(profile=profile).count()
+    total_workouts = ExerciseLog.objects.filter(profile=profile).count()
+    total_habit_logs = HabitLog.objects.filter(profile=profile).count()
+    
     return render(request, 'users/dashboard.html', {
+        'profile': profile,
+        'current_weight': current_weight,
+        'weight_lost': weight_lost,
+        'weight_progress_percent': weight_progress_percent,
+        'weight_data': weight_data,
         'recent_meals': recent_meals,
         'recent_metrics': recent_metrics,
         'recent_measurements': recent_measurements,
-        'recent_milestones': recent_milestones,
         'recent_habits': recent_habits,
         'recent_exercise': recent_exercise,
-        'recent_fertility': recent_fertility,
+        'total_meals': total_meals,
+        'total_workouts': total_workouts,
+        'total_habit_logs': total_habit_logs,
         'weight_unit': profile.weight_unit,
         'height_unit': profile.height_unit,
     })

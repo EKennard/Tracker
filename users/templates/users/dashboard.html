@@ -1,75 +1,396 @@
 {% extends 'base.html' %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
-<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">Welcome to your Dashboard</h1>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-  <div class="card">
-    <h2 class="text-lg font-semibold mb-2">Recent Meals</h2>
-    <ul>
-      {% for meal in recent_meals %}
-      <li class="border-b py-1">{{ meal.date }}: {{ meal.get_meal_type_display }} ({{ meal.calories }} kcal)</li>
-      {% empty %}
-      <li>No meals logged yet.</li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="card">
-    <h2 class="text-lg font-semibold mb-2">Recent Metrics</h2>
-    <ul>
-      {% for m in recent_metrics %}
-      <li class="border-b py-1">{{ m.date }}: {{ m.weight }} {{ weight_unit }}, {{ m.height }} {{ height_unit }}, BF: {{ m.body_fat_percentage }}%</li>
-      {% empty %}
-      <li>No metrics logged yet.</li>
-      {% endfor %}
-    </ul>
-    <h2 class="text-lg font-semibold mt-4 mb-2">Recent Measurements</h2>
-    <ul>
-      {% for meas in recent_measurements %}
-      <li class="border-b py-1">{{ meas.date }}: {{ meas.body_part }} - {{ meas.value }} {{ meas.unit }}</li>
-      {% empty %}
-      <li>No measurements logged yet.</li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="bg-white p-4 rounded shadow">
-    <h2 class="text-lg font-semibold mb-2">Recent Milestones</h2>
-    <ul>
-      {% for ms in recent_milestones %}
-      <li class="border-b py-1">{{ ms.title }} ({{ ms.get_milestone_type_display }}) {% if ms.date_achieved %}- Achieved: {{ ms.date_achieved }}{% endif %}</li>
-      {% empty %}
-      <li>No milestones yet.</li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="bg-white p-4 rounded shadow">
-    <h2 class="text-lg font-semibold mb-2">Recent Habits</h2>
-    <ul>
-      {% for h in recent_habits %}
-      <li class="border-b py-1">{{ h.date }}: {{ h.habit_name }} {% if h.value %}- {{ h.value }} {{ h.unit }}{% endif %}</li>
-      {% empty %}
-      <li>No habit logs yet.</li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="bg-white p-4 rounded shadow">
-    <h2 class="text-lg font-semibold mb-2">Recent Exercise</h2>
-    <ul>
-      {% for ex in recent_exercise %}
-      <li class="border-b py-1">{{ ex.date }}: {{ ex.get_exercise_type_display }} ({{ ex.duration_minutes }} min)</li>
-      {% empty %}
-      <li>No exercise logs yet.</li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="bg-white p-4 rounded shadow">
-    <h2 class="text-lg font-semibold mb-2">Recent Fertility Logs</h2>
-    <ul>
-      {% for f in recent_fertility %}
-      <li class="border-b py-1">{{ f.date }}: Cycle Day {{ f.cycle_day }} {% if f.temperature %}- Temp: {{ f.temperature }}°C{% endif %}</li>
-      {% empty %}
-      <li>No fertility logs yet.</li>
-      {% endfor %}
-    </ul>
-  </div>
+<style>
+    .dashboard-container {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .stat-card {
+        background: white;
+        border: 2px solid #4FC3F7;
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(79, 195, 247, 0.1);
+        transition: transform 0.2s;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(79, 195, 247, 0.2);
+    }
+    
+    .stat-title {
+        font-size: 0.95rem;
+        color: #666;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+    
+    .stat-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #4FC3F7;
+        margin-bottom: 0.25rem;
+    }
+    
+    .stat-label {
+        font-size: 0.85rem;
+        color: #999;
+    }
+    
+    .progress-bar-container {
+        width: 100%;
+        height: 20px;
+        background: #E1F5FE;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 1rem 0;
+    }
+    
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #4FC3F7, #81C784);
+        transition: width 0.5s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: bold;
+    }
+    
+    .chart-container {
+        background: white;
+        border: 2px solid #4FC3F7;
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .time-filter {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .time-btn {
+        padding: 0.5rem 1rem;
+        border: 2px solid #4FC3F7;
+        background: white;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    .time-btn:hover {
+        background: #E1F5FE;
+    }
+    
+    .time-btn.active {
+        background: #4FC3F7;
+        color: white;
+    }
+    
+    .activity-card {
+        background: white;
+        border: 2px solid #4FC3F7;
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .activity-card h2 {
+        color: #4FC3F7;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
+    
+    .activity-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .activity-item {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #E1F5FE;
+        color: #666;
+    }
+    
+    .activity-item:last-child {
+        border-bottom: none;
+    }
+    
+    .empty-state {
+        text-align: center;
+        color: #999;
+        font-style: italic;
+        padding: 2rem;
+    }
+    
+    .section-header {
+        color: #4FC3F7;
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+</style>
+
+<div class="dashboard-container">
+    <h1 class="section-header">📊 Your Progress Dashboard</h1>
+    
+    <!-- Weight Progress Overview -->
+    <div class="chart-container">
+        <h2 style="color: #4FC3F7; font-size: 1.5rem; margin-bottom: 1rem; font-weight: bold;">⚖️ Weight Progress</h2>
+        
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-title">Starting Weight</div>
+                <div class="stat-value">{{ profile.starting_weight|floatformat:1 }}</div>
+                <div class="stat-label">{{ weight_unit }}</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-title">Current Weight</div>
+                <div class="stat-value">{% if current_weight %}{{ current_weight|floatformat:1 }}{% else %}--{% endif %}</div>
+                <div class="stat-label">{{ weight_unit }}</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-title">Goal Weight</div>
+                <div class="stat-value">{% if profile.goal %}{{ profile.goal }}{% else %}Not Set{% endif %}</div>
+                <div class="stat-label">Target</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-title">Weight Lost</div>
+                <div class="stat-value" style="color: #81C784;">{% if current_weight %}{{ weight_lost|floatformat:1 }}{% else %}0{% endif %}</div>
+                <div class="stat-label">{{ weight_unit }}</div>
+            </div>
+        </div>
+        
+        {% if weight_progress_percent > 0 %}
+        <div style="margin: 1.5rem 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span style="font-weight: 600; color: #666;">Progress to Goal</span>
+                <span style="font-weight: bold; color: #4FC3F7;">{{ weight_progress_percent|floatformat:1 }}%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: {{ weight_progress_percent }}%;">
+                    {% if weight_progress_percent > 15 %}{{ weight_progress_percent|floatformat:0 }}%{% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Time Filter Buttons -->
+        <div class="time-filter">
+            <button class="time-btn active" onclick="filterChart('all')">All Time</button>
+            <button class="time-btn" onclick="filterChart('year')">1 Year</button>
+            <button class="time-btn" onclick="filterChart('3month')">3 Months</button>
+            <button class="time-btn" onclick="filterChart('month')">1 Month</button>
+            <button class="time-btn" onclick="filterChart('week')">1 Week</button>
+        </div>
+        
+        <!-- Weight Chart -->
+        <canvas id="weightChart" style="max-height: 300px;"></canvas>
+    </div>
+    
+    <!-- Activity Summary Cards -->
+    <div class="dashboard-grid">
+        <div class="stat-card">
+            <div class="stat-title">🍽️ Total Meals Logged</div>
+            <div class="stat-value">{{ total_meals }}</div>
+            <div class="stat-label">All time</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-title">💪 Total Workouts</div>
+            <div class="stat-value">{{ total_workouts }}</div>
+            <div class="stat-label">All time</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-title">✅ Habit Logs</div>
+            <div class="stat-value">{{ total_habit_logs }}</div>
+            <div class="stat-label">All time</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-title">📏 Metrics Tracked</div>
+            <div class="stat-value">{{ recent_metrics|length }}</div>
+            <div class="stat-label">Recent entries</div>
+        </div>
+    </div>
+    
+    <!-- Recent Activity -->
+    <div class="dashboard-grid">
+        <div class="activity-card">
+            <h2>🍽️ Recent Meals</h2>
+            <ul class="activity-list">
+                {% for meal in recent_meals %}
+                <li class="activity-item">
+                    <strong>{{ meal.date }}</strong>: {{ meal.get_meal_type_display }} 
+                    ({{ meal.calories }} kcal)
+                </li>
+                {% empty %}
+                <li class="empty-state">No meals logged yet</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="activity-card">
+            <h2>💪 Recent Exercise</h2>
+            <ul class="activity-list">
+                {% for ex in recent_exercise %}
+                <li class="activity-item">
+                    <strong>{{ ex.date }}</strong>: {{ ex.get_exercise_type_display }} 
+                    ({{ ex.duration_minutes }} min)
+                </li>
+                {% empty %}
+                <li class="empty-state">No exercise logged yet</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="activity-card">
+            <h2>✅ Recent Habits</h2>
+            <ul class="activity-list">
+                {% for h in recent_habits %}
+                <li class="activity-item">
+                    <strong>{{ h.date }}</strong>: {{ h.habit_name }}
+                    {% if h.value %}- {{ h.value }} {{ h.unit }}{% endif %}
+                </li>
+                {% empty %}
+                <li class="empty-state">No habit logs yet</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="activity-card">
+            <h2>📏 Recent Measurements</h2>
+            <ul class="activity-list">
+                {% for meas in recent_measurements %}
+                <li class="activity-item">
+                    <strong>{{ meas.date }}</strong>: {{ meas.body_part }} 
+                    - {{ meas.value }} {{ meas.unit }}
+                </li>
+                {% empty %}
+                <li class="empty-state">No measurements yet</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const weightData = {{ weight_data|safe }};
+    let chart = null;
+    
+    function filterChart(period) {
+        // Update active button
+        document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        let filteredData = weightData;
+        const now = new Date();
+        
+        if (period !== 'all') {
+            filteredData = weightData.filter(entry => {
+                const entryDate = new Date(entry.date);
+                const diffTime = now - entryDate;
+                const diffDays = diffTime / (1000 * 60 * 60 * 24);
+                
+                if (period === 'week') return diffDays <= 7;
+                if (period === 'month') return diffDays <= 30;
+                if (period === '3month') return diffDays <= 90;
+                if (period === 'year') return diffDays <= 365;
+                return true;
+            });
+        }
+        
+        updateChart(filteredData);
+    }
+    
+    function updateChart(data) {
+        const labels = data.map(d => d.date);
+        const weights = data.map(d => d.weight);
+        
+        if (chart) {
+            chart.destroy();
+        }
+        
+        const ctx = document.getElementById('weightChart').getContext('2d');
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Weight ({{ weight_unit }})',
+                    data: weights,
+                    borderColor: '#4FC3F7',
+                    backgroundColor: 'rgba(79, 195, 247, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    pointBackgroundColor: '#4FC3F7',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toFixed(1) + ' {{ weight_unit }}';
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    // Initialize chart with all data
+    updateChart(weightData);
+</script>
 {% endblock %}
