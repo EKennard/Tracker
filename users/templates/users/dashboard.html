@@ -348,26 +348,7 @@
         document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
         
-        let filteredData = weightData;
-        const now = new Date();
-        now.setHours(0, 0, 0, 0);
-        
-        if (period !== 'all') {
-            filteredData = weightData.filter(entry => {
-                const entryDate = new Date(entry.date);
-                entryDate.setHours(0, 0, 0, 0);
-                const diffTime = now - entryDate;
-                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-                
-                if (period === 'week') return diffDays >= 0 && diffDays <= 7;
-                if (period === 'month') return diffDays >= 0 && diffDays <= 30;
-                if (period === '3month') return diffDays >= 0 && diffDays <= 90;
-                if (period === 'year') return diffDays >= 0 && diffDays <= 365;
-                return true;
-            });
-        }
-        
-        updateChart(filteredData, period);
+        updateChart(weightData, period);
     }
     
     function fillDateGaps(data, period) {
@@ -376,21 +357,23 @@
         const now = new Date();
         now.setHours(0, 0, 0, 0);
         
-        let startDate = new Date(data[0].date);
-        startDate.setHours(0, 0, 0, 0);
-        
         // Determine date range based on period
         let rangeStart = new Date();
         rangeStart.setHours(0, 0, 0, 0);
         
-        if (period === 'week') rangeStart.setDate(rangeStart.getDate() - 7);
-        else if (period === 'month') rangeStart.setDate(rangeStart.getDate() - 30);
-        else if (period === '3month') rangeStart.setDate(rangeStart.getDate() - 90);
-        else if (period === 'year') rangeStart.setDate(rangeStart.getDate() - 365);
-        else rangeStart = startDate;
-        
-        // Use the later of the actual start date or the range start
-        if (startDate > rangeStart) rangeStart = startDate;
+        if (period === 'week') {
+            rangeStart.setDate(rangeStart.getDate() - 6); // Last 7 days including today
+        } else if (period === 'month') {
+            rangeStart.setDate(rangeStart.getDate() - 29); // Last 30 days including today
+        } else if (period === '3month') {
+            rangeStart.setDate(rangeStart.getDate() - 89); // Last 90 days
+        } else if (period === 'year') {
+            rangeStart.setDate(rangeStart.getDate() - 364); // Last 365 days
+        } else {
+            // For 'all', use earliest data point
+            rangeStart = new Date(data[0].date);
+            rangeStart.setHours(0, 0, 0, 0);
+        }
         
         // Create map of existing data points
         const dataMap = {};
@@ -402,14 +385,12 @@
         // Fill in all dates in range
         const filledData = [];
         let currentDate = new Date(rangeStart);
-        let lastWeight = data[0].weight;
         
         while (currentDate <= now) {
             const dateKey = currentDate.toISOString().split('T')[0];
             
             if (dataMap[dateKey] !== undefined) {
-                lastWeight = dataMap[dateKey];
-                filledData.push({ date: dateKey, weight: lastWeight, hasData: true });
+                filledData.push({ date: dateKey, weight: dataMap[dateKey], hasData: true });
             } else {
                 filledData.push({ date: dateKey, weight: null, hasData: false });
             }
@@ -422,7 +403,7 @@
     
     function updateChart(data, period) {
         // Fill date gaps for better visualization
-        if (period && period !== 'all') {
+        if (period) {
             data = fillDateGaps(data, period);
         }
         
@@ -491,6 +472,6 @@
     }
     
     // Initialize chart with all data
-    updateChart(weightData);
+    updateChart(weightData, 'all');
 </script>
 {% endblock %}
