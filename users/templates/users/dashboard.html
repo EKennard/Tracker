@@ -369,7 +369,10 @@
     }
     
     function updateChart(data) {
-        const labels = data.map(d => d.date);
+        const labels = data.map(d => {
+            const date = new Date(d.date);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        });
         const weights = data.map(d => d.weight);
         
         if (chart) {

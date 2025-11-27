@@ -70,32 +70,41 @@ def dashboard(request):
     
     # Calculate BMI if we have current weight and height
     current_bmi = None
-    if current_weight and profile.height:
+    weight_for_bmi = current_weight if current_weight else profile.starting_weight
+    
+    if weight_for_bmi and profile.height:
         # Convert height to meters for BMI calculation
         if profile.height_unit == 'cm':
-            height_m = profile.height / 100
+            height_m = float(profile.height) / 100
         else:  # inches
-            height_m = profile.height * 0.0254
+            height_m = float(profile.height) * 0.0254
         
         # Convert weight to kg for BMI calculation
-        if profile.weight_unit == 'lb':
-            weight_kg = current_weight * 0.453592
-        else:  # kg or st (stones converted to lb in form, stored as lb)
-            weight_kg = current_weight
+        # Note: weight_unit is stored as 'lb' even for stones (converted in form)
+        weight_kg = float(weight_for_bmi) * 0.453592  # Convert lb to kg
         
-        current_bmi = weight_kg / (height_m ** 2)
+        if weight_kg > 0 and height_m > 0:
+            current_bmi = weight_kg / (height_m ** 2)
     
     # Get weight data for chart (last 30 entries or all if less)
     weight_data = list(all_metrics.values('date', 'weight').order_by('-date')[:30])
     weight_data.reverse()  # Oldest to newest for chart
     
-    # Add starting weight as first data point if not already in metrics
-    if weight_data and profile.starting_weight:
-        # Check if we need to add starting weight
-        if not all_metrics.filter(weight=profile.starting_weight).exists():
-            # Get profile creation date or use first metric date
-            start_date = profile.user.date_joined.strftime('%Y-%m-%d')
-            weight_data.insert(0, {'date': start_date, 'weight': float(profile.starting_weight)})
+    # Add starting weight as first data point
+    if profile.starting_weight:
+        # Get profile creation date
+        start_date = profile.user.date_joined.strftime('%Y-%m-%d')
+        
+        # Only add if no metrics exist OR starting weight isn't in the data
+        if not weight_data:
+            # No metrics yet, just add starting weight
+            weight_data = [{'date': start_date, 'weight': float(profile.starting_weight)}]
+        else:
+            # Check if starting weight already exists in metrics
+            first_weight = weight_data[0]['weight']
+            if abs(float(first_weight) - float(profile.starting_weight)) > 0.1:
+                # Starting weight is different, add it as first point
+                weight_data.insert(0, {'date': start_date, 'weight': float(profile.starting_weight)})
     
     # Unified activity stream - combine all activities
     from itertools import chain
