@@ -119,11 +119,13 @@ def create_profile(request):
             print(form.non_field_errors())
     else:
         form = UserProfileForm()
-        # Show welcome message for first-time profile creation
-        messages.info(
-            request,
-            f'Welcome {request.user.username}! 👋 Let\'s set up your profile to get started with your wellness journey.'
-        )
+        # Show welcome message only on first visit to profile creation
+        if not request.session.get('profile_creation_started', False):
+            messages.info(
+                request,
+                f'Welcome {request.user.username}! 👋 Let\'s set up your profile to get started with your wellness journey.'
+            )
+            request.session['profile_creation_started'] = True
     
     return render(request, 'users/create_profile.html', {'form': form})
 
