@@ -104,6 +104,7 @@ def create_profile(request):
             profile.user = request.user
             # DOB is saved from the form, age is calculated in form.clean()
             profile.date_of_birth = form.cleaned_data.get('date_of_birth')
+            profile.age = form.cleaned_data.get('age', 0)  # Save the calculated age
             profile.save()
             messages.success(
                 request, 
