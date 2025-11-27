@@ -273,10 +273,18 @@
             </div>
             
             <div class="stat-card">
+                <div class="stat-title">Current BMI</div>
+                <div class="stat-value">{% if current_bmi %}{{ current_bmi|floatformat:1 }}{% else %}--{% endif %}</div>
+                <div class="stat-label">Body Mass Index</div>
+            </div>
+            
+            {% if goal_weight %}
+            <div class="stat-card">
                 <div class="stat-title">Goal Weight</div>
-                <div class="stat-value">{% if profile.goal %}{{ profile.goal }}{% else %}Not Set{% endif %}</div>
+                <div class="stat-value">{{ goal_weight }}</div>
                 <div class="stat-label">Target</div>
             </div>
+            {% endif %}
             
             <div class="stat-card">
                 <div class="stat-title">Weight Lost</div>

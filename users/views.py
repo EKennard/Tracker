@@ -68,9 +68,34 @@ def dashboard(request):
             if total_to_lose > 0:
                 weight_progress_percent = (weight_lost / total_to_lose) * 100
     
+    # Calculate BMI if we have current weight and height
+    current_bmi = None
+    if current_weight and profile.height:
+        # Convert height to meters for BMI calculation
+        if profile.height_unit == 'cm':
+            height_m = profile.height / 100
+        else:  # inches
+            height_m = profile.height * 0.0254
+        
+        # Convert weight to kg for BMI calculation
+        if profile.weight_unit == 'lb':
+            weight_kg = current_weight * 0.453592
+        else:  # kg or st (stones converted to lb in form, stored as lb)
+            weight_kg = current_weight
+        
+        current_bmi = weight_kg / (height_m ** 2)
+    
     # Get weight data for chart (last 30 entries or all if less)
     weight_data = list(all_metrics.values('date', 'weight').order_by('-date')[:30])
     weight_data.reverse()  # Oldest to newest for chart
+    
+    # Add starting weight as first data point if not already in metrics
+    if weight_data and profile.starting_weight:
+        # Check if we need to add starting weight
+        if not all_metrics.filter(weight=profile.starting_weight).exists():
+            # Get profile creation date or use first metric date
+            start_date = profile.user.date_joined.strftime('%Y-%m-%d')
+            weight_data.insert(0, {'date': start_date, 'weight': float(profile.starting_weight)})
     
     # Unified activity stream - combine all activities
     from itertools import chain
@@ -123,6 +148,7 @@ def dashboard(request):
     return render(request, 'users/dashboard.html', {
         'profile': profile,
         'current_weight': current_weight,
+        'current_bmi': current_bmi,
         'weight_lost': weight_lost,
         'weight_progress_percent': weight_progress_percent,
         'weight_data': weight_data,
@@ -132,6 +158,7 @@ def dashboard(request):
         'total_habit_logs': total_habit_logs,
         'weight_unit': profile.weight_unit,
         'height_unit': profile.height_unit,
+        'goal_weight': getattr(profile, 'goal', None),
     })
 
 
