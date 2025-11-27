@@ -3,56 +3,72 @@
 {% block content %}
 <h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">Metrics Summary</h1>
 <div class="card" style="margin-bottom:1.5rem;">
-  <form method="post" class="space-y-4">
+  <form method="post">
     {% csrf_token %}
-    <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:0.5rem;">📊 Add Health Metrics</h2>
-    <p style="color:#666;font-size:0.9rem;margin-bottom:1rem;">💡 Tip: Change the date to add historic data - perfect for tracking your progress over time!</p>
-    {{ metrics_form.non_field_errors }}
-    <div class="grid grid-cols-2 gap-4">
+    <div class="form-section">
+      <h2>📊 Add Health Metrics</h2>
+      <p style="color:#666;font-size:0.9rem;margin-bottom:1rem;">💡 Tip: Change the date to add historic data - perfect for tracking your progress over time!</p>
+      {{ metrics_form.non_field_errors }}
+    </div>
+    <div class="form-grid">
       <div>
-        <label style="font-weight:600;color:#333;">Date</label><br>
+        <label>Date</label>
         {{ metrics_form.date }}
       </div>
       <div>
-        <label style="font-weight:600;color:#333;">Weight ({{ weight_unit }}) *</label><br>
+        <label>Weight ({{ weight_unit }}) *</label>
         {{ metrics_form.weight }}
       </div>
       <div>
-        <label style="font-weight:600;color:#333;">Height ({{ height_unit }})</label><br>
+        <label>Height ({{ height_unit }})</label>
         {{ metrics_form.height }}
       </div>
       <div>
-        <label style="font-weight:600;color:#333;">Body Fat %</label><br>
+        <label>Body Fat %</label>
         {{ metrics_form.body_fat_percentage }}
       </div>
       <div>
-        <label style="font-weight:600;color:#333;">Basal Metabolic Rate</label><br>
+        <label>Basal Metabolic Rate</label>
         {{ metrics_form.basal_metabolic_rate }}
       </div>
       <div>
-        <label style="font-weight:600;color:#333;">Daily Caloric Needs</label><br>
+        <label>Daily Caloric Needs</label>
         {{ metrics_form.daily_caloric_needs }}
       </div>
     </div>
-    <button type="submit" name="metrics_submit" class="button" style="margin-top:1rem;">💾 Save Metrics</button>
+    <button type="submit" name="metrics_submit" class="button" style="margin-top:1.5rem;">💾 Save Metrics</button>
   </form>
 </div>
-<div class="mb-6 bg-white p-4 rounded shadow">
-  <form method="post" class="space-y-4">
+<div class="card" style="margin-bottom:1.5rem;">
+  <form method="post">
     {% csrf_token %}
-    <h2 class="text-lg font-semibold mb-2">Add Measurement</h2>
-    {{ measurement_form.non_field_errors }}
-    <div class="grid grid-cols-2 gap-4">
-      <div>{{ measurement_form.date.label_tag }}<br>{{ measurement_form.date }}</div>
-      <div>{{ measurement_form.body_part.label_tag }}<br>{{ measurement_form.body_part }}</div>
-      <div>{{ measurement_form.value.label_tag }}<br>{{ measurement_form.value }}</div>
-      <div>{{ measurement_form.unit.label_tag }}<br>{{ measurement_form.unit }}</div>
+    <div class="form-section">
+      <h2>📏 Add Measurement</h2>
+      {{ measurement_form.non_field_errors }}
     </div>
-    <button type="submit" name="measurement_submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Measurement</button>
+    <div class="form-grid">
+      <div>
+        <label>{{ measurement_form.date.label }}</label>
+        {{ measurement_form.date }}
+      </div>
+      <div>
+        <label>{{ measurement_form.body_part.label }}</label>
+        {{ measurement_form.body_part }}
+      </div>
+      <div>
+        <label>{{ measurement_form.value.label }}</label>
+        {{ measurement_form.value }}
+      </div>
+      <div>
+        <label>{{ measurement_form.unit.label }}</label>
+        {{ measurement_form.unit }}
+      </div>
+    </div>
+    <button type="submit" name="measurement_submit" class="button" style="margin-top:1.5rem;">💾 Add Measurement</button>
   </form>
 </div>
-<div class="bg-white p-4 rounded shadow mb-6">
-  <h2 class="text-xl font-semibold mb-2">Your Health Metrics</h2>
+<div class="card" style="margin-bottom:1.5rem;">
+  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">📊 Your Health Metrics</h2>
   <table class="min-w-full table-auto">
     <thead>
       <tr class="bg-gray-200">
@@ -80,8 +96,8 @@
     </tbody>
   </table>
 </div>
-<div class="bg-white p-4 rounded shadow">
-  <h2 class="text-xl font-semibold mb-2">Your Measurements</h2>
+<div class="card">
+  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">📏 Your Measurements</h2>
   <table class="min-w-full table-auto">
     <thead>
       <tr class="bg-gray-200">

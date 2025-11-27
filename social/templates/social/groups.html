@@ -3,19 +3,27 @@
 {% block content %}
 <h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">Groups</h1>
 <div class="card" style="margin-bottom:1.5rem;">
-  <form method="post" class="space-y-4">
+  <form method="post">
     {% csrf_token %}
-    <h2 class="text-lg font-semibold mb-2">Create Group</h2>
-    {{ form.non_field_errors }}
-    <div class="grid grid-cols-2 gap-4">
-      <div>{{ form.name.label_tag }}<br>{{ form.name }}</div>
-      <div class="col-span-2">{{ form.description.label_tag }}<br>{{ form.description }}</div>
+    <div class="form-section">
+      <h2>👥 Create Group</h2>
+      {{ form.non_field_errors }}
     </div>
-  <button type="submit" class="button">Create Group</button>
+    <div class="form-grid">
+      <div>
+        <label>{{ form.name.label }}</label>
+        {{ form.name }}
+      </div>
+      <div class="form-grid-full">
+        <label>{{ form.description.label }}</label>
+        {{ form.description }}
+      </div>
+    </div>
+    <button type="submit" class="button" style="margin-top:1.5rem;">💾 Create Group</button>
   </form>
 </div>
 <div class="card">
-  <h2 class="text-xl font-semibold mb-2">Your Groups</h2>
+  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">👥 Your Groups</h2>
   <table class="min-w-full table-auto">
     <thead>
       <tr class="bg-gray-200">

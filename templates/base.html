@@ -356,6 +356,76 @@
                 transform: translateY(0);
             }
         }
+        
+        /* Universal form input styling to match create profile */
+        .form-input,
+        input[type="date"],
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid #4FC3F7;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            box-sizing: border-box;
+            font-family: 'Comic Neue', 'Quicksand', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-input:focus,
+        input[type="date"]:focus,
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #BA68C8;
+            box-shadow: 0 0 0 3px rgba(186,104,200,0.1);
+        }
+        
+        /* Form labels */
+        label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+            color: #4FC3F7;
+            font-size: 0.95rem;
+        }
+        
+        /* Form sections */
+        .form-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-section h2 {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #4FC3F7;
+            margin-bottom: 1rem;
+        }
+        
+        /* Grid layout for forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .form-grid-full {
+                grid-column: 1 / -1;
+            }
+        }
     </style>
     {% block extra_head %}{% endblock %}
 </head>

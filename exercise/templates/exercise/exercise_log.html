@@ -3,27 +3,56 @@
 {% block content %}
 <h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">Exercise Log</h1>
 <div class="card" style="margin-bottom:1.5rem;">
-  <form method="post" class="space-y-4">
+  <form method="post">
     {% csrf_token %}
-    <h2 class="text-lg font-semibold mb-2">Add Exercise Log</h2>
-    {{ form.non_field_errors }}
-    <div class="grid grid-cols-2 gap-4">
-      <div>{{ form.date.label_tag }}<br>{{ form.date }}</div>
-      <div>{{ form.exercise_type.label_tag }}<br>{{ form.exercise_type }}</div>
-      <div>{{ form.duration_minutes.label_tag }}<br>{{ form.duration_minutes }}</div>
-      <div><label>Distance ({{ distance_unit }})</label><br>{{ form.distance_logged }}</div>
-      <div style="display:none;">{{ form.distance_unit }}</div>
-      <div>{{ form.rating.label_tag }}<br>{{ form.rating }}</div>
-      <div>{{ form.intensity.label_tag }}<br>{{ form.intensity }}</div>
-      <div>{{ form.emoji.label_tag }}<br>{{ form.emoji }}</div>
-      <div>{{ form.calories_burned.label_tag }}<br>{{ form.calories_burned }}</div>
-      <div class="col-span-2">{{ form.notes.label_tag }}<br>{{ form.notes }}</div>
+    <div class="form-section">
+      <h2>💪 Add Exercise Log</h2>
+      {{ form.non_field_errors }}
     </div>
-  <button type="submit" class="button">Add Exercise Log</button>
+    <div class="form-grid">
+      <div>
+        <label>{{ form.date.label }}</label>
+        {{ form.date }}
+      </div>
+      <div>
+        <label>{{ form.exercise_type.label }}</label>
+        {{ form.exercise_type }}
+      </div>
+      <div>
+        <label>{{ form.duration_minutes.label }}</label>
+        {{ form.duration_minutes }}
+      </div>
+      <div>
+        <label>Distance ({{ distance_unit }})</label>
+        {{ form.distance_logged }}
+        <div style="display:none;">{{ form.distance_unit }}</div>
+      </div>
+      <div>
+        <label>{{ form.rating.label }}</label>
+        {{ form.rating }}
+      </div>
+      <div>
+        <label>{{ form.intensity.label }}</label>
+        {{ form.intensity }}
+      </div>
+      <div>
+        <label>{{ form.emoji.label }}</label>
+        {{ form.emoji }}
+      </div>
+      <div>
+        <label>{{ form.calories_burned.label }}</label>
+        {{ form.calories_burned }}
+      </div>
+      <div class="form-grid-full">
+        <label>{{ form.notes.label }}</label>
+        {{ form.notes }}
+      </div>
+    </div>
+    <button type="submit" class="button" style="margin-top:1.5rem;">💾 Add Exercise Log</button>
   </form>
 </div>
 <div class="card">
-  <h2 class="text-xl font-semibold mb-2">Your Exercise Logs</h2>
+  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">🏋️ Your Exercise Logs</h2>
   <table class="min-w-full table-auto">
     <thead>
       <tr class="bg-gray-200">

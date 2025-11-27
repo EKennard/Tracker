@@ -3,21 +3,35 @@
 {% block content %}
 <h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">Habits Log</h1>
 <div class="card" style="margin-bottom:1.5rem;">
-  <form method="post" class="space-y-4">
+  <form method="post">
     {% csrf_token %}
-    <h2 class="text-lg font-semibold mb-2">Add Habit Log</h2>
-    {{ form.non_field_errors }}
-    <div class="grid grid-cols-2 gap-4">
-      <div>{{ form.habit_name.label_tag }}<br>{{ form.habit_name }}</div>
-      <div>{{ form.date.label_tag }}<br>{{ form.date }}</div>
-      <div>{{ form.value.label_tag }}<br>{{ form.value }}</div>
-      <div>{{ form.unit.label_tag }}<br>{{ form.unit }}</div>
+    <div class="form-section">
+      <h2>✅ Add Habit Log</h2>
+      {{ form.non_field_errors }}
     </div>
-  <button type="submit" class="button">Add Habit Log</button>
+    <div class="form-grid">
+      <div>
+        <label>{{ form.habit_name.label }}</label>
+        {{ form.habit_name }}
+      </div>
+      <div>
+        <label>{{ form.date.label }}</label>
+        {{ form.date }}
+      </div>
+      <div>
+        <label>{{ form.value.label }}</label>
+        {{ form.value }}
+      </div>
+      <div>
+        <label>{{ form.unit.label }}</label>
+        {{ form.unit }}
+      </div>
+    </div>
+    <button type="submit" class="button" style="margin-top:1.5rem;">💾 Add Habit Log</button>
   </form>
 </div>
 <div class="card">
-  <h2 class="text-xl font-semibold mb-2">Your Habit Logs</h2>
+  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">📋 Your Habit Logs</h2>
   <table class="min-w-full table-auto">
     <thead>
       <tr class="bg-gray-200">

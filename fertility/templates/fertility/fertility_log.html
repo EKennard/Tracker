@@ -3,22 +3,39 @@
 {% block content %}
 <h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">Fertility Log</h1>
 <div class="card" style="margin-bottom:1.5rem;">
-  <form method="post" class="space-y-4">
+  <form method="post">
     {% csrf_token %}
-    <h2 class="text-lg font-semibold mb-2">Add Fertility Log</h2>
-    {{ form.non_field_errors }}
-    <div class="grid grid-cols-2 gap-4">
-      <div>{{ form.date.label_tag }}<br>{{ form.date }}</div>
-      <div>{{ form.cycle_day.label_tag }}<br>{{ form.cycle_day }}</div>
-      <div>{{ form.temperature.label_tag }}<br>{{ form.temperature }}</div>
-      <div class="col-span-2">{{ form.symptoms.label_tag }}<br>{{ form.symptoms }}</div>
-      <div class="col-span-2">{{ form.notes.label_tag }}<br>{{ form.notes }}</div>
+    <div class="form-section">
+      <h2>🌸 Add Fertility Log</h2>
+      {{ form.non_field_errors }}
     </div>
-  <button type="submit" class="button">Add Fertility Log</button>
+    <div class="form-grid">
+      <div>
+        <label>{{ form.date.label }}</label>
+        {{ form.date }}
+      </div>
+      <div>
+        <label>{{ form.cycle_day.label }}</label>
+        {{ form.cycle_day }}
+      </div>
+      <div>
+        <label>{{ form.temperature.label }}</label>
+        {{ form.temperature }}
+      </div>
+      <div class="form-grid-full">
+        <label>{{ form.symptoms.label }}</label>
+        {{ form.symptoms }}
+      </div>
+      <div class="form-grid-full">
+        <label>{{ form.notes.label }}</label>
+        {{ form.notes }}
+      </div>
+    </div>
+    <button type="submit" class="button" style="margin-top:1.5rem;">💾 Add Fertility Log</button>
   </form>
 </div>
 <div class="card">
-  <h2 class="text-xl font-semibold mb-2">Your Fertility Logs</h2>
+  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">📅 Your Fertility Logs</h2>
   <table class="min-w-full table-auto">
     <thead>
       <tr class="bg-gray-200">
