@@ -63,19 +63,22 @@ def dashboard(request):
     # Calculate weight progress
     current_weight = None
     current_weight_display = None
+    starting_weight_display = convert_weight_for_display(profile.starting_weight)
     weight_lost = 0
     weight_progress_percent = 0
+    
     if all_metrics.exists():
         latest_metric = all_metrics.last()
         current_weight = latest_metric.weight  # stored in lb
         current_weight_display = convert_weight_for_display(current_weight)
-        weight_lost = convert_weight_for_display(profile.starting_weight - current_weight)
+        weight_lost_lb = profile.starting_weight - current_weight
+        weight_lost = convert_weight_for_display(weight_lost_lb)
         
         # Calculate progress percentage if goal weight exists
         if hasattr(profile, 'goal_weight') and profile.goal_weight:
             total_to_lose = profile.starting_weight - profile.goal_weight
             if total_to_lose > 0:
-                weight_progress_percent = (weight_lost / total_to_lose) * 100
+                weight_progress_percent = (float(weight_lost_lb) / float(total_to_lose)) * 100
     
     # Calculate BMI if we have current weight and height
     current_bmi = None
@@ -94,33 +97,17 @@ def dashboard(request):
         if weight_kg > 0 and height_m > 0:
             current_bmi = weight_kg / (height_m ** 2)
     
-    # Get weight data for chart (last 30 entries or all if less)
-    weight_data = list(all_metrics.values('date', 'weight').order_by('-date')[:30])
-    weight_data.reverse()  # Oldest to newest for chart
+    # Get weight data for chart - use ALL HealthMetrics entries ordered by date
+    weight_data = list(all_metrics.values('date', 'weight').order_by('date'))
     
     # Convert all weights for display based on user preference
     for entry in weight_data:
         entry['weight'] = convert_weight_for_display(entry['weight'])
     
-    # Add starting weight as first data point
-    if profile.starting_weight:
-        # Get profile creation date
+    # If no weight data exists, show starting weight as a placeholder
+    if not weight_data and profile.starting_weight:
         start_date = profile.user.date_joined.strftime('%Y-%m-%d')
-        starting_weight_display = convert_weight_for_display(profile.starting_weight)
-        
-        # Only add if no metrics exist OR starting weight isn't in the data
-        if not weight_data:
-            # No metrics yet, just add starting weight
-            weight_data = [{'date': start_date, 'weight': starting_weight_display}]
-        else:
-            # Check if starting weight already exists in metrics
-            first_weight = weight_data[0]['weight']
-            if abs(float(first_weight) - float(starting_weight_display)) > 0.1:
-                # Starting weight is different, add it as first point
-                weight_data.insert(0, {'date': start_date, 'weight': starting_weight_display})
-    
-    # Convert starting weight for display
-    starting_weight_display = convert_weight_for_display(profile.starting_weight)
+        weight_data = [{'date': start_date, 'weight': starting_weight_display}]
     
     # Get proper display unit label
     display_unit = 'st' if profile.weight_unit == 'st' else profile.weight_unit
@@ -228,6 +215,18 @@ def create_profile(request):
             profile.date_of_birth = form.cleaned_data.get('date_of_birth')
             profile.age = form.cleaned_data.get('age', 0)  # Save the calculated age
             profile.save()
+            
+            # Create initial HealthMetrics entry with starting weight
+            from metrics.models import HealthMetrics
+            from datetime import date
+            
+            HealthMetrics.objects.create(
+                user_profile=profile,
+                date=date.today(),
+                weight=profile.starting_weight,
+                height=profile.height
+            )
+            
             messages.success(
                 request, 
                 f'Profile created successfully! Welcome to GetLizzyFit, {request.user.username}! 🎉'
