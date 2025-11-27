@@ -31,6 +31,81 @@
         margin-bottom: 1.5rem;
     }
     
+    .dashboard-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    @media (min-width: 1024px) {
+        .dashboard-layout {
+            grid-template-columns: 2fr 1fr;
+        }
+    }
+    
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .activity-stream-sidebar {
+        background: white;
+        border: 2px solid #4FC3F7;
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        max-height: 600px;
+        overflow-y: auto;
+        position: sticky;
+        top: 1rem;
+    }
+    
+    .activity-stream-sidebar h2 {
+        color: #4FC3F7;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .activity-stream-item {
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid #E1F5FE;
+        transition: background 0.2s;
+    }
+    
+    .activity-stream-item:hover {
+        background: #E1F5FE;
+        border-radius: 0.5rem;
+    }
+    
+    .activity-stream-item:last-child {
+        border-bottom: none;
+    }
+    
+    .activity-date {
+        font-size: 0.8rem;
+        color: #999;
+        margin-bottom: 0.25rem;
+    }
+    
+    .activity-content {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #666;
+        font-size: 0.95rem;
+    }
+    
+    .activity-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+    
     .stat-card {
         background: white;
         border: 2px solid #4FC3F7;
@@ -227,89 +302,52 @@
         <canvas id="weightChart" style="max-height: 300px;"></canvas>
     </div>
     
-    <!-- Activity Summary Cards -->
-    <div class="dashboard-grid">
-        <div class="stat-card">
-            <div class="stat-title">🍽️ Total Meals Logged</div>
-            <div class="stat-value">{{ total_meals }}</div>
-            <div class="stat-label">All time</div>
+    <!-- Dashboard Layout: Main Content + Activity Stream Sidebar -->
+    <div class="dashboard-layout">
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Activity Summary Cards -->
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-title">🍽️ Total Meals Logged</div>
+                    <div class="stat-value">{{ total_meals }}</div>
+                    <div class="stat-label">All time</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-title">💪 Total Workouts</div>
+                    <div class="stat-value">{{ total_workouts }}</div>
+                    <div class="stat-label">All time</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-title">✅ Habit Logs</div>
+                    <div class="stat-value">{{ total_habit_logs }}</div>
+                    <div class="stat-label">All time</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-title">📏 Total Activities</div>
+                    <div class="stat-value">{{ activity_stream|length }}</div>
+                    <div class="stat-label">Recent entries</div>
+                </div>
+            </div>
         </div>
         
-        <div class="stat-card">
-            <div class="stat-title">💪 Total Workouts</div>
-            <div class="stat-value">{{ total_workouts }}</div>
-            <div class="stat-label">All time</div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-title">✅ Habit Logs</div>
-            <div class="stat-value">{{ total_habit_logs }}</div>
-            <div class="stat-label">All time</div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-title">📏 Metrics Tracked</div>
-            <div class="stat-value">{{ recent_metrics|length }}</div>
-            <div class="stat-label">Recent entries</div>
-        </div>
-    </div>
-    
-    <!-- Recent Activity -->
-    <div class="dashboard-grid">
-        <div class="activity-card">
-            <h2>🍽️ Recent Meals</h2>
-            <ul class="activity-list">
-                {% for meal in recent_meals %}
-                <li class="activity-item">
-                    <strong>{{ meal.date }}</strong>: {{ meal.get_meal_type_display }} 
-                    ({{ meal.calories }} kcal)
-                </li>
-                {% empty %}
-                <li class="empty-state">No meals logged yet</li>
-                {% endfor %}
-            </ul>
-        </div>
-        
-        <div class="activity-card">
-            <h2>💪 Recent Exercise</h2>
-            <ul class="activity-list">
-                {% for ex in recent_exercise %}
-                <li class="activity-item">
-                    <strong>{{ ex.date }}</strong>: {{ ex.get_exercise_type_display }} 
-                    ({{ ex.duration_minutes }} min)
-                </li>
-                {% empty %}
-                <li class="empty-state">No exercise logged yet</li>
-                {% endfor %}
-            </ul>
-        </div>
-        
-        <div class="activity-card">
-            <h2>✅ Recent Habits</h2>
-            <ul class="activity-list">
-                {% for h in recent_habits %}
-                <li class="activity-item">
-                    <strong>{{ h.date }}</strong>: {{ h.habit_name }}
-                    {% if h.value %}- {{ h.value }} {{ h.unit }}{% endif %}
-                </li>
-                {% empty %}
-                <li class="empty-state">No habit logs yet</li>
-                {% endfor %}
-            </ul>
-        </div>
-        
-        <div class="activity-card">
-            <h2>📏 Recent Measurements</h2>
-            <ul class="activity-list">
-                {% for meas in recent_measurements %}
-                <li class="activity-item">
-                    <strong>{{ meas.date }}</strong>: {{ meas.body_part }} 
-                    - {{ meas.value }} {{ meas.unit }}
-                </li>
-                {% empty %}
-                <li class="empty-state">No measurements yet</li>
-                {% endfor %}
-            </ul>
+        <!-- Activity Stream Sidebar -->
+        <div class="activity-stream-sidebar">
+            <h2>📊 Activity Stream</h2>
+            {% for activity in activity_stream %}
+                <div class="activity-stream-item">
+                    <div class="activity-date">{{ activity.date|date:"M d, Y" }}</div>
+                    <div class="activity-content">
+                        <span class="activity-icon">{{ activity.activity_icon }}</span>
+                        <span>{{ activity.activity_text }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="empty-state">No activities logged yet. Start tracking your wellness journey!</div>
+            {% endfor %}
         </div>
     </div>
 </div>

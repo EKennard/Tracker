@@ -72,12 +72,48 @@ def dashboard(request):
     weight_data = list(all_metrics.values('date', 'weight').order_by('-date')[:30])
     weight_data.reverse()  # Oldest to newest for chart
     
-    # Recent activity
-    recent_meals = NutritionLog.objects.filter(profile=profile).order_by('-date')[:5]
-    recent_metrics = all_metrics.order_by('-date')[:5]
-    recent_measurements = Measurement.objects.filter(profile=profile).order_by('-date')[:5]
-    recent_habits = HabitLog.objects.filter(profile=profile).order_by('-date')[:5]
-    recent_exercise = ExerciseLog.objects.filter(profile=profile).order_by('-date')[:5]
+    # Unified activity stream - combine all activities
+    from itertools import chain
+    from operator import attrgetter
+    
+    recent_meals = NutritionLog.objects.filter(profile=profile).order_by('-date')[:10]
+    recent_metrics = all_metrics.order_by('-date')[:10]
+    recent_measurements = Measurement.objects.filter(profile=profile).order_by('-date')[:10]
+    recent_habits = HabitLog.objects.filter(profile=profile).order_by('-date')[:10]
+    recent_exercise = ExerciseLog.objects.filter(profile=profile).order_by('-date')[:10]
+    
+    # Add activity_type to each object for display
+    for meal in recent_meals:
+        meal.activity_type = 'meal'
+        meal.activity_icon = '🍽️'
+        meal.activity_text = f"{meal.get_meal_type_display()} ({meal.calories} kcal)"
+    
+    for metric in recent_metrics:
+        metric.activity_type = 'metric'
+        metric.activity_icon = '⚖️'
+        metric.activity_text = f"Weight: {metric.weight} {profile.weight_unit}"
+    
+    for measurement in recent_measurements:
+        measurement.activity_type = 'measurement'
+        measurement.activity_icon = '📏'
+        measurement.activity_text = f"{measurement.body_part}: {measurement.value} {measurement.unit}"
+    
+    for habit in recent_habits:
+        habit.activity_type = 'habit'
+        habit.activity_icon = '✅'
+        habit.activity_text = f"{habit.habit_name}" + (f" - {habit.value} {habit.unit}" if habit.value else "")
+    
+    for exercise in recent_exercise:
+        exercise.activity_type = 'exercise'
+        exercise.activity_icon = '💪'
+        exercise.activity_text = f"{exercise.get_exercise_type_display()} ({exercise.duration_minutes} min)"
+    
+    # Combine and sort all activities by date
+    activity_stream = sorted(
+        chain(recent_meals, recent_metrics, recent_measurements, recent_habits, recent_exercise),
+        key=attrgetter('date'),
+        reverse=True
+    )[:15]  # Show last 15 activities
     
     # Activity counts
     total_meals = NutritionLog.objects.filter(profile=profile).count()
@@ -90,11 +126,7 @@ def dashboard(request):
         'weight_lost': weight_lost,
         'weight_progress_percent': weight_progress_percent,
         'weight_data': weight_data,
-        'recent_meals': recent_meals,
-        'recent_metrics': recent_metrics,
-        'recent_measurements': recent_measurements,
-        'recent_habits': recent_habits,
-        'recent_exercise': recent_exercise,
+        'activity_stream': activity_stream,
         'total_meals': total_meals,
         'total_workouts': total_workouts,
         'total_habit_logs': total_habit_logs,

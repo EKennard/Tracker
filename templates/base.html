@@ -270,6 +270,60 @@
                 padding: 0.4rem 1rem !important;
             }
         }
+        
+        /* Messages container and toast styles */
+        #messages-container {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            max-width: 600px;
+            width: 90%;
+        }
+        
+        .toast-message {
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 1.1rem;
+            color: #333;
+            animation: slideDown 0.3s ease-out;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .toast-message.message-success {
+            background: #C8E6C9;
+            border: 2px solid #81C784;
+        }
+        
+        .toast-message.message-error {
+            background: #FFCDD2;
+            border: 2px solid #E57373;
+        }
+        
+        .toast-message.message-warning {
+            background: #FFF9C4;
+            border: 2px solid #FFD54F;
+        }
+        
+        .toast-message.message-info {
+            background: #BBDEFB;
+            border: 2px solid #64B5F6;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
     {% block extra_head %}{% endblock %}
 </head>
@@ -357,36 +411,13 @@
     
     <!-- Django Messages - Fixed position overlay -->
     {% if messages %}
-        <div id="messages-container" style="position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 9999; max-width: 600px; width: 90%;">
+        <div id="messages-container">
             {% for message in messages %}
-                <div class="toast-message {% if message.tags %}message-{{ message.tags }}{% endif %}" 
-                     style="background: {% if message.level_tag == 'success' %}#C8E6C9{% elif message.level_tag == 'error' %}#FFCDD2{% elif message.level_tag == 'warning' %}#FFF9C4{% else %}#BBDEFB{% endif %}; 
-                            border: 2px solid {% if message.level_tag == 'success' %}#81C784{% elif message.level_tag == 'error' %}#E57373{% elif message.level_tag == 'warning' %}#FFD54F{% else %}#64B5F6{% endif %}; 
-                            border-radius: 1rem; 
-                            padding: 1rem 1.5rem; 
-                            margin-bottom: 1rem; 
-                            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-                            font-size: 1.1rem;
-                            color: #333;
-                            animation: slideDown 0.3s ease-out;
-                            opacity: 1;
-                            transition: opacity 0.5s ease-out;">
+                <div class="toast-message message-{{ message.level_tag }}">
                     {{ message }}
                 </div>
             {% endfor %}
         </div>
-        <style>
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        </style>
         <script>
             // Auto-fade messages after 3 seconds
             setTimeout(function() {
