@@ -53,14 +53,23 @@ def dashboard(request):
     # Get all metrics for progress tracking
     all_metrics = HealthMetrics.objects.filter(user_profile=profile).order_by('date')
     
+    # Helper function to convert weight for display based on user preference
+    def convert_weight_for_display(weight_in_lb):
+        if profile.weight_unit == 'st':
+            # Convert pounds to stones (1 stone = 14 pounds)
+            return float(weight_in_lb) / 14.0
+        return float(weight_in_lb)
+    
     # Calculate weight progress
     current_weight = None
+    current_weight_display = None
     weight_lost = 0
     weight_progress_percent = 0
     if all_metrics.exists():
         latest_metric = all_metrics.last()
-        current_weight = latest_metric.weight
-        weight_lost = profile.starting_weight - current_weight
+        current_weight = latest_metric.weight  # stored in lb
+        current_weight_display = convert_weight_for_display(current_weight)
+        weight_lost = convert_weight_for_display(profile.starting_weight - current_weight)
         
         # Calculate progress percentage if goal weight exists
         if hasattr(profile, 'goal_weight') and profile.goal_weight:
@@ -79,8 +88,7 @@ def dashboard(request):
         else:  # inches
             height_m = float(profile.height) * 0.0254
         
-        # Convert weight to kg for BMI calculation
-        # Note: weight_unit is stored as 'lb' even for stones (converted in form)
+        # Convert weight to kg for BMI calculation (weight is stored in lb)
         weight_kg = float(weight_for_bmi) * 0.453592  # Convert lb to kg
         
         if weight_kg > 0 and height_m > 0:
@@ -90,21 +98,32 @@ def dashboard(request):
     weight_data = list(all_metrics.values('date', 'weight').order_by('-date')[:30])
     weight_data.reverse()  # Oldest to newest for chart
     
+    # Convert all weights for display based on user preference
+    for entry in weight_data:
+        entry['weight'] = convert_weight_for_display(entry['weight'])
+    
     # Add starting weight as first data point
     if profile.starting_weight:
         # Get profile creation date
         start_date = profile.user.date_joined.strftime('%Y-%m-%d')
+        starting_weight_display = convert_weight_for_display(profile.starting_weight)
         
         # Only add if no metrics exist OR starting weight isn't in the data
         if not weight_data:
             # No metrics yet, just add starting weight
-            weight_data = [{'date': start_date, 'weight': float(profile.starting_weight)}]
+            weight_data = [{'date': start_date, 'weight': starting_weight_display}]
         else:
             # Check if starting weight already exists in metrics
             first_weight = weight_data[0]['weight']
-            if abs(float(first_weight) - float(profile.starting_weight)) > 0.1:
+            if abs(float(first_weight) - float(starting_weight_display)) > 0.1:
                 # Starting weight is different, add it as first point
-                weight_data.insert(0, {'date': start_date, 'weight': float(profile.starting_weight)})
+                weight_data.insert(0, {'date': start_date, 'weight': starting_weight_display})
+    
+    # Convert starting weight for display
+    starting_weight_display = convert_weight_for_display(profile.starting_weight)
+    
+    # Get proper display unit label
+    display_unit = 'st' if profile.weight_unit == 'st' else profile.weight_unit
     
     # Unified activity stream - combine all activities
     from itertools import chain
@@ -125,7 +144,8 @@ def dashboard(request):
     for metric in recent_metrics:
         metric.activity_type = 'metric'
         metric.activity_icon = '⚖️'
-        metric.activity_text = f"Weight: {metric.weight} {profile.weight_unit}"
+        weight_display = convert_weight_for_display(metric.weight)
+        metric.activity_text = f"Weight: {weight_display:.1f} {display_unit}"
     
     for measurement in recent_measurements:
         measurement.activity_type = 'measurement'
@@ -156,7 +176,8 @@ def dashboard(request):
     
     return render(request, 'users/dashboard.html', {
         'profile': profile,
-        'current_weight': current_weight,
+        'starting_weight_display': starting_weight_display,
+        'current_weight': current_weight_display,
         'current_bmi': current_bmi,
         'weight_lost': weight_lost,
         'weight_progress_percent': weight_progress_percent,
@@ -165,7 +186,7 @@ def dashboard(request):
         'total_meals': total_meals,
         'total_workouts': total_workouts,
         'total_habit_logs': total_habit_logs,
-        'weight_unit': profile.weight_unit,
+        'weight_unit': display_unit,
         'height_unit': profile.height_unit,
         'goal_weight': getattr(profile, 'goal', None),
     })
