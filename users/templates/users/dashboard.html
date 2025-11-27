@@ -2,6 +2,21 @@
 {% block title %}Dashboard{% endblock %}
 {% block content %}
 <style>
+    /* Override base.html main-section constraint for dashboard */
+    .main-section {
+        max-width: 100% !important;
+        width: 95% !important;
+        margin: 1rem auto !important;
+        padding: 1.5rem !important;
+    }
+    
+    @media (min-width: 768px) {
+        .main-section {
+            width: 98% !important;
+            padding: 2rem !important;
+        }
+    }
+    
     .dashboard-container {
         padding: 0;
         margin: 0;
