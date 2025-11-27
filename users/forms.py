@@ -87,6 +87,8 @@ class UserProfileForm(forms.ModelForm):
             # Convert to total pounds, then store
             total_pounds = (stones * 14) + (pounds or 0)
             cleaned_data['starting_weight'] = total_pounds
+            # Update weight_unit to 'lb' since we're storing in pounds
+            cleaned_data['weight_unit'] = 'lb'
         else:
             # Using kg or lb - require starting_weight field
             if not cleaned_data.get('starting_weight'):
@@ -94,14 +96,16 @@ class UserProfileForm(forms.ModelForm):
         
         # Handle height based on unit
         if height_unit == 'in':
-            # Using feet/inches - convert to inches for storage
+            # Check if user provided feet/inches (which means they want feet/inches display)
             feet = cleaned_data.get('height_feet')
             inches = cleaned_data.get('height_inches', 0)
-            if feet is None or feet == '':
+            if feet is not None and feet != '':
+                # Using feet/inches - convert to total inches for storage
+                total_inches = (feet * 12) + (inches or 0)
+                cleaned_data['height'] = total_inches
+                # Keep height_unit as 'in' since we're storing in inches
+            elif not cleaned_data.get('height'):
                 raise forms.ValidationError('Please enter height in feet.')
-            # Convert to total inches
-            total_inches = (feet * 12) + (inches or 0)
-            cleaned_data['height'] = total_inches
         else:
             # Using cm - require height field
             if not cleaned_data.get('height'):
