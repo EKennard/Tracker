@@ -4,7 +4,7 @@ from .models import HealthMetrics, Measurement
 class HealthMetricsForm(forms.ModelForm):
     class Meta:
         model = HealthMetrics
-        fields = ['date', 'weight', 'height', 'body_fat_percentage', 'basal_metabolic_rate', 'daily_caloric_needs']
+        fields = ['date', 'weight', 'body_fat_percentage', 'basal_metabolic_rate', 'daily_caloric_needs']
         widgets = {
             'date': forms.DateInput(attrs={
                 'type': 'date', 
@@ -15,11 +15,6 @@ class HealthMetricsForm(forms.ModelForm):
                 'class': 'border rounded p-2',
                 'step': '0.1',
                 'placeholder': 'Required'
-            }),
-            'height': forms.NumberInput(attrs={
-                'class': 'border rounded p-2',
-                'step': '0.1',
-                'placeholder': 'Optional'
             }),
             'body_fat_percentage': forms.NumberInput(attrs={
                 'class': 'border rounded p-2',
@@ -44,7 +39,6 @@ class HealthMetricsForm(forms.ModelForm):
             self.initial['date'] = date.today()
         
         # Make most fields optional - only weight is required
-        self.fields['height'].required = False
         self.fields['basal_metabolic_rate'].required = False
         self.fields['daily_caloric_needs'].required = False
         self.fields['body_fat_percentage'].required = False

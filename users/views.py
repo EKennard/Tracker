@@ -286,3 +286,82 @@ def user_list(request):
         'sent': sent,
         'received': received,
     })
+
+@login_required
+@profile_required
+def profile_view(request):
+    """View user's complete profile information"""
+    profile = request.user.userprofile
+    
+    # Helper function to convert weight for display
+    def convert_weight_for_display(weight_in_lb):
+        if profile.weight_unit == 'st':
+            return float(weight_in_lb) / 14.0
+        elif profile.weight_unit == 'kg':
+            return float(weight_in_lb) * 0.453592
+        return float(weight_in_lb)
+    
+    # Helper function to convert height for display
+    def convert_height_for_display(height_value):
+        if profile.height_unit == 'in':
+            # Height stored in cm, convert to inches
+            return float(height_value) / 2.54
+        return float(height_value)
+    
+    # Get weight unit display
+    weight_unit = 'st' if profile.weight_unit == 'st' else profile.weight_unit
+    
+    # Convert starting weight for display
+    starting_weight_display = f"{convert_weight_for_display(profile.starting_weight):.1f}"
+    
+    # Convert goal weight if exists
+    goal_weight_display = None
+    if hasattr(profile, 'goal_weight') and profile.goal_weight:
+        goal_weight_display = f"{convert_weight_for_display(profile.goal_weight):.1f}"
+    
+    # Convert height for display
+    height_display = f"{convert_height_for_display(profile.height):.1f}"
+    
+    # Get current weight and BMI from latest metrics
+    all_metrics = HealthMetrics.objects.filter(user_profile=profile).order_by('date')
+    current_weight_display = None
+    current_bmi = None
+    
+    if all_metrics.exists():
+        latest_metric = all_metrics.last()
+        current_weight_display = f"{convert_weight_for_display(latest_metric.weight):.1f}"
+        
+        # Calculate BMI
+        weight_for_bmi = latest_metric.weight
+        if weight_for_bmi and profile.height:
+            if profile.height_unit == 'cm':
+                height_m = float(profile.height) / 100
+            else:  # inches
+                height_m = float(profile.height) * 0.0254
+            
+            weight_kg = float(weight_for_bmi) * 0.453592
+            
+            if weight_kg > 0 and height_m > 0:
+                current_bmi = weight_kg / (height_m ** 2)
+    
+    # Get recent metrics (last 5)
+    recent_metrics = all_metrics.order_by('-date')[:5]
+    for metric in recent_metrics:
+        metric.weight_display = f"{convert_weight_for_display(metric.weight):.1f}"
+    
+    # Get recent measurements (last 5)
+    recent_measurements = Measurement.objects.filter(profile=profile).order_by('-date')[:5]
+    
+    context = {
+        'profile': profile,
+        'weight_unit': weight_unit,
+        'starting_weight_display': starting_weight_display,
+        'goal_weight_display': goal_weight_display,
+        'height_display': height_display,
+        'current_weight_display': current_weight_display,
+        'current_bmi': current_bmi,
+        'recent_metrics': recent_metrics,
+        'recent_measurements': recent_measurements,
+    }
+    
+    return render(request, 'users/profile.html', context)

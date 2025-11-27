@@ -20,22 +20,36 @@
         {{ metrics_form.weight }}
       </div>
       <div>
-        <label>Height ({{ height_unit }})</label>
-        {{ metrics_form.height }}
-      </div>
-      <div>
         <label>Body Fat %</label>
         {{ metrics_form.body_fat_percentage }}
+        {% if calculated_body_fat %}
+        <div style="margin-top:0.25rem;padding:0.5rem;background:#E1F5FE;border-radius:0.5rem;font-size:0.85rem;color:#666;">
+          💡 Estimated: <strong style="color:#4FC3F7;">{{ calculated_body_fat }}%</strong>
+        </div>
+        {% endif %}
       </div>
       <div>
         <label>Basal Metabolic Rate</label>
         {{ metrics_form.basal_metabolic_rate }}
+        {% if calculated_bmr %}
+        <div style="margin-top:0.25rem;padding:0.5rem;background:#E1F5FE;border-radius:0.5rem;font-size:0.85rem;color:#666;">
+          💡 Calculated: <strong style="color:#4FC3F7;">{{ calculated_bmr }} kcal/day</strong>
+        </div>
+        {% endif %}
       </div>
       <div>
         <label>Daily Caloric Needs</label>
         {{ metrics_form.daily_caloric_needs }}
+        {% if calculated_calories %}
+        <div style="margin-top:0.25rem;padding:0.5rem;background:#E1F5FE;border-radius:0.5rem;font-size:0.85rem;color:#666;">
+          💡 Calculated: <strong style="color:#4FC3F7;">{{ calculated_calories }} kcal/day</strong>
+        </div>
+        {% endif %}
       </div>
     </div>
+    <p style="color:#666;font-size:0.85rem;margin-top:0.5rem;font-style:italic;">
+      ℹ️ Leave fields empty to auto-fill with calculated values based on your profile.
+    </p>
     <button type="submit" name="metrics_submit" class="button" style="margin-top:1.5rem;">💾 Save Metrics</button>
   </form>
 </div>
@@ -73,7 +87,6 @@
     <thead>
       <tr class="bg-gray-200">
         <th class="px-2 py-1">Date</th>
-        <th class="px-2 py-1">Height ({{ height_unit }})</th>
         <th class="px-2 py-1">Weight ({{ weight_unit }})</th>
         <th class="px-2 py-1">BMR</th>
         <th class="px-2 py-1">Calories</th>
@@ -84,14 +97,13 @@
       {% for m in metrics %}
       <tr class="border-b">
         <td class="px-2 py-1">{{ m.date }}</td>
-        <td class="px-2 py-1">{{ m.height }} {{ height_unit }}</td>
         <td class="px-2 py-1">{{ m.weight }} {{ weight_unit }}</td>
         <td class="px-2 py-1">{{ m.basal_metabolic_rate }}</td>
         <td class="px-2 py-1">{{ m.daily_caloric_needs }}</td>
         <td class="px-2 py-1">{{ m.body_fat_percentage }}</td>
       </tr>
       {% empty %}
-      <tr><td colspan="6" class="text-center py-2">No metrics logged yet.</td></tr>
+      <tr><td colspan="5" class="text-center py-2">No metrics logged yet.</td></tr>
       {% endfor %}
     </tbody>
   </table>
