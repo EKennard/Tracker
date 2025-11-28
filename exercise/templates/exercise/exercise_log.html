@@ -73,7 +73,7 @@
         <td class="px-2 py-1">{{ log.date }}</td>
         <td class="px-2 py-1">{{ log.get_exercise_type_display }}</td>
         <td class="px-2 py-1">{{ log.duration_minutes }}</td>
-        <td class="px-2 py-1">{{ log.distance_logged }}</td>
+        <td class="px-2 py-1">{% if log.distance_display %}{{ log.distance_display|floatformat:2 }}{% else %}--{% endif %}</td>
         <td class="px-2 py-1">{{ log.rating }}</td>
         <td class="px-2 py-1">{{ log.get_intensity_display }}</td>
         <td class="px-2 py-1">{{ log.emoji }}</td>

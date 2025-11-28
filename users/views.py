@@ -55,10 +55,15 @@ def dashboard(request):
     
     # Helper function to convert weight for display based on user preference
     def convert_weight_for_display(weight_in_lb):
-        if profile.weight_unit == 'st':
+        if profile.weight_unit == 'kg':
+            # Convert lb to kg (1 lb = 0.453592 kg)
+            return float(weight_in_lb) * 0.453592
+        elif profile.weight_unit == 'st':
             # Convert pounds to stones (1 stone = 14 pounds)
             return float(weight_in_lb) / 14.0
-        return float(weight_in_lb)
+        else:
+            # Already in lb
+            return float(weight_in_lb)
     
     # Calculate weight progress
     current_weight = None
