@@ -1,8 +1,33 @@
 {% extends 'base.html' %}
 {% block title %}Fertility Log{% endblock %}
 {% block content %}
-<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">Fertility Log</h1>
-<div class="card" style="margin-bottom:1.5rem;">
+<style>
+  /* Compact input styling for fertility page */
+  input[type="date"],
+  input[type="number"],
+  input[type="text"],
+  textarea {
+    max-width: 300px;
+    padding: 0.25rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  textarea {
+    max-width: 100%;
+    min-height: 60px;
+  }
+  
+  label {
+    font-size: 0.85rem !important;
+    margin-bottom: 0.1rem !important;
+  }
+  
+  .form-grid > div {
+    max-width: 350px;
+  }
+</style>
+<h1 class="card" style="font-size:1.3rem;font-weight:bold;margin-bottom:0.5rem;">Fertility Log</h1>
+<div class="card" style="margin-bottom:0.5rem;">
   <form method="post">
     {% csrf_token %}
     <div class="form-section">
@@ -31,34 +56,36 @@
         {{ form.notes }}
       </div>
     </div>
-    <button type="submit" class="button" style="margin-top:1.5rem;">💾 Add Fertility Log</button>
+    <button type="submit" class="button" style="margin-top:0.5rem;">💾 Add Fertility Log</button>
   </form>
 </div>
 <div class="card">
-  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">📅 Your Fertility Logs</h2>
-  <table class="min-w-full table-auto">
-    <thead>
-      <tr class="bg-gray-200">
-        <th class="px-2 py-1">Date</th>
-        <th class="px-2 py-1">Cycle Day</th>
-        <th class="px-2 py-1">Temperature</th>
-        <th class="px-2 py-1">Symptoms</th>
-        <th class="px-2 py-1">Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for log in logs %}
-      <tr class="border-b">
-        <td class="px-2 py-1">{{ log.date }}</td>
-        <td class="px-2 py-1">{{ log.cycle_day }}</td>
-        <td class="px-2 py-1">{{ log.temperature }}</td>
-        <td class="px-2 py-1">{{ log.symptoms }}</td>
-        <td class="px-2 py-1">{{ log.notes }}</td>
-      </tr>
-      {% empty %}
-      <tr><td colspan="5" class="text-center py-2">No fertility logs yet.</td></tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <h2 style="font-size:1.1rem;font-weight:bold;color:#4FC3F7;margin-bottom:0.5rem;">📅 Your Fertility Logs</h2>
+  <div style="overflow-x:auto;">
+    <table class="min-w-full table-auto" style="font-size:0.85rem;">
+      <thead>
+        <tr class="bg-gray-200">
+          <th style="padding:0.25rem 0.35rem;">Date</th>
+          <th style="padding:0.25rem 0.35rem;">Cycle Day</th>
+          <th style="padding:0.25rem 0.35rem;">Temperature</th>
+          <th style="padding:0.25rem 0.35rem;">Symptoms</th>
+          <th style="padding:0.25rem 0.35rem;">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in logs %}
+        <tr class="border-b">
+          <td style="padding:0.25rem 0.35rem;">{{ log.date }}</td>
+          <td style="padding:0.25rem 0.35rem;">{{ log.cycle_day }}</td>
+          <td style="padding:0.25rem 0.35rem;">{{ log.temperature }}</td>
+          <td style="padding:0.25rem 0.35rem;">{{ log.symptoms }}</td>
+          <td style="padding:0.25rem 0.35rem;">{{ log.notes }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="text-center" style="padding:0.35rem;">No fertility logs yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
