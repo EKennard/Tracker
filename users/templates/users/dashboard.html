@@ -392,14 +392,14 @@
             <div class="dashboard-grid">
             <div class="stat-card">
                 <div class="stat-title">Starting Weight</div>
-                <div class="stat-value">{{ starting_weight_display|floatformat:1 }}</div>
-                <div class="stat-label">{{ weight_unit }}</div>
+                <div class="stat-value">{{ starting_weight_display }}</div>
+                <div class="stat-label">Initial</div>
             </div>
             
             <div class="stat-card">
                 <div class="stat-title">Current Weight</div>
-                <div class="stat-value">{% if current_weight %}{{ current_weight|floatformat:1 }}{% else %}--{% endif %}</div>
-                <div class="stat-label">{{ weight_unit }}</div>
+                <div class="stat-value">{% if current_weight %}{{ current_weight }}{% else %}--{% endif %}</div>
+                <div class="stat-label">Latest</div>
             </div>
             
             <div class="stat-card">
@@ -418,8 +418,8 @@
             
             <div class="stat-card">
                 <div class="stat-title">Weight Lost</div>
-                <div class="stat-value" style="color: #81C784;">{% if current_weight %}{{ weight_lost|floatformat:1 }}{% else %}0{% endif %}</div>
-                <div class="stat-label">{{ weight_unit }}</div>
+                <div class="stat-value" style="color: #81C784;">{% if current_weight %}{{ weight_lost }}{% else %}0{% endif %}</div>
+                <div class="stat-label">Progress</div>
             </div>
         </div>
         

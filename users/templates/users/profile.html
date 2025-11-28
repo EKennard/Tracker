@@ -69,20 +69,20 @@
     <div>
       <label>Height</label>
       <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">
-        {{ height_display }} {{ profile.height_unit }}
+        {{ height_display }}
       </div>
     </div>
     <div>
       <label>Starting Weight</label>
       <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">
-        {{ starting_weight_display }} {{ weight_unit }}
+        {{ starting_weight_display }}
       </div>
     </div>
     {% if current_weight_display %}
     <div>
       <label>Current Weight</label>
       <div style="padding:0.5rem;background:#81C784;border-radius:0.5rem;color:white;font-weight:bold;">
-        {{ current_weight_display }} {{ weight_unit }}
+        {{ current_weight_display }}
       </div>
     </div>
     {% endif %}
@@ -135,7 +135,7 @@
     <div>
       <label>Goal Weight</label>
       <div style="padding:0.5rem;background:#FFF9C4;border-radius:0.5rem;color:#333;">
-        {{ goal_weight_display }} {{ weight_unit }}
+        {{ goal_weight_display }}
       </div>
     </div>
     {% endif %}
@@ -159,7 +159,7 @@
     <thead>
       <tr class="bg-gray-200">
         <th class="px-2 py-1">Date</th>
-        <th class="px-2 py-1">Weight ({{ weight_unit }})</th>
+        <th class="px-2 py-1">Weight</th>
         <th class="px-2 py-1">Body Fat %</th>
         <th class="px-2 py-1">BMR</th>
         <th class="px-2 py-1">Caloric Needs</th>

@@ -97,21 +97,22 @@ def metrics_summary(request):
         metrics_form = HealthMetricsForm(prefix='metrics')
         measurement_form = MeasurementForm(prefix='measurement')
     
-    # Convert weight display for all metrics based on user preference
-    def convert_weight_for_display(weight_in_lb):
-        if profile.weight_unit == 'kg':
-            # Convert lb to kg (1 lb = 0.453592 kg)
-            return float(weight_in_lb) * 0.453592
-        elif profile.weight_unit == 'st':
-            # Convert lb to stones (1 stone = 14 lb)
-            return float(weight_in_lb) / 14.0
+    # Format weight display for all metrics based on user preference
+    def format_weight_for_display(weight_in_lb):
+        if profile.weight_unit == 'st':
+            total_pounds = float(weight_in_lb)
+            stones = int(total_pounds // 14)
+            pounds = round(total_pounds % 14, 1)
+            return f"{stones}st {pounds}lb"
+        elif profile.weight_unit == 'kg':
+            kg = float(weight_in_lb) * 0.453592
+            return f"{kg:.1f} kg"
         else:
-            # Already in lb
-            return float(weight_in_lb)
+            return f"{float(weight_in_lb):.1f} lb"
     
-    # Add converted weight display to each metric
+    # Add formatted weight display to each metric
     for metric in metrics:
-        metric.weight_display = f"{convert_weight_for_display(metric.weight):.1f}"
+        metric.weight_display = format_weight_for_display(metric.weight)
     
     return render(request, 'metrics/metrics_summary.html', {
         'metrics_form': metrics_form,

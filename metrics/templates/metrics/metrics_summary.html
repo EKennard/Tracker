@@ -87,7 +87,7 @@
     <thead>
       <tr class="bg-gray-200">
         <th class="px-2 py-1">Date</th>
-        <th class="px-2 py-1">Weight ({{ weight_unit }})</th>
+        <th class="px-2 py-1">Weight</th>
         <th class="px-2 py-1">BMR</th>
         <th class="px-2 py-1">Calories</th>
         <th class="px-2 py-1">Body Fat %</th>
@@ -97,7 +97,7 @@
       {% for m in metrics %}
       <tr class="border-b">
         <td class="px-2 py-1">{{ m.date }}</td>
-        <td class="px-2 py-1">{{ m.weight_display }} {{ weight_unit }}</td>
+        <td class="px-2 py-1">{{ m.weight_display }}</td>
         <td class="px-2 py-1">{{ m.basal_metabolic_rate }}</td>
         <td class="px-2 py-1">{{ m.daily_caloric_needs }}</td>
         <td class="px-2 py-1">{{ m.body_fat_percentage }}</td>

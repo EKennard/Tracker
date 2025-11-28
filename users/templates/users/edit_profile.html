@@ -46,43 +46,80 @@
     <div class="form-section" style="margin-top:2rem;">
       <h2>⚙️ Unit Preferences</h2>
     </div>
-    <div class="form-grid">
-      <div>
-        <label>Weight Unit *</label>
-        {{ form.weight_unit }}
+    
+    <div style="margin-bottom:1.5rem;">
+      <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Weight Unit *</label>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button type="button" class="unit-option" data-unit="kg" onclick="setWeightUnit('kg')">Kilograms (kg)</button>
+        <button type="button" class="unit-option" data-unit="lb" onclick="setWeightUnit('lb')">Pounds (lb)</button>
+        <button type="button" class="unit-option" data-unit="st" onclick="setWeightUnit('st')">Stones (st)</button>
       </div>
-      <div>
-        <label>Height Unit *</label>
-        {{ form.height_unit }}
+      <div style="display:none;">{{ form.weight_unit }}</div>
+    </div>
+    
+    <div style="margin-bottom:1.5rem;">
+      <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Starting Weight *</label>
+      
+      <div id="weight-kg" class="weight-input" style="display:none;">
+        <div style="position:relative;">
+          <input type="number" step="0.01" class="form-input" id="weight-input-kg" placeholder="Enter weight in kg">
+          <span style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);color:#999;">kg</span>
+        </div>
       </div>
-      <div>
-        <label>Distance Unit *</label>
-        {{ form.distance_unit }}
+      
+      <div id="weight-lb" class="weight-input" style="display:none;">
+        <div style="position:relative;">
+          <input type="number" step="0.01" class="form-input" id="weight-input-lb" placeholder="Enter weight in lb">
+          <span style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);color:#999;">lb</span>
+        </div>
+      </div>
+      
+      <div id="weight-st" class="weight-input" style="display:none;">
+        <div style="display:flex;gap:0.5rem;">
+          <input type="number" class="form-input" id="weight-stones-input" placeholder="Stones" style="width:48%;">
+          <span style="align-self:center;color:#999;">st</span>
+          <input type="number" step="0.1" class="form-input" id="weight-pounds-input" placeholder="Pounds" style="width:48%;">
+          <span style="align-self:center;color:#999;">lb</span>
+        </div>
       </div>
     </div>
     
-    <!-- Body Metrics -->
-    <div class="form-section" style="margin-top:2rem;">
-      <h2>📏 Body Metrics</h2>
-      <p style="color:#666;font-size:0.9rem;margin-bottom:1rem;">
-        ℹ️ Note: Changing these values will affect your historical data calculations.
-      </p>
+    <div style="margin-bottom:1.5rem;">
+      <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height Unit *</label>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button type="button" class="unit-option" data-unit="cm" onclick="setHeightUnit('cm')">Centimeters (cm)</button>
+        <button type="button" class="unit-option" data-unit="in" onclick="setHeightUnit('in')">Feet/Inches (ft/in)</button>
+      </div>
+      <div style="display:none;">{{ form.height_unit }}</div>
     </div>
-    <div class="form-grid">
-      <div>
-        <label>Starting Weight *</label>
-        {{ form.starting_weight }}
-        <div style="font-size:0.85rem;color:#999;margin-top:0.25rem;">
-          Enter in your selected weight unit
+    
+    <div style="margin-bottom:1.5rem;">
+      <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Height *</label>
+      
+      <div id="height-cm" class="height-input" style="display:none;">
+        <div style="position:relative;">
+          <input type="number" step="0.01" class="form-input" id="height-input-cm" placeholder="Enter height in cm">
+          <span style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);color:#999;">cm</span>
         </div>
       </div>
-      <div>
-        <label>Height *</label>
-        {{ form.height }}
-        <div style="font-size:0.85rem;color:#999;margin-top:0.25rem;">
-          Enter in your selected height unit
+      
+      <div id="height-in" class="height-input" style="display:none;">
+        <div style="display:flex;gap:0.5rem;">
+          <input type="number" class="form-input" id="height-feet-input" placeholder="Feet" style="width:48%;">
+          <span style="align-self:center;color:#999;">ft</span>
+          <input type="number" step="0.1" class="form-input" id="height-inches-input" placeholder="Inches" style="width:48%;">
+          <span style="align-self:center;color:#999;">in</span>
         </div>
       </div>
+    </div>
+    
+    <div style="margin-bottom:1.5rem;">
+      <label style="display:block;margin-bottom:0.5rem;font-weight:bold;color:#4FC3F7;">Distance Unit *</label>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button type="button" class="unit-option" data-unit="km" onclick="setDistanceUnit('km')">Kilometres (km)</button>
+        <button type="button" class="unit-option" data-unit="mi" onclick="setDistanceUnit('mi')">Miles (mi)</button>
+      </div>
+      <div style="display:none;">{{ form.distance_unit }}</div>
     </div>
     
     <!-- Goals (Optional) -->
@@ -121,7 +158,142 @@
   </form>
 </div>
 
+<style>
+  .unit-option {
+    padding: 0.5rem 1rem;
+    border: 2px solid #4FC3F7;
+    background: white;
+    color: #4FC3F7;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+  }
+  .unit-option:hover {
+    background: #E1F5FE;
+  }
+  .unit-option.active {
+    background: #4FC3F7;
+    color: white;
+    font-weight: bold;
+  }
+</style>
+
 <script>
+  // Initialize with current profile values
+  const initialWeightUnit = '{{ form.weight_unit.value }}' || 'kg';
+  const initialHeightUnit = '{{ form.height_unit.value }}' || 'cm';
+  const initialDistanceUnit = '{{ form.distance_unit.value }}' || 'km';
+  
+  // Pre-fill values if editing
+  const weightKgValue = {{ weight_kg_value|default:"null" }};
+  const weightLbValue = {{ weight_lb_value|default:"null" }};
+  const weightStonesValue = {{ weight_stones_value|default:"null" }};
+  const weightPoundsValue = {{ weight_pounds_value|default:"null" }};
+  const heightCmValue = {{ height_cm_value|default:"null" }};
+  const heightFeetValue = {{ height_feet_value|default:"null" }};
+  const heightInchesValue = {{ height_inches_value|default:"null" }};
+  
+  // Weight unit toggle
+  function setWeightUnit(unit) {
+    document.querySelector('select[name="weight_unit"]').value = unit;
+    
+    // Update button styles
+    document.querySelectorAll('.unit-option[data-unit]').forEach(btn => {
+      if (btn.getAttribute('onclick')?.includes('setWeightUnit')) {
+        btn.classList.toggle('active', btn.dataset.unit === unit);
+      }
+    });
+    
+    // Show/hide appropriate input
+    document.querySelectorAll('.weight-input').forEach(div => div.style.display = 'none');
+    
+    const kgInput = document.getElementById('weight-input-kg');
+    const lbInput = document.getElementById('weight-input-lb');
+    const stonesInput = document.getElementById('weight-stones-input');
+    const poundsInput = document.getElementById('weight-pounds-input');
+    
+    // Clear all name attributes
+    kgInput.removeAttribute('name');
+    lbInput.removeAttribute('name');
+    stonesInput.removeAttribute('name');
+    poundsInput.removeAttribute('name');
+    
+    if (unit === 'kg') {
+      document.getElementById('weight-kg').style.display = 'block';
+      kgInput.name = 'starting_weight';
+    } else if (unit === 'lb') {
+      document.getElementById('weight-lb').style.display = 'block';
+      lbInput.name = 'starting_weight';
+    } else if (unit === 'st') {
+      document.getElementById('weight-st').style.display = 'block';
+      stonesInput.name = 'weight_stones';
+      poundsInput.name = 'weight_pounds_extra';
+    }
+  }
+  
+  // Height unit toggle
+  function setHeightUnit(unit) {
+    document.querySelector('select[name="height_unit"]').value = unit;
+    
+    // Update button styles
+    document.querySelectorAll('.unit-option[data-unit]').forEach(btn => {
+      if (btn.getAttribute('onclick')?.includes('setHeightUnit')) {
+        btn.classList.toggle('active', btn.dataset.unit === unit);
+      }
+    });
+    
+    // Show/hide appropriate input
+    document.querySelectorAll('.height-input').forEach(div => div.style.display = 'none');
+    
+    const cmInput = document.getElementById('height-input-cm');
+    const feetInput = document.getElementById('height-feet-input');
+    const inchesInput = document.getElementById('height-inches-input');
+    
+    // Clear all name attributes
+    cmInput.removeAttribute('name');
+    feetInput.removeAttribute('name');
+    inchesInput.removeAttribute('name');
+    
+    if (unit === 'cm') {
+      document.getElementById('height-cm').style.display = 'block';
+      cmInput.name = 'height';
+    } else if (unit === 'in') {
+      document.getElementById('height-in').style.display = 'block';
+      feetInput.name = 'height_feet';
+      inchesInput.name = 'height_inches';
+    }
+  }
+  
+  // Distance unit toggle
+  function setDistanceUnit(unit) {
+    document.querySelector('select[name="distance_unit"]').value = unit;
+    
+    // Update button styles
+    document.querySelectorAll('.unit-option[data-unit]').forEach(btn => {
+      if (btn.getAttribute('onclick')?.includes('setDistanceUnit')) {
+        btn.classList.toggle('active', btn.dataset.unit === unit);
+      }
+    });
+  }
+  
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set initial units
+    setWeightUnit(initialWeightUnit);
+    setHeightUnit(initialHeightUnit);
+    setDistanceUnit(initialDistanceUnit);
+    
+    // Pre-fill values
+    if (weightKgValue) document.getElementById('weight-input-kg').value = weightKgValue;
+    if (weightLbValue) document.getElementById('weight-input-lb').value = weightLbValue;
+    if (weightStonesValue) document.getElementById('weight-stones-input').value = weightStonesValue;
+    if (weightPoundsValue) document.getElementById('weight-pounds-input').value = weightPoundsValue;
+    if (heightCmValue) document.getElementById('height-input-cm').value = heightCmValue;
+    if (heightFeetValue) document.getElementById('height-feet-input').value = heightFeetValue;
+    if (heightInchesValue) document.getElementById('height-inches-input').value = heightInchesValue;
+  });
+  
   // Calculate and display age from date of birth
   const dobInput = document.querySelector('input[name="date_of_birth"]');
   if (dobInput) {

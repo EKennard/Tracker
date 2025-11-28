@@ -53,31 +53,32 @@ def dashboard(request):
     # Get all metrics for progress tracking
     all_metrics = HealthMetrics.objects.filter(user_profile=profile).order_by('date')
     
-    # Helper function to convert weight for display based on user preference
-    def convert_weight_for_display(weight_in_lb):
-        if profile.weight_unit == 'kg':
-            # Convert lb to kg (1 lb = 0.453592 kg)
-            return float(weight_in_lb) * 0.453592
-        elif profile.weight_unit == 'st':
-            # Convert pounds to stones (1 stone = 14 pounds)
-            return float(weight_in_lb) / 14.0
+    # Helper function to format weight for display (with stones/pounds breakdown)
+    def format_weight_for_display(weight_in_lb):
+        if profile.weight_unit == 'st':
+            total_pounds = float(weight_in_lb)
+            stones = int(total_pounds // 14)
+            pounds = round(total_pounds % 14, 1)
+            return f"{stones}st {pounds}lb"
+        elif profile.weight_unit == 'kg':
+            kg = float(weight_in_lb) * 0.453592
+            return f"{kg:.1f}"
         else:
-            # Already in lb
-            return float(weight_in_lb)
+            return f"{float(weight_in_lb):.1f}"
     
     # Calculate weight progress
     current_weight = None
     current_weight_display = None
-    starting_weight_display = convert_weight_for_display(profile.starting_weight)
+    starting_weight_display = format_weight_for_display(profile.starting_weight)
     weight_lost = 0
     weight_progress_percent = 0
     
     if all_metrics.exists():
         latest_metric = all_metrics.last()
         current_weight = latest_metric.weight  # stored in lb
-        current_weight_display = convert_weight_for_display(current_weight)
+        current_weight_display = format_weight_for_display(current_weight)
         weight_lost_lb = profile.starting_weight - current_weight
-        weight_lost = convert_weight_for_display(weight_lost_lb)
+        weight_lost = format_weight_for_display(weight_lost_lb)
         
         # Calculate progress percentage if goal weight exists
         if hasattr(profile, 'goal_weight') and profile.goal_weight:
@@ -110,9 +111,15 @@ def dashboard(request):
     for entry in weight_data:
         print(f"  Date: {entry['date']}, Weight (lb): {entry['weight']}")
     
-    # Convert all weights for display based on user preference
+    # Convert all weights for display based on user preference (as numeric for chart)
     for entry in weight_data:
-        entry['weight'] = convert_weight_for_display(entry['weight'])
+        weight_lb = entry['weight']
+        if profile.weight_unit == 'st':
+            entry['weight'] = float(weight_lb) / 14.0  # Chart needs numeric
+        elif profile.weight_unit == 'kg':
+            entry['weight'] = float(weight_lb) * 0.453592
+        else:
+            entry['weight'] = float(weight_lb)
         print(f"  After conversion: Date: {entry['date']}, Weight: {entry['weight']} {display_unit}")
     
     # If no weight data exists, show starting weight as a placeholder
@@ -142,8 +149,8 @@ def dashboard(request):
     for metric in recent_metrics:
         metric.activity_type = 'metric'
         metric.activity_icon = '⚖️'
-        weight_display = convert_weight_for_display(metric.weight)
-        metric.activity_text = f"Weight: {weight_display:.1f} {display_unit}"
+        weight_display = format_weight_for_display(metric.weight)
+        metric.activity_text = f"Weight: {weight_display}"
     
     for measurement in recent_measurements:
         measurement.activity_type = 'measurement'
@@ -298,34 +305,39 @@ def profile_view(request):
     """View user's complete profile information"""
     profile = request.user.userprofile
     
-    # Helper function to convert weight for display
-    def convert_weight_for_display(weight_in_lb):
+    # Helper function to format weight for display (with stones/pounds breakdown)
+    def format_weight_for_display(weight_in_lb):
         if profile.weight_unit == 'st':
-            return float(weight_in_lb) / 14.0
+            total_pounds = float(weight_in_lb)
+            stones = int(total_pounds // 14)
+            pounds = round(total_pounds % 14, 1)
+            return f"{stones}st {pounds}lb"
         elif profile.weight_unit == 'kg':
-            return float(weight_in_lb) * 0.453592
-        return float(weight_in_lb)
+            kg = float(weight_in_lb) * 0.453592
+            return f"{kg:.1f} kg"
+        else:
+            return f"{float(weight_in_lb):.1f} lb"
     
-    # Helper function to convert height for display
-    def convert_height_for_display(height_value):
+    # Helper function to format height for display (with feet/inches breakdown)
+    def format_height_for_display(height_value):
         if profile.height_unit == 'in':
-            # Height stored in cm, convert to inches
-            return float(height_value) / 2.54
-        return float(height_value)
-    
-    # Get weight unit display
-    weight_unit = 'st' if profile.weight_unit == 'st' else profile.weight_unit
+            total_inches = float(height_value)
+            feet = int(total_inches // 12)
+            inches = round(total_inches % 12, 1)
+            return f"{feet}ft {inches}in"
+        else:
+            return f"{float(height_value):.1f} cm"
     
     # Convert starting weight for display
-    starting_weight_display = f"{convert_weight_for_display(profile.starting_weight):.1f}"
+    starting_weight_display = format_weight_for_display(profile.starting_weight)
     
     # Convert goal weight if exists
     goal_weight_display = None
     if hasattr(profile, 'goal_weight') and profile.goal_weight:
-        goal_weight_display = f"{convert_weight_for_display(profile.goal_weight):.1f}"
+        goal_weight_display = format_weight_for_display(profile.goal_weight)
     
     # Convert height for display
-    height_display = f"{convert_height_for_display(profile.height):.1f}"
+    height_display = format_height_for_display(profile.height)
     
     # Get current weight and BMI from latest metrics
     all_metrics = HealthMetrics.objects.filter(user_profile=profile).order_by('date')
@@ -334,7 +346,7 @@ def profile_view(request):
     
     if all_metrics.exists():
         latest_metric = all_metrics.last()
-        current_weight_display = f"{convert_weight_for_display(latest_metric.weight):.1f}"
+        current_weight_display = format_weight_for_display(latest_metric.weight)
         
         # Calculate BMI
         weight_for_bmi = latest_metric.weight
@@ -352,14 +364,13 @@ def profile_view(request):
     # Get recent metrics (last 5)
     recent_metrics = all_metrics.order_by('-date')[:5]
     for metric in recent_metrics:
-        metric.weight_display = f"{convert_weight_for_display(metric.weight):.1f}"
+        metric.weight_display = format_weight_for_display(metric.weight)
     
     # Get recent measurements (last 5)
     recent_measurements = Measurement.objects.filter(profile=profile).order_by('-date')[:5]
     
     context = {
         'profile': profile,
-        'weight_unit': weight_unit,
         'starting_weight_display': starting_weight_display,
         'goal_weight_display': goal_weight_display,
         'height_display': height_display,
@@ -392,22 +403,38 @@ def edit_profile(request):
         # Pre-populate form with existing data
         initial_data = {}
         
-        # If user's weight is stored in pounds but they use stones, show stones/pounds
-        if profile.weight_unit == 'st':
+        # Prepare converted values for JavaScript
+        context = {'form': UserProfileForm(instance=profile, initial=initial_data)}
+        
+        # Weight conversions
+        if profile.weight_unit == 'kg':
+            # Convert lb to kg
+            context['weight_kg_value'] = round(float(profile.starting_weight) * 0.453592, 2)
+        elif profile.weight_unit == 'lb':
+            context['weight_lb_value'] = round(float(profile.starting_weight), 2)
+        elif profile.weight_unit == 'st':
+            # Convert lb to stones and pounds
             total_pounds = float(profile.starting_weight)
-            stones = int(total_pounds // 14)
-            pounds = total_pounds % 14
-            initial_data['weight_stones'] = stones
-            initial_data['weight_pounds_extra'] = round(pounds, 1)
+            context['weight_stones_value'] = int(total_pounds // 14)
+            context['weight_pounds_value'] = round(total_pounds % 14, 1)
+            initial_data['weight_stones'] = context['weight_stones_value']
+            initial_data['weight_pounds_extra'] = context['weight_pounds_value']
         
-        # If user's height is in inches but stored differently, convert
-        if profile.height_unit == 'in':
+        # Height conversions
+        if profile.height_unit == 'cm':
+            context['height_cm_value'] = round(float(profile.height), 2)
+        elif profile.height_unit == 'in':
+            # Convert to feet and inches
             total_inches = float(profile.height)
-            feet = int(total_inches // 12)
-            inches = total_inches % 12
-            initial_data['height_feet'] = feet
-            initial_data['height_inches'] = round(inches, 1)
+            context['height_feet_value'] = int(total_inches // 12)
+            context['height_inches_value'] = round(total_inches % 12, 1)
+            initial_data['height_feet'] = context['height_feet_value']
+            initial_data['height_inches'] = context['height_inches_value']
         
-        form = UserProfileForm(instance=profile, initial=initial_data)
+        # Update form with initial data
+        context['form'] = UserProfileForm(instance=profile, initial=initial_data)
+        
+        return render(request, 'users/edit_profile.html', context)
     
+    # If POST but invalid
     return render(request, 'users/edit_profile.html', {'form': form})
