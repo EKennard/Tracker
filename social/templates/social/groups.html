@@ -2,98 +2,98 @@
 {% block title %}Groups{% endblock %}
 {% block content %}
 
-<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">👥 Groups</h1>
+<div class="container py-4">
+  <h1 class="mb-4">👥 Groups</h1>
 
-<!-- Group Invitations -->
-{% if invitations %}
-<div class="card" style="margin-bottom:1.5rem;border:2px solid #FFB74D;">
-  <h2 style="font-size:1.3rem;font-weight:bold;color:#FFB74D;margin-bottom:1rem;">
-    📨 Group Invitations ({{ invitations.count }})
-  </h2>
-  
-  <div style="display:flex;flex-direction:column;gap:1rem;">
-    {% for invitation in invitations %}
-    <div style="border:2px solid #FFB74D;padding:1rem;border-radius:0.5rem;background:#FFF8E1;">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
-        <div>
-          <h3 style="margin:0 0 0.5rem 0;">{{ invitation.group.name }}</h3>
-          <p style="margin:0;color:#666;font-size:0.9rem;">
-            Invited by {{ invitation.from_user.user.username }}
-          </p>
+  <!-- Group Invitations -->
+  {% if invitations %}
+  <div class="card border-warning mb-4">
+    <div class="card-header bg-warning bg-opacity-10">
+      <h2 class="h5 mb-0">📨 Group Invitations ({{ invitations.count }})</h2>
+    </div>
+    <div class="card-body">
+      <div class="list-group">
+        {% for invitation in invitations %}
+        <div class="list-group-item border-warning bg-warning bg-opacity-10">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div>
+              <h5 class="mb-1">{{ invitation.group.name }}</h5>
+              <small class="text-muted">Invited by {{ invitation.from_user.user.username }}</small>
+            </div>
+            <div class="btn-group">
+              <a href="{% url 'accept_group_invitation' invitation.id %}" class="btn btn-success">✓ Accept</a>
+              <a href="{% url 'decline_group_invitation' invitation.id %}" class="btn btn-danger">✗ Decline</a>
+            </div>
+          </div>
         </div>
-        <div style="display:flex;gap:0.5rem;">
-          <a href="{% url 'accept_group_invitation' invitation.id %}" class="button" style="background:#81C784;text-decoration:none;">
-            ✓ Accept
-          </a>
-          <a href="{% url 'decline_group_invitation' invitation.id %}" class="button" style="background:#E57373;text-decoration:none;">
-            ✗ Decline
-          </a>
-        </div>
+        {% endfor %}
       </div>
     </div>
-    {% endfor %}
   </div>
-</div>
-{% endif %}
+  {% endif %}
 
-<!-- Create Group -->
-<div class="card" style="margin-bottom:1.5rem;">
-  <form method="post">
-    {% csrf_token %}
-    <div class="form-section">
-      <h2>➕ Create New Group</h2>
-      {{ form.non_field_errors }}
+  <!-- Create Group -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2 class="h5 mb-0">➕ Create New Group</h2>
     </div>
-    <div class="form-grid">
-      <div>
-        <label>{{ form.name.label }}</label>
-        {{ form.name }}
-      </div>
-      <div class="form-grid-full">
-        <label>{{ form.description.label }}</label>
-        {{ form.description }}
-      </div>
-      <div>
-        <label style="display:flex;align-items:center;cursor:pointer;">
-          {{ form.is_public }}
-          <span style="margin-left:0.5rem;">Make group public (searchable)</span>
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="button" style="margin-top:1.5rem;">💾 Create Group</button>
-  </form>
-</div>
-
-<!-- Your Groups -->
-<div class="card">
-  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">
-    My Groups ({{ my_groups.count }})
-  </h2>
-  
-  {% if my_groups %}
-    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:1rem;">
-      {% for group in my_groups %}
-      <div style="border:2px solid #4FC3F7;padding:1.5rem;border-radius:0.5rem;background:#F0F8FF;">
-        <h3 style="margin:0 0 0.5rem 0;color:#BA68C8;">{{ group.name }}</h3>
-        {% if group.description %}
-          <p style="margin:0 0 1rem 0;color:#666;font-size:0.9rem;">{{ group.description }}</p>
-        {% endif %}
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
-          <span style="color:#666;font-size:0.85rem;">
-            👤 {{ group.members.count }} member{{ group.members.count|pluralize }}
-          </span>
-          <a href="{% url 'group_detail' group.id %}" class="button" style="text-decoration:none;font-size:0.9rem;padding:0.5rem 1rem;">
-            View →
-          </a>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <div class="mb-3">
+          <label for="{{ form.name.id_for_label }}" class="form-label">{{ form.name.label }}</label>
+          <input type="text" name="{{ form.name.name }}" class="form-control" id="{{ form.name.id_for_label }}" value="{{ form.name.value|default:'' }}">
         </div>
-      </div>
-      {% endfor %}
+        
+        <div class="mb-3">
+          <label for="{{ form.description.id_for_label }}" class="form-label">{{ form.description.label }}</label>
+          <textarea name="{{ form.description.name }}" class="form-control" id="{{ form.description.id_for_label }}" rows="3">{{ form.description.value|default:'' }}</textarea>
+        </div>
+        
+        <div class="mb-3 form-check">
+          <input type="checkbox" name="{{ form.is_public.name }}" class="form-check-input" id="{{ form.is_public.id_for_label }}" {% if form.is_public.value %}checked{% endif %}>
+          <label class="form-check-label" for="{{ form.is_public.id_for_label }}">
+            Make group public (searchable)
+          </label>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">💾 Create Group</button>
+      </form>
     </div>
-  {% else %}
-    <div style="text-align:center;padding:3rem;color:#999;">
-      <div style="font-size:3rem;margin-bottom:1rem;">👥</div>
-      <p>You're not in any groups yet.</p>
-      <p style="font-size:0.9rem;margin-top:0.5rem;">Create a group or wait for an invitation!</p>
+  </div>
+
+  <!-- Your Groups -->
+  <div class="card">
+    <div class="card-header">
+      <h2 class="h5 mb-0">My Groups ({{ my_groups.count }})</h2>
+    </div>
+    <div class="card-body">
+      {% if my_groups %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+          {% for group in my_groups %}
+          <div class="col">
+            <div class="card border-primary h-100">
+              <div class="card-body">
+                <h5 class="card-title text-primary">{{ group.name }}</h5>
+                {% if group.description %}
+                  <p class="card-text text-muted small">{{ group.description }}</p>
+                {% endif %}
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <small class="text-muted">👤 {{ group.members.count }} member{{ group.members.count|pluralize }}</small>
+                  <a href="{% url 'group_detail' group.id %}" class="btn btn-sm btn-outline-primary">View →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center py-5 text-muted">
+          <div class="display-1 mb-3">👥</div>
+          <p>You're not in any groups yet.</p>
+      <p class="group-card-description">Create a group or wait for an invitation!</p>
     </div>
   {% endif %}
 </div>
