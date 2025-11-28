@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+
+<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">✏️ Edit Profile</h1>
+
+<div class="card" style="max-width:800px;margin:auto;">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    {% if form.errors %}
+    <div style="background:#FFCDD2;border:2px solid #E57373;border-radius:0.5rem;padding:1rem;margin-bottom:1.5rem;">
+      <h4 style="color:#E57373;margin:0 0 0.5rem 0;">⚠️ Form Errors:</h4>
+      {{ form.non_field_errors }}
+      {% for field in form %}
+        {% if field.errors %}
+          <div style="color:#E57373;margin-bottom:0.25rem;">
+            <strong>{{ field.label }}:</strong> {{ field.errors|join:", " }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    <!-- Basic Information -->
+    <div class="form-section">
+      <h2>📋 Basic Information</h2>
+    </div>
+    <div class="form-grid">
+      <div>
+        <label>Date of Birth *</label>
+        {{ form.date_of_birth }}
+      </div>
+      <div>
+        <label>Sex *</label>
+        {{ form.sex }}
+      </div>
+      <div>
+        <label>Activity Level *</label>
+        {{ form.activity_level }}
+      </div>
+    </div>
+    
+    <!-- Unit Preferences -->
+    <div class="form-section" style="margin-top:2rem;">
+      <h2>⚙️ Unit Preferences</h2>
+    </div>
+    <div class="form-grid">
+      <div>
+        <label>Weight Unit *</label>
+        {{ form.weight_unit }}
+      </div>
+      <div>
+        <label>Height Unit *</label>
+        {{ form.height_unit }}
+      </div>
+      <div>
+        <label>Distance Unit *</label>
+        {{ form.distance_unit }}
+      </div>
+    </div>
+    
+    <!-- Body Metrics -->
+    <div class="form-section" style="margin-top:2rem;">
+      <h2>📏 Body Metrics</h2>
+      <p style="color:#666;font-size:0.9rem;margin-bottom:1rem;">
+        ℹ️ Note: Changing these values will affect your historical data calculations.
+      </p>
+    </div>
+    <div class="form-grid">
+      <div>
+        <label>Starting Weight *</label>
+        {{ form.starting_weight }}
+        <div style="font-size:0.85rem;color:#999;margin-top:0.25rem;">
+          Enter in your selected weight unit
+        </div>
+      </div>
+      <div>
+        <label>Height *</label>
+        {{ form.height }}
+        <div style="font-size:0.85rem;color:#999;margin-top:0.25rem;">
+          Enter in your selected height unit
+        </div>
+      </div>
+    </div>
+    
+    <!-- Goals (Optional) -->
+    <div class="form-section" style="margin-top:2rem;">
+      <h2>🎯 Goals (Optional)</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-grid-full">
+        <label>Goal Description</label>
+        {{ form.goal }}
+      </div>
+      <div>
+        <label>Goal Deadline</label>
+        {{ form.deadline }}
+      </div>
+    </div>
+    
+    <!-- Privacy Settings -->
+    <div class="form-section" style="margin-top:2rem;">
+      <h2>🔒 Privacy Settings</h2>
+    </div>
+    <div style="margin-bottom:1.5rem;">
+      <label style="display:flex;align-items:center;cursor:pointer;">
+        {{ form.is_public }}
+        <span style="margin-left:0.5rem;color:#4FC3F7;">
+          Make my profile public (allow others to view my progress)
+        </span>
+      </label>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div style="display:flex;gap:1rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;">
+      <a href="/users/profile/" class="button" style="background:#999;text-decoration:none;">❌ Cancel</a>
+      <button type="submit" class="button" style="background:#81C784;">💾 Save Changes</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // Calculate and display age from date of birth
+  const dobInput = document.querySelector('input[name="date_of_birth"]');
+  if (dobInput) {
+    dobInput.addEventListener('change', function() {
+      const dob = new Date(this.value);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const monthDiff = today.getMonth() - dob.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      if (age >= 0 && age < 120) {
+        const ageDisplay = document.createElement('div');
+        ageDisplay.style.cssText = 'margin-top:0.5rem;color:#81C784;font-size:0.9rem;';
+        ageDisplay.textContent = `Age: ${age} years`;
+        // Remove existing age display if any
+        const existing = this.parentElement.querySelector('.age-display');
+        if (existing) existing.remove();
+        ageDisplay.className = 'age-display';
+        this.parentElement.appendChild(ageDisplay);
+      }
+    });
+  }
+</script>
+
+{% endblock %}

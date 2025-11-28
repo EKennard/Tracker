@@ -365,3 +365,44 @@ def profile_view(request):
     }
     
     return render(request, 'users/profile.html', context)
+
+@login_required
+@profile_required
+def edit_profile(request):
+    """Edit user's profile information"""
+    profile = request.user.userprofile
+    
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        
+        if form.is_valid():
+            updated_profile = form.save(commit=False)
+            # Ensure age is saved
+            updated_profile.age = form.cleaned_data.get('age', profile.age)
+            updated_profile.save()
+            
+            messages.success(request, '✅ Profile updated successfully!')
+            return redirect('profile_view')
+    else:
+        # Pre-populate form with existing data
+        initial_data = {}
+        
+        # If user's weight is stored in pounds but they use stones, show stones/pounds
+        if profile.weight_unit == 'st':
+            total_pounds = float(profile.starting_weight)
+            stones = int(total_pounds // 14)
+            pounds = total_pounds % 14
+            initial_data['weight_stones'] = stones
+            initial_data['weight_pounds_extra'] = round(pounds, 1)
+        
+        # If user's height is in inches but stored differently, convert
+        if profile.height_unit == 'in':
+            total_inches = float(profile.height)
+            feet = int(total_inches // 12)
+            inches = total_inches % 12
+            initial_data['height_feet'] = feet
+            initial_data['height_inches'] = round(inches, 1)
+        
+        form = UserProfileForm(instance=profile, initial=initial_data)
+    
+    return render(request, 'users/edit_profile.html', {'form': form})
