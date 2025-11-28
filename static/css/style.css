@@ -159,31 +159,21 @@ body {
     box-sizing: border-box;
 }
 
-/* Navbar Styles */
-.main-navbar {
+/* Hero Section */
+.hero-section {
     background: #FFFFFF;
     border-bottom: 2px solid #FFD54F;
-    padding: 0.25rem 0.5rem;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    padding: 0.35rem 0.5rem;
     box-shadow: 0 1px 4px rgba(186,104,200,0.08);
 }
 
-.navbar-container {
+.hero-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     max-width: 100%;
     margin: 0 auto;
-}
-
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    flex-shrink: 0;
 }
 
 .brand-icons {
@@ -201,6 +191,7 @@ body {
     font-family: 'Fredoka One', 'Comic Neue', sans-serif;
     font-size: 1.1rem;
     margin: 0;
+    flex: 1;
 }
 
 .brand-title a {
@@ -208,12 +199,37 @@ body {
     text-decoration: none;
 }
 
+.hero-user {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-shrink: 0;
+}
+
+/* Navbar Styles */
+.main-navbar {
+    background: #FFFFFF;
+    border-bottom: 2px solid #4FC3F7;
+    padding: 0.25rem 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 4px rgba(186,104,200,0.08);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
 .navbar-links {
     display: flex;
     gap: 0.15rem;
     flex-wrap: wrap;
     align-items: center;
-    flex: 1;
     justify-content: center;
 }
 
@@ -238,13 +254,6 @@ body {
     color: #4FC3F7;
 }
 
-.navbar-user {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    flex-shrink: 0;
-}
-
 .user-name {
     color: #BA68C8;
     font-size: 0.85rem;
@@ -252,7 +261,7 @@ body {
     white-space: nowrap;
 }
 
-.navbar-user .logout-button {
+.logout-button {
     background: #FF6B6B;
     color: white;
     padding: 0.2rem 0.4rem;
@@ -266,7 +275,7 @@ body {
     white-space: nowrap;
 }
 
-.navbar-user .logout-button:hover {
+.logout-button:hover {
     background: #E74C3C !important;
     transform: scale(1.05);
     box-shadow: 0 2px 6px rgba(231,76,60,0.4) !important;
@@ -389,25 +398,16 @@ body {
         display: block !important;
     }
     
-    .navbar-container {
+    .hero-container {
         flex-wrap: wrap;
-    }
-    
-    .navbar-brand {
-        order: 1;
-    }
-    
-    .navbar-user {
-        order: 2;
     }
     
     .navbar-links {
         display: none;
-        order: 3;
         width: 100%;
         flex-direction: column;
         background: white;
-        border-top: 2px solid #FFD54F;
+        border-top: 2px solid #4FC3F7;
         margin-top: 0.25rem;
         padding: 0.25rem;
         gap: 0.15rem;
@@ -435,7 +435,7 @@ body {
         font-size: 0.75rem;
     }
     
-    .navbar-user .logout-button {
+    .logout-button {
         font-size: 0.75rem;
         padding: 0.15rem 0.3rem;
     }

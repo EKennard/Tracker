@@ -13,8 +13,28 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-        <!-- Burger Menu Button (Mobile) -->
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="hero-container">
+                <div class="brand-icons">
+                    <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
+                    <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
+                    <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
+                    <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
+                    <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
+                </div>
+                <h1 class="brand-title">
+                    <a href="/">GetLizzyFit</a>
+                </h1>
+                <div class="hero-user">
+                    <span class="user-name">👤 {{ user.username }}</span>
+                    <a href="/accounts/logout/" class="logout-button">🚪 Logout</a>
+                </div>
+            </div>
+        </header>
+        
         {% if request.path != '/users/create-profile/' %}
+        <!-- Burger Menu Button (Mobile) -->
         <button id="burger-menu" class="burger-menu" onclick="toggleMenu()">
             <div class="burger-icon">
                 <span></span>
@@ -22,25 +42,10 @@
                 <span></span>
             </div>
         </button>
-        {% endif %}
         
         <!-- Main Navbar -->
         <nav id="main-navbar" class="main-navbar">
             <div class="navbar-container">
-                <div class="navbar-brand">
-                    <div class="brand-icons">
-                        <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
-                        <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
-                        <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
-                        <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
-                        <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
-                    </div>
-                    <h1 class="brand-title">
-                        <a href="/">GetLizzyFit</a>
-                    </h1>
-                </div>
-                
-                {% if request.path != '/users/create-profile/' %}
                 <div id="navbar-links" class="navbar-links">
                     <a href="/users/dashboard/" class="nav-link">🏠 Dashboard</a>
                     <a href="/meals/log/" class="nav-link">🍎 Meals</a>
@@ -55,14 +60,9 @@
                     <a href="/social/groups/" class="nav-link">👫 Groups</a>
                     <a href="/notifications/list/" class="nav-link">🔔 Notifications</a>
                 </div>
-                {% endif %}
-                
-                <div class="navbar-user">
-                    <span class="user-name">👤 {{ user.username }}</span>
-                    <a href="/accounts/logout/" class="logout-button">🚪 Logout</a>
-                </div>
             </div>
         </nav>
+        {% endif %}
     {% else %}
         <header class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.25rem;text-align:center;">
             <div style="display:flex;justify-content:center;align-items:center;gap:0.5rem;">
