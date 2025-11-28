@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}Global Activity Feed{% endblock %}
+{% block content %}
+
+<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">🌍 Global Activity Feed</h1>
+
+<div class="card" style="margin-bottom:1.5rem;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;padding:1.5rem;">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <h3 style="margin:0 0 0.5rem 0;font-size:1.2rem;">Your Personal Key</h3>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <code style="background:rgba(255,255,255,0.2);padding:0.5rem 1rem;border-radius:0.5rem;font-size:1.3rem;letter-spacing:2px;font-weight:bold;">
+          {{ profile.personal_key }}
+        </code>
+        <button onclick="copyKey()" style="background:white;color:#667eea;border:none;padding:0.5rem 1rem;border-radius:0.5rem;cursor:pointer;font-weight:bold;">
+          📋 Copy
+        </button>
+      </div>
+      <p style="margin:0.5rem 0 0 0;font-size:0.9rem;opacity:0.9;">Share this key with friends so they can find you!</p>
+    </div>
+    <div style="text-align:right;">
+      <a href="{% url 'search_users' %}" class="button" style="background:white;color:#667eea;text-decoration:none;display:inline-block;">
+        🔍 Search Users
+      </a>
+    </div>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr;gap:1.5rem;">
+  <!-- Activity Feed -->
+  <div class="card">
+    <h2 style="font-size:1.5rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">📰 Recent Activity</h2>
+    
+    {% if activities %}
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        {% for activity in activities %}
+        <div style="border-left:4px solid #4FC3F7;padding:1rem;background:#F0F8FF;border-radius:0.5rem;">
+          <div style="display:flex;align-items:start;gap:1rem;">
+            <div style="font-size:2rem;">{{ activity.icon }}</div>
+            <div style="flex:1;">
+              <div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:0.5rem;">
+                <div>
+                  <strong style="color:#BA68C8;">{{ activity.profile.user.username }}</strong>
+                  <span style="color:#666;margin:0 0.5rem;">•</span>
+                  <span style="color:#666;text-transform:capitalize;">{{ activity.get_activity_type_display }}</span>
+                </div>
+                <span style="color:#999;font-size:0.85rem;">{{ activity.created_at|timesince }} ago</span>
+              </div>
+              <p style="margin:0.5rem 0 0 0;color:#333;">{{ activity.description }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div style="text-align:center;padding:3rem;color:#999;">
+        <div style="font-size:3rem;margin-bottom:1rem;">🌟</div>
+        <p>No activities yet! Make your profile public or add friends to see updates.</p>
+        <div style="margin-top:1.5rem;">
+          <a href="{% url 'search_users' %}" class="button" style="text-decoration:none;display:inline-block;">Find Friends</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  function copyKey() {
+    const key = '{{ profile.personal_key }}';
+    navigator.clipboard.writeText(key).then(() => {
+      alert('Personal key copied to clipboard!');
+    });
+  }
+</script>
+
+{% endblock %}

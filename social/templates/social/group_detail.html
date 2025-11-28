@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}{{ group.name }}{% endblock %}
+{% block content %}
+
+<div style="margin-bottom:1rem;">
+  <a href="{% url 'groups' %}" style="color:#4FC3F7;text-decoration:none;">← Back to Groups</a>
+</div>
+
+<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">👥 {{ group.name }}</h1>
+
+<div class="card" style="margin-bottom:1.5rem;">
+  <div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;">
+    <div style="flex:1;">
+      {% if group.description %}
+        <p style="color:#666;font-size:1.1rem;margin:0;">{{ group.description }}</p>
+      {% endif %}
+      <div style="margin-top:1rem;display:flex;gap:1rem;flex-wrap:wrap;">
+        <span style="padding:0.5rem 1rem;background:#E1F5FE;border-radius:0.5rem;color:#666;">
+          👤 {{ group.members.count }} member{{ group.members.count|pluralize }}
+        </span>
+        <span style="padding:0.5rem 1rem;background:#E1F5FE;border-radius:0.5rem;color:#666;">
+          Created by {{ group.creator.user.username }}
+        </span>
+        {% if group.is_public %}
+          <span style="padding:0.5rem 1rem;background:#81C784;border-radius:0.5rem;color:white;">
+            🌍 Public
+          </span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Members -->
+<div class="card" style="margin-bottom:1.5rem;">
+  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">
+    Members ({{ group.members.count }})
+  </h2>
+  
+  <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));gap:1rem;">
+    {% for member in group.members.all %}
+    <div style="border:2px solid {% if member == group.creator %}#FFB74D{% else %}#DDD{% endif %};padding:1rem;border-radius:0.5rem;background:#FAFAFA;">
+      <div style="display:flex;justify-content:space-between;align-items:start;">
+        <div>
+          <h3 style="margin:0 0 0.5rem 0;color:#4FC3F7;">
+            👤 {{ member.user.username }}
+          </h3>
+          {% if member == group.creator %}
+            <span style="padding:0.25rem 0.5rem;background:#FFB74D;color:white;border-radius:0.25rem;font-size:0.75rem;font-weight:bold;">
+              CREATOR
+            </span>
+          {% endif %}
+        </div>
+        {% if is_member and member != profile %}
+          <a href="{% url 'invite_to_group' group.id member.id %}" style="color:#4FC3F7;font-size:0.85rem;text-decoration:none;">
+            👥
+          </a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Invite Friends (if member) -->
+{% if is_member %}
+<div class="card">
+  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">
+    ➕ Invite Friends
+  </h2>
+  
+  <p style="color:#666;margin-bottom:1rem;">
+    Search for friends to invite them to this group.
+  </p>
+  
+  <a href="{% url 'friend_requests' %}" class="button" style="text-decoration:none;">
+    View Your Friends
+  </a>
+</div>
+{% endif %}
+
+{% endblock %}
