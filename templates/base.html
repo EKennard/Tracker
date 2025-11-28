@@ -13,70 +13,56 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-        <header class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.15rem;text-align:center;padding:0.35rem;">
-            <div style="display:flex;justify-content:center;align-items:center;">
-                <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
-                <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
-                <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
-                <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
-                <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
-            </div>
-            <h1 style="font-family:'Fredoka One','Comic Neue',sans-serif;">
-                <a href="/" style="color:#4FC3F7;text-decoration:none;">GetLizzyFit</a>
-            </h1>
-            <div class="user-info" style="display:flex;align-items:center;gap:0.25rem;">
-                <span style="color:#BA68C8;font-size:0.95rem;font-weight:bold;">👤 {{ user.username }}</span>
-                <a href="/accounts/logout/" class="logout-button" style="background:#FF6B6B;color:white;padding:0.25rem 0.5rem;border-radius:0;text-decoration:none;font-weight:bold;box-shadow:0 1px 4px rgba(255,107,107,0.3);transition:all 0.3s;font-size:0.85rem;">🚪 Logout</a>
-            </div>
-        </header>
-        
-        {% if request.path != '/users/create-profile/' %}
         <!-- Burger Menu Button (Mobile) -->
-        <button id="burger-menu" class="burger-menu" onclick="toggleMenu()" style="display:none;position:fixed;top:0.25rem;right:0.25rem;z-index:1001;background:#4FC3F7;border:2px solid #BA68C8;border-radius:0;width:40px;height:40px;cursor:pointer;box-shadow:0 2px 6px rgba(79,195,247,0.4);transition:all 0.3s;padding:0;">
+        {% if request.path != '/users/create-profile/' %}
+        <button id="burger-menu" class="burger-menu" onclick="toggleMenu()">
             <div class="burger-icon">
-                <span style="display:block;width:24px;height:2.5px;background:white;margin:4px auto;border-radius:2px;transition:all 0.3s;"></span>
-                <span style="display:block;width:24px;height:2.5px;background:white;margin:4px auto;border-radius:2px;transition:all 0.3s;"></span>
-                <span style="display:block;width:24px;height:2.5px;background:white;margin:4px auto;border-radius:2px;transition:all 0.3s;"></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </button>
+        {% endif %}
         
-        <!-- Navigation Menu -->
-        <nav id="main-nav" class="card main-nav" style="display:flex;flex-wrap:wrap;gap:0.25rem;align-items:center;justify-content:center;margin-bottom:0.25rem;padding:0.25rem;">
-            <a href="/users/dashboard/" class="button">🏠 Dashboard</a>
-            
-            <!-- Tracking Dropdown -->
-            <div class="dropdown">
-                <button class="button dropdown-btn" onclick="toggleDropdown(event, 'tracking-menu')">📊 Tracking ▼</button>
-                <div id="tracking-menu" class="dropdown-content">
-                    <a href="/meals/log/">🍎 Meals</a>
-                    <a href="/exercise/log/">💪 Exercise</a>
-                    <a href="/habits/log/">✅ Habits</a>
-                    <a href="/fertility/">🌸 Fertility</a>
+        <!-- Main Navbar -->
+        <nav id="main-navbar" class="main-navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <div class="brand-icons">
+                        <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
+                        <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
+                        <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
+                        <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
+                        <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
+                    </div>
+                    <h1 class="brand-title">
+                        <a href="/">GetLizzyFit</a>
+                    </h1>
                 </div>
-            </div>
-            
-            <!-- Progress Dropdown -->
-            <div class="dropdown">
-                <button class="button dropdown-btn" onclick="toggleDropdown(event, 'progress-menu')">📈 Progress ▼</button>
-                <div id="progress-menu" class="dropdown-content">
-                    <a href="/metrics/summary/">📏 Metrics</a>
-                    <a href="/milestones/list/">🎯 Milestones</a>
+                
+                {% if request.path != '/users/create-profile/' %}
+                <div id="navbar-links" class="navbar-links">
+                    <a href="/users/dashboard/" class="nav-link">🏠 Dashboard</a>
+                    <a href="/meals/log/" class="nav-link">🍎 Meals</a>
+                    <a href="/exercise/log/" class="nav-link">💪 Exercise</a>
+                    <a href="/habits/log/" class="nav-link">✅ Habits</a>
+                    <a href="/fertility/" class="nav-link">🌸 Fertility</a>
+                    <a href="/metrics/summary/" class="nav-link">📏 Metrics</a>
+                    <a href="/milestones/list/" class="nav-link">🎯 Milestones</a>
+                    <a href="/social/feed/" class="nav-link">🌍 Feed</a>
+                    <a href="/social/search/" class="nav-link">🔍 Find Friends</a>
+                    <a href="/social/friend-requests/" class="nav-link">👥 Friends</a>
+                    <a href="/social/groups/" class="nav-link">👫 Groups</a>
+                    <a href="/notifications/list/" class="nav-link">🔔 Notifications</a>
                 </div>
-            </div>
-            
-            <!-- Social Dropdown -->
-            <div class="dropdown">
-                <button class="button dropdown-btn" onclick="toggleDropdown(event, 'social-menu')">👥 Social ▼</button>
-                <div id="social-menu" class="dropdown-content">
-                    <a href="/social/feed/">🌍 Global Feed</a>
-                    <a href="/social/search/">🔍 Find Friends</a>
-                    <a href="/social/friend-requests/">👥 My Friends</a>
-                    <a href="/social/groups/">👫 Groups</a>
-                    <a href="/notifications/list/">🔔 Notifications</a>
+                {% endif %}
+                
+                <div class="navbar-user">
+                    <span class="user-name">👤 {{ user.username }}</span>
+                    <a href="/accounts/logout/" class="logout-button">🚪 Logout</a>
                 </div>
             </div>
         </nav>
-        {% endif %}
     {% else %}
         <header class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.25rem;text-align:center;">
             <div style="display:flex;justify-content:center;align-items:center;gap:0.5rem;">
@@ -176,46 +162,24 @@
     <script>
         // Toggle burger menu
         function toggleMenu() {
-            const nav = document.getElementById('main-nav');
+            const navLinks = document.getElementById('navbar-links');
             const burger = document.getElementById('burger-menu');
-            nav.classList.toggle('active');
-            burger.classList.toggle('active');
-        }
-        
-        // Toggle dropdown menus
-        function toggleDropdown(event, menuId) {
-            event.stopPropagation();
-            const dropdown = event.target.closest('.dropdown');
-            const allDropdowns = document.querySelectorAll('.dropdown');
-            
-            // Close other dropdowns
-            allDropdowns.forEach(d => {
-                if (d !== dropdown) {
-                    d.classList.remove('active');
-                }
-            });
-            
-            // Toggle current dropdown
-            dropdown.classList.toggle('active');
-        }
-        
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('.dropdown')) {
-                document.querySelectorAll('.dropdown').forEach(d => {
-                    d.classList.remove('active');
-                });
+            if (navLinks) {
+                navLinks.classList.toggle('active');
             }
-        });
+            if (burger) {
+                burger.classList.toggle('active');
+            }
+        }
         
         // Close mobile menu when clicking outside
         document.addEventListener('click', function(event) {
-            const nav = document.getElementById('main-nav');
+            const navLinks = document.getElementById('navbar-links');
             const burger = document.getElementById('burger-menu');
             
-            if (nav && burger && nav.classList.contains('active')) {
-                if (!nav.contains(event.target) && !burger.contains(event.target)) {
-                    nav.classList.remove('active');
+            if (navLinks && burger && navLinks.classList.contains('active')) {
+                if (!navLinks.contains(event.target) && !burger.contains(event.target)) {
+                    navLinks.classList.remove('active');
                     burger.classList.remove('active');
                 }
             }
