@@ -125,7 +125,13 @@ def dashboard(request):
     # If no weight data exists, show starting weight as a placeholder
     if not weight_data and profile.starting_weight:
         start_date = profile.user.date_joined.strftime('%Y-%m-%d')
-        weight_data = [{'date': start_date, 'weight': starting_weight_display}]
+        # Convert starting weight to display unit (numeric for chart)
+        starting_weight_numeric = float(profile.starting_weight)
+        if profile.weight_unit == 'st':
+            starting_weight_numeric = starting_weight_numeric / 14.0
+        elif profile.weight_unit == 'kg':
+            starting_weight_numeric = starting_weight_numeric * 0.453592
+        weight_data = [{'date': start_date, 'weight': starting_weight_numeric}]
     
     # Get proper display unit label
     display_unit = 'st' if profile.weight_unit == 'st' else profile.weight_unit
