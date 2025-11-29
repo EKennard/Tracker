@@ -505,8 +505,8 @@ def log_activities(request):
     except UserProfile.DoesNotExist:
         return redirect('create_profile')
     
-    from meals.forms import MealForm
-    from exercise.forms import ExerciseForm
+    from meals.forms import NutritionLogForm
+    from exercise.forms import ExerciseLogForm
     from habits.forms import HabitLogForm
     from fertility.forms import FertilityLogForm
     from metrics.forms import HealthMetricsForm
@@ -521,24 +521,24 @@ def log_activities(request):
     
     # Get recent entries for each category
     from metrics.models import HealthMetrics
-    from meals.models import Meal
-    from exercise.models import Exercise
-    from habits.models import HabitLog
-    from fertility.models import FertilityLog
+    from meals.models import NutritionLog
+    from exercise.models import ExerciseLog
+    from habits.models import HabitLog as HabitLogModel
+    from fertility.models import FertilityLog as FertilityLogModel
     
     recent_weight = HealthMetrics.objects.filter(user_profile=profile).order_by('-date')[:5]
-    recent_meals = Meal.objects.filter(user_profile=profile).order_by('-date', '-time')[:5]
-    recent_exercise = Exercise.objects.filter(user_profile=profile).order_by('-date')[:5]
-    recent_habits = HabitLog.objects.filter(user_profile=profile).order_by('-date')[:5]
-    recent_fertility = FertilityLog.objects.filter(user_profile=profile).order_by('-date')[:5]
+    recent_meals = NutritionLog.objects.filter(profile=profile).order_by('-date')[:5]
+    recent_exercise = ExerciseLog.objects.filter(profile=profile).order_by('-date')[:5]
+    recent_habits = HabitLogModel.objects.filter(profile=profile).order_by('-date')[:5]
+    recent_fertility = FertilityLogModel.objects.filter(profile=profile).order_by('-date')[:5]
     
     # Initialize forms with selected date
     context = {
         'profile': profile,
         'selected_date': selected_date,
         'weight_form': HealthMetricsForm(initial={'date': selected_date}),
-        'meal_form': MealForm(initial={'date': selected_date}),
-        'exercise_form': ExerciseForm(initial={'date': selected_date}),
+        'meal_form': NutritionLogForm(initial={'date': selected_date}),
+        'exercise_form': ExerciseLogForm(initial={'date': selected_date}),
         'habit_form': HabitLogForm(initial={'date': selected_date}),
         'fertility_form': FertilityLogForm(initial={'date': selected_date}),
         'recent_weight': recent_weight,
