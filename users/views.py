@@ -197,7 +197,7 @@ def dashboard(request):
     from social.models import GlobalActivity
     friends = profile.get_friends()
     friend_ids = [f.id for f in friends]
-    friend_activities = GlobalActivity.objects.filter(profile_id__in=friend_ids).order_by('-timestamp')[:5]
+    friend_activities = GlobalActivity.objects.filter(profile_id__in=friend_ids).order_by('-created_at')[:5]
     
     # Goal weight for display
     goal_weight = None
