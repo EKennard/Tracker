@@ -16,43 +16,55 @@
         <!-- Bootstrap Navbar -->
         <nav class="navbar navbar-expand-lg sticky-top p-1" style="background: linear-gradient(135deg, #9C27B0 0%, #E91E63 50%, #FF6F00 100%);">
             <div class="container-fluid px-2">
-                <!-- Brand -->
-                <a class="navbar-brand text-white fw-bold d-flex align-items-center gap-2" href="/users/dashboard/">
-                    <img src="{% static 'icons/apple-doodle.svg' %}" width="24" height="24" alt="">
-                    <img src="{% static 'icons/heart-doodle.svg' %}" width="24" height="24" alt="">
-                    <img src="{% static 'icons/checklist-doodle.svg' %}" width="24" height="24" alt="">
-                    <img src="{% static 'icons/calendar-doodle.svg' %}" width="24" height="24" alt="">
-                    <img src="{% static 'icons/user-doodle.svg' %}" width="24" height="24" alt="">
-                    <span class="ms-1">GetLizzyFit</span>
-                </a>
-                
-                <!-- User info + Logout (Desktop) -->
-                <div class="d-none d-lg-flex align-items-center gap-2 text-white me-2">
-                    <span class="small">👤 {{ user.username }}</span>
-                    <a href="/accounts/logout/" class="btn btn-sm" style="background: #FFD600; color: #333; font-weight: bold;">🚪 Logout</a>
+                <div class="d-flex flex-column w-100">
+                    <!-- Top Row: Logo and Burger -->
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <!-- Brand -->
+                        <a class="navbar-brand text-white fw-bold mb-0" href="/users/dashboard/">
+                            <span>GetLizzyFit</span>
+                        </a>
+                        
+                        <div class="d-flex align-items-center gap-2">
+                            <!-- User info + Logout (Desktop) -->
+                            <div class="d-none d-lg-flex align-items-center gap-2 text-white">
+                                <span class="small">👤 {{ user.username }}</span>
+                                <a href="/accounts/logout/" class="btn btn-sm" style="background: #FFD600; color: #333; font-weight: bold;">🚪 Logout</a>
+                            </div>
+                            
+                            <!-- Toggler for mobile -->
+                            <button class="navbar-toggler border-white p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Bottom Row: Icons -->
+                    <div class="d-flex gap-1 mb-1">
+                        <img src="{% static 'icons/apple-doodle.svg' %}" width="20" height="20" alt="">
+                        <img src="{% static 'icons/heart-doodle.svg' %}" width="20" height="20" alt="">
+                        <img src="{% static 'icons/checklist-doodle.svg' %}" width="20" height="20" alt="">
+                        <img src="{% static 'icons/calendar-doodle.svg' %}" width="20" height="20" alt="">
+                        <img src="{% static 'icons/user-doodle.svg' %}" width="20" height="20" alt="">
+                    </div>
                 </div>
-                
-                <!-- Toggler for mobile -->
-                <button class="navbar-toggler border-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                <!-- Desktop Links -->
-                <div class="collapse navbar-collapse d-none d-lg-block">
-                    <ul class="navbar-nav ms-auto gap-1">
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/users/dashboard/">🏠 Dashboard</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/meals/log/">🍎 Meals</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/exercise/log/">💪 Exercise</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/habits/log/">✅ Habits</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/fertility/">🌸 Fertility</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/metrics/summary/">📏 Metrics</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/milestones/list/">🎯 Milestones</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/feed/">🌍 Feed</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/search/">🔍 Find Friends</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/friend-requests/">👥 Friends</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/groups/">👫 Groups</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/notifications/list/">🔔 Notifications</a></li>
-                    </ul>
+                    
+                    <!-- Desktop Links -->
+                    <div class="collapse navbar-collapse d-none d-lg-block">
+                        <ul class="navbar-nav gap-1 flex-wrap">
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/users/dashboard/">🏠 Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/meals/log/">🍎 Meals</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/exercise/log/">💪 Exercise</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/habits/log/">✅ Habits</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/fertility/">🌸 Fertility</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/metrics/summary/">📏 Metrics</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/milestones/list/">🎯 Milestones</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/feed/">🌍 Feed</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/search/">🔍 Find Friends</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/friend-requests/">👥 Friends</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/groups/">👫 Groups</a></li>
+                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/notifications/list/">🔔 Notifications</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
