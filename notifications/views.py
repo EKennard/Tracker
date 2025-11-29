@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from .models import Notification
 from users.decorators import profile_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -19,6 +20,7 @@ def notifications_list(request):
             notif = form.save(commit=False)
             notif.profile = profile
             notif.save()
+            messages.success(request, '✅ Notification added successfully!')
             return redirect('notifications_list')
     else:
         form = NotificationForm()

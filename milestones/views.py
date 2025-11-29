@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from .models import Milestone
 from users.decorators import profile_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -19,6 +20,7 @@ def milestones_list(request):
             milestone = form.save(commit=False)
             milestone.profile = profile
             milestone.save()
+            messages.success(request, f'✅ Milestone "{milestone.title}" added successfully!')
             return redirect('milestones_list')
     else:
         form = MilestoneForm()
