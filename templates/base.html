@@ -25,14 +25,14 @@
                         </a>
                         
                         <div class="d-flex align-items-center gap-2">
-                            <!-- User info + Logout (Desktop) -->
-                            <div class="d-none d-lg-flex align-items-center gap-2 text-white">
+                            <!-- User info + Logout (All screens) -->
+                            <div class="d-flex align-items-center gap-2 text-white">
                                 <span class="small">👤 {{ user.username }}</span>
                                 <a href="/accounts/logout/" class="btn btn-sm" style="background: #FFD600; color: #333; font-weight: bold;">🚪 Logout</a>
                             </div>
                             
                             <!-- Toggler for mobile -->
-                            <button class="navbar-toggler border-white p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas">
+                            <button class="navbar-toggler border-white p-1 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                         </div>
@@ -46,11 +46,10 @@
                         <img src="{% static 'icons/calendar-doodle.svg' %}" width="20" height="20" alt="">
                         <img src="{% static 'icons/user-doodle.svg' %}" width="20" height="20" alt="">
                     </div>
-                </div>
                     
                     <!-- Desktop Links -->
-                    <div class="collapse navbar-collapse d-none d-lg-block">
-                        <ul class="navbar-nav gap-1 flex-wrap">
+                    <div class="d-none d-lg-block">
+                        <ul class="navbar-nav gap-1 flex-wrap d-flex flex-row">
                             <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/users/dashboard/">🏠 Dashboard</a></li>
                             <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/meals/log/">🍎 Meals</a></li>
                             <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/exercise/log/">💪 Exercise</a></li>
@@ -65,6 +64,7 @@
                             <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/notifications/list/">🔔 Notifications</a></li>
                         </ul>
                     </div>
+                </div>
                 </div>
             </div>
         </nav>
