@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<div class="row g-2">
+    <!-- LEFT COLUMN: User Stats Card -->
+    <div class="col-lg-3">
+        <!-- User Card -->
+        <div class="card mb-2" style="border: 2px solid #9C27B0;">
+            <div class="card-body p-3 text-center">
+                <div class="mb-2" style="font-size: 3rem;">
+                    {% if profile.avatar == 'male1' %}💪
+                    {% elif profile.avatar == 'male2' %}🏃‍♂️
+                    {% elif profile.avatar == 'male3' %}🚴‍♂️
+                    {% elif profile.avatar == 'female1' %}💃
+                    {% elif profile.avatar == 'female2' %}🏃‍♀️
+                    {% elif profile.avatar == 'female3' %}🚴‍♀️
+                    {% elif profile.avatar == 'fitness1' %}🏋️
+                    {% elif profile.avatar == 'fitness2' %}🤸
+                    {% elif profile.avatar == 'fitness3' %}🧘
+                    {% elif profile.avatar == 'health1' %}❤️
+                    {% elif profile.avatar == 'health2' %}🌟
+                    {% else %}👤
+                    {% endif %}
+                </div>
+                <h3 class="h6 mb-0">{{ user.username }}</h3>
+                <div class="small text-muted mb-3">Member since {{ user.date_joined|date:"M Y" }}</div>
+                
+                <!-- Quick Stats -->
+                <div class="row g-1 text-center small mb-2">
+                    <div class="col-4">
+                        <div class="fw-bold" style="color: #9C27B0;">{{ activity_count }}</div>
+                        <div class="text-muted" style="font-size: 0.75rem;">Activities</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="fw-bold" style="color: #E91E63;">{{ friend_count }}</div>
+                        <div class="text-muted" style="font-size: 0.75rem;">Friends</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="fw-bold" style="color: #FF6F00;">{{ milestone_count }}</div>
+                        <div class="text-muted" style="font-size: 0.75rem;">Milestones</div>
+                    </div>
+                </div>
+                
+                <a href="{% url 'profile_view' %}" class="btn btn-sm w-100" style="background: #9C27B0; color: white;">View Profile</a>
+            </div>
+        </div>
+        
+        <!-- Weight Summary Card -->
+        <div class="card mb-2" style="border: 2px solid #E91E63;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #E91E63;">⚖️ Weight Progress</h3>
+                <div class="small mb-1"><strong>Starting:</strong> {{ starting_weight_display }}</div>
+                {% if current_weight_display %}
+                <div class="small mb-1"><strong>Current:</strong> {{ current_weight_display }}</div>
+                <div class="small mb-1"><strong>Lost:</strong> <span style="color: #00C853;">{{ weight_lost }}</span></div>
+                {% else %}
+                <div class="small text-muted fst-italic">No weight logged yet</div>
+                {% endif %}
+                {% if current_bmi %}
+                <div class="small mb-2"><strong>BMI:</strong> {{ current_bmi|floatformat:1 }}</div>
+                {% endif %}
+                <a href="{% url 'log_activities' %}" class="btn btn-sm w-100" style="background: #E91E63; color: white;">📝 Log Weight</a>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="card" style="border: 2px solid #FF6F00;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #FF6F00;">⚡ Quick Actions</h3>
+                <a href="{% url 'log_activities' %}" class="btn btn-sm w-100 mb-1" style="background: #FF6F00; color: white;">📝 Log Activities</a>
+                <a href="{% url 'social_hub' %}" class="btn btn-sm w-100 mb-1" style="background: #FFD600; color: #333;">👥 View Friends</a>
+                <a href="/milestones/list/" class="btn btn-sm w-100" style="background: #00C853; color: white;">🎯 My Milestones</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CENTER COLUMN: Activity Feed -->
+    <div class="col-lg-6">
+        <div class="card" style="border: 2px solid #9C27B0;">
+            <div class="card-body p-2">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h2 class="h5 mb-0" style="color: #9C27B0;">📊 Your Activity Feed</h2>
+                    <a href="{% url 'log_activities' %}" class="btn btn-sm" style="background: #9C27B0; color: white;">+ Log New</a>
+                </div>
+                
+                {% if activity_stream %}
+                    {% for activity in activity_stream %}
+                    <div class="card mb-2" style="border-left: 3px solid 
+                        {% if 'Weight' in activity.activity_text or 'Body' in activity.activity_text %}#9C27B0
+                        {% elif 'Meal' in activity.activity_text or 'breakfast' in activity.activity_text or 'lunch' in activity.activity_text or 'dinner' in activity.activity_text %}#E91E63
+                        {% elif 'Exercise' in activity.activity_text or 'workout' in activity.activity_text %}#FF6F00
+                        {% elif 'Habit' in activity.activity_text %}#FFD600
+                        {% elif 'Fertility' in activity.activity_text %}#00C853
+                        {% else %}#9C27B0
+                        {% endif %};">
+                        <div class="card-body p-2">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <span class="fs-5">{{ activity.activity_icon }}</span>
+                                        <span class="small fw-bold">{{ activity.activity_text }}</span>
+                                    </div>
+                                    {% if activity.details %}
+                                    <div class="small text-muted ms-4">{{ activity.details }}</div>
+                                    {% endif %}
+                                </div>
+                                <span class="badge bg-light text-dark small">{{ activity.date|date:"M d" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center py-5">
+                        <div class="mb-3" style="font-size: 3rem; opacity: 0.3;">📊</div>
+                        <p class="text-muted">No activities logged yet</p>
+                        <p class="small text-muted">Start tracking your wellness journey!</p>
+                        <a href="{% url 'log_activities' %}" class="btn" style="background: #9C27B0; color: white;">📝 Log Your First Activity</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- RIGHT COLUMN: Weight Chart & Milestones -->
+    <div class="col-lg-3">
+        <!-- Weight Chart -->
+        <div class="card mb-2" style="border: 2px solid #00C853;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #00C853;">📈 Weight Trend</h3>
+                
+                <!-- Mini Chart -->
+                <canvas id="miniWeightChart" style="max-height: 150px;"></canvas>
+                
+                <!-- Progress Bar -->
+                {% if weight_progress_percent > 0 %}
+                <div class="mt-2">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="small">Progress to Goal</span>
+                        <span class="small fw-bold" style="color: #00C853;">{{ weight_progress_percent|floatformat:0 }}%</span>
+                    </div>
+                    <div class="progress" style="height: 8px; background-color: #F3E5F5;">
+                        <div class="progress-bar" role="progressbar" style="width: {{ weight_progress_percent }}%; background: linear-gradient(90deg, #9C27B0, #00C853);"></div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Active Milestones -->
+        <div class="card mb-2" style="border: 2px solid #FFD600;">
+            <div class="card-body p-2">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="h6 mb-0" style="color: #FF9800;">🎯 Milestones</h3>
+                    <a href="/milestones/list/" class="btn btn-sm" style="background: #FFD600; color: #333;">View All</a>
+                </div>
+                
+                {% if recent_milestones %}
+                    {% for milestone in recent_milestones|slice:":3" %}
+                    <div class="border-bottom pb-1 mb-1">
+                        <div class="small fw-bold">{{ milestone.title }}</div>
+                        <div class="small text-muted">{{ milestone.description|truncatewords:8 }}</div>
+                        {% if milestone.achieved %}
+                        <span class="badge bg-success small">✓ Achieved!</span>
+                        {% else %}
+                        <span class="badge bg-warning text-dark small">In Progress</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center text-muted small py-2">
+                        No milestones set yet
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Friends Activity -->
+        <div class="card" style="border: 2px solid #E91E63;">
+            <div class="card-body p-2">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="h6 mb-0" style="color: #E91E63;">👥 Friends</h3>
+                    <a href="{% url 'social_hub' %}" class="btn btn-sm" style="background: #E91E63; color: white;">View All</a>
+                </div>
+                
+                {% if friend_activities %}
+                    {% for activity in friend_activities|slice:":3" %}
+                    <div class="border-bottom pb-1 mb-1">
+                        <div class="small"><strong>{{ activity.profile.user.username }}</strong></div>
+                        <div class="small text-muted">{{ activity.activity_text|truncatewords:6 }}</div>
+                        <div class="small text-muted">{{ activity.timestamp|timesince }} ago</div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center text-muted small py-2">
+                        No friend activity yet
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js for mini weight chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const weightData = {{ weight_data|safe }};
+    
+    if (weightData && weightData.length > 0) {
+        const ctx = document.getElementById('miniWeightChart').getContext('2d');
+        
+        // Take last 7 data points for mini chart
+        const recentData = weightData.slice(-7);
+        const labels = recentData.map(d => {
+            const date = new Date(d.date);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        });
+        const weights = recentData.map(d => d.weight);
+        
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Weight',
+                    data: weights,
+                    borderColor: '#00C853',
+                    backgroundColor: 'rgba(0, 200, 83, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#00C853',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { font: { size: 10 } }
+                    },
+                    x: {
+                        ticks: { font: { size: 9 }, maxRotation: 45 }
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+{% endblock %}

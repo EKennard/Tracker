@@ -185,15 +185,42 @@ def dashboard(request):
     total_workouts = ExerciseLog.objects.filter(profile=profile).count()
     total_habit_logs = HabitLog.objects.filter(profile=profile).count()
     
-    return render(request, 'users/dashboard.html', {
+    # Get counts for dashboard stats
+    activity_count = len(activity_stream)
+    friend_count = profile.get_friends().count()
+    
+    # Get milestones
+    from milestones.models import Milestone
+    recent_milestones = Milestone.objects.filter(user_profile=profile).order_by('-created_at')[:5]
+    milestone_count = Milestone.objects.filter(user_profile=profile, achieved=True).count()
+    
+    # Get friend activities
+    from social.models import GlobalActivity
+    friends = profile.get_friends()
+    friend_ids = [f.id for f in friends]
+    friend_activities = GlobalActivity.objects.filter(profile_id__in=friend_ids).order_by('-timestamp')[:5]
+    
+    # Goal weight for display
+    goal_weight = None
+    if hasattr(profile, 'goal_weight') and profile.goal_weight:
+        goal_weight = format_weight_for_display(profile.goal_weight)
+    
+    return render(request, 'users/dashboard_new.html', {
         'profile': profile,
         'starting_weight_display': starting_weight_display,
+        'current_weight_display': current_weight_display,
         'current_weight': current_weight_display,
         'current_bmi': current_bmi,
         'weight_lost': weight_lost,
         'weight_progress_percent': weight_progress_percent,
+        'goal_weight': goal_weight,
         'weight_data': weight_data,
         'activity_stream': activity_stream,
+        'activity_count': activity_count,
+        'friend_count': friend_count,
+        'milestone_count': milestone_count,
+        'recent_milestones': recent_milestones,
+        'friend_activities': friend_activities,
         'total_meals': total_meals,
         'total_workouts': total_workouts,
         'total_habit_logs': total_habit_logs,
