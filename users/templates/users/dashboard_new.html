@@ -2,7 +2,7 @@
 {% block title %}Dashboard{% endblock %}
 {% block content %}
 
-<div class="row g-2">
+<div class="row g-2" style="min-height: calc(100vh - 180px);">
     <!-- LEFT COLUMN: User Stats Card -->
     <div class="col-lg-3">
         <!-- User Card -->
@@ -160,7 +160,7 @@
                     <div class="border-bottom pb-1 mb-1">
                         <div class="small fw-bold">{{ milestone.title }}</div>
                         <div class="small text-muted">{{ milestone.description|truncatewords:8 }}</div>
-                        {% if milestone.achieved %}
+                        {% if milestone.date_achieved %}
                         <span class="badge bg-success small">✓ Achieved!</span>
                         {% else %}
                         <span class="badge bg-warning text-dark small">In Progress</span>
@@ -187,8 +187,8 @@
                     {% for activity in friend_activities|slice:":3" %}
                     <div class="border-bottom pb-1 mb-1">
                         <div class="small"><strong>{{ activity.profile.user.username }}</strong></div>
-                        <div class="small text-muted">{{ activity.activity_text|truncatewords:6 }}</div>
-                        <div class="small text-muted">{{ activity.timestamp|timesince }} ago</div>
+                        <div class="small text-muted">{{ activity.description|truncatewords:6 }}</div>
+                        <div class="small text-muted">{{ activity.created_at|timesince }} ago</div>
                     </div>
                     {% endfor %}
                 {% else %}
