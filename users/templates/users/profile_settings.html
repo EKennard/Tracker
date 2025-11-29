@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profile & Settings{% endblock %}
+{% block content %}
+
+<div class="row g-2">
+    <!-- LEFT COLUMN: Account & Avatar -->
+    <div class="col-lg-4">
+        <!-- Avatar Selection -->
+        <div class="card mb-2" style="border: 2px solid #9C27B0;">
+            <div class="card-body p-3 text-center">
+                <h3 class="h6 mb-3" style="color: #9C27B0;">👤 Your Avatar</h3>
+                <div class="mb-3" style="font-size: 4rem;">
+                    <span id="avatarDisplay">
+                        {% if profile.avatar == 'male1' %}💪
+                        {% elif profile.avatar == 'male2' %}🏃‍♂️
+                        {% elif profile.avatar == 'male3' %}🚴‍♂️
+                        {% elif profile.avatar == 'female1' %}💃
+                        {% elif profile.avatar == 'female2' %}🏃‍♀️
+                        {% elif profile.avatar == 'female3' %}🚴‍♀️
+                        {% elif profile.avatar == 'fitness1' %}🏋️
+                        {% elif profile.avatar == 'fitness2' %}🤸
+                        {% elif profile.avatar == 'fitness3' %}🧘
+                        {% elif profile.avatar == 'health1' %}❤️
+                        {% elif profile.avatar == 'health2' %}🌟
+                        {% else %}👤
+                        {% endif %}
+                    </span>
+                </div>
+                <form method="post" action="{% url 'profile_view' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="update_avatar" value="1">
+                    <select name="avatar" class="form-select mb-2" id="avatarSelect" onchange="updateAvatarPreview()">
+                        <option value="default" {% if profile.avatar == 'default' %}selected{% endif %}>👤 Default</option>
+                        <optgroup label="Male">
+                            <option value="male1" {% if profile.avatar == 'male1' %}selected{% endif %}>💪 Strong</option>
+                            <option value="male2" {% if profile.avatar == 'male2' %}selected{% endif %}>🏃‍♂️ Runner</option>
+                            <option value="male3" {% if profile.avatar == 'male3' %}selected{% endif %}>🚴‍♂️ Cyclist</option>
+                        </optgroup>
+                        <optgroup label="Female">
+                            <option value="female1" {% if profile.avatar == 'female1' %}selected{% endif %}>💃 Dancer</option>
+                            <option value="female2" {% if profile.avatar == 'female2' %}selected{% endif %}>🏃‍♀️ Runner</option>
+                            <option value="female3" {% if profile.avatar == 'female3' %}selected{% endif %}>🚴‍♀️ Cyclist</option>
+                        </optgroup>
+                        <optgroup label="Fitness">
+                            <option value="fitness1" {% if profile.avatar == 'fitness1' %}selected{% endif %}>🏋️ Weightlifter</option>
+                            <option value="fitness2" {% if profile.avatar == 'fitness2' %}selected{% endif %}>🤸 Gymnast</option>
+                            <option value="fitness3" {% if profile.avatar == 'fitness3' %}selected{% endif %}>🧘 Yoga</option>
+                        </optgroup>
+                        <optgroup label="Wellness">
+                            <option value="health1" {% if profile.avatar == 'health1' %}selected{% endif %}>❤️ Heart</option>
+                            <option value="health2" {% if profile.avatar == 'health2' %}selected{% endif %}>🌟 Star</option>
+                        </optgroup>
+                    </select>
+                    <button type="submit" class="btn btn-sm w-100" style="background: #9C27B0; color: white;">💾 Save Avatar</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Account Info Card -->
+        <div class="card mb-2" style="border: 2px solid #E91E63;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #E91E63;">🔐 Account</h3>
+                <div class="small mb-1"><strong>Username:</strong> {{ user.username }}</div>
+                <div class="small mb-1"><strong>Email:</strong> {{ user.email|default:"Not set" }}</div>
+                <div class="small mb-2"><strong>Member Since:</strong> {{ user.date_joined|date:"M d, Y" }}</div>
+                <a href="{% url 'password_change' %}" class="btn btn-sm w-100" style="background: #E91E63; color: white;">🔑 Change Password</a>
+            </div>
+        </div>
+        
+        <!-- Personal Key -->
+        <div class="card" style="border: 2px solid #FF6F00;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #FF6F00;">🔑 Personal Key</h3>
+                <div class="small mb-1">Share this key with friends to connect:</div>
+                <div class="text-center p-2 mb-2" style="background: #FFF3E0; border: 2px dashed #FF6F00; font-family: monospace; font-size: 1.2rem; font-weight: bold; letter-spacing: 2px;">
+                    {{ profile.personal_key }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CENTER COLUMN: Privacy Settings -->
+    <div class="col-lg-4">
+        <div class="card" style="border: 2px solid #9C27B0;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-3" style="color: #9C27B0;">🔒 Privacy Settings</h3>
+                <form method="post" action="{% url 'profile_view' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="update_privacy" value="1">
+                    
+                    <!-- Global Privacy -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">Global Profile Visibility</label>
+                        <select name="is_public" class="form-select form-select-sm">
+                            <option value="False" {% if not profile.is_public %}selected{% endif %}>🔒 Private</option>
+                            <option value="True" {% if profile.is_public %}selected{% endif %}>🌍 Public</option>
+                        </select>
+                        <div class="form-text small">Public profiles are visible to all users</div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <!-- Weight Privacy -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">⚖️ Weight & Body Stats</label>
+                        <select name="weight_privacy" class="form-select form-select-sm">
+                            <option value="private" {% if profile.weight_privacy == 'private' %}selected{% endif %}>🔒 Private</option>
+                            <option value="friends" {% if profile.weight_privacy == 'friends' %}selected{% endif %}>👥 Friends Only</option>
+                            <option value="groups" {% if profile.weight_privacy == 'groups' %}selected{% endif %}>👫 Groups Only</option>
+                            <option value="public" {% if profile.weight_privacy == 'public' %}selected{% endif %}>🌍 Public</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Meals Privacy -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">🍎 Meal Diary</label>
+                        <select name="meals_privacy" class="form-select form-select-sm">
+                            <option value="private" {% if profile.meals_privacy == 'private' %}selected{% endif %}>🔒 Private</option>
+                            <option value="friends" {% if profile.meals_privacy == 'friends' %}selected{% endif %}>👥 Friends Only</option>
+                            <option value="groups" {% if profile.meals_privacy == 'groups' %}selected{% endif %}>👫 Groups Only</option>
+                            <option value="public" {% if profile.meals_privacy == 'public' %}selected{% endif %}>🌍 Public</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Exercise Privacy -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">💪 Exercise Logs</label>
+                        <select name="exercise_privacy" class="form-select form-select-sm">
+                            <option value="private" {% if profile.exercise_privacy == 'private' %}selected{% endif %}>🔒 Private</option>
+                            <option value="friends" {% if profile.exercise_privacy == 'friends' %}selected{% endif %}>👥 Friends Only</option>
+                            <option value="groups" {% if profile.exercise_privacy == 'groups' %}selected{% endif %}>👫 Groups Only</option>
+                            <option value="public" {% if profile.exercise_privacy == 'public' %}selected{% endif %}>🌍 Public</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Habits Privacy -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">✅ Habits</label>
+                        <select name="habits_privacy" class="form-select form-select-sm">
+                            <option value="private" {% if profile.habits_privacy == 'private' %}selected{% endif %}>🔒 Private</option>
+                            <option value="friends" {% if profile.habits_privacy == 'friends' %}selected{% endif %}>👥 Friends Only</option>
+                            <option value="groups" {% if profile.habits_privacy == 'groups' %}selected{% endif %}>👫 Groups Only</option>
+                            <option value="public" {% if profile.habits_privacy == 'public' %}selected{% endif %}>🌍 Public</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Fertility Privacy -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">🌸 Fertility Tracking</label>
+                        <select name="fertility_privacy" class="form-select form-select-sm">
+                            <option value="private" {% if profile.fertility_privacy == 'private' %}selected{% endif %}>🔒 Private</option>
+                            <option value="friends" {% if profile.fertility_privacy == 'friends' %}selected{% endif %}>👥 Friends Only</option>
+                            <option value="groups" {% if profile.fertility_privacy == 'groups' %}selected{% endif %}>👫 Groups Only</option>
+                            <option value="public" {% if profile.fertility_privacy == 'public' %}selected{% endif %}>🌍 Public</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn w-100" style="background: #9C27B0; color: white;">💾 Save Privacy Settings</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- RIGHT COLUMN: Personal Info & Preferences -->
+    <div class="col-lg-4">
+        <!-- Personal Info -->
+        <div class="card mb-2" style="border: 2px solid #00C853;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #00C853;">📋 Personal Info</h3>
+                <div class="small mb-1"><strong>Age:</strong> {{ profile.age }} years</div>
+                <div class="small mb-1"><strong>Sex:</strong> {{ profile.get_sex_display }}</div>
+                <div class="small mb-1"><strong>Height:</strong> {{ height_display }}</div>
+                <div class="small mb-1"><strong>Starting Weight:</strong> {{ starting_weight_display }}</div>
+                {% if current_weight_display %}
+                <div class="small mb-1"><strong>Current Weight:</strong> {{ current_weight_display }}</div>
+                {% endif %}
+                <div class="small mb-2"><strong>Activity Level:</strong> {{ profile.get_activity_level_display }}</div>
+                <a href="{% url 'edit_profile' %}" class="btn btn-sm w-100" style="background: #00C853; color: white;">✏️ Edit Profile</a>
+            </div>
+        </div>
+        
+        <!-- Unit Preferences -->
+        <div class="card mb-2" style="border: 2px solid #FFD600;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #FF9800;">⚙️ Unit Preferences</h3>
+                <div class="small mb-1"><strong>Weight:</strong> {{ profile.get_weight_unit_display }}</div>
+                <div class="small mb-1"><strong>Height:</strong> {{ profile.get_height_unit_display }}</div>
+                <div class="small mb-2"><strong>Distance:</strong> {{ profile.get_distance_unit_display }}</div>
+                <a href="{% url 'edit_profile' %}" class="btn btn-sm w-100" style="background: #FFD600; color: #333;">⚙️ Change Units</a>
+            </div>
+        </div>
+        
+        <!-- Goals -->
+        {% if profile.goal or goal_weight_display %}
+        <div class="card" style="border: 2px solid #E91E63;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #E91E63;">🎯 My Goals</h3>
+                {% if profile.goal %}
+                <div class="small mb-1"><strong>Goal:</strong> {{ profile.goal }}</div>
+                {% endif %}
+                {% if goal_weight_display %}
+                <div class="small mb-1"><strong>Target Weight:</strong> {{ goal_weight_display }}</div>
+                {% endif %}
+                {% if profile.deadline %}
+                <div class="small mb-2"><strong>Deadline:</strong> {{ profile.deadline|date:"M d, Y" }}</div>
+                {% endif %}
+                <a href="{% url 'edit_profile' %}" class="btn btn-sm w-100" style="background: #E91E63; color: white;">✏️ Edit Goals</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function updateAvatarPreview() {
+    const select = document.getElementById('avatarSelect');
+    const display = document.getElementById('avatarDisplay');
+    const avatarMap = {
+        'default': '👤',
+        'male1': '💪',
+        'male2': '🏃‍♂️',
+        'male3': '🚴‍♂️',
+        'female1': '💃',
+        'female2': '🏃‍♀️',
+        'female3': '🚴‍♀️',
+        'fitness1': '🏋️',
+        'fitness2': '🤸',
+        'fitness3': '🧘',
+        'health1': '❤️',
+        'health2': '🌟'
+    };
+    display.textContent = avatarMap[select.value] || '👤';
+}
+</script>
+
+{% endblock %}

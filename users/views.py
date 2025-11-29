@@ -308,7 +308,29 @@ def user_list(request):
 @login_required
 @profile_required
 def profile_view(request):
-    """View user's complete profile information"""
+    """View user's complete profile information and handle settings updates"""
+    profile = request.user.userprofile
+    
+    # Handle avatar update
+    if request.method == 'POST' and 'update_avatar' in request.POST:
+        avatar = request.POST.get('avatar', 'default')
+        profile.avatar = avatar
+        profile.save()
+        messages.success(request, '✅ Avatar updated successfully!')
+        return redirect('profile_view')
+    
+    # Handle privacy settings update
+    if request.method == 'POST' and 'update_privacy' in request.POST:
+        profile.is_public = request.POST.get('is_public') == 'True'
+        profile.weight_privacy = request.POST.get('weight_privacy', 'private')
+        profile.meals_privacy = request.POST.get('meals_privacy', 'private')
+        profile.exercise_privacy = request.POST.get('exercise_privacy', 'private')
+        profile.habits_privacy = request.POST.get('habits_privacy', 'private')
+        profile.fertility_privacy = request.POST.get('fertility_privacy', 'private')
+        profile.save()
+        messages.success(request, '✅ Privacy settings updated successfully!')
+        return redirect('profile_view')
+    
     profile = request.user.userprofile
     
     # Helper function to format weight for display (with stones/pounds breakdown)
@@ -386,7 +408,7 @@ def profile_view(request):
         'recent_measurements': recent_measurements,
     }
     
-    return render(request, 'users/profile.html', context)
+    return render(request, 'users/profile_settings.html', context)
 
 @login_required
 @profile_required

@@ -36,6 +36,22 @@ class UserProfile(models.Model):
     # Social features
     personal_key = models.CharField(max_length=12, unique=True, blank=True, help_text='Unique code for others to find you')
     is_public = models.BooleanField(default=False, help_text='Allow others to view your progress and milestones')
+    
+    # Avatar selection
+    avatar = models.CharField(max_length=50, default='default', help_text='Selected avatar icon')
+    
+    # Privacy settings for each feature
+    PRIVACY_CHOICES = [
+        ('private', 'Private'),
+        ('friends', 'Friends Only'),
+        ('groups', 'Groups Only'),
+        ('public', 'Public'),
+    ]
+    weight_privacy = models.CharField(max_length=20, choices=PRIVACY_CHOICES, default='private')
+    meals_privacy = models.CharField(max_length=20, choices=PRIVACY_CHOICES, default='private')
+    exercise_privacy = models.CharField(max_length=20, choices=PRIVACY_CHOICES, default='private')
+    fertility_privacy = models.CharField(max_length=20, choices=PRIVACY_CHOICES, default='private')
+    habits_privacy = models.CharField(max_length=20, choices=PRIVACY_CHOICES, default='private')
 
     def save(self, *args, **kwargs):
         # Generate personal key if not exists
