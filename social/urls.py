@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # Main social hub
+    path('', views.social_hub, name='social_hub'),
+    
     # Global feed
     path('feed/', views.global_feed, name='global_feed'),
     

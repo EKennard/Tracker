@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block title %}Social{% endblock %}
+{% block content %}
+
+<div class="row g-2">
+    <!-- LEFT COLUMN: Friends & Requests -->
+    <div class="col-lg-4">
+        <!-- Friend Requests -->
+        {% if pending_requests %}
+        <div class="card mb-2" style="border: 2px solid #E91E63;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #E91E63;">👥 Friend Requests ({{ pending_requests.count }})</h3>
+                {% for request in pending_requests %}
+                <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                    <div>
+                        <strong>{{ request.user.user.username }}</strong>
+                        <div class="small text-muted">{{ request.created_at|date:"M d" }}</div>
+                    </div>
+                    <div>
+                        <form method="post" action="{% url 'accept_friend_request' request.id %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-success">✓</button>
+                        </form>
+                        <form method="post" action="{% url 'decline_friend_request' request.id %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">✗</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Friends List -->
+        <div class="card mb-2" style="border: 2px solid #9C27B0;">
+            <div class="card-body p-2">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="h6 mb-0" style="color: #9C27B0;">👥 Friends ({{ friends.count }})</h3>
+                    <button class="btn btn-sm" style="background: #9C27B0; color: white;" data-bs-toggle="modal" data-bs-target="#searchModal">+ Find</button>
+                </div>
+                {% if friends %}
+                    {% for friend in friends|slice:":10" %}
+                    <div class="border-bottom pb-1 mb-1">
+                        <strong class="small">{{ friend.user.username }}</strong>
+                        {% if friend.is_public %}
+                        <span class="badge bg-success small">Public</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    {% if friends.count > 10 %}
+                    <div class="text-center mt-2">
+                        <small class="text-muted">+ {{ friends.count|add:"-10" }} more</small>
+                    </div>
+                    {% endif %}
+                {% else %}
+                    <div class="text-center text-muted fst-italic small py-2">
+                        No friends yet. Start connecting!
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Group Invitations -->
+        {% if pending_invitations %}
+        <div class="card mb-2" style="border: 2px solid #FF6F00;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #FF6F00;">👫 Group Invites ({{ pending_invitations.count }})</h3>
+                {% for invitation in pending_invitations %}
+                <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                    <div>
+                        <strong class="small">{{ invitation.group.name }}</strong>
+                        <div class="small text-muted">by {{ invitation.inviter.user.username }}</div>
+                    </div>
+                    <div>
+                        <form method="post" action="{% url 'accept_group_invitation' invitation.id %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-success">✓</button>
+                        </form>
+                        <form method="post" action="{% url 'decline_group_invitation' invitation.id %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">✗</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Groups -->
+        <div class="card" style="border: 2px solid #FFD600;">
+            <div class="card-body p-2">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="h6 mb-0" style="color: #FF9800;">👫 My Groups ({{ user_groups.count }})</h3>
+                    <a href="{% url 'groups' %}" class="btn btn-sm" style="background: #FFD600; color: #333;">View All</a>
+                </div>
+                {% if user_groups %}
+                    {% for group in user_groups|slice:":5" %}
+                    <div class="border-bottom pb-1 mb-1">
+                        <a href="{% url 'group_detail' group.id %}" class="text-decoration-none">
+                            <strong class="small">{{ group.name }}</strong>
+                        </a>
+                        <div class="small text-muted">{{ group.members.count }} members</div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center text-muted fst-italic small py-2">
+                        Not in any groups yet
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- CENTER COLUMN: Activity Feed -->
+    <div class="col-lg-8">
+        <div class="card" style="border: 2px solid #00C853;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #00C853;">🌍 Activity Feed</h3>
+                
+                {% if activities %}
+                    {% for activity in activities %}
+                    <div class="card mb-2" style="border: 1px solid #E0E0E0;">
+                        <div class="card-body p-2">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                <div>
+                                    <strong class="small">{{ activity.profile.user.username }}</strong>
+                                    <span class="small text-muted">• {{ activity.timestamp|timesince }} ago</span>
+                                </div>
+                                <span class="fs-5">{{ activity.activity_icon }}</span>
+                            </div>
+                            <div class="small">{{ activity.activity_text }}</div>
+                            {% if activity.details %}
+                            <div class="small text-muted mt-1">{{ activity.details }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center text-muted fst-italic py-4">
+                        <p>No recent activity from your friends</p>
+                        <p class="small">Start adding friends or make your activities public to see content here!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Users Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #9C27B0, #E91E63); color: white;">
+                <h5 class="modal-title">🔍 Find Friends</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="get" action="{% url 'search_users' %}">
+                    <div class="mb-3">
+                        <label class="form-label">Search by username or personal key</label>
+                        <input type="text" name="q" class="form-control" placeholder="Enter username or key...">
+                    </div>
+                    <button type="submit" class="btn w-100" style="background: #9C27B0; color: white;">🔍 Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

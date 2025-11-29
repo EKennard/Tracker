@@ -13,6 +13,49 @@ from users.decorators import profile_required
 
 @login_required
 @profile_required
+def social_hub(request):
+    """Main social hub showing friends, groups, and activity feed"""
+    profile = request.user.userprofile
+    
+    # Get friend requests
+    pending_requests = Friendship.objects.filter(
+        friend=profile,
+        status='pending'
+    ).select_related('user')
+    
+    # Get friends
+    friends = profile.get_friends()
+    
+    # Get user's groups
+    user_groups = profile.groups.all()
+    
+    # Get group invitations
+    pending_invitations = GroupInvitation.objects.filter(
+        invitee=profile,
+        status='pending'
+    ).select_related('group', 'inviter')
+    
+    # Get recent activities from friends
+    friend_ids = [f.id for f in friends]
+    friend_ids.append(profile.id)  # Include own activities
+    
+    activities = GlobalActivity.objects.filter(
+        profile_id__in=friend_ids
+    )[:20]
+    
+    context = {
+        'profile': profile,
+        'pending_requests': pending_requests,
+        'friends': friends,
+        'user_groups': user_groups,
+        'pending_invitations': pending_invitations,
+        'activities': activities,
+    }
+    
+    return render(request, 'social/social_hub.html', context)
+
+@login_required
+@profile_required
 def global_feed(request):
     """Global activity feed showing public users' activities"""
     profile = request.user.userprofile
