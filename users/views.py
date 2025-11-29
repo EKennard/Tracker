@@ -190,8 +190,8 @@ def dashboard(request):
     friend_count = profile.get_friends().count()
     
     # Get milestones
-    recent_milestones = Milestone.objects.filter(user_profile=profile).order_by('-created_at')[:5]
-    milestone_count = Milestone.objects.filter(user_profile=profile, achieved=True).count()
+    recent_milestones = Milestone.objects.filter(profile=profile).order_by('-modified_at')[:5]
+    milestone_count = Milestone.objects.filter(profile=profile, date_achieved__isnull=False).count()
     
     # Get friend activities
     from social.models import GlobalActivity
