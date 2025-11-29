@@ -190,7 +190,6 @@ def dashboard(request):
     friend_count = profile.get_friends().count()
     
     # Get milestones
-    from milestones.models import Milestone
     recent_milestones = Milestone.objects.filter(user_profile=profile).order_by('-created_at')[:5]
     milestone_count = Milestone.objects.filter(user_profile=profile, achieved=True).count()
     
