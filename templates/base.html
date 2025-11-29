@@ -47,26 +47,24 @@
                         <img src="{% static 'icons/user-doodle.svg' %}" width="20" height="20" alt="">
                     </div>
                     
-                    <!-- Desktop Links -->
-                    <div class="d-none d-lg-block">
-                        <ul class="navbar-nav gap-1 flex-wrap d-flex flex-row">
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/users/dashboard/">🏠 Dashboard</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/meals/log/">🍎 Meals</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/exercise/log/">💪 Exercise</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/habits/log/">✅ Habits</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/fertility/">🌸 Fertility</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/metrics/summary/">📏 Metrics</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/milestones/list/">🎯 Milestones</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/feed/">🌍 Feed</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/search/">🔍 Find Friends</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/friend-requests/">👥 Friends</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/groups/">👫 Groups</a></li>
-                            <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/notifications/list/">🔔 Notifications</a></li>
-                        </ul>
+                    <!-- Desktop Links (hidden on mobile) -->
+                    <div class="d-none d-lg-flex justify-content-around">
+                        <a class="nav-link text-white px-1 py-1" href="/users/dashboard/">🏠 Dashboard</a>
+                        <a class="nav-link text-white px-1 py-1" href="/meals/log/">🍎 Meals</a>
+                        <a class="nav-link text-white px-1 py-1" href="/exercise/log/">💪 Exercise</a>
+                        <a class="nav-link text-white px-1 py-1" href="/habits/log/">✅ Habits</a>
+                        <a class="nav-link text-white px-1 py-1" href="/fertility/">🌸 Fertility</a>
+                        <a class="nav-link text-white px-1 py-1" href="/metrics/summary/">📏 Metrics</a>
+                        <a class="nav-link text-white px-1 py-1" href="/milestones/list/">🎯 Milestones</a>
+                        <a class="nav-link text-white px-1 py-1" href="/social/feed/">🌍 Feed</a>
+                        <a class="nav-link text-white px-1 py-1" href="/social/search/">🔍 Find Friends</a>
+                        <a class="nav-link text-white px-1 py-1" href="/social/friend-requests/">👥 Friends</a>
+                        <a class="nav-link text-white px-1 py-1" href="/social/groups/">👫 Groups</a>
+                        <a class="nav-link text-white px-1 py-1" href="/notifications/list/">🔔 Notifications</a>
                     </div>
                 </div>
-                </div>
             </div>
+        </nav>
         </nav>
         
         <!-- Bootstrap Offcanvas for Mobile -->
