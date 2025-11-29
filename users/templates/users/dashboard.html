@@ -3,45 +3,45 @@
 {% block content %}
 <!-- Header with Title and Profile Button -->
 <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
-    <h1 class="h4 text-primary mb-0">📊 Your Progress Dashboard</h1>
-    <a href="/users/profile/" class="btn btn-sm" style="background:#BA68C8;color:white;">👤 Profile</a>
+    <h1 class="h4 mb-0" style="color: #9C27B0;">📊 Your Progress Dashboard</h1>
+    <a href="/users/profile/" class="btn btn-sm" style="background: linear-gradient(135deg, #FF6F00, #FFD600); color: white; font-weight: bold;">👤 Profile</a>
 </div>
 
 <!-- Dashboard Layout: Weight Progress + Activity Stream -->
 <div class="row g-2">
     <!-- Weight Progress Column -->
     <div class="col-lg-8">
-        <div class="card border-primary">
+        <div class="card" style="border: 2px solid #9C27B0;">
             <div class="card-body p-2">
-                <h2 class="h5 text-primary mb-2">⚖️ Weight Progress</h2>
+                <h2 class="h5 mb-2" style="color: #9C27B0;">⚖️ Weight Progress</h2>
                 
                 <!-- Stats Grid -->
                 <div class="row g-1 mb-2">
                     <div class="col-6 col-md-3">
-                        <div class="card border-primary text-center">
+                        <div class="card text-center" style="border: 2px solid #9C27B0;">
                             <div class="card-body p-2">
                                 <div class="small text-muted">Starting Weight</div>
-                                <div class="fw-bold text-primary">{{ starting_weight_display }}</div>
+                                <div class="fw-bold" style="color: #9C27B0;">{{ starting_weight_display }}</div>
                                 <div class="small text-muted">Initial</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col-6 col-md-3">
-                        <div class="card border-primary text-center">
+                        <div class="card text-center" style="border: 2px solid #E91E63;">
                             <div class="card-body p-2">
                                 <div class="small text-muted">Current Weight</div>
-                                <div class="fw-bold text-primary">{% if current_weight %}{{ current_weight }}{% else %}--{% endif %}</div>
+                                <div class="fw-bold" style="color: #E91E63;">{% if current_weight %}{{ current_weight }}{% else %}--{% endif %}</div>
                                 <div class="small text-muted">Latest</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col-6 col-md-3">
-                        <div class="card border-primary text-center">
+                        <div class="card text-center" style="border: 2px solid #FF6F00;">
                             <div class="card-body p-2">
                                 <div class="small text-muted">Current BMI</div>
-                                <div class="fw-bold text-primary">{% if current_bmi %}{{ current_bmi|floatformat:1 }}{% else %}--{% endif %}</div>
+                                <div class="fw-bold" style="color: #FF6F00;">{% if current_bmi %}{{ current_bmi|floatformat:1 }}{% else %}--{% endif %}</div>
                                 <div class="small text-muted">Body Mass Index</div>
                             </div>
                         </div>
@@ -49,10 +49,10 @@
                     
                     {% if goal_weight %}
                     <div class="col-6 col-md-3">
-                        <div class="card border-primary text-center">
+                        <div class="card text-center" style="border: 2px solid #FFD600;">
                             <div class="card-body p-2">
                                 <div class="small text-muted">Goal Weight</div>
-                                <div class="fw-bold text-primary">{{ goal_weight }}</div>
+                                <div class="fw-bold" style="color: #FF6F00;">{{ goal_weight }}</div>
                                 <div class="small text-muted">Target</div>
                             </div>
                         </div>
@@ -60,10 +60,10 @@
                     {% endif %}
                     
                     <div class="col-6 col-md-3">
-                        <div class="card border-primary text-center">
+                        <div class="card text-center" style="border: 2px solid #00C853;">
                             <div class="card-body p-2">
                                 <div class="small text-muted">Weight Lost</div>
-                                <div class="fw-bold text-success">{% if current_weight %}{{ weight_lost }}{% else %}0{% endif %}</div>
+                                <div class="fw-bold" style="color: #00C853;">{% if current_weight %}{{ weight_lost }}{% else %}0{% endif %}</div>
                                 <div class="small text-muted">Progress</div>
                             </div>
                         </div>
@@ -75,10 +75,10 @@
                 <div class="mb-3">
                     <div class="d-flex justify-content-between mb-1">
                         <span class="fw-semibold small">Progress to Goal</span>
-                        <span class="fw-bold small text-primary">{{ weight_progress_percent|floatformat:1 }}%</span>
+                        <span class="fw-bold small" style="color: #9C27B0;">{{ weight_progress_percent|floatformat:1 }}%</span>
                     </div>
-                    <div class="progress" style="height: 20px;">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ weight_progress_percent }}%;" aria-valuenow="{{ weight_progress_percent }}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress" style="height: 20px; background-color: #F3E5F5;">
+                        <div class="progress-bar" role="progressbar" style="width: {{ weight_progress_percent }}%; background: linear-gradient(90deg, #9C27B0, #FF6F00, #FFD600);" aria-valuenow="{{ weight_progress_percent }}" aria-valuemin="0" aria-valuemax="100">
                             {% if weight_progress_percent > 15 %}{{ weight_progress_percent|floatformat:0 }}%{% endif %}
                         </div>
                     </div>
@@ -87,11 +87,11 @@
                 
                 <!-- Time Filter Buttons -->
                 <div class="btn-group btn-group-sm mb-2 flex-wrap" role="group">
-                    <button type="button" class="btn btn-outline-primary active" onclick="filterChart('all')">All Time</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('year')">1 Year</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('3month')">3 Months</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('month')">1 Month</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('week')">1 Week</button>
+                    <button type="button" class="btn btn-outline-primary active" onclick="filterChart('all')" style="border-color: #9C27B0; color: #9C27B0;">All Time</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('year')" style="border-color: #9C27B0; color: #9C27B0;">1 Year</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('3month')" style="border-color: #9C27B0; color: #9C27B0;">3 Months</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('month')" style="border-color: #9C27B0; color: #9C27B0;">1 Month</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('week')" style="border-color: #9C27B0; color: #9C27B0;">1 Week</button>
                 </div>
                 
                 <!-- Weight Chart -->
@@ -104,9 +104,9 @@
     
     <!-- Activity Stream Sidebar -->
     <div class="col-lg-4">
-        <div class="card border-primary">
+        <div class="card" style="border: 2px solid #E91E63;">
             <div class="card-body p-2" style="max-height: 600px; overflow-y: auto;">
-                <h2 class="h5 text-primary mb-2">📊 Activity Stream</h2>
+                <h2 class="h5 mb-2" style="color: #E91E63;">📊 Activity Stream</h2>
                 {% for activity in activity_stream %}
                     <div class="border-bottom pb-2 mb-2">
                         <div class="small text-muted">{{ activity.date|date:"M d, Y" }}</div>

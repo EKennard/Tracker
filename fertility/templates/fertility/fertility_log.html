@@ -13,8 +13,8 @@
     font-weight: bold;
     font-size: 0.75rem;
     padding: 0.25rem;
-    background: var(--bs-primary-bg-subtle);
-    color: var(--bs-primary);
+    background: linear-gradient(135deg, #FFF9E6, #FFE5F5);
+    color: #FF6F00;
   }
   
   .calendar-day {
@@ -32,7 +32,7 @@
   }
   
   .calendar-day:hover {
-    background: var(--bs-primary-bg-subtle);
+    background: #F3E5FF;
   }
   
   .calendar-day.other-month {
@@ -41,42 +41,42 @@
   }
   
   .calendar-day.today {
-    background: #FFD54F;
+    background: #FFD600;
     font-weight: bold;
   }
   
   .calendar-day.selected {
-    background: var(--bs-primary);
+    background: #9C27B0;
     color: white;
     font-weight: bold;
   }
   
   .calendar-day.has-log {
-    border: 2px solid var(--bs-success);
-    background: var(--bs-success-bg-subtle);
+    border: 2px solid #00C853;
+    background: #E8F5E9;
   }
   
   .calendar-day.has-log.selected {
-    background: var(--bs-primary);
-    border-color: var(--bs-success);
+    background: #9C27B0;
+    border-color: #00C853;
   }
   
   .day-indicator {
     font-size: 0.6rem;
     position: absolute;
     bottom: 1px;
-    color: var(--bs-success);
+    color: #00C853;
   }
 </style>
 
-<h1 class="h4 text-primary mb-2">🌸 Fertility Log</h1>
+<h1 class="h4 mb-2" style="color: #9C27B0;">🌸 Fertility Log</h1>
 
 <div class="row g-2">
   <!-- Form Column -->
   <div class="col-lg-4">
-    <div class="card border-primary">
+    <div class="card" style="border: 2px solid #E91E63;">
       <div class="card-body p-2">
-        <h2 class="h5 text-primary mb-2">Add Fertility Log</h2>
+        <h2 class="h5 mb-2" style="color: #E91E63;">Add Fertility Log</h2>
         <form method="post" id="fertility-form">
           {% csrf_token %}
           {{ form.non_field_errors }}
@@ -108,7 +108,7 @@
             {{ form.notes }}
           </div>
           
-          <button type="submit" class="btn btn-primary btn-sm w-100">💾 Add Fertility Log</button>
+          <button type="submit" class="btn btn-sm w-100" style="background: linear-gradient(135deg, #9C27B0, #E91E63); color: white; font-weight: bold;">💾 Add Fertility Log</button>
         </form>
       </div>
     </div>
@@ -116,13 +116,13 @@
   
   <!-- Calendar Column -->
   <div class="col-lg-8">
-    <div class="card border-primary">
+    <div class="card" style="border: 2px solid #FF6F00;">
       <div class="card-body p-2">
-        <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-primary-subtle">
-          <h3 class="h6 text-primary mb-0" id="calendar-month-year">Month Year</h3>
+        <div class="d-flex justify-content-between align-items-center mb-2 p-2" style="background: linear-gradient(135deg, #FFF9E6, #FFE5F5);">
+          <h3 class="h6 mb-0" id="calendar-month-year" style="color: #FF6F00;">Month Year</h3>
           <div class="btn-group btn-group-sm">
-            <button type="button" class="btn btn-primary btn-sm" onclick="previousMonth()">◀</button>
-            <button type="button" class="btn btn-primary btn-sm" onclick="nextMonth()">▶</button>
+            <button type="button" class="btn btn-sm" style="background: #FF6F00; color: white;" onclick="previousMonth()">◀</button>
+            <button type="button" class="btn btn-sm" style="background: #FF6F00; color: white;" onclick="nextMonth()">▶</button>
           </div>
         </div>
         <div class="calendar-grid" id="calendar-grid">

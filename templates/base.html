@@ -14,7 +14,7 @@
     {% if user.is_authenticated %}
         {% if request.path != '/users/create-profile/' %}
         <!-- Bootstrap Navbar -->
-        <nav class="navbar navbar-expand-lg bg-primary sticky-top p-1">
+        <nav class="navbar navbar-expand-lg sticky-top p-1" style="background: linear-gradient(135deg, #9C27B0 0%, #E91E63 50%, #FF6F00 100%);">
             <div class="container-fluid px-2">
                 <!-- Brand -->
                 <a class="navbar-brand text-white fw-bold d-flex align-items-center gap-2" href="/">
@@ -29,7 +29,7 @@
                 <!-- User info + Logout (Desktop) -->
                 <div class="d-none d-lg-flex align-items-center gap-2 text-white me-2">
                     <span class="small">👤 {{ user.username }}</span>
-                    <a href="/accounts/logout/" class="btn btn-sm btn-light">🚪 Logout</a>
+                    <a href="/accounts/logout/" class="btn btn-sm" style="background: #FFD600; color: #333; font-weight: bold;">🚪 Logout</a>
                 </div>
                 
                 <!-- Toggler for mobile -->
@@ -59,15 +59,15 @@
         
         <!-- Bootstrap Offcanvas for Mobile -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
-            <div class="offcanvas-header bg-primary text-white">
+            <div class="offcanvas-header text-white" style="background: linear-gradient(135deg, #9C27B0, #E91E63);">
                 <h5 class="offcanvas-title">Menu</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
             </div>
             <div class="offcanvas-body p-0">
                 <div class="d-flex flex-column">
-                    <div class="bg-light p-3 border-bottom">
-                        <div class="small mb-2">👤 {{ user.username }}</div>
-                        <a href="/accounts/logout/" class="btn btn-sm btn-primary w-100">🚪 Logout</a>
+                    <div class="p-3 border-bottom" style="background: linear-gradient(135deg, #FFF9E6, #FFE5F5);">
+                        <div class="small mb-2 fw-bold" style="color: #9C27B0;">👤 {{ user.username }}</div>
+                        <a href="/accounts/logout/" class="btn btn-sm w-100" style="background: #FFD600; color: #333; font-weight: bold;">🚪 Logout</a>
                     </div>
                     <a href="/users/dashboard/" class="p-3 border-bottom text-decoration-none text-dark">🏠 Dashboard</a>
                     <a href="/meals/log/" class="p-3 border-bottom text-decoration-none text-dark">🍎 Meals</a>
@@ -86,7 +86,7 @@
         </div>
         {% endif %}
     {% else %}
-        <div class="card border-primary m-3 p-3 text-center">
+        <div class="card m-3 p-3 text-center" style="border: 3px solid #9C27B0; background: linear-gradient(135deg, #FFF9E6, #FFE5F5);">
             <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
                 <img src="{% static 'icons/apple-doodle.svg' %}" width="32" alt="Meals">
                 <img src="{% static 'icons/heart-doodle.svg' %}" width="32" alt="Health">
@@ -95,11 +95,11 @@
                 <img src="{% static 'icons/user-doodle.svg' %}" width="32" alt="Profile">
             </div>
             <h1 class="h3 mb-0">
-                <a href="/" class="text-decoration-none text-primary">GetLizzyFit</a>
+                <a href="/" class="text-decoration-none" style="color: #9C27B0;">GetLizzyFit</a>
             </h1>
         </div>
         <div class="text-center mb-3">
-            <a href="/accounts/login/" class="btn btn-primary">Login</a>
+            <a href="/accounts/login/" class="btn" style="background: linear-gradient(135deg, #9C27B0, #E91E63); color: white; font-weight: bold;">Login</a>
         </div>
     {% endif %}
     
