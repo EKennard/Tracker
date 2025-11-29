@@ -510,14 +510,63 @@ def log_activities(request):
     from habits.forms import HabitLogForm
     from fertility.forms import FertilityLogForm
     from metrics.forms import HealthMetricsForm
+    from datetime import datetime, date
     
     # Get selected date from query param or default to today
-    from datetime import datetime, date
     selected_date_str = request.GET.get('date', date.today().strftime('%Y-%m-%d'))
     try:
         selected_date = datetime.strptime(selected_date_str, '%Y-%m-%d').date()
     except:
         selected_date = date.today()
+    
+    # Handle form submissions
+    if request.method == 'POST':
+        form_type = request.POST.get('form_type')
+        
+        if form_type == 'weight':
+            form = HealthMetricsForm(request.POST)
+            if form.is_valid():
+                entry = form.save(commit=False)
+                entry.user_profile = profile
+                entry.save()
+                messages.success(request, '✅ Weight logged successfully!')
+                return redirect('log_activities')
+                
+        elif form_type == 'meal':
+            form = NutritionLogForm(request.POST)
+            if form.is_valid():
+                entry = form.save(commit=False)
+                entry.profile = profile
+                entry.save()
+                messages.success(request, '✅ Meal logged successfully!')
+                return redirect('log_activities')
+                
+        elif form_type == 'exercise':
+            form = ExerciseLogForm(request.POST)
+            if form.is_valid():
+                entry = form.save(commit=False)
+                entry.profile = profile
+                entry.save()
+                messages.success(request, '✅ Exercise logged successfully!')
+                return redirect('log_activities')
+                
+        elif form_type == 'habit':
+            form = HabitLogForm(request.POST)
+            if form.is_valid():
+                entry = form.save(commit=False)
+                entry.profile = profile
+                entry.save()
+                messages.success(request, '✅ Habit logged successfully!')
+                return redirect('log_activities')
+                
+        elif form_type == 'fertility':
+            form = FertilityLogForm(request.POST)
+            if form.is_valid():
+                entry = form.save(commit=False)
+                entry.profile = profile
+                entry.save()
+                messages.success(request, '✅ Fertility data logged successfully!')
+                return redirect('log_activities')
     
     # Get recent entries for each category
     from metrics.models import HealthMetrics
@@ -531,6 +580,18 @@ def log_activities(request):
     recent_exercise = ExerciseLog.objects.filter(profile=profile).order_by('-date')[:5]
     recent_habits = HabitLogModel.objects.filter(profile=profile).order_by('-date')[:5]
     recent_fertility = FertilityLogModel.objects.filter(profile=profile).order_by('-date')[:5]
+    
+    # Format recent weight entries with user's preferred unit
+    for entry in recent_weight:
+        if profile.weight_unit == 'kg':
+            entry.weight_display = f"{float(entry.weight) * 0.453592:.1f} kg"
+        elif profile.weight_unit == 'st':
+            total_lb = float(entry.weight)
+            stones = int(total_lb // 14)
+            pounds = round(total_lb % 14, 1)
+            entry.weight_display = f"{stones}st {pounds}lb"
+        else:
+            entry.weight_display = f"{float(entry.weight):.1f} lb"
     
     # Initialize forms with selected date
     context = {

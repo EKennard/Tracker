@@ -125,10 +125,10 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/metrics/summary/" id="weightForm">
+                <form method="post" action="{% url 'log_activities' %}?type=weight" id="weightForm">
                     {% csrf_token %}
                     {{ weight_form.as_p }}
-                    <input type="hidden" name="metrics_submit" value="1">
+                    <input type="hidden" name="form_type" value="weight">
                 </form>
             </div>
             <div class="modal-footer">
@@ -148,9 +148,10 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/meals/log/" id="mealForm">
+                <form method="post" action="{% url 'log_activities' %}?type=meal" id="mealForm">
                     {% csrf_token %}
                     {{ meal_form.as_p }}
+                    <input type="hidden" name="form_type" value="meal">
                 </form>
             </div>
             <div class="modal-footer">
@@ -170,9 +171,10 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/exercise/log/" id="exerciseForm">
+                <form method="post" action="{% url 'log_activities' %}?type=exercise" id="exerciseForm">
                     {% csrf_token %}
                     {{ exercise_form.as_p }}
+                    <input type="hidden" name="form_type" value="exercise">
                 </form>
             </div>
             <div class="modal-footer">
@@ -192,9 +194,10 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/habits/log/" id="habitForm">
+                <form method="post" action="{% url 'log_activities' %}?type=habit" id="habitForm">
                     {% csrf_token %}
                     {{ habit_form.as_p }}
+                    <input type="hidden" name="form_type" value="habit">
                 </form>
             </div>
             <div class="modal-footer">
@@ -214,9 +217,10 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/fertility/" id="fertilityForm">
+                <form method="post" action="{% url 'log_activities' %}?type=fertility" id="fertilityForm">
                     {% csrf_token %}
                     {{ fertility_form.as_p }}
+                    <input type="hidden" name="form_type" value="fertility">
                 </form>
             </div>
             <div class="modal-footer">
