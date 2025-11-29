@@ -2,7 +2,7 @@
 {% block title %}Dashboard{% endblock %}
 {% block content %}
 
-<div class="row g-2" style="min-height: calc(100vh - 180px);">
+<div class="row g-2">
     <!-- LEFT COLUMN: User Stats Card -->
     <div class="col-lg-3">
         <!-- User Card -->
@@ -111,11 +111,59 @@
                     </div>
                     {% endfor %}
                 {% else %}
-                    <div class="text-center py-5">
-                        <div class="mb-3" style="font-size: 3rem; opacity: 0.3;">📊</div>
-                        <p class="text-muted">No activities logged yet</p>
-                        <p class="small text-muted">Start tracking your wellness journey!</p>
-                        <a href="{% url 'log_activities' %}" class="btn" style="background: #9C27B0; color: white;">📝 Log Your First Activity</a>
+                    <div class="text-center py-4">
+                        <div class="mb-3" style="font-size: 2.5rem; opacity: 0.3;">📊</div>
+                        <p class="text-muted mb-2">No activities logged yet</p>
+                        <p class="small text-muted mb-3">Start tracking your wellness journey!</p>
+                        <a href="{% url 'log_activities' %}" class="btn btn-sm" style="background: #9C27B0; color: white;">📝 Log Your First Activity</a>
+                        
+                        <!-- Quick Start Guide -->
+                        <div class="mt-4 text-start">
+                            <div class="card mb-2" style="border-left: 3px solid #9C27B0;">
+                                <div class="card-body p-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="fs-5">⚖️</span>
+                                        <div>
+                                            <div class="small fw-bold">Track Your Weight</div>
+                                            <div class="small text-muted">Monitor your progress over time</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2" style="border-left: 3px solid #E91E63;">
+                                <div class="card-body p-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="fs-5">🍎</span>
+                                        <div>
+                                            <div class="small fw-bold">Log Your Meals</div>
+                                            <div class="small text-muted">Keep track of your nutrition</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2" style="border-left: 3px solid #FF6F00;">
+                                <div class="card-body p-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="fs-5">💪</span>
+                                        <div>
+                                            <div class="small fw-bold">Record Workouts</div>
+                                            <div class="small text-muted">Track your exercise routine</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2" style="border-left: 3px solid #FFD600;">
+                                <div class="card-body p-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="fs-5">✅</span>
+                                        <div>
+                                            <div class="small fw-bold">Build Habits</div>
+                                            <div class="small text-muted">Create healthy daily routines</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 {% endif %}
             </div>
