@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% block title %}Metrics Summary{% endblock %}
+{% block title %}Body Stats{% endblock %}
 {% block content %}
-<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">Metrics Summary</h1>
+<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">📊 Body Stats</h1>
 <div class="card" style="margin-bottom:1.5rem;">
   <form method="post">
     {% csrf_token %}
     <div class="form-section">
-      <h2>📊 Add Health Metrics</h2>
+      <h2>📊 Update Body Stats</h2>
       <p style="color:#666;font-size:0.9rem;margin-bottom:1rem;">💡 Tip: Change the date to add historic data - perfect for tracking your progress over time!</p>
       {{ metrics_form.non_field_errors }}
     </div>
@@ -50,7 +50,7 @@
     <p style="color:#666;font-size:0.85rem;margin-top:0.5rem;font-style:italic;">
       ℹ️ Leave fields empty to auto-fill with calculated values based on your profile.
     </p>
-    <button type="submit" name="metrics_submit" class="button" style="margin-top:1.5rem;">💾 Save Metrics</button>
+    <button type="submit" name="metrics_submit" class="button" style="margin-top:1.5rem;">💾 Save Stats</button>
   </form>
 </div>
 <div class="card" style="margin-bottom:1.5rem;">
@@ -82,7 +82,7 @@
   </form>
 </div>
 <div class="card" style="margin-bottom:1.5rem;">
-  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">📊 Your Health Metrics</h2>
+  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">📊 Your Body Stats</h2>
   <table class="min-w-full table-auto">
     <thead>
       <tr class="bg-gray-200">
@@ -103,7 +103,7 @@
         <td class="px-2 py-1">{{ m.body_fat_percentage }}</td>
       </tr>
       {% empty %}
-      <tr><td colspan="5" class="text-center py-2">No metrics logged yet.</td></tr>
+      <tr><td colspan="5" class="text-center py-2">No stats logged yet.</td></tr>
       {% endfor %}
     </tbody>
   </table>
