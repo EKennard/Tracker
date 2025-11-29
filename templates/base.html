@@ -7,184 +7,216 @@
     <title>{% block title %}GetLizzyFit{% endblock %}</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/cartoon-theme.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block extra_head %}{% endblock %}
 </head>
 <body>
     {% if user.is_authenticated %}
-        <!-- Hero Section -->
-        <header class="hero-section">
-            <div class="hero-container">
-                <div class="brand-icons">
-                    <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
-                    <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
-                    <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
-                    <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
-                    <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
-                </div>
-                <h1 class="brand-title">
-                    <a href="/">GetLizzyFit</a>
-                </h1>
-                <div class="hero-user">
-                    <span class="user-name">👤 {{ user.username }}</span>
-                    <a href="/accounts/logout/" class="logout-button">🚪 Logout</a>
-                </div>
-            </div>
-        </header>
-        
         {% if request.path != '/users/create-profile/' %}
-        <!-- Burger Menu Button (Mobile) -->
-        <button id="burger-menu" class="burger-menu" onclick="toggleMenu()">
-            <div class="burger-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </button>
-        
-        <!-- Main Navbar -->
-        <nav id="main-navbar" class="main-navbar">
-            <div class="navbar-container">
-                <div id="navbar-links" class="navbar-links">
-                    <a href="/users/dashboard/" class="nav-link">🏠 Dashboard</a>
-                    <a href="/meals/log/" class="nav-link">🍎 Meals</a>
-                    <a href="/exercise/log/" class="nav-link">💪 Exercise</a>
-                    <a href="/habits/log/" class="nav-link">✅ Habits</a>
-                    <a href="/fertility/" class="nav-link">🌸 Fertility</a>
-                    <a href="/metrics/summary/" class="nav-link">📏 Metrics</a>
-                    <a href="/milestones/list/" class="nav-link">🎯 Milestones</a>
-                    <a href="/social/feed/" class="nav-link">🌍 Feed</a>
-                    <a href="/social/search/" class="nav-link">🔍 Find Friends</a>
-                    <a href="/social/friend-requests/" class="nav-link">👥 Friends</a>
-                    <a href="/social/groups/" class="nav-link">👫 Groups</a>
-                    <a href="/notifications/list/" class="nav-link">🔔 Notifications</a>
+        <!-- Bootstrap Navbar -->
+        <nav class="navbar navbar-expand-lg bg-primary sticky-top p-1">
+            <div class="container-fluid px-2">
+                <!-- Brand -->
+                <a class="navbar-brand text-white fw-bold d-flex align-items-center gap-2" href="/">
+                    <img src="{% static 'icons/apple-doodle.svg' %}" width="24" height="24" alt="">
+                    <img src="{% static 'icons/heart-doodle.svg' %}" width="24" height="24" alt="">
+                    <img src="{% static 'icons/checklist-doodle.svg' %}" width="24" height="24" alt="">
+                    <img src="{% static 'icons/calendar-doodle.svg' %}" width="24" height="24" alt="">
+                    <img src="{% static 'icons/user-doodle.svg' %}" width="24" height="24" alt="">
+                    <span class="ms-1">GetLizzyFit</span>
+                </a>
+                
+                <!-- User info + Logout (Desktop) -->
+                <div class="d-none d-lg-flex align-items-center gap-2 text-white me-2">
+                    <span class="small">👤 {{ user.username }}</span>
+                    <a href="/accounts/logout/" class="btn btn-sm btn-light">🚪 Logout</a>
+                </div>
+                
+                <!-- Toggler for mobile -->
+                <button class="navbar-toggler border-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <!-- Desktop Links -->
+                <div class="collapse navbar-collapse d-none d-lg-block">
+                    <ul class="navbar-nav ms-auto gap-1">
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/users/dashboard/">🏠 Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/meals/log/">🍎 Meals</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/exercise/log/">💪 Exercise</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/habits/log/">✅ Habits</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/fertility/">🌸 Fertility</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/metrics/summary/">📏 Metrics</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/milestones/list/">🎯 Milestones</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/feed/">🌍 Feed</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/search/">🔍 Find Friends</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/friend-requests/">👥 Friends</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/social/groups/">👫 Groups</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2 py-1" href="/notifications/list/">🔔 Notifications</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
+        
+        <!-- Bootstrap Offcanvas for Mobile -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
+            <div class="offcanvas-header bg-primary text-white">
+                <h5 class="offcanvas-title">Menu</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <div class="d-flex flex-column">
+                    <div class="bg-light p-3 border-bottom">
+                        <div class="small mb-2">👤 {{ user.username }}</div>
+                        <a href="/accounts/logout/" class="btn btn-sm btn-primary w-100">🚪 Logout</a>
+                    </div>
+                    <a href="/users/dashboard/" class="p-3 border-bottom text-decoration-none text-dark">🏠 Dashboard</a>
+                    <a href="/meals/log/" class="p-3 border-bottom text-decoration-none text-dark">🍎 Meals</a>
+                    <a href="/exercise/log/" class="p-3 border-bottom text-decoration-none text-dark">💪 Exercise</a>
+                    <a href="/habits/log/" class="p-3 border-bottom text-decoration-none text-dark">✅ Habits</a>
+                    <a href="/fertility/" class="p-3 border-bottom text-decoration-none text-dark">🌸 Fertility</a>
+                    <a href="/metrics/summary/" class="p-3 border-bottom text-decoration-none text-dark">📏 Metrics</a>
+                    <a href="/milestones/list/" class="p-3 border-bottom text-decoration-none text-dark">🎯 Milestones</a>
+                    <a href="/social/feed/" class="p-3 border-bottom text-decoration-none text-dark">🌍 Feed</a>
+                    <a href="/social/search/" class="p-3 border-bottom text-decoration-none text-dark">🔍 Find Friends</a>
+                    <a href="/social/friend-requests/" class="p-3 border-bottom text-decoration-none text-dark">👥 Friends</a>
+                    <a href="/social/groups/" class="p-3 border-bottom text-decoration-none text-dark">👫 Groups</a>
+                    <a href="/notifications/list/" class="p-3 border-bottom text-decoration-none text-dark">🔔 Notifications</a>
+                </div>
+            </div>
+        </div>
         {% endif %}
     {% else %}
-        <header class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.25rem;text-align:center;">
-            <div style="display:flex;justify-content:center;align-items:center;gap:0.5rem;">
-                <img src="{% static 'icons/apple-doodle.svg' %}" class="icon" alt="Meals">
-                <img src="{% static 'icons/heart-doodle.svg' %}" class="icon" alt="Health">
-                <img src="{% static 'icons/checklist-doodle.svg' %}" class="icon" alt="Habits">
-                <img src="{% static 'icons/calendar-doodle.svg' %}" class="icon" alt="Fertility">
-                <img src="{% static 'icons/user-doodle.svg' %}" class="icon" alt="Profile">
+        <div class="card border-primary m-3 p-3 text-center">
+            <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+                <img src="{% static 'icons/apple-doodle.svg' %}" width="32" alt="Meals">
+                <img src="{% static 'icons/heart-doodle.svg' %}" width="32" alt="Health">
+                <img src="{% static 'icons/checklist-doodle.svg' %}" width="32" alt="Habits">
+                <img src="{% static 'icons/calendar-doodle.svg' %}" width="32" alt="Fertility">
+                <img src="{% static 'icons/user-doodle.svg' %}" width="32" alt="Profile">
             </div>
-            <h1 style="margin-top:0.15rem;margin-bottom:0;font-family:'Fredoka One','Comic Neue',sans-serif;font-size:1.5rem;">
-                <a href="/" style="color:#4FC3F7;text-decoration:none;">GetLizzyFit</a>
+            <h1 class="h3 mb-0">
+                <a href="/" class="text-decoration-none text-primary">GetLizzyFit</a>
             </h1>
-        </header>
-        <nav class="card" style="display:flex;flex-wrap:wrap;gap:0.25rem;align-items:center;justify-content:center;margin-bottom:0.5rem;">
-            <a href="/accounts/login/" class="button">Login</a>
-        </nav>
+        </div>
+        <div class="text-center mb-3">
+            <a href="/accounts/login/" class="btn btn-primary">Login</a>
+        </div>
     {% endif %}
     
-    <!-- Django Messages - Fixed position overlay -->
+    <!-- Django Messages with Bootstrap Toast -->
     {% if messages %}
-        <div id="messages-container">
+        <div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
             {% for message in messages %}
-                <div class="toast-message message-{{ message.level_tag }}">
-                    {{ message }}
+                <div class="toast show align-items-center text-white bg-{% if message.level_tag == 'error' %}danger{% elif message.level_tag == 'success' %}success{% elif message.level_tag == 'warning' %}warning{% else %}info{% endif %} border-0" role="alert">
+                    <div class="d-flex p-2">
+                        <div class="toast-body">{{ message }}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
                 </div>
             {% endfor %}
         </div>
         <script>
-            // Auto-fade messages after 3 seconds
+            // Auto-hide toasts after 3 seconds
             setTimeout(function() {
-                const messages = document.querySelectorAll('.toast-message');
-                messages.forEach(function(msg) {
-                    msg.style.opacity = '0';
-                    setTimeout(function() {
-                        msg.remove();
-                        const container = document.getElementById('messages-container');
-                        if (container && container.children.length === 0) {
-                            container.remove();
-                        }
-                    }, 500);
+                const toasts = document.querySelectorAll('.toast');
+                toasts.forEach(toast => {
+                    const bsToast = bootstrap.Toast.getOrCreateInstance(toast);
+                    bsToast.hide();
                 });
             }, 3000);
         </script>
     {% endif %}
     
-    <main class="main-section">
+    <main class="container-fluid p-2 p-md-3">
         {% block content %}
             {% if user.is_authenticated %}
-                <div class="section-title">Welcome back, {{ user.username }}!</div>
+                <h2 class="text-primary mb-3">Welcome back, {{ user.username }}!</h2>
             {% else %}
-                <div class="welcome-title">Welcome to GetLizzyFit!</div>
-                <div class="welcome-desc">
-                    GetLizzyFit is your all-in-one health, fitness, and wellness tracker. Log your meals, track your habits, monitor your health metrics, and connect with friends for motivation. Our app helps you build healthy routines, celebrate milestones, and stay on top of your goals in a fun, supportive environment.
-                </div>
-                <div class="feature-card">
-                    <img src="{% static 'icons/apple-doodle.svg' %}" class="feature-icon" alt="Meals">
-                    <div class="feature-info">
-                        <div class="feature-title">Meal Logging</div>
-                        <div class="feature-desc">Easily log your daily meals, track nutrition, and spot healthy eating patterns.</div>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <h1 class="display-6 text-primary mb-3">Welcome to GetLizzyFit!</h1>
+                        <p class="lead">
+                            GetLizzyFit is your all-in-one health, fitness, and wellness tracker. Log your meals, track your habits, monitor your health metrics, and connect with friends for motivation. Our app helps you build healthy routines, celebrate milestones, and stay on top of your goals in a fun, supportive environment.
+                        </p>
                     </div>
-                </div>
-                <div class="feature-card">
-                    <img src="{% static 'icons/heart-doodle.svg' %}" class="feature-icon" alt="Health">
-                    <div class="feature-info">
-                        <div class="feature-title">Health Metrics</div>
-                        <div class="feature-desc">Monitor your health stats, including weight, heart rate, and more, all in one place.</div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-primary h-100">
+                            <div class="card-body p-2">
+                                <div class="d-flex align-items-start gap-2">
+                                    <img src="{% static 'icons/apple-doodle.svg' %}" width="48" alt="Meals">
+                                    <div>
+                                        <h5 class="card-title h6 mb-1 text-primary">Meal Logging</h5>
+                                        <p class="card-text small mb-0">Easily log your daily meals, track nutrition, and spot healthy eating patterns.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="feature-card">
-                    <img src="{% static 'icons/checklist-doodle.svg' %}" class="feature-icon" alt="Habits">
-                    <div class="feature-info">
-                        <div class="feature-title">Habit Tracking</div>
-                        <div class="feature-desc">Build and maintain healthy habits with daily tracking and reminders.</div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-primary h-100">
+                            <div class="card-body p-2">
+                                <div class="d-flex align-items-start gap-2">
+                                    <img src="{% static 'icons/heart-doodle.svg' %}" width="48" alt="Health">
+                                    <div>
+                                        <h5 class="card-title h6 mb-1 text-primary">Health Metrics</h5>
+                                        <p class="card-text small mb-0">Monitor your health stats, including weight, heart rate, and more, all in one place.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="feature-card">
-                    <img src="{% static 'icons/calendar-doodle.svg' %}" class="feature-icon" alt="Fertility">
-                    <div class="feature-info">
-                        <div class="feature-title">Fertility & Calendar</div>
-                        <div class="feature-desc">Track fertility cycles and important dates with our integrated calendar.</div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-primary h-100">
+                            <div class="card-body p-2">
+                                <div class="d-flex align-items-start gap-2">
+                                    <img src="{% static 'icons/checklist-doodle.svg' %}" width="48" alt="Habits">
+                                    <div>
+                                        <h5 class="card-title h6 mb-1 text-primary">Habit Tracking</h5>
+                                        <p class="card-text small mb-0">Build and maintain healthy habits with daily tracking and reminders.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="feature-card">
-                    <img src="{% static 'icons/user-doodle.svg' %}" class="feature-icon" alt="Profile">
-                    <div class="feature-info">
-                        <div class="feature-title">Social & Community</div>
-                        <div class="feature-desc">Connect with friends, join groups, and celebrate milestones together.</div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-primary h-100">
+                            <div class="card-body p-2">
+                                <div class="d-flex align-items-start gap-2">
+                                    <img src="{% static 'icons/calendar-doodle.svg' %}" width="48" alt="Fertility">
+                                    <div>
+                                        <h5 class="card-title h6 mb-1 text-primary">Fertility & Calendar</h5>
+                                        <p class="card-text small mb-0">Track fertility cycles and important dates with our integrated calendar.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-primary h-100">
+                            <div class="card-body p-2">
+                                <div class="d-flex align-items-start gap-2">
+                                    <img src="{% static 'icons/user-doodle.svg' %}" width="48" alt="Profile">
+                                    <div>
+                                        <h5 class="card-title h6 mb-1 text-primary">Social & Community</h5>
+                                        <p class="card-text small mb-0">Connect with friends, join groups, and celebrate milestones together.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% endif %}
         {% endblock %}
     </main>
-    <footer style="text-align:center;margin-top:0.5rem;color:#81C784;font-size:0.85rem;">
+    
+    <footer class="text-center mt-3 text-success small">
         &copy; {{ now.year }} GetLizzyFit. All rights reserved.
     </footer>
-    
-    <script>
-        // Toggle burger menu
-        function toggleMenu() {
-            const navLinks = document.getElementById('navbar-links');
-            const burger = document.getElementById('burger-menu');
-            if (navLinks) {
-                navLinks.classList.toggle('active');
-            }
-            if (burger) {
-                burger.classList.toggle('active');
-            }
-        }
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navLinks = document.getElementById('navbar-links');
-            const burger = document.getElementById('burger-menu');
-            
-            if (navLinks && burger && navLinks.classList.contains('active')) {
-                if (!navLinks.contains(event.target) && !burger.contains(event.target)) {
-                    navLinks.classList.remove('active');
-                    burger.classList.remove('active');
-                }
-            }
-        });
-    </script>
     
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

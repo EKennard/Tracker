@@ -1,427 +1,126 @@
 {% extends 'base.html' %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
-<style>
-    /* Dashboard specific overrides */
-    .main-section {
-        padding: 0.5rem !important;
-    }
-    
-    .dashboard-container {
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-        box-sizing: border-box;
-    }
-    
-    .dashboard-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.25rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    @media (min-width: 768px) {
-        .dashboard-grid {
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.35rem;
-        }
-    }
-    
-    .dashboard-layout {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-        margin-top: 0.75rem;
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-    
-    @media (min-width: 768px) {
-        .dashboard-layout {
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-    }
-    
-    @media (min-width: 1024px) {
-        .dashboard-layout {
-            grid-template-columns: 2fr 1fr;
-        }
-    }
-    
-    .main-content {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .activity-stream-sidebar {
-        background: white;
-        border: 2px solid #4FC3F7;
-        border-radius: 0;
-        padding: 0.5rem;
-        max-height: none;
-        overflow-y: visible;
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-        box-sizing: border-box;
-    }
-    
-    @media (min-width: 1024px) {
-        .activity-stream-sidebar {
-            max-height: 600px;
-            overflow-y: auto;
-            position: sticky;
-            top: 1rem;
-        }
-    }
-    
-    .activity-stream-sidebar h2 {
-        color: #4FC3F7;
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    
-    .activity-stream-item {
-        padding: 0.75rem;
-        margin-bottom: 0.75rem;
-        border-bottom: 1px solid #E1F5FE;
-        transition: background 0.2s;
-    }
-    
-    .activity-stream-item:hover {
-        background: #E1F5FE;
-        border-radius: 0.5rem;
-    }
-    
-    .activity-stream-item:last-child {
-        border-bottom: none;
-    }
-    
-    .activity-date {
-        font-size: 0.8rem;
-        color: #999;
-        margin-bottom: 0.25rem;
-    }
-    
-    .activity-content {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #666;
-        font-size: 0.95rem;
-    }
-    
-    .activity-icon {
-        font-size: 1.2rem;
-        flex-shrink: 0;
-    }
-    
-    .stat-card {
-        background: white;
-        border: 2px solid #4FC3F7;
-        border-radius: 0;
-        padding: 0.35rem;
-        box-shadow: 0 1px 4px rgba(79, 195, 247, 0.1);
-        transition: transform 0.2s;
-        text-align: center;
-        min-width: 0;
-        overflow: hidden;
-    }
-    
-    .stat-card:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 2px 6px rgba(79, 195, 247, 0.2);
-    }
-    
-    .stat-title {
-        font-size: 0.7rem;
-        color: #666;
-        margin-bottom: 0.1rem;
-        font-weight: 600;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    
-    .stat-value {
-        font-size: 1rem;
-        font-weight: bold;
-        color: #4FC3F7;
-        margin-bottom: 0.05rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    
-    .stat-label {
-        font-size: 0.65rem;
-        color: #999;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    
-    .progress-bar-container {
-        width: 100%;
-        height: 20px;
-        background: #E1F5FE;
-        border-radius: 10px;
-        overflow: hidden;
-        margin: 1rem 0;
-    }
-    
-    .progress-bar {
-        height: 100%;
-        background: linear-gradient(90deg, #4FC3F7, #81C784);
-        transition: width 0.5s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 0.75rem;
-        font-weight: bold;
-    }
-    
-    .chart-container {
-        background: white;
-        border: 2px solid #4FC3F7;
-        border-radius: 0;
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-        box-sizing: border-box;
-    }
-    
-    .time-filter {
-        display: flex;
-        gap: 0.4rem;
-        margin-bottom: 0.75rem;
-        flex-wrap: wrap;
-    }
-    
-    .time-btn {
-        padding: 0.35rem 0.5rem;
-        border: 2px solid #4FC3F7;
-        background: white;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        font-size: 0.7rem;
-        font-weight: 600;
-        flex: 1;
-        min-width: 55px;
-        max-width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    
-    @media (min-width: 768px) {
-        .time-btn {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            flex: 0;
-            min-width: auto;
-        }
-        
-        .time-filter {
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-    }
-    
-    .time-btn:hover {
-        background: #E1F5FE;
-    }
-    
-    .time-btn.active {
-        background: #4FC3F7;
-        color: white;
-    }
-    
-    .activity-card {
-        background: white;
-        border: 2px solid #4FC3F7;
-        border-radius: 0;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .activity-card h2 {
-        color: #4FC3F7;
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-        font-weight: bold;
-    }
-    
-    .activity-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    
-    .activity-item {
-        padding: 0.75rem 0;
-        border-bottom: 1px solid #E1F5FE;
-        color: #666;
-    }
-    
-    .activity-item:last-child {
-        border-bottom: none;
-    }
-    
-    .empty-state {
-        text-align: center;
-        color: #999;
-        font-style: italic;
-        padding: 2rem;
-    }
-    
-    .section-header {
-        color: #4FC3F7;
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-        text-align: center;
-        word-break: break-word;
-    }
-    
-    @media (min-width: 480px) {
-        .section-header {
-            font-size: 1.3rem;
-        }
-    }
-    
-    @media (min-width: 768px) {
-        .section-header {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-    }
-    
-    .chart-title {
-        color: #4FC3F7;
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-        font-weight: bold;
-        word-break: break-word;
-    }
-    
-    @media (min-width: 480px) {
-        .chart-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.75rem;
-        }
-    }
-    
-    @media (min-width: 768px) {
-        .chart-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-    }
-</style>
+<!-- Header with Title and Profile Button -->
+<div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+    <h1 class="h4 text-primary mb-0">📊 Your Progress Dashboard</h1>
+    <a href="/users/profile/" class="btn btn-sm" style="background:#BA68C8;color:white;">👤 Profile</a>
+</div>
 
-<div class="dashboard-container">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;flex-wrap:wrap;gap:0.5rem;width:100%;max-width:100%;">
-        <h1 class="section-header" style="margin:0;flex:1;min-width:150px;max-width:100%;">📊 Your Progress Dashboard</h1>
-        <a href="/users/profile/" class="button" style="background:#BA68C8;font-size:0.85rem;padding:0.4rem 0.75rem;white-space:nowrap;">👤 Profile</a>
-    </div>
-    
-    <!-- Dashboard Layout: Weight Progress + Activity Stream Sidebar -->
-    <div class="dashboard-layout">
-        <!-- Weight Progress Overview -->
-        <div class="chart-container">
-            <h2 class="chart-title">⚖️ Weight Progress</h2>
-            
-            <div class="dashboard-grid">
-            <div class="stat-card">
-                <div class="stat-title">Starting Weight</div>
-                <div class="stat-value">{{ starting_weight_display }}</div>
-                <div class="stat-label">Initial</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-title">Current Weight</div>
-                <div class="stat-value">{% if current_weight %}{{ current_weight }}{% else %}--{% endif %}</div>
-                <div class="stat-label">Latest</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-title">Current BMI</div>
-                <div class="stat-value">{% if current_bmi %}{{ current_bmi|floatformat:1 }}{% else %}--{% endif %}</div>
-                <div class="stat-label">Body Mass Index</div>
-            </div>
-            
-            {% if goal_weight %}
-            <div class="stat-card">
-                <div class="stat-title">Goal Weight</div>
-                <div class="stat-value">{{ goal_weight }}</div>
-                <div class="stat-label">Target</div>
-            </div>
-            {% endif %}
-            
-            <div class="stat-card">
-                <div class="stat-title">Weight Lost</div>
-                <div class="stat-value" style="color: #81C784;">{% if current_weight %}{{ weight_lost }}{% else %}0{% endif %}</div>
-                <div class="stat-label">Progress</div>
-            </div>
-        </div>
-        
-        {% if weight_progress_percent > 0 %}
-        <div style="margin: 1.5rem 0;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                <span style="font-weight: 600; color: #666;">Progress to Goal</span>
-                <span style="font-weight: bold; color: #4FC3F7;">{{ weight_progress_percent|floatformat:1 }}%</span>
-            </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar" style="width: {{ weight_progress_percent }}%;">
-                    {% if weight_progress_percent > 15 %}{{ weight_progress_percent|floatformat:0 }}%{% endif %}
-                </div>
-            </div>
-        </div>
-        {% endif %}
-        
-        <!-- Time Filter Buttons -->
-        <div class="time-filter">
-            <button class="time-btn active" onclick="filterChart('all')">All Time</button>
-            <button class="time-btn" onclick="filterChart('year')">1 Year</button>
-            <button class="time-btn" onclick="filterChart('3month')">3 Months</button>
-            <button class="time-btn" onclick="filterChart('month')">1 Month</button>
-            <button class="time-btn" onclick="filterChart('week')">1 Week</button>
-        </div>
-        
-            <!-- Weight Chart -->
-            <div style="width: 100%; max-width: 100%; overflow-x: hidden;">
-                <canvas id="weightChart" style="max-height: 300px; width: 100%; max-width: 100%;"></canvas>
-            </div>
-        </div>
-        
-        <!-- Activity Stream Sidebar -->
-        <div class="activity-stream-sidebar">
-            <h2>📊 Activity Stream</h2>
-            {% for activity in activity_stream %}
-                <div class="activity-stream-item">
-                    <div class="activity-date">{{ activity.date|date:"M d, Y" }}</div>
-                    <div class="activity-content">
-                        <span class="activity-icon">{{ activity.activity_icon }}</span>
-                        <span>{{ activity.activity_text }}</span>
+<!-- Dashboard Layout: Weight Progress + Activity Stream -->
+<div class="row g-2">
+    <!-- Weight Progress Column -->
+    <div class="col-lg-8">
+        <div class="card border-primary">
+            <div class="card-body p-2">
+                <h2 class="h5 text-primary mb-2">⚖️ Weight Progress</h2>
+                
+                <!-- Stats Grid -->
+                <div class="row g-1 mb-2">
+                    <div class="col-6 col-md-3">
+                        <div class="card border-primary text-center">
+                            <div class="card-body p-2">
+                                <div class="small text-muted">Starting Weight</div>
+                                <div class="fw-bold text-primary">{{ starting_weight_display }}</div>
+                                <div class="small text-muted">Initial</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6 col-md-3">
+                        <div class="card border-primary text-center">
+                            <div class="card-body p-2">
+                                <div class="small text-muted">Current Weight</div>
+                                <div class="fw-bold text-primary">{% if current_weight %}{{ current_weight }}{% else %}--{% endif %}</div>
+                                <div class="small text-muted">Latest</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6 col-md-3">
+                        <div class="card border-primary text-center">
+                            <div class="card-body p-2">
+                                <div class="small text-muted">Current BMI</div>
+                                <div class="fw-bold text-primary">{% if current_bmi %}{{ current_bmi|floatformat:1 }}{% else %}--{% endif %}</div>
+                                <div class="small text-muted">Body Mass Index</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% if goal_weight %}
+                    <div class="col-6 col-md-3">
+                        <div class="card border-primary text-center">
+                            <div class="card-body p-2">
+                                <div class="small text-muted">Goal Weight</div>
+                                <div class="fw-bold text-primary">{{ goal_weight }}</div>
+                                <div class="small text-muted">Target</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="col-6 col-md-3">
+                        <div class="card border-primary text-center">
+                            <div class="card-body p-2">
+                                <div class="small text-muted">Weight Lost</div>
+                                <div class="fw-bold text-success">{% if current_weight %}{{ weight_lost }}{% else %}0{% endif %}</div>
+                                <div class="small text-muted">Progress</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            {% empty %}
-                <div class="empty-state">No activities logged yet. Start tracking your wellness journey!</div>
-            {% endfor %}
+                
+                <!-- Progress Bar -->
+                {% if weight_progress_percent > 0 %}
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="fw-semibold small">Progress to Goal</span>
+                        <span class="fw-bold small text-primary">{{ weight_progress_percent|floatformat:1 }}%</span>
+                    </div>
+                    <div class="progress" style="height: 20px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ weight_progress_percent }}%;" aria-valuenow="{{ weight_progress_percent }}" aria-valuemin="0" aria-valuemax="100">
+                            {% if weight_progress_percent > 15 %}{{ weight_progress_percent|floatformat:0 }}%{% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Time Filter Buttons -->
+                <div class="btn-group btn-group-sm mb-2 flex-wrap" role="group">
+                    <button type="button" class="btn btn-outline-primary active" onclick="filterChart('all')">All Time</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('year')">1 Year</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('3month')">3 Months</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('month')">1 Month</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filterChart('week')">1 Week</button>
+                </div>
+                
+                <!-- Weight Chart -->
+                <div>
+                    <canvas id="weightChart" style="max-height: 300px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Activity Stream Sidebar -->
+    <div class="col-lg-4">
+        <div class="card border-primary">
+            <div class="card-body p-2" style="max-height: 600px; overflow-y: auto;">
+                <h2 class="h5 text-primary mb-2">📊 Activity Stream</h2>
+                {% for activity in activity_stream %}
+                    <div class="border-bottom pb-2 mb-2">
+                        <div class="small text-muted">{{ activity.date|date:"M d, Y" }}</div>
+                        <div class="d-flex align-items-center gap-2 small">
+                            <span class="fs-5">{{ activity.activity_icon }}</span>
+                            <span>{{ activity.activity_text }}</span>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="text-center text-muted fst-italic p-3 small">
+                        No activities logged yet. Start tracking your wellness journey!
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
@@ -433,7 +132,7 @@
     
     function filterChart(period) {
         // Update active button
-        document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.btn-group .btn').forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
         
         updateChart(weightData, period);
