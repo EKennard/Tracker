@@ -273,30 +273,34 @@
         
         const ctx = document.getElementById('miniWeightChart').getContext('2d');
         
-        // Filter data by date range (last N days)
+        // Calculate date range
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const startDate = new Date(today);
         startDate.setDate(startDate.getDate() - period + 1);
         
-        const recentData = weightData.filter(d => {
-            const entryDate = new Date(d.date);
-            entryDate.setHours(0, 0, 0, 0);
-            return entryDate >= startDate && entryDate <= today;
+        // Generate all date labels for the period
+        const allLabels = [];
+        const allWeights = [];
+        const currentDate = new Date(startDate);
+        
+        // Create a lookup map of weight data by date
+        const weightByDate = {};
+        weightData.forEach(d => {
+            weightByDate[d.date] = d.weight;
         });
         
-        console.log(`Rendering chart for ${period} days:`, {
-            startDate: startDate.toISOString().split('T')[0],
-            today: today.toISOString().split('T')[0],
-            filteredDataPoints: recentData.length,
-            dates: recentData.map(d => d.date)
-        });
-        
-        const labels = recentData.map(d => {
-            const date = new Date(d.date);
-            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-        });
-        const weights = recentData.map(d => d.weight);
+        // Generate data for each day in the period
+        while (currentDate <= today) {
+            const dateStr = currentDate.toISOString().split('T')[0];
+            const label = currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            
+            allLabels.push(label);
+            // Only add weight if actual entry exists for this date, otherwise null
+            allWeights.push(weightByDate[dateStr] !== undefined ? weightByDate[dateStr] : null);
+            
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
         
         // Destroy previous chart if exists
         if (weightChart) {
@@ -306,10 +310,10 @@
         weightChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: labels,
+                labels: allLabels,
                 datasets: [{
                     label: 'Weight',
-                    data: weights,
+                    data: allWeights,
                     borderColor: '#00C853',
                     backgroundColor: 'rgba(0, 200, 83, 0.1)',
                     borderWidth: 2,
@@ -319,7 +323,7 @@
                     pointBackgroundColor: '#00C853',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2,
-                    spanGaps: false,
+                    spanGaps: true,
                 }]
             },
             options: {
