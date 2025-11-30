@@ -19,9 +19,9 @@ def social_hub(request):
     
     # Get friend requests
     pending_requests = Friendship.objects.filter(
-        friend=profile,
-        status='pending'
-    ).select_related('user')
+        to_user=profile,
+        accepted=False
+    ).select_related('from_user')
     
     # Get friends
     friends = profile.get_friends()
