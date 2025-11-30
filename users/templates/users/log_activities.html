@@ -4,111 +4,128 @@
 {% block content %}
 
 <div class="row g-2">
-    <!-- LEFT COLUMN: Activity Tiles -->
-    <div class="col-lg-3">
-        <h2 class="h5 mb-2" style="color: #9C27B0;">📝 Quick Log</h2>
-        
-        <!-- Weight & Body Stats Tile -->
-        <div class="card mb-2" style="border: 2px solid #9C27B0; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#weightModal">
-            <div class="card-body p-2 text-center">
-                <div class="fs-4">⚖️</div>
-                <div class="fw-bold small" style="color: #9C27B0;">Weight & Body Stats</div>
-            </div>
-        </div>
-        
-        <!-- Meals Tile -->
-        <div class="card mb-2" style="border: 2px solid #E91E63; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#mealModal">
-            <div class="card-body p-2 text-center">
-                <div class="fs-4">🍎</div>
-                <div class="fw-bold small" style="color: #E91E63;">Meals</div>
-            </div>
-        </div>
-        
-        <!-- Exercise Tile -->
-        <div class="card mb-2" style="border: 2px solid #FF6F00; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exerciseModal">
-            <div class="card-body p-2 text-center">
-                <div class="fs-4">💪</div>
-                <div class="fw-bold small" style="color: #FF6F00;">Exercise</div>
-            </div>
-        </div>
-        
-        <!-- Habits Tile -->
-        <div class="card mb-2" style="border: 2px solid #FFD600; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#habitModal">
-            <div class="card-body p-2 text-center">
-                <div class="fs-4">✅</div>
-                <div class="fw-bold small" style="color: #FF9800;">Habits</div>
-            </div>
-        </div>
-        
-        <!-- Fertility Tile -->
-        <div class="card mb-2" style="border: 2px solid #00C853; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#fertilityModal">
-            <div class="card-body p-2 text-center">
-                <div class="fs-4">🌸</div>
-                <div class="fw-bold small" style="color: #00C853;">Fertility</div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- CENTER COLUMN: Interactive Calendar -->
-    <div class="col-lg-6">
+    <!-- LEFT COLUMN: Interactive Calendar -->
+    <div class="col-lg-8">
         <div class="card" style="border: 2px solid #9C27B0;">
-            <div class="card-body p-2">
-                <h2 class="h5 mb-2" style="color: #9C27B0;">📅 Select Date</h2>
-                <p class="small text-muted">Click a date to log activities for that day</p>
+            <div class="card-body p-3">
+                <h2 class="h5 mb-2" style="color: #9C27B0;">📅 Select Date to Log Activities</h2>
+                <p class="small text-muted">Click a date to view and manage entries for that day</p>
                 
                 <!-- Calendar will be rendered here -->
                 <div id="activityCalendar" class="mb-3"></div>
-                
-                <div class="alert alert-info mb-0 small">
-                    <strong>Selected Date:</strong> <span id="selectedDateDisplay">{{ selected_date|date:"F d, Y" }}</span>
-                </div>
             </div>
         </div>
     </div>
     
-    <!-- RIGHT COLUMN: Today's Entries Summary -->
-    <div class="col-lg-3">
-        <h2 class="h5 mb-2" style="color: #9C27B0;">📊 Today's Entries</h2>
-        
-        <!-- Recent Weight -->
-        <div class="card mb-2" style="border: 1px solid #9C27B0;">
+    <!-- RIGHT COLUMN: Date Entries Panel -->
+    <div class="col-lg-4">
+        <div class="card" style="border: 2px solid #9C27B0;">
             <div class="card-body p-2">
-                <div class="fw-bold small mb-1" style="color: #9C27B0;">⚖️ Weight</div>
-                {% if recent_weight %}
-                    {% for entry in recent_weight|slice:":3" %}
-                        <div class="small text-muted">{{ entry.date|date:"M d" }}: {{ entry.weight_display }}</div>
-                    {% endfor %}
-                {% else %}
-                    <div class="small text-muted fst-italic">No entries yet</div>
-                {% endif %}
-            </div>
-        </div>
-        
-        <!-- Recent Meals -->
-        <div class="card mb-2" style="border: 1px solid #E91E63;">
-            <div class="card-body p-2">
-                <div class="fw-bold small mb-1" style="color: #E91E63;">🍎 Meals</div>
-                {% if recent_meals %}
-                    {% for meal in recent_meals|slice:":3" %}
-                        <div class="small text-muted">{{ meal.date|date:"M d" }}: {{ meal.meal_type }}</div>
-                    {% endfor %}
-                {% else %}
-                    <div class="small text-muted fst-italic">No entries yet</div>
-                {% endif %}
-            </div>
-        </div>
-        
-        <!-- Recent Exercise -->
-        <div class="card mb-2" style="border: 1px solid #FF6F00;">
-            <div class="card-body p-2">
-                <div class="fw-bold small mb-1" style="color: #FF6F00;">💪 Exercise</div>
-                {% if recent_exercise %}
-                    {% for ex in recent_exercise|slice:":3" %}
-                        <div class="small text-muted">{{ ex.date|date:"M d" }}: {{ ex.exercise_type }}</div>
-                    {% endfor %}
-                {% else %}
-                    <div class="small text-muted fst-italic">No entries yet</div>
-                {% endif %}
+                <h2 class="h5 mb-2" style="color: #9C27B0;" id="entriesDateTitle">📊 Entries for <span id="selectedDateDisplay">{{ selected_date|date:"M d, Y" }}</span></h2>
+                
+                <!-- Add Entry Buttons -->
+                <div class="d-grid gap-2 mb-3">
+                    <button class="btn btn-sm" style="background: #9C27B0; color: white;" data-bs-toggle="modal" data-bs-target="#weightModal">
+                        ⚖️ Add Weight
+                    </button>
+                    <button class="btn btn-sm" style="background: #E91E63; color: white;" data-bs-toggle="modal" data-bs-target="#mealModal">
+                        🍎 Add Meal
+                    </button>
+                    <button class="btn btn-sm" style="background: #FF6F00; color: white;" data-bs-toggle="modal" data-bs-target="#exerciseModal">
+                        💪 Add Exercise
+                    </button>
+                    <button class="btn btn-sm" style="background: #FFD600; color: #333;" data-bs-toggle="modal" data-bs-target="#habitModal">
+                        ✅ Add Habit
+                    </button>
+                    <button class="btn btn-sm" style="background: #00C853; color: white;" data-bs-toggle="modal" data-bs-target="#fertilityModal">
+                        🌸 Add Fertility
+                    </button>
+                </div>
+                
+                <hr>
+                
+                <!-- Entries for Selected Date -->
+                <div id="dateEntriesContainer">
+                    <!-- Weight Entry -->
+                    <div class="card mb-2" style="border-left: 3px solid #9C27B0;">
+                        <div class="card-body p-2">
+                            <div class="fw-bold small mb-1" style="color: #9C27B0;">⚖️ Weight</div>
+                            <div id="weightEntries">
+                                {% if recent_weight %}
+                                    {% for entry in recent_weight %}
+                                        <div class="small">{{ entry.weight_display }}</div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="small text-muted fst-italic">No entries</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Meals Entry -->
+                    <div class="card mb-2" style="border-left: 3px solid #E91E63;">
+                        <div class="card-body p-2">
+                            <div class="fw-bold small mb-1" style="color: #E91E63;">🍎 Meals</div>
+                            <div id="mealEntries">
+                                {% if recent_meals %}
+                                    {% for meal in recent_meals %}
+                                        <div class="small">{{ meal.get_meal_type_display }} - {{ meal.calories }} kcal</div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="small text-muted fst-italic">No entries</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Exercise Entry -->
+                    <div class="card mb-2" style="border-left: 3px solid #FF6F00;">
+                        <div class="card-body p-2">
+                            <div class="fw-bold small mb-1" style="color: #FF6F00;">💪 Exercise</div>
+                            <div id="exerciseEntries">
+                                {% if recent_exercise %}
+                                    {% for ex in recent_exercise %}
+                                        <div class="small">{{ ex.get_exercise_type_display }} - {{ ex.duration_minutes }} min</div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="small text-muted fst-italic">No entries</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Habits Entry -->
+                    <div class="card mb-2" style="border-left: 3px solid #FFD600;">
+                        <div class="card-body p-2">
+                            <div class="fw-bold small mb-1" style="color: #FF9800;">✅ Habits</div>
+                            <div id="habitEntries">
+                                {% if recent_habits %}
+                                    {% for habit in recent_habits %}
+                                        <div class="small">{{ habit.habit_name }}</div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="small text-muted fst-italic">No entries</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fertility Entry -->
+                    <div class="card mb-2" style="border-left: 3px solid #00C853;">
+                        <div class="card-body p-2">
+                            <div class="fw-bold small mb-1" style="color: #00C853;">🌸 Fertility</div>
+                            <div id="fertilityEntries">
+                                {% if recent_fertility %}
+                                    {% for fert in recent_fertility %}
+                                        <div class="small">Logged</div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="small text-muted fst-italic">No entries</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -289,14 +306,15 @@
 </div>
 
 <script>
-// Simple calendar implementation
+// Calendar implementation with dynamic date selection
 document.addEventListener('DOMContentLoaded', function() {
     const calendarEl = document.getElementById('activityCalendar');
-    const selectedDate = new Date('{{ selected_date|date:"Y-m-d" }}');
+    let currentDate = new Date('{{ selected_date|date:"Y-m-d" }}');
+    let selectedDateStr = '{{ selected_date|date:"Y-m-d" }}';
     
     function renderCalendar() {
-        const year = selectedDate.getFullYear();
-        const month = selectedDate.getMonth();
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
         
         const firstDay = new Date(year, month, 1);
         const lastDay = new Date(year, month + 1, 0);
@@ -322,11 +340,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Days
+        const today = new Date();
+        const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        
         for (let day = 1; day <= daysInMonth; day++) {
             const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-            const isSelected = dateStr === '{{ selected_date|date:"Y-m-d" }}';
-            const classes = isSelected ? 'bg-primary text-white' : 'bg-light';
-            html += `<div class="text-center p-2 ${classes}" style="cursor: pointer; border-radius: 0;" onclick="selectDate('${dateStr}')">${day}</div>`;
+            const isSelected = dateStr === selectedDateStr;
+            const isToday = dateStr === todayStr;
+            
+            let classes = 'bg-light';
+            let style = 'cursor: pointer; border-radius: 4px;';
+            
+            if (isSelected) {
+                classes = 'text-white';
+                style += ' background: linear-gradient(135deg, #9C27B0, #E91E63);';
+            } else if (isToday) {
+                classes = 'border border-primary';
+            }
+            
+            html += `<div class="text-center p-2 ${classes}" style="${style}" onclick="selectDate('${dateStr}')">${day}</div>`;
         }
         
         html += '</div>';
@@ -334,13 +366,102 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     window.changeMonth = function(delta) {
-        selectedDate.setMonth(selectedDate.getMonth() + delta);
+        currentDate.setMonth(currentDate.getMonth() + delta);
         renderCalendar();
     };
     
     window.selectDate = function(dateStr) {
-        window.location.href = '?date=' + dateStr;
+        // Update the selected date display
+        const date = new Date(dateStr + 'T00:00:00');
+        const options = { month: 'short', day: 'numeric', year: 'numeric' };
+        const formattedDate = date.toLocaleDateString('en-US', options);
+        document.getElementById('selectedDateDisplay').textContent = formattedDate;
+        
+        selectedDateStr = dateStr;
+        renderCalendar();
+        
+        // Load entries for this date via AJAX
+        loadEntriesForDate(dateStr);
+        
+        // Update form dates
+        updateFormDates(dateStr);
     };
+    
+    function loadEntriesForDate(dateStr) {
+        // Show loading state
+        document.getElementById('dateEntriesContainer').style.opacity = '0.5';
+        
+        // Fetch entries for the selected date
+        fetch(`/users/log/entries/?date=${dateStr}`)
+            .then(response => response.json())
+            .then(data => {
+                updateEntriesDisplay(data);
+                document.getElementById('dateEntriesContainer').style.opacity = '1';
+            })
+            .catch(error => {
+                console.error('Error loading entries:', error);
+                document.getElementById('dateEntriesContainer').style.opacity = '1';
+            });
+    }
+    
+    function updateEntriesDisplay(data) {
+        // Update Weight
+        const weightContainer = document.getElementById('weightEntries');
+        if (data.weight && data.weight.length > 0) {
+            weightContainer.innerHTML = data.weight.map(w => 
+                `<div class="small">${w.weight_display}</div>`
+            ).join('');
+        } else {
+            weightContainer.innerHTML = '<div class="small text-muted fst-italic">No entries</div>';
+        }
+        
+        // Update Meals
+        const mealContainer = document.getElementById('mealEntries');
+        if (data.meals && data.meals.length > 0) {
+            mealContainer.innerHTML = data.meals.map(m => 
+                `<div class="small">${m.meal_type} - ${m.calories} kcal</div>`
+            ).join('');
+        } else {
+            mealContainer.innerHTML = '<div class="small text-muted fst-italic">No entries</div>';
+        }
+        
+        // Update Exercise
+        const exerciseContainer = document.getElementById('exerciseEntries');
+        if (data.exercise && data.exercise.length > 0) {
+            exerciseContainer.innerHTML = data.exercise.map(e => 
+                `<div class="small">${e.exercise_type} - ${e.duration_minutes} min</div>`
+            ).join('');
+        } else {
+            exerciseContainer.innerHTML = '<div class="small text-muted fst-italic">No entries</div>';
+        }
+        
+        // Update Habits
+        const habitContainer = document.getElementById('habitEntries');
+        if (data.habits && data.habits.length > 0) {
+            habitContainer.innerHTML = data.habits.map(h => 
+                `<div class="small">${h.habit_name}</div>`
+            ).join('');
+        } else {
+            habitContainer.innerHTML = '<div class="small text-muted fst-italic">No entries</div>';
+        }
+        
+        // Update Fertility
+        const fertilityContainer = document.getElementById('fertilityEntries');
+        if (data.fertility && data.fertility.length > 0) {
+            fertilityContainer.innerHTML = data.fertility.map(() => 
+                `<div class="small">Logged</div>`
+            ).join('');
+        } else {
+            fertilityContainer.innerHTML = '<div class="small text-muted fst-italic">No entries</div>';
+        }
+    }
+    
+    function updateFormDates(dateStr) {
+        // Update all date inputs in the forms to the selected date
+        document.querySelectorAll('input[type="date"]').forEach(input => {
+            input.value = dateStr;
+        });
+    }
     
     renderCalendar();
 });

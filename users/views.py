@@ -580,19 +580,18 @@ def log_activities(request):
                 messages.success(request, '✅ Fertility data logged successfully!')
                 return redirect('log_activities')
     
-    # Get today's entries for each category
+    # Get entries for selected date (not just today)
     from metrics.models import HealthMetrics
     from meals.models import NutritionLog
     from exercise.models import ExerciseLog
     from habits.models import HabitLog as HabitLogModel
     from fertility.models import FertilityLog as FertilityLogModel
     
-    today = date.today()
-    recent_weight = HealthMetrics.objects.filter(user_profile=profile, date=today).order_by('-date')
-    recent_meals = NutritionLog.objects.filter(profile=profile, date=today).order_by('-date')
-    recent_exercise = ExerciseLog.objects.filter(profile=profile, date=today).order_by('-date')
-    recent_habits = HabitLogModel.objects.filter(profile=profile, date=today).order_by('-date')
-    recent_fertility = FertilityLogModel.objects.filter(profile=profile, date=today).order_by('-date')
+    recent_weight = HealthMetrics.objects.filter(user_profile=profile, date=selected_date).order_by('-date')
+    recent_meals = NutritionLog.objects.filter(profile=profile, date=selected_date).order_by('-date')
+    recent_exercise = ExerciseLog.objects.filter(profile=profile, date=selected_date).order_by('-date')
+    recent_habits = HabitLogModel.objects.filter(profile=profile, date=selected_date).order_by('-date')
+    recent_fertility = FertilityLogModel.objects.filter(profile=profile, date=selected_date).order_by('-date')
     
     # Format recent weight entries with user's preferred unit
     for entry in recent_weight:
@@ -625,3 +624,81 @@ def log_activities(request):
     }
     
     return render(request, 'users/log_activities.html', context)
+
+
+@login_required
+@profile_required
+def get_entries_by_date(request):
+    """API endpoint to fetch entries for a specific date"""
+    from django.http import JsonResponse
+    from metrics.models import HealthMetrics
+    from meals.models import NutritionLog
+    from exercise.models import ExerciseLog
+    from habits.models import HabitLog as HabitLogModel
+    from fertility.models import FertilityLog as FertilityLogModel
+    from datetime import datetime
+    
+    profile = request.user.userprofile
+    date_str = request.GET.get('date')
+    
+    try:
+        selected_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+    except:
+        return JsonResponse({'error': 'Invalid date format'}, status=400)
+    
+    # Fetch entries for this date
+    weight_entries = HealthMetrics.objects.filter(user_profile=profile, date=selected_date).order_by('-date')
+    meal_entries = NutritionLog.objects.filter(profile=profile, date=selected_date).order_by('-date')
+    exercise_entries = ExerciseLog.objects.filter(profile=profile, date=selected_date).order_by('-date')
+    habit_entries = HabitLogModel.objects.filter(profile=profile, date=selected_date).order_by('-date')
+    fertility_entries = FertilityLogModel.objects.filter(profile=profile, date=selected_date).order_by('-date')
+    
+    # Format weight entries
+    weight_data = []
+    for entry in weight_entries:
+        if profile.weight_unit == 'kg':
+            weight_display = f"{float(entry.weight) * 0.453592:.1f} kg"
+        elif profile.weight_unit == 'st':
+            total_lb = float(entry.weight)
+            stones = int(total_lb // 14)
+            pounds = round(total_lb % 14, 1)
+            weight_display = f"{stones}st {pounds}lb"
+        else:
+            weight_display = f"{float(entry.weight):.1f} lb"
+        
+        weight_data.append({'weight_display': weight_display})
+    
+    # Format meal entries
+    meal_data = []
+    for meal in meal_entries:
+        meal_data.append({
+            'meal_type': meal.get_meal_type_display(),
+            'calories': meal.calories
+        })
+    
+    # Format exercise entries
+    exercise_data = []
+    for ex in exercise_entries:
+        exercise_data.append({
+            'exercise_type': ex.get_exercise_type_display(),
+            'duration_minutes': ex.duration_minutes
+        })
+    
+    # Format habit entries
+    habit_data = []
+    for habit in habit_entries:
+        habit_data.append({
+            'habit_name': habit.habit_name
+        })
+    
+    # Format fertility entries
+    fertility_data = [{'logged': True} for _ in fertility_entries]
+    
+    return JsonResponse({
+        'weight': weight_data,
+        'meals': meal_data,
+        'exercise': exercise_data,
+        'habits': habit_data,
+        'fertility': fertility_data
+    })
+
