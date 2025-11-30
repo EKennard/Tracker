@@ -75,7 +75,6 @@ INSTALLED_APPS = [
     'users',
     'meals',
     'metrics',
-    'milestones',
     'social',
     'notifications',
     'fertility',

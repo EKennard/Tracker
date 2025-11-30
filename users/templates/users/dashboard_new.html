@@ -13,17 +13,13 @@
                 
                 <!-- Quick Stats -->
                 <div class="row g-1 text-center small mb-2">
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class="fw-bold">{{ activity_count }}</div>
                         <div >Activities</div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class="fw-bold">{{ friend_count }}</div>
                         <div >Friends</div>
-                    </div>
-                    <div class="col-4">
-                        <div class="fw-bold">{{ milestone_count }}</div>
-                        <div >Milestones</div>
                     </div>
                 </div>
                 
@@ -145,16 +141,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-2">
-                                <div class="card-body p-2">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div>
-                                            <div class="small fw-bold">Build Habits</div>
-                                            <div class="small">Create healthy daily routines</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 {% endif %}
@@ -162,36 +148,8 @@
         </div>
     </div>
     
-    <!-- RIGHT COLUMN: Milestones & Friends -->
+    <!-- RIGHT COLUMN: Friends -->
     <div class="col-lg-3">
-        <!-- Active Milestones -->
-        <div class="card mb-2">
-            <div class="card-body p-2">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h3 class="h6 mb-0">Milestones</h3>
-                    <a href="/milestones/list/" class="btn btn-sm">View All</a>
-                </div>
-                
-                {% if recent_milestones %}
-                    {% for milestone in recent_milestones|slice:":3" %}
-                    <div class="border-bottom pb-1 mb-1">
-                        <div class="small fw-bold">{{ milestone.title }}</div>
-                        <div class="small">{{ milestone.description|truncatewords:8 }}</div>
-                        {% if milestone.date_achieved %}
-                        <span class="badge small">Achieved!</span>
-                        {% else %}
-                        <span class="badge small">In Progress</span>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="text-center small py-2">
-                        No milestones set yet
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-        
         <!-- Friends Activity -->
         <div class="card">
             <div class="card-body p-2">
@@ -222,7 +180,6 @@
                 <h3 class="h6 mb-2">Quick Actions</h3>
                 <div class="d-flex flex-column gap-1">
                     <a href="{% url 'log_activities' %}" class="btn btn-sm w-100 text-start">Log Activities</a>
-                    <a href="/milestones/list/" class="btn btn-sm w-100 text-start">View Milestones</a>
                     <a href="{% url 'social_hub' %}" class="btn btn-sm w-100 text-start">Social Hub</a>
                 </div>
             </div>

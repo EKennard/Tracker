@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import HealthMetricsForm, MeasurementForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+
+from .forms import HealthMetricsForm, MeasurementForm
 from .models import HealthMetrics, Measurement
 from users.decorators import profile_required
 

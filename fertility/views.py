@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
 from .models import FertilityLog
 from .forms import FertilityLogForm
-from django.contrib.auth.decorators import login_required
 from users.decorators import profile_required
 
 @login_required

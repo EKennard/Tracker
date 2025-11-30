@@ -1,19 +1,15 @@
-from django.shortcuts import render
+import json
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-import json
 
 from meals.models import NutritionLog
 from metrics.models import HealthMetrics, Measurement
-from milestones.models import Milestone
 from exercise.models import ExerciseLog
 from fertility.models import FertilityLog
-
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from .models import UserProfile, Friendship
 from .forms import FriendRequestForm, UserProfileForm
 from .decorators import profile_required
@@ -31,7 +27,6 @@ def dashboard(request):
             NutritionLog.objects.filter(profile=profile).exists() or
             HealthMetrics.objects.filter(user_profile=profile).exists() or
             Measurement.objects.filter(profile=profile).exists() or
-            Milestone.objects.filter(profile=profile).exists() or
             ExerciseLog.objects.filter(profile=profile).exists() or
             FertilityLog.objects.filter(profile=profile).exists()
         )
@@ -179,10 +174,6 @@ def dashboard(request):
     activity_count = len(activity_stream)
     friend_count = profile.get_friends().count()
     
-    # Get milestones
-    recent_milestones = Milestone.objects.filter(profile=profile).order_by('-modified_at')[:5]
-    milestone_count = Milestone.objects.filter(profile=profile, date_achieved__isnull=False).count()
-    
     # Get friend activities
     from social.models import GlobalActivity
     friends = profile.get_friends()
@@ -220,8 +211,6 @@ def dashboard(request):
         'activity_stream': activity_stream,
         'activity_count': activity_count,
         'friend_count': friend_count,
-        'milestone_count': milestone_count,
-        'recent_milestones': recent_milestones,
         'friend_activities': friend_activities,
         'total_meals': total_meals,
         'total_workouts': total_workouts,
@@ -497,8 +486,7 @@ def edit_profile(request):
 @login_required
 def log_activities(request):
     """
-    Unified logging page with interactive calendar and modal forms
-    for weight, meals, exercise, habits, and fertility tracking
+    Unified logging page for weight, meals, exercise, and fertility tracking
     """
     try:
         profile = request.user.userprofile

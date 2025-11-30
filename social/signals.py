@@ -74,23 +74,6 @@ def create_meal_activity(sender, instance, created, **kwargs):
         )
 
 
-@receiver(post_save, sender='milestones.Milestone')
-def create_milestone_activity(sender, instance, created, **kwargs):
-    """Create global activity when milestone is achieved"""
-    if created and hasattr(instance, 'profile') and instance.profile.is_public:
-        title = instance.title if hasattr(instance, 'title') else "a milestone"
-        description = f"Achieved milestone: {title}"
-        
-        GlobalActivity.objects.create(
-            profile=instance.profile,
-            activity_type='milestone',
-            description=description,
-            icon='🎯',
-            content_type=ContentType.objects.get_for_model(instance),
-            object_id=instance.id
-        )
-
-
 @receiver(post_save, sender='metrics.Measurement')
 def create_measurement_activity(sender, instance, created, **kwargs):
     """Create global activity when body measurement is logged"""
