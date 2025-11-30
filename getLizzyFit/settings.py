@@ -78,7 +78,6 @@ INSTALLED_APPS = [
     'milestones',
     'social',
     'notifications',
-    'habits',
     'fertility',
     'exercise',
 ]

@@ -45,11 +45,6 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#habitModal">
-                                ✅ Habit
-                            </a>
-                        </li>
-                        <li>
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#fertilityModal">
                                 🌸 Fertility
                             </a>
@@ -101,22 +96,6 @@
                                 {% if recent_exercise %}
                                     {% for ex in recent_exercise %}
                                         <div class="small">{{ ex.get_exercise_type_display }} - {{ ex.duration_minutes }} min</div>
-                                    {% endfor %}
-                                {% else %}
-                                    <div class="small text-muted fst-italic">No entries</div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Habits Entry -->
-                    <div class="card mb-2" style="border-left: 3px solid #FFD600;">
-                        <div class="card-body p-2">
-                            <div class="fw-bold small mb-1" style="color: #FF9800;">✅ Habits</div>
-                            <div id="habitEntries">
-                                {% if recent_habits %}
-                                    {% for habit in recent_habits %}
-                                        <div class="small">{{ habit.habit_name }}</div>
                                     {% endfor %}
                                 {% else %}
                                     <div class="small text-muted fst-italic">No entries</div>
@@ -343,29 +322,6 @@
     </div>
 </div>
 
-<!-- Habit Modal -->
-<div class="modal fade" id="habitModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background: linear-gradient(135deg, #FFD600, #00C853); color: white;">
-                <h5 class="modal-title">✅ Log Habit</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="{% url 'log_activities' %}?type=habit" id="habitForm">
-                    {% csrf_token %}
-                    {{ habit_form.as_p }}
-                    <input type="hidden" name="form_type" value="habit">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" form="habitForm" class="btn" style="background: #FFD600; color: #333;">💾 Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Fertility Modal -->
 <div class="modal fade" id="fertilityModal" tabindex="-1">
     <div class="modal-dialog">
@@ -493,7 +449,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const hasEntries = (data.weight && data.weight.length > 0) ||
                           (data.meals && data.meals.length > 0) ||
                           (data.exercise && data.exercise.length > 0) ||
-                          (data.habits && data.habits.length > 0) ||
                           (data.fertility && data.fertility.length > 0);
         
         // Update button text
@@ -528,16 +483,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ).join('');
         } else {
             exerciseContainer.innerHTML = '<div class="small text-muted fst-italic">No entries</div>';
-        }
-        
-        // Update Habits
-        const habitContainer = document.getElementById('habitEntries');
-        if (data.habits && data.habits.length > 0) {
-            habitContainer.innerHTML = data.habits.map(h => 
-                `<div class="small">${h.habit_name}</div>`
-            ).join('');
-        } else {
-            habitContainer.innerHTML = '<div class="small text-muted fst-italic">No entries</div>';
         }
         
         // Update Fertility

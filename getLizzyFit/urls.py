@@ -37,7 +37,6 @@ urlpatterns += [
     path('milestones/', include('milestones.urls')),
     path('social/', include('social.urls')),
     path('notifications/', include('notifications.urls')),
-    path('habits/', include('habits.urls')),
     path('exercise/', include('exercise.urls')),
 ]
 

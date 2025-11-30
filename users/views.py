@@ -6,7 +6,6 @@ from django.contrib import messages
 from meals.models import NutritionLog
 from metrics.models import HealthMetrics, Measurement
 from milestones.models import Milestone
-from habits.models import HabitLog
 from exercise.models import ExerciseLog
 from fertility.models import FertilityLog
 
@@ -32,7 +31,6 @@ def dashboard(request):
             HealthMetrics.objects.filter(user_profile=profile).exists() or
             Measurement.objects.filter(profile=profile).exists() or
             Milestone.objects.filter(profile=profile).exists() or
-            HabitLog.objects.filter(profile=profile).exists() or
             ExerciseLog.objects.filter(profile=profile).exists() or
             FertilityLog.objects.filter(profile=profile).exists()
         )
@@ -143,7 +141,6 @@ def dashboard(request):
     recent_meals = NutritionLog.objects.filter(profile=profile).order_by('-date')[:10]
     recent_metrics = all_metrics.order_by('-date')[:10]
     recent_measurements = Measurement.objects.filter(profile=profile).order_by('-date')[:10]
-    recent_habits = HabitLog.objects.filter(profile=profile).order_by('-date')[:10]
     recent_exercise = ExerciseLog.objects.filter(profile=profile).order_by('-date')[:10]
     
     # Add activity_type to each object for display
@@ -163,11 +160,6 @@ def dashboard(request):
         measurement.activity_icon = '📏'
         measurement.activity_text = f"{measurement.body_part}: {measurement.value} {measurement.unit}"
     
-    for habit in recent_habits:
-        habit.activity_type = 'habit'
-        habit.activity_icon = '✅'
-        habit.activity_text = f"{habit.habit_name}" + (f" - {habit.value} {habit.unit}" if habit.value else "")
-    
     for exercise in recent_exercise:
         exercise.activity_type = 'exercise'
         exercise.activity_icon = '💪'
@@ -175,7 +167,7 @@ def dashboard(request):
     
     # Combine and sort all activities by date
     activity_stream = sorted(
-        chain(recent_meals, recent_metrics, recent_measurements, recent_habits, recent_exercise),
+        chain(recent_meals, recent_metrics, recent_measurements, recent_exercise),
         key=attrgetter('date'),
         reverse=True
     )[:15]  # Show last 15 activities
@@ -183,7 +175,6 @@ def dashboard(request):
     # Activity counts
     total_meals = NutritionLog.objects.filter(profile=profile).count()
     total_workouts = ExerciseLog.objects.filter(profile=profile).count()
-    total_habit_logs = HabitLog.objects.filter(profile=profile).count()
     
     # Get counts for dashboard stats
     activity_count = len(activity_stream)
@@ -351,7 +342,6 @@ def profile_view(request):
         profile.weight_privacy = request.POST.get('weight_privacy', 'private')
         profile.meals_privacy = request.POST.get('meals_privacy', 'private')
         profile.exercise_privacy = request.POST.get('exercise_privacy', 'private')
-        profile.habits_privacy = request.POST.get('habits_privacy', 'private')
         profile.fertility_privacy = request.POST.get('fertility_privacy', 'private')
         profile.save()
         messages.success(request, '✅ Privacy settings updated successfully!')
@@ -507,7 +497,6 @@ def log_activities(request):
     
     from meals.forms import NutritionLogForm
     from exercise.forms import ExerciseLogForm
-    from habits.forms import HabitLogForm
     from fertility.forms import FertilityLogForm
     from metrics.forms import HealthMetricsForm
     from datetime import datetime, date
@@ -562,15 +551,6 @@ def log_activities(request):
                 messages.success(request, '✅ Exercise logged successfully!')
                 return redirect('log_activities')
                 
-        elif form_type == 'habit':
-            form = HabitLogForm(request.POST)
-            if form.is_valid():
-                entry = form.save(commit=False)
-                entry.profile = profile
-                entry.save()
-                messages.success(request, '✅ Habit logged successfully!')
-                return redirect('log_activities')
-                
         elif form_type == 'fertility':
             form = FertilityLogForm(request.POST)
             if form.is_valid():
@@ -590,7 +570,6 @@ def log_activities(request):
     recent_weight = HealthMetrics.objects.filter(user_profile=profile, date=selected_date).order_by('-date')
     recent_meals = NutritionLog.objects.filter(profile=profile, date=selected_date).order_by('-date')
     recent_exercise = ExerciseLog.objects.filter(profile=profile, date=selected_date).order_by('-date')
-    recent_habits = HabitLogModel.objects.filter(profile=profile, date=selected_date).order_by('-date')
     recent_fertility = FertilityLogModel.objects.filter(profile=profile, date=selected_date).order_by('-date')
     
     # Format recent weight entries with user's preferred unit
@@ -612,12 +591,10 @@ def log_activities(request):
         'weight_form': HealthMetricsForm(initial={'date': selected_date}, user_profile=profile),
         'meal_form': NutritionLogForm(initial={'date': selected_date}),
         'exercise_form': ExerciseLogForm(initial={'date': selected_date}),
-        'habit_form': HabitLogForm(initial={'date': selected_date}),
         'fertility_form': FertilityLogForm(initial={'date': selected_date}),
         'recent_weight': recent_weight,
         'recent_meals': recent_meals,
         'recent_exercise': recent_exercise,
-        'recent_habits': recent_habits,
         'recent_fertility': recent_fertility,
         'weight_unit': profile.weight_unit,
         'height_unit': profile.height_unit,
@@ -634,7 +611,6 @@ def get_entries_by_date(request):
     from metrics.models import HealthMetrics
     from meals.models import NutritionLog
     from exercise.models import ExerciseLog
-    from habits.models import HabitLog as HabitLogModel
     from fertility.models import FertilityLog as FertilityLogModel
     from datetime import datetime
     
@@ -650,7 +626,6 @@ def get_entries_by_date(request):
     weight_entries = HealthMetrics.objects.filter(user_profile=profile, date=selected_date).order_by('-date')
     meal_entries = NutritionLog.objects.filter(profile=profile, date=selected_date).order_by('-date')
     exercise_entries = ExerciseLog.objects.filter(profile=profile, date=selected_date).order_by('-date')
-    habit_entries = HabitLogModel.objects.filter(profile=profile, date=selected_date).order_by('-date')
     fertility_entries = FertilityLogModel.objects.filter(profile=profile, date=selected_date).order_by('-date')
     
     # Format weight entries
@@ -684,13 +659,6 @@ def get_entries_by_date(request):
             'duration_minutes': ex.duration_minutes
         })
     
-    # Format habit entries
-    habit_data = []
-    for habit in habit_entries:
-        habit_data.append({
-            'habit_name': habit.habit_name
-        })
-    
     # Format fertility entries
     fertility_data = [{'logged': True} for _ in fertility_entries]
     
@@ -698,7 +666,6 @@ def get_entries_by_date(request):
         'weight': weight_data,
         'meals': meal_data,
         'exercise': exercise_data,
-        'habits': habit_data,
         'fertility': fertility_data
     })
 

@@ -51,7 +51,6 @@ class UserProfile(models.Model):
     meals_privacy = models.CharField(max_length=20, choices=PRIVACY_CHOICES, default='private')
     exercise_privacy = models.CharField(max_length=20, choices=PRIVACY_CHOICES, default='private')
     fertility_privacy = models.CharField(max_length=20, choices=PRIVACY_CHOICES, default='private')
-    habits_privacy = models.CharField(max_length=20, choices=PRIVACY_CHOICES, default='private')
 
     def save(self, *args, **kwargs):
         # Generate personal key if not exists
