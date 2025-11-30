@@ -564,7 +564,6 @@ def log_activities(request):
     from metrics.models import HealthMetrics
     from meals.models import NutritionLog
     from exercise.models import ExerciseLog
-    from habits.models import HabitLog as HabitLogModel
     from fertility.models import FertilityLog as FertilityLogModel
     
     recent_weight = HealthMetrics.objects.filter(user_profile=profile, date=selected_date).order_by('-date')
