@@ -64,13 +64,33 @@
             </div>
         </div>
         
-        <!-- Quick Actions -->
-        <div class="card" style="border: 2px solid #FF6F00;">
+        <!-- Weight Chart -->
+        <div class="card" style="border: 2px solid #00C853;">
             <div class="card-body p-2">
-                <h3 class="h6 mb-2" style="color: #FF6F00;">⚡ Quick Actions</h3>
-                <a href="{% url 'log_activities' %}" class="btn btn-sm w-100 mb-1" style="background: #FF6F00; color: white;">📝 Log Activities</a>
-                <a href="{% url 'social_hub' %}" class="btn btn-sm w-100 mb-1" style="background: #FFD600; color: #333;">👥 View Friends</a>
-                <a href="/milestones/list/" class="btn btn-sm w-100" style="background: #00C853; color: white;">🎯 My Milestones</a>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="h6 mb-0" style="color: #00C853;">📈 Weight Trend</h3>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-outline-success active" data-period="7" onclick="updateChartPeriod(7)">7D</button>
+                        <button type="button" class="btn btn-outline-success" data-period="30" onclick="updateChartPeriod(30)">1M</button>
+                        <button type="button" class="btn btn-outline-success" data-period="365" onclick="updateChartPeriod(365)">1Y</button>
+                    </div>
+                </div>
+                
+                <!-- Mini Chart -->
+                <canvas id="miniWeightChart" style="max-height: 150px;"></canvas>
+                
+                <!-- Progress Bar -->
+                {% if weight_progress_percent > 0 %}
+                <div class="mt-2">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="small">Progress to Goal</span>
+                        <span class="small fw-bold" style="color: #00C853;">{{ weight_progress_percent|floatformat:0 }}%</span>
+                    </div>
+                    <div class="progress" style="height: 8px; background-color: #F3E5F5;">
+                        <div class="progress-bar" role="progressbar" style="width: {{ weight_progress_percent }}%; background: linear-gradient(90deg, #9C27B0, #00C853);"></div>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -170,31 +190,8 @@
         </div>
     </div>
     
-    <!-- RIGHT COLUMN: Weight Chart & Milestones -->
+    <!-- RIGHT COLUMN: Milestones & Friends -->
     <div class="col-lg-3">
-        <!-- Weight Chart -->
-        <div class="card mb-2" style="border: 2px solid #00C853;">
-            <div class="card-body p-2">
-                <h3 class="h6 mb-2" style="color: #00C853;">📈 Weight Trend</h3>
-                
-                <!-- Mini Chart -->
-                <canvas id="miniWeightChart" style="max-height: 150px;"></canvas>
-                
-                <!-- Progress Bar -->
-                {% if weight_progress_percent > 0 %}
-                <div class="mt-2">
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="small">Progress to Goal</span>
-                        <span class="small fw-bold" style="color: #00C853;">{{ weight_progress_percent|floatformat:0 }}%</span>
-                    </div>
-                    <div class="progress" style="height: 8px; background-color: #F3E5F5;">
-                        <div class="progress-bar" role="progressbar" style="width: {{ weight_progress_percent }}%; background: linear-gradient(90deg, #9C27B0, #00C853);"></div>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        
         <!-- Active Milestones -->
         <div class="card mb-2" style="border: 2px solid #FFD600;">
             <div class="card-body p-2">
@@ -246,6 +243,18 @@
                 {% endif %}
             </div>
         </div>
+        
+        <!-- Quick Actions -->
+        <div class="card mt-2" style="border: 2px solid #9C27B0;">
+            <div class="card-body p-2">
+                <h3 class="h6 mb-2" style="color: #9C27B0;">⚡ Quick Actions</h3>
+                <div class="d-flex flex-column gap-1">
+                    <a href="{% url 'log_activities' %}" class="btn btn-sm w-100 text-start" style="background: linear-gradient(135deg, #9C27B0, #E91E63); color: white;">📝 Log Activities</a>
+                    <a href="/milestones/list/" class="btn btn-sm w-100 text-start" style="background: linear-gradient(135deg, #FFD600, #FF9800); color: #333;">🎯 View Milestones</a>
+                    <a href="{% url 'social_hub' %}" class="btn btn-sm w-100 text-start" style="background: linear-gradient(135deg, #E91E63, #9C27B0); color: white;">👥 Social Hub</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -253,19 +262,28 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const weightData = {{ weight_data_json|safe }};
+    let weightChart = null;
+    let currentPeriod = 7;
     
-    if (weightData && weightData.length > 0) {
+    function renderChart(period) {
+        if (!weightData || weightData.length === 0) return;
+        
         const ctx = document.getElementById('miniWeightChart').getContext('2d');
         
-        // Take last 7 data points for mini chart
-        const recentData = weightData.slice(-7);
+        // Take last N data points based on period
+        const recentData = weightData.slice(-period);
         const labels = recentData.map(d => {
             const date = new Date(d.date);
             return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         });
         const weights = recentData.map(d => d.weight);
         
-        new Chart(ctx, {
+        // Destroy previous chart if exists
+        if (weightChart) {
+            weightChart.destroy();
+        }
+        
+        weightChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
@@ -298,6 +316,25 @@
                 }
             }
         });
+    }
+    
+    function updateChartPeriod(period) {
+        currentPeriod = period;
+        renderChart(period);
+        
+        // Update button states
+        document.querySelectorAll('[data-period]').forEach(btn => {
+            if (parseInt(btn.dataset.period) === period) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+    
+    // Initial render
+    if (weightData && weightData.length > 0) {
+        renderChart(currentPeriod);
     }
 </script>
 

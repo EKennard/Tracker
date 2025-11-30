@@ -150,23 +150,23 @@ def dashboard(request):
     for meal in recent_meals:
         meal.activity_type = 'meal'
         meal.activity_icon = '🍽️'
-        meal.activity_text = f"{meal.get_meal_type_display()} ({meal.calories} kcal)"
+        meal.activity_text = f"{profile.user.username} logged {meal.get_meal_type_display()} ({meal.calories} kcal)"
     
     for metric in recent_metrics:
         metric.activity_type = 'metric'
         metric.activity_icon = '⚖️'
         weight_display = format_weight_for_display(metric.weight)
-        metric.activity_text = f"Weight: {weight_display}"
+        metric.activity_text = f"{profile.user.username} logged weight: {weight_display}"
     
     for measurement in recent_measurements:
         measurement.activity_type = 'measurement'
         measurement.activity_icon = '📏'
-        measurement.activity_text = f"{measurement.body_part}: {measurement.value} {measurement.unit}"
+        measurement.activity_text = f"{profile.user.username} measured {measurement.body_part}: {measurement.value} {measurement.unit}"
     
     for exercise in recent_exercise:
         exercise.activity_type = 'exercise'
         exercise.activity_icon = '💪'
-        exercise.activity_text = f"{exercise.get_exercise_type_display()} ({exercise.duration_minutes} min)"
+        exercise.activity_text = f"{profile.user.username} completed {exercise.get_exercise_type_display()} ({exercise.duration_minutes} min)"
     
     # Combine and sort all activities by date
     activity_stream = sorted(
