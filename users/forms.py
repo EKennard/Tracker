@@ -85,8 +85,11 @@ class UserProfileForm(forms.ModelForm):
             if stones is None or stones == '':
                 raise forms.ValidationError('Please enter weight in stones.')
             # Convert to total pounds for storage (but keep weight_unit as 'st' for display preference)
-            total_pounds = (stones * 14) + (pounds or 0)
-            cleaned_data['starting_weight'] = total_pounds
+            try:
+                total_pounds = (float(stones) * 14) + float(pounds or 0)
+                cleaned_data['starting_weight'] = total_pounds
+            except (ValueError, TypeError):
+                raise forms.ValidationError('Invalid weight value.')
             # Keep weight_unit as 'st' for user preference display
         elif weight_unit == 'kg':
             # Using kg - convert to pounds for internal storage
@@ -94,7 +97,10 @@ class UserProfileForm(forms.ModelForm):
             if not kg_weight:
                 raise forms.ValidationError('Please enter your starting weight.')
             # Convert kg to lb for storage
-            cleaned_data['starting_weight'] = float(kg_weight) * 2.20462
+            try:
+                cleaned_data['starting_weight'] = float(kg_weight) * 2.20462
+            except (ValueError, TypeError):
+                raise forms.ValidationError('Invalid weight value.')
         else:
             # Using lb - require starting_weight field (no conversion needed)
             if not cleaned_data.get('starting_weight'):
@@ -107,12 +113,15 @@ class UserProfileForm(forms.ModelForm):
             inches = cleaned_data.get('height_inches', 0)
             if feet is not None and feet != '':
                 # Using feet/inches - convert to total inches for storage
-                total_inches = (feet * 12) + (inches or 0)
-                cleaned_data['height'] = total_inches
+                try:
+                    total_inches = (float(feet) * 12) + float(inches or 0)
+                    cleaned_data['height'] = total_inches
+                except (ValueError, TypeError):
+                    raise forms.ValidationError('Invalid height value.')
                 # Keep height_unit as 'in' since we're storing in inches
             elif not cleaned_data.get('height'):
                 raise forms.ValidationError('Please enter height in feet.')
-        else:
+        elif height_unit == 'cm':
             # Using cm - require height field
             if not cleaned_data.get('height'):
                 raise forms.ValidationError('Please enter your height.')
