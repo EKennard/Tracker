@@ -213,7 +213,6 @@ def dashboard(request):
         'friend_activities': friend_activities,
         'total_meals': total_meals,
         'total_workouts': total_workouts,
-        'total_habit_logs': total_habit_logs,
         'weight_unit': display_unit,
         'height_unit': profile.height_unit,
         'goal_weight': getattr(profile, 'goal', None),
