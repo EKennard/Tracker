@@ -13,7 +13,7 @@
                 {% for request in pending_requests %}
                 <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
                     <div>
-                        <strong>{{ request.user.user.username }}</strong>
+                        <strong>{{ request.from_user.user.username }}</strong>
                         <div class="small text-muted">{{ request.created_at|date:"M d" }}</div>
                     </div>
                     <div>
@@ -70,7 +70,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
                     <div>
                         <strong class="small">{{ invitation.group.name }}</strong>
-                        <div class="small text-muted">by {{ invitation.inviter.user.username }}</div>
+                        <div class="small text-muted">by {{ invitation.from_user.user.username }}</div>
                     </div>
                     <div>
                         <form method="post" action="{% url 'accept_group_invitation' invitation.id %}" class="d-inline">
