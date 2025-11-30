@@ -2,33 +2,33 @@
 {% load static %}
 {% block title %}My Profile{% endblock %}
 {% block content %}
-<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">👤 My Profile</h1>
+<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;"> My Profile</h1>
 
 <!-- User Account Information -->
 <div class="card" style="margin-bottom:1.5rem;">
   <div class="form-section">
-    <h2>🔐 Account Information</h2>
+    <h2> Account Information</h2>
   </div>
   <div class="form-grid">
     <div>
       <label>Username</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">{{ user.username }}</div>
+      <div >{{ user.username }}</div>
     </div>
     <div>
       <label>Email</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">{{ user.email|default:"Not set" }}</div>
+      <div >{{ user.email|default:"Not set" }}</div>
     </div>
     <div>
       <label>Member Since</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">{{ user.date_joined|date:"F j, Y" }}</div>
+      <div >{{ user.date_joined|date:"F j, Y" }}</div>
     </div>
     <div>
       <label>Profile Visibility</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">
+      <div >
         {% if profile.is_public %}
-          🌍 Public
+           Public
         {% else %}
-          🔒 Private
+           Private
         {% endif %}
       </div>
     </div>
@@ -38,24 +38,24 @@
 <!-- Personal Information -->
 <div class="card" style="margin-bottom:1.5rem;">
   <div class="form-section">
-    <h2>📋 Personal Information</h2>
+    <h2> Personal Information</h2>
   </div>
   <div class="form-grid">
     <div>
       <label>Date of Birth</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">{{ profile.date_of_birth|date:"F j, Y" }}</div>
+      <div >{{ profile.date_of_birth|date:"F j, Y" }}</div>
     </div>
     <div>
       <label>Age</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">{{ profile.age }} years</div>
+      <div >{{ profile.age }} years</div>
     </div>
     <div>
       <label>Sex</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">{{ profile.get_sex_display }}</div>
+      <div >{{ profile.get_sex_display }}</div>
     </div>
     <div>
       <label>Activity Level</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">{{ profile.get_activity_level_display }}</div>
+      <div >{{ profile.get_activity_level_display }}</div>
     </div>
   </div>
 </div>
@@ -63,25 +63,25 @@
 <!-- Body Metrics -->
 <div class="card" style="margin-bottom:1.5rem;">
   <div class="form-section">
-    <h2>📏 Body Metrics</h2>
+    <h2> Body Metrics</h2>
   </div>
   <div class="form-grid">
     <div>
       <label>Height</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">
+      <div >
         {{ height_display }}
       </div>
     </div>
     <div>
       <label>Starting Weight</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">
+      <div >
         {{ starting_weight_display }}
       </div>
     </div>
     {% if current_weight_display %}
     <div>
       <label>Current Weight</label>
-      <div style="padding:0.5rem;background:#81C784;border-radius:0.5rem;color:white;font-weight:bold;">
+      <div >
         {{ current_weight_display }}
       </div>
     </div>
@@ -89,7 +89,7 @@
     {% if current_bmi %}
     <div>
       <label>Current BMI</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">
+      <div >
         {{ current_bmi|floatformat:1 }}
       </div>
     </div>
@@ -100,20 +100,20 @@
 <!-- Unit Preferences -->
 <div class="card" style="margin-bottom:1.5rem;">
   <div class="form-section">
-    <h2>⚙️ Unit Preferences</h2>
+    <h2>️ Unit Preferences</h2>
   </div>
   <div class="form-grid">
     <div>
       <label>Weight Unit</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">{{ profile.get_weight_unit_display }}</div>
+      <div >{{ profile.get_weight_unit_display }}</div>
     </div>
     <div>
       <label>Height Unit</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">{{ profile.get_height_unit_display }}</div>
+      <div >{{ profile.get_height_unit_display }}</div>
     </div>
     <div>
       <label>Distance Unit</label>
-      <div style="padding:0.5rem;background:#F0F8FF;border-radius:0.5rem;color:#333;">{{ profile.get_distance_unit_display }}</div>
+      <div >{{ profile.get_distance_unit_display }}</div>
     </div>
   </div>
 </div>
@@ -122,19 +122,19 @@
 {% if profile.goal or goal_weight_display %}
 <div class="card" style="margin-bottom:1.5rem;">
   <div class="form-section">
-    <h2>🎯 My Goals</h2>
+    <h2> My Goals</h2>
   </div>
   <div class="form-grid">
     {% if profile.goal %}
     <div class="form-grid-full">
       <label>Goal Description</label>
-      <div style="padding:0.5rem;background:#FFF9C4;border-radius:0.5rem;color:#333;">{{ profile.goal }}</div>
+      <div >{{ profile.goal }}</div>
     </div>
     {% endif %}
     {% if goal_weight_display %}
     <div>
       <label>Goal Weight</label>
-      <div style="padding:0.5rem;background:#FFF9C4;border-radius:0.5rem;color:#333;">
+      <div >
         {{ goal_weight_display }}
       </div>
     </div>
@@ -142,7 +142,7 @@
     {% if profile.deadline %}
     <div>
       <label>Target Deadline</label>
-      <div style="padding:0.5rem;background:#FFF9C4;border-radius:0.5rem;color:#333;">{{ profile.deadline|date:"F j, Y" }}</div>
+      <div >{{ profile.deadline|date:"F j, Y" }}</div>
     </div>
     {% endif %}
   </div>
@@ -153,7 +153,7 @@
 {% if recent_metrics %}
 <div class="card" style="margin-bottom:1.5rem;">
   <div class="form-section">
-    <h2>📊 Recent Health Metrics</h2>
+    <h2> Recent Health Metrics</h2>
   </div>
   <table class="min-w-full table-auto">
     <thead>
@@ -178,7 +178,7 @@
     </tbody>
   </table>
   <div style="margin-top:1rem;text-align:center;">
-    <a href="/metrics/summary/" class="button">📊 View All Metrics</a>
+    <a href="/metrics/summary/" class="button"> View All Metrics</a>
   </div>
 </div>
 {% endif %}
@@ -187,7 +187,7 @@
 {% if recent_measurements %}
 <div class="card" style="margin-bottom:1.5rem;">
   <div class="form-section">
-    <h2>📏 Recent Body Measurements</h2>
+    <h2> Recent Body Measurements</h2>
   </div>
   <table class="min-w-full table-auto">
     <thead>
@@ -210,14 +210,14 @@
     </tbody>
   </table>
   <div style="margin-top:1rem;text-align:center;">
-    <a href="/metrics/summary/" class="button">📏 View All Measurements</a>
+    <a href="/metrics/summary/" class="button"> View All Measurements</a>
   </div>
 </div>
 {% endif %}
 
 <div style="text-align:center;margin-top:2rem;">
-  <a href="/users/dashboard/" class="button" style="margin-right:0.5rem;">🏠 Back to Dashboard</a>
-  <a href="/users/edit-profile/" class="button" style="background:#BA68C8;">✏️ Edit Profile</a>
+  <a href="/users/dashboard/" class="button" style="margin-right:0.5rem;"> Back to Dashboard</a>
+  <a href="/users/edit-profile/" class="button" >️ Edit Profile</a>
 </div>
 
 {% endblock %}

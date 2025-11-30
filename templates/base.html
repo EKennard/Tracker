@@ -14,69 +14,50 @@
     {% if user.is_authenticated %}
         {% if request.path != '/users/create-profile/' %}
         <!-- Bootstrap Navbar -->
-        <nav class="navbar sticky-top p-1" style="background: linear-gradient(135deg, #9C27B0 0%, #E91E63 50%, #FF6F00 100%);">
+        <nav class="navbar sticky-top p-1">
             <div class="container-fluid px-2">
-                <div class="d-flex flex-column w-100">
-                    <!-- Top Row: Logo and Burger -->
-                    <div class="d-flex justify-content-between align-items-center mb-1">
-                        <!-- Brand -->
-                        <a class="navbar-brand text-white fw-bold mb-0" href="/users/dashboard/" style="font-size: 1.5rem;">
-                            <span>GetLizzyFit</span>
-                        </a>
-                        
-                        <!-- Toggler (all screens) -->
-                        <button class="navbar-toggler border-white p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </div>
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <!-- Brand -->
+                    <a class="navbar-brand fw-bold mb-0" href="/users/dashboard/">
+                        <span>GetLizzyFit</span>
+                    </a>
                     
-                    <!-- Bottom Row: Icons -->
-                    <div class="d-flex justify-content-around mb-1">
-                        <img src="{% static 'icons/apple-doodle.svg' %}" width="20" height="20" alt="">
-                        <img src="{% static 'icons/heart-doodle.svg' %}" width="20" height="20" alt="">
-                        <img src="{% static 'icons/checklist-doodle.svg' %}" width="20" height="20" alt="">
-                        <img src="{% static 'icons/calendar-doodle.svg' %}" width="20" height="20" alt="">
-                        <img src="{% static 'icons/user-doodle.svg' %}" width="20" height="20" alt="">
-                    </div>
+                    <!-- Toggler (all screens) -->
+                    <button class="navbar-toggler p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
             </div>
         </nav>
         
         <!-- Bootstrap Offcanvas for Mobile -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
-            <div class="offcanvas-header text-white" style="background: linear-gradient(135deg, #9C27B0, #E91E63);">
+            <div class="offcanvas-header">
                 <h5 class="offcanvas-title">Menu</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
             </div>
             <div class="offcanvas-body p-0">
                 <div class="d-flex flex-column">
-                    <div class="p-3 border-bottom" style="background: linear-gradient(135deg, #FFF9E6, #FFE5F5);">
-                        <div class="small mb-2 fw-bold" style="color: #9C27B0;">👤 {{ user.username }}</div>
-                        <a href="/accounts/logout/" class="btn btn-sm w-100" style="background: #FFD600; color: #333; font-weight: bold;">🚪 Logout</a>
+                    <div class="p-3 border-bottom">
+                        <div class="small mb-2 fw-bold">{{ user.username }}</div>
+                        <a href="/accounts/logout/" class="btn btn-sm w-100">Logout</a>
                     </div>
-                    <a href="/users/dashboard/" class="p-3 border-bottom text-decoration-none text-dark">🏠 Dashboard</a>
-                    <a href="/users/log/" class="p-3 border-bottom text-decoration-none text-dark">📝 Log Activities</a>
-                    <a href="/users/profile/" class="p-3 border-bottom text-decoration-none text-dark">👤 Profile & Settings</a>
-                    <a href="/social/" class="p-3 border-bottom text-decoration-none text-dark">👥 Social</a>
+                    <a href="/users/dashboard/" class="p-3 border-bottom text-decoration-none">Dashboard</a>
+                    <a href="/users/log/" class="p-3 border-bottom text-decoration-none">Log Activities</a>
+                    <a href="/users/profile/" class="p-3 border-bottom text-decoration-none">Profile & Settings</a>
+                    <a href="/social/" class="p-3 border-bottom text-decoration-none">Social</a>
                 </div>
             </div>
         </div>
         {% endif %}
     {% else %}
-        <div class="card m-3 p-3 text-center" style="border: 3px solid #9C27B0; background: linear-gradient(135deg, #FFF9E6, #FFE5F5);">
-            <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
-                <img src="{% static 'icons/apple-doodle.svg' %}" width="32" alt="Meals">
-                <img src="{% static 'icons/heart-doodle.svg' %}" width="32" alt="Health">
-                <img src="{% static 'icons/checklist-doodle.svg' %}" width="32" alt="Habits">
-                <img src="{% static 'icons/calendar-doodle.svg' %}" width="32" alt="Fertility">
-                <img src="{% static 'icons/user-doodle.svg' %}" width="32" alt="Profile">
-            </div>
+        <div class="card m-3 p-3 text-center">
             <h1 class="h3 mb-0">
-                <a href="/" class="text-decoration-none" style="color: #9C27B0;">GetLizzyFit</a>
+                <a href="/" class="text-decoration-none">GetLizzyFit</a>
             </h1>
         </div>
         <div class="text-center mb-3">
-            <a href="/accounts/login/" class="btn" style="background: linear-gradient(135deg, #9C27B0, #E91E63); color: white; font-weight: bold;">Login</a>
+            <a href="/accounts/login/" class="btn">Login</a>
         </div>
     {% endif %}
     
@@ -104,85 +85,60 @@
         </script>
     {% endif %}
     
-    <main class="container-fluid p-2 p-md-3" style="min-height: calc(100vh - 120px);">
+    <main class="container-fluid p-2 p-md-3">
         {% block content %}
             {% if user.is_authenticated %}
-                <h2 class="text-primary mb-3">Welcome back, {{ user.username }}!</h2>
+                <h2 class="mb-3">Welcome back, {{ user.username }}!</h2>
             {% else %}
                 <div class="row g-3 py-5">
                     <div class="col-12 text-center mb-4">
-                        <h1 class="display-4 mb-3" style="color: #9C27B0; font-weight: 600;">Welcome to GetLizzyFit!</h1>
-                        <p class="lead px-3" style="max-width: 900px; margin: 0 auto; color: #666; font-size: 1.1rem;">
+                        <h1 class="display-4 mb-3">Welcome to GetLizzyFit!</h1>
+                        <p class="lead px-3">
                             GetLizzyFit is your all-in-one health, fitness, and wellness tracker. Log your meals, track your habits, monitor your body stats, and connect with friends for motivation. Our app helps you build healthy routines, celebrate milestones, and stay on top of your goals in a fun, supportive environment.
                         </p>
                     </div>
                     
                     <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="card shadow-sm h-100" style="border: 2px solid #FFD600; border-radius: 12px;">
+                        <div class="card h-100">
                             <div class="card-body p-4">
-                                <div class="d-flex align-items-start gap-3">
-                                    <img src="{% static 'icons/apple-doodle.svg' %}" width="56" alt="Meals">
-                                    <div>
-                                        <h5 class="card-title mb-2" style="color: #FF6F00; font-weight: 600;">Meal Logging</h5>
-                                        <p class="card-text mb-0" style="color: #666;">Easily log your daily meals, track nutrition, and spot healthy eating patterns.</p>
-                                    </div>
-                                </div>
+                                <h5 class="card-title mb-2">Meal Logging</h5>
+                                <p class="card-text mb-0">Easily log your daily meals, track nutrition, and spot healthy eating patterns.</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="card shadow-sm h-100" style="border: 2px solid #E91E63; border-radius: 12px;">
+                        <div class="card h-100">
                             <div class="card-body p-4">
-                                <div class="d-flex align-items-start gap-3">
-                                    <img src="{% static 'icons/heart-doodle.svg' %}" width="56" alt="Health">
-                                    <div>
-                                        <h5 class="card-title mb-2" style="color: #E91E63; font-weight: 600;">Body Stats</h5>
-                                        <p class="card-text mb-0" style="color: #666;">Monitor your health stats, including weight, heart rate, and more, all in one place.</p>
-                                    </div>
-                                </div>
+                                <h5 class="card-title mb-2">Body Stats</h5>
+                                <p class="card-text mb-0">Monitor your health stats, including weight, heart rate, and more, all in one place.</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="card shadow-sm h-100" style="border: 2px solid #9C27B0; border-radius: 12px;">
+                        <div class="card h-100">
                             <div class="card-body p-4">
-                                <div class="d-flex align-items-start gap-3">
-                                    <img src="{% static 'icons/checklist-doodle.svg' %}" width="56" alt="Habits">
-                                    <div>
-                                        <h5 class="card-title mb-2" style="color: #9C27B0; font-weight: 600;">Habit Tracking</h5>
-                                        <p class="card-text mb-0" style="color: #666;">Build and maintain healthy habits with daily tracking and reminders.</p>
-                                    </div>
-                                </div>
+                                <h5 class="card-title mb-2">Habit Tracking</h5>
+                                <p class="card-text mb-0">Build and maintain healthy habits with daily tracking and reminders.</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="card shadow-sm h-100" style="border: 2px solid #FF6F00; border-radius: 12px;">
+                        <div class="card h-100">
                             <div class="card-body p-4">
-                                <div class="d-flex align-items-start gap-3">
-                                    <img src="{% static 'icons/calendar-doodle.svg' %}" width="56" alt="Fertility">
-                                    <div>
-                                        <h5 class="card-title mb-2" style="color: #FF6F00; font-weight: 600;">Fertility & Calendar</h5>
-                                        <p class="card-text mb-0" style="color: #666;">Track fertility cycles and important dates with our integrated calendar.</p>
-                                    </div>
-                                </div>
+                                <h5 class="card-title mb-2">Fertility & Calendar</h5>
+                                <p class="card-text mb-0">Track fertility cycles and important dates with our integrated calendar.</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="card shadow-sm h-100" style="border: 2px solid #00C853; border-radius: 12px;">
+                        <div class="card h-100">
                             <div class="card-body p-4">
-                                <div class="d-flex align-items-start gap-3">
-                                    <img src="{% static 'icons/user-doodle.svg' %}" width="56" alt="Profile">
-                                    <div>
-                                        <h5 class="card-title mb-2" style="color: #00C853; font-weight: 600;">Social & Community</h5>
-                                        <p class="card-text mb-0" style="color: #666;">Connect with friends, join groups, and celebrate milestones together.</p>
-                                    </div>
-                                </div>
+                                <h5 class="card-title mb-2">Social & Community</h5>
+                                <p class="card-text mb-0">Connect with friends, join groups, and celebrate milestones together.</p>
                             </div>
                         </div>
                     </div>
@@ -191,7 +147,7 @@
         {% endblock %}
     </main>
     
-    <footer class="text-center py-3 mt-auto" style="color: #00C853; font-size: 0.9rem;">
+    <footer class="text-center py-3 mt-auto">
         &copy; {{ now.year }} GetLizzyFit. All rights reserved.
     </footer>
     

@@ -3,26 +3,26 @@
 {% block content %}
 
 <div class="container py-4">
-  <h1 class="mb-4">👥 Friends & Requests</h1>
+  <h1 class="mb-4"> Friends & Requests</h1>
 
   <!-- Pending Requests Received -->
   {% if pending_received %}
   <div class="card border-warning mb-4">
-    <div class="card-header bg-warning bg-opacity-10">
-      <h2 class="h5 mb-0">📬 Pending Requests ({{ pending_received.count }})</h2>
+    <div class="card-header bg-secondary bg-opacity-10">
+      <h2 class="h5 mb-0"> Pending Requests ({{ pending_received.count }})</h2>
     </div>
     <div class="card-body">
       <div class="list-group">
         {% for friendship in pending_received %}
-        <div class="list-group-item border-warning bg-warning bg-opacity-10">
+        <div class="list-group-item border-warning bg-secondary bg-opacity-10">
           <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
             <div>
-              <h5 class="mb-1">👤 {{ friendship.from_user.user.username }}</h5>
+              <h5 class="mb-1"> {{ friendship.from_user.user.username }}</h5>
               <small class="text-muted">Sent {{ friendship.created_at|timesince }} ago</small>
             </div>
             <div class="btn-group">
-              <a href="{% url 'accept_friend_request' friendship.id %}" class="btn btn-success">✓ Accept</a>
-              <a href="{% url 'decline_friend_request' friendship.id %}" class="btn btn-danger">✗ Decline</a>
+              <a href="{% url 'accept_friend_request' friendship.id %}" class="btn btn-secondary"> Accept</a>
+              <a href="{% url 'decline_friend_request' friendship.id %}" class="btn btn-secondary"> Decline</a>
             </div>
           </div>
         </div>
@@ -35,8 +35,8 @@
   <!-- Your Friends -->
   <div class="card mb-4">
     <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-3">
-      <h2 class="h5 mb-0">✓ My Friends ({{ friends.count }})</h2>
-      <a href="{% url 'search_users' %}" class="btn btn-primary btn-sm">🔍 Find More Friends</a>
+      <h2 class="h5 mb-0"> My Friends ({{ friends.count }})</h2>
+      <a href="{% url 'search_users' %}" class="btn btn-secondary btn-sm"> Find More Friends</a>
     </div>
     <div class="card-body">
       {% if friends %}
@@ -45,7 +45,7 @@
           <div class="col">
             <div class="card border-success h-100">
               <div class="card-body">
-                <h5 class="card-title text-primary">👤 {{ friend.user.username }}</h5>
+                <h5 class="card-title text-secondary"> {{ friend.user.username }}</h5>
                 <div class="mb-2">
                   <code class="bg-light px-2 py-1 rounded small">{{ friend.personal_key }}</code>
                 </div>
@@ -59,7 +59,7 @@
         </div>
       {% else %}
         <div class="text-center py-5 text-muted">
-          <div class="display-1 mb-3">👥</div>
+          <div class="display-1 mb-3"></div>
           <p>You don't have any friends yet.</p>
           <p class="small">Search for friends using their personal key or username!</p>
         </div>
@@ -79,7 +79,7 @@
         <div class="list-group-item bg-light">
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <h5 class="mb-1">👤 {{ friendship.to_user.user.username }}</h5>
+              <h5 class="mb-1"> {{ friendship.to_user.user.username }}</h5>
               <small class="text-muted">Waiting for response...</small>
             </div>
             <span class="text-muted">⏳</span>

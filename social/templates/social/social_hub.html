@@ -7,9 +7,9 @@
     <div class="col-lg-4">
         <!-- Friend Requests -->
         {% if pending_requests %}
-        <div class="card mb-2" style="border: 2px solid #E91E63;">
+        <div class="card mb-2" >
             <div class="card-body p-2">
-                <h3 class="h6 mb-2" style="color: #E91E63;">👥 Friend Requests ({{ pending_requests.count }})</h3>
+                <h3 class="h6 mb-2" > Friend Requests ({{ pending_requests.count }})</h3>
                 {% for request in pending_requests %}
                 <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
                     <div>
@@ -19,11 +19,11 @@
                     <div>
                         <form method="post" action="{% url 'accept_friend_request' request.id %}" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-success">✓</button>
+                            <button type="submit" class="btn btn-sm btn-secondary"></button>
                         </form>
                         <form method="post" action="{% url 'decline_friend_request' request.id %}" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-danger">✗</button>
+                            <button type="submit" class="btn btn-sm btn-secondary"></button>
                         </form>
                     </div>
                 </div>
@@ -33,18 +33,18 @@
         {% endif %}
         
         <!-- Friends List -->
-        <div class="card mb-2" style="border: 2px solid #9C27B0;">
+        <div class="card mb-2" >
             <div class="card-body p-2">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h3 class="h6 mb-0" style="color: #9C27B0;">👥 Friends ({{ friends.count }})</h3>
-                    <button class="btn btn-sm" style="background: #9C27B0; color: white;" data-bs-toggle="modal" data-bs-target="#searchModal">+ Find</button>
+                    <h3 class="h6 mb-0" > Friends ({{ friends.count }})</h3>
+                    <button class="btn btn-sm"  data-bs-toggle="modal" data-bs-target="#searchModal">+ Find</button>
                 </div>
                 {% if friends %}
                     {% for friend in friends|slice:":10" %}
                     <div class="border-bottom pb-1 mb-1">
                         <strong class="small">{{ friend.user.username }}</strong>
                         {% if friend.is_public %}
-                        <span class="badge bg-success small">Public</span>
+                        <span class="badge bg-secondary small">Public</span>
                         {% endif %}
                     </div>
                     {% endfor %}
@@ -63,9 +63,9 @@
         
         <!-- Group Invitations -->
         {% if pending_invitations %}
-        <div class="card mb-2" style="border: 2px solid #FF6F00;">
+        <div class="card mb-2" >
             <div class="card-body p-2">
-                <h3 class="h6 mb-2" style="color: #FF6F00;">👫 Group Invites ({{ pending_invitations.count }})</h3>
+                <h3 class="h6 mb-2" > Group Invites ({{ pending_invitations.count }})</h3>
                 {% for invitation in pending_invitations %}
                 <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
                     <div>
@@ -75,11 +75,11 @@
                     <div>
                         <form method="post" action="{% url 'accept_group_invitation' invitation.id %}" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-success">✓</button>
+                            <button type="submit" class="btn btn-sm btn-secondary"></button>
                         </form>
                         <form method="post" action="{% url 'decline_group_invitation' invitation.id %}" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-danger">✗</button>
+                            <button type="submit" class="btn btn-sm btn-secondary"></button>
                         </form>
                     </div>
                 </div>
@@ -89,11 +89,11 @@
         {% endif %}
         
         <!-- Groups -->
-        <div class="card" style="border: 2px solid #FFD600;">
+        <div class="card" >
             <div class="card-body p-2">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h3 class="h6 mb-0" style="color: #FF9800;">👫 My Groups ({{ user_groups.count }})</h3>
-                    <a href="{% url 'groups' %}" class="btn btn-sm" style="background: #FFD600; color: #333;">View All</a>
+                    <h3 class="h6 mb-0" > My Groups ({{ user_groups.count }})</h3>
+                    <a href="{% url 'groups' %}" class="btn btn-sm" >View All</a>
                 </div>
                 {% if user_groups %}
                     {% for group in user_groups|slice:":5" %}
@@ -115,13 +115,13 @@
     
     <!-- CENTER COLUMN: Activity Feed -->
     <div class="col-lg-8">
-        <div class="card" style="border: 2px solid #00C853;">
+        <div class="card" >
             <div class="card-body p-2">
-                <h3 class="h6 mb-2" style="color: #00C853;">🌍 Activity Feed</h3>
+                <h3 class="h6 mb-2" > Activity Feed</h3>
                 
                 {% if activities %}
                     {% for activity in activities %}
-                    <div class="card mb-2" style="border: 1px solid #E0E0E0;">
+                    <div class="card mb-2" >
                         <div class="card-body p-2">
                             <div class="d-flex justify-content-between align-items-start mb-1">
                                 <div>
@@ -152,8 +152,8 @@
 <div class="modal fade" id="searchModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="background: linear-gradient(135deg, #9C27B0, #E91E63); color: white;">
-                <h5 class="modal-title">🔍 Find Friends</h5>
+            <div class="modal-header" >
+                <h5 class="modal-title"> Find Friends</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -162,7 +162,7 @@
                         <label class="form-label">Search by username or personal key</label>
                         <input type="text" name="q" class="form-control" placeholder="Enter username or key...">
                     </div>
-                    <button type="submit" class="btn w-100" style="background: #9C27B0; color: white;">🔍 Search</button>
+                    <button type="submit" class="btn w-100" > Search</button>
                 </form>
             </div>
         </div>

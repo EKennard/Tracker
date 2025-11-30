@@ -3,10 +3,10 @@
 {% block content %}
 
 <div class="container py-4">
-  <h1 class="mb-4">🌍 Global Activity Feed</h1>
+  <h1 class="mb-4"> Global Activity Feed</h1>
 
   <!-- Personal Key Card -->
-  <div class="card bg-primary text-white mb-4">
+  <div class="card bg-secondary text-white mb-4">
     <div class="card-body">
       <div class="row align-items-center">
         <div class="col-md-8">
@@ -16,14 +16,14 @@
               {{ profile.personal_key }}
             </code>
             <button onclick="copyKey()" class="btn btn-light">
-              📋 Copy
+               Copy
             </button>
           </div>
           <p class="mb-0 small opacity-75">Share this key with friends so they can find you!</p>
         </div>
         <div class="col-md-4 text-md-end mt-3 mt-md-0">
           <a href="{% url 'search_users' %}" class="btn btn-light">
-            🔍 Search Users
+             Search Users
           </a>
         </div>
       </div>
@@ -33,7 +33,7 @@
   <!-- Activity Feed -->
   <div class="card">
     <div class="card-header">
-      <h2 class="h5 mb-0">📰 Recent Activity</h2>
+      <h2 class="h5 mb-0"> Recent Activity</h2>
     </div>
     <div class="card-body">
       {% if activities %}
@@ -45,7 +45,7 @@
               <div class="flex-grow-1">
                 <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
                   <div>
-                    <strong class="text-primary">{{ activity.profile.user.username }}</strong>
+                    <strong class="text-secondary">{{ activity.profile.user.username }}</strong>
                     <span class="text-muted mx-2">•</span>
                     <span class="text-muted text-capitalize">{{ activity.get_activity_type_display }}</span>
                   </div>
@@ -59,9 +59,9 @@
         </div>
       {% else %}
         <div class="text-center py-5 text-muted">
-          <div class="display-1 mb-3">🌟</div>
+          <div class="display-1 mb-3"></div>
           <p>No activities yet! Make your profile public or add friends to see updates.</p>
-          <a href="{% url 'search_users' %}" class="btn btn-primary mt-3">Find Friends</a>
+          <a href="{% url 'search_users' %}" class="btn btn-secondary mt-3">Find Friends</a>
         </div>
       {% endif %}
     </div>

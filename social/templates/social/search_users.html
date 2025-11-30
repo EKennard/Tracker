@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container py-4">
-  <h1 class="mb-4">🔍 Find Friends</h1>
+  <h1 class="mb-4"> Find Friends</h1>
 
   <!-- Search Form -->
   <div class="card mb-4">
@@ -20,13 +20,13 @@
           >
         </div>
         <div class="col-md-6">
-          <button type="submit" class="btn btn-primary me-2">🔍 Search</button>
+          <button type="submit" class="btn btn-secondary me-2"> Search</button>
           <a href="{% url 'global_feed' %}" class="btn btn-secondary">← Back to Feed</a>
         </div>
       </form>
       
-      <div class="alert alert-info mt-3 mb-0">
-        💡 <strong>Tip:</strong> Search by personal key (e.g., ABC123DEF456) or username to find friends!
+      <div class="alert alert-secondary mt-3 mb-0">
+         <strong>Tip:</strong> Search by personal key (e.g., ABC123DEF456) or username to find friends!
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
             <div class="list-group-item">
               <div class="row align-items-center">
                 <div class="col-md-8">
-                  <h5 class="mb-2">👤 {{ user.user.username }}</h5>
+                  <h5 class="mb-2"> {{ user.user.username }}</h5>
                   <div class="mb-2">
                     <code class="bg-light px-2 py-1 rounded">{{ user.personal_key }}</code>
                   </div>
@@ -52,19 +52,19 @@
                     <p class="text-muted mb-1 fst-italic">Goal: {{ user.goal }}</p>
                   {% endif %}
                   {% if user.is_public %}
-                    <span class="badge bg-success">🌍 Public Profile</span>
+                    <span class="badge bg-secondary"> Public Profile</span>
                   {% endif %}
                 </div>
                 
                 <div class="col-md-4 text-md-end mt-3 mt-md-0">
                   {% if user.friend_status == 'friends' %}
-                    <span class="badge bg-success fs-6 px-3 py-2">✓ Friends</span>
+                    <span class="badge bg-secondary fs-6 px-3 py-2"> Friends</span>
                   {% elif user.friend_status == 'request_sent' %}
-                    <span class="badge bg-warning fs-6 px-3 py-2">⏳ Request Sent</span>
+                    <span class="badge bg-secondary fs-6 px-3 py-2">⏳ Request Sent</span>
                   {% elif user.friend_status == 'request_received' %}
-                    <a href="{% url 'friend_requests' %}" class="btn btn-info">📬 View Request</a>
+                    <a href="{% url 'friend_requests' %}" class="btn btn-secondary"> View Request</a>
                   {% else %}
-                    <a href="{% url 'send_friend_request' user.id %}" class="btn btn-primary">➕ Add Friend</a>
+                    <a href="{% url 'send_friend_request' user.id %}" class="btn btn-secondary"> Add Friend</a>
                   {% endif %}
                 </div>
               </div>
@@ -73,7 +73,7 @@
           </div>
         {% else %}
           <div class="text-center py-5 text-muted">
-            <div class="display-1 mb-3">🔍</div>
+            <div class="display-1 mb-3"></div>
             <p>No users found matching "{{ query }}"</p>
             <p class="small">Try searching with a different personal key or username.</p>
           </div>

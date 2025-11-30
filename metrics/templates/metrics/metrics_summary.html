@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Body Stats{% endblock %}
 {% block content %}
-<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;">📊 Body Stats</h1>
+<h1 class="card" style="font-size:2rem;font-weight:bold;margin-bottom:1rem;"> Body Stats</h1>
 <div class="card" style="margin-bottom:1.5rem;">
   <form method="post">
     {% csrf_token %}
     <div class="form-section">
-      <h2>📊 Update Body Stats</h2>
-      <p style="color:#666;font-size:0.9rem;margin-bottom:1rem;">💡 Tip: Change the date to add historic data - perfect for tracking your progress over time!</p>
+      <h2> Update Body Stats</h2>
+      <p > Tip: Change the date to add historic data - perfect for tracking your progress over time!</p>
       {{ metrics_form.non_field_errors }}
     </div>
     <div class="form-grid">
@@ -20,15 +20,15 @@
         <label>Weight (Stones & Pounds) *</label>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
           <div>
-            <label style="font-size: 0.85rem; color: #666;">Stones</label>
+            <label >Stones</label>
             {{ metrics_form.weight_stones }}
           </div>
           <div>
-            <label style="font-size: 0.85rem; color: #666;">Pounds</label>
+            <label >Pounds</label>
             {{ metrics_form.weight_pounds }}
           </div>
         </div>
-        <small style="color: #666; font-size: 0.85rem;">Enter your weight in stones and pounds (e.g., 12 stones 5 pounds)</small>
+        <small >Enter your weight in stones and pounds (e.g., 12 stones 5 pounds)</small>
         {{ metrics_form.weight }}
       </div>
       {% else %}
@@ -43,8 +43,8 @@
         <label>Body Fat %</label>
         {{ metrics_form.body_fat_percentage }}
         {% if calculated_body_fat %}
-        <div style="margin-top:0.25rem;padding:0.5rem;background:#E1F5FE;border-radius:0.5rem;font-size:0.85rem;color:#666;">
-          💡 Estimated: <strong style="color:#4FC3F7;">{{ calculated_body_fat }}%</strong>
+        <div >
+           Estimated: <strong >{{ calculated_body_fat }}%</strong>
         </div>
         {% endif %}
       </div>
@@ -52,8 +52,8 @@
         <label>Basal Metabolic Rate</label>
         {{ metrics_form.basal_metabolic_rate }}
         {% if calculated_bmr %}
-        <div style="margin-top:0.25rem;padding:0.5rem;background:#E1F5FE;border-radius:0.5rem;font-size:0.85rem;color:#666;">
-          💡 Calculated: <strong style="color:#4FC3F7;">{{ calculated_bmr }} kcal/day</strong>
+        <div >
+           Calculated: <strong >{{ calculated_bmr }} kcal/day</strong>
         </div>
         {% endif %}
       </div>
@@ -61,23 +61,23 @@
         <label>Daily Caloric Needs</label>
         {{ metrics_form.daily_caloric_needs }}
         {% if calculated_calories %}
-        <div style="margin-top:0.25rem;padding:0.5rem;background:#E1F5FE;border-radius:0.5rem;font-size:0.85rem;color:#666;">
-          💡 Calculated: <strong style="color:#4FC3F7;">{{ calculated_calories }} kcal/day</strong>
+        <div >
+           Calculated: <strong >{{ calculated_calories }} kcal/day</strong>
         </div>
         {% endif %}
       </div>
     </div>
-    <p style="color:#666;font-size:0.85rem;margin-top:0.5rem;font-style:italic;">
+    <p >
       ℹ️ Leave fields empty to auto-fill with calculated values based on your profile.
     </p>
-    <button type="submit" name="metrics_submit" class="button" style="margin-top:1.5rem;">💾 Save Stats</button>
+    <button type="submit" name="metrics_submit" class="button" style="margin-top:1.5rem;"> Save Stats</button>
   </form>
 </div>
 <div class="card" style="margin-bottom:1.5rem;">
   <form method="post">
     {% csrf_token %}
     <div class="form-section">
-      <h2>📏 Add Measurement</h2>
+      <h2> Add Measurement</h2>
       {{ measurement_form.non_field_errors }}
     </div>
     <div class="form-grid">
@@ -98,11 +98,11 @@
         {{ measurement_form.unit }}
       </div>
     </div>
-    <button type="submit" name="measurement_submit" class="button" style="margin-top:1.5rem;">💾 Add Measurement</button>
+    <button type="submit" name="measurement_submit" class="button" style="margin-top:1.5rem;"> Add Measurement</button>
   </form>
 </div>
 <div class="card" style="margin-bottom:1.5rem;">
-  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">📊 Your Body Stats</h2>
+  <h2 > Your Body Stats</h2>
   <table class="min-w-full table-auto">
     <thead>
       <tr class="bg-gray-200">
@@ -129,7 +129,7 @@
   </table>
 </div>
 <div class="card">
-  <h2 style="font-size:1.3rem;font-weight:bold;color:#4FC3F7;margin-bottom:1rem;">📏 Your Measurements</h2>
+  <h2 > Your Measurements</h2>
   <table class="min-w-full table-auto">
     <thead>
       <tr class="bg-gray-200">

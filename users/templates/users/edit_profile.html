@@ -5,16 +5,16 @@
 
 <div class="row g-2 justify-content-center">
   <div class="col-lg-8">
-    <div class="card mb-2" style="border: 2px solid #9C27B0;">
+    <div class="card mb-2">
       <div class="card-body p-2">
-        <h3 class="h6 mb-2" style="color: #9C27B0;">✏️ Edit Profile</h3>
+        <h3 class="h6 mb-2">Edit Profile</h3>
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     
     {% if form.errors %}
-    <div class="alert alert-danger p-2 mb-2" style="border: 2px solid #FF1744;">
-      <div class="small fw-bold mb-1" style="color: #FF1744;">⚠️ Form Errors:</div>
+    <div class="alert alert-secondary p-2 mb-2">
+      <div class="small fw-bold mb-1">Form Errors:</div>
       {{ form.non_field_errors }}
       {% for field in form %}
         {% if field.errors %}
@@ -28,7 +28,7 @@
     
     <!-- Basic Information -->
     <div class="mb-2">
-      <div class="small fw-bold mb-2" style="color: #9C27B0;">📋 Basic Information</div>
+      <div class="small fw-bold mb-2">Basic Information</div>
     </div>
     <div class="row g-2 mb-2">
       <div class="col-md-4">
@@ -47,15 +47,15 @@
     
     <!-- Unit Preferences -->
     <div class="mb-2 mt-2">
-      <div class="small fw-bold mb-2" style="color: #9C27B0;">⚙️ Unit Preferences</div>
+      <div class="small fw-bold mb-2">Unit Preferences</div>
     </div>
     
     <div class="mb-2">
       <label class="form-label small mb-1">Weight Unit *</label>
       <div class="btn-group btn-group-sm w-100" role="group">
-        <button type="button" class="btn btn-outline-success unit-option" data-unit="kg" onclick="setWeightUnit('kg')" style="font-size: 0.8rem;">Kilograms (kg)</button>
-        <button type="button" class="btn btn-outline-success unit-option" data-unit="lb" onclick="setWeightUnit('lb')" style="font-size: 0.8rem;">Pounds (lb)</button>
-        <button type="button" class="btn btn-outline-success unit-option" data-unit="st" onclick="setWeightUnit('st')" style="font-size: 0.8rem;">Stones (st)</button>
+        <button type="button" class="btn btn-outline-secondary unit-option" data-unit="kg" onclick="setWeightUnit('kg')" >Kilograms (kg)</button>
+        <button type="button" class="btn btn-outline-secondary unit-option" data-unit="lb" onclick="setWeightUnit('lb')" >Pounds (lb)</button>
+        <button type="button" class="btn btn-outline-secondary unit-option" data-unit="st" onclick="setWeightUnit('st')" >Stones (st)</button>
       </div>
       <div class="d-none">{{ form.weight_unit }}</div>
     </div>
@@ -98,8 +98,8 @@
     <div class="mb-2">
       <label class="form-label small mb-1">Height Unit *</label>
       <div class="btn-group btn-group-sm w-100" role="group">
-        <button type="button" class="btn btn-outline-success unit-option" data-unit="cm" onclick="setHeightUnit('cm')" style="font-size: 0.8rem;">Centimeters (cm)</button>
-        <button type="button" class="btn btn-outline-success unit-option" data-unit="in" onclick="setHeightUnit('in')" style="font-size: 0.8rem;">Feet/Inches (ft/in)</button>
+        <button type="button" class="btn btn-outline-secondary unit-option" data-unit="cm" onclick="setHeightUnit('cm')" >Centimeters (cm)</button>
+        <button type="button" class="btn btn-outline-secondary unit-option" data-unit="in" onclick="setHeightUnit('in')" >Feet/Inches (ft/in)</button>
       </div>
       <div class="d-none">{{ form.height_unit }}</div>
     </div>
@@ -135,15 +135,15 @@
     <div class="mb-2">
       <label class="form-label small mb-1">Distance Unit *</label>
       <div class="btn-group btn-group-sm w-100" role="group">
-        <button type="button" class="btn btn-outline-success unit-option" data-unit="km" onclick="setDistanceUnit('km')" style="font-size: 0.8rem;">Kilometres (km)</button>
-        <button type="button" class="btn btn-outline-success unit-option" data-unit="mi" onclick="setDistanceUnit('mi')" style="font-size: 0.8rem;">Miles (mi)</button>
+        <button type="button" class="btn btn-outline-secondary unit-option" data-unit="km" onclick="setDistanceUnit('km')" >Kilometres (km)</button>
+        <button type="button" class="btn btn-outline-secondary unit-option" data-unit="mi" onclick="setDistanceUnit('mi')" >Miles (mi)</button>
       </div>
       <div class="d-none">{{ form.distance_unit }}</div>
     </div>
     
     <!-- Goals (Optional) -->
     <div class="mb-2 mt-2">
-      <div class="small fw-bold mb-2" style="color: #9C27B0;">🎯 Goals (Optional)</div>
+      <div class="small fw-bold mb-2">Goals (Optional)</div>
     </div>
     <div class="row g-2 mb-2">
       <div class="col-12">
@@ -158,7 +158,7 @@
     
     <!-- Privacy Settings -->
     <div class="mb-2 mt-2">
-      <div class="small fw-bold mb-2" style="color: #9C27B0;">🔒 Privacy Settings</div>
+      <div class="small fw-bold mb-2">Privacy Settings</div>
     </div>
     <div class="mb-2">
       <div class="form-check">
@@ -171,8 +171,8 @@
     
     <!-- Action Buttons -->
     <div class="d-flex gap-2 justify-content-center mt-2">
-      <a href="/users/profile/" class="btn btn-sm" style="background: #6c757d; color: white;">❌ Cancel</a>
-      <button type="submit" class="btn btn-sm" style="background: #00C853; color: white;">💾 Save Changes</button>
+      <a href="/users/profile/" class="btn btn-sm">Cancel</a>
+      <button type="submit" class="btn btn-sm">Save Changes</button>
     </div>
   </form>
       </div>

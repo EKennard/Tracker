@@ -2,56 +2,6 @@
 /* Bootstrap Overrides for Sharp Corners & Tight Spacing */
 /* ============================= */
 
-/* Fun Color Scheme - Purple, Pink, Yellow, Orange */
-:root {
-    --bs-primary: #9C27B0;
-    --bs-primary-rgb: 156, 39, 176;
-    --bs-secondary: #FF6F00;
-    --bs-secondary-rgb: 255, 111, 0;
-    --bs-success: #00C853;
-    --bs-success-rgb: 0, 200, 83;
-    --bs-warning: #FFD600;
-    --bs-warning-rgb: 255, 214, 0;
-    --bs-danger: #FF1744;
-    --bs-danger-rgb: 255, 23, 68;
-    --bs-info: #FF4081;
-    --bs-info-rgb: 255, 64, 129;
-    --bs-primary-bg-subtle: #F3E5F5;
-    --bs-success-bg-subtle: #E8F5E9;
-}
-
-.bg-primary,
-.btn-primary,
-.navbar.bg-primary {
-    background-color: #9C27B0 !important;
-    border-color: #9C27B0 !important;
-}
-
-.text-primary {
-    color: #9C27B0 !important;
-}
-
-.border-primary {
-    border-color: #9C27B0 !important;
-}
-
-.btn-primary:hover {
-    background-color: #7B1FA2 !important;
-    border-color: #7B1FA2 !important;
-}
-
-.btn-outline-primary {
-    color: #9C27B0;
-    border-color: #9C27B0;
-}
-
-.btn-outline-primary:hover,
-.btn-outline-primary.active {
-    background-color: #9C27B0 !important;
-    border-color: #9C27B0 !important;
-    color: white !important;
-}
-
 /* SHARP CORNERS - Remove all border radius */
 .card,
 .btn,
@@ -182,20 +132,9 @@ h6, .h6 { font-size: 0.85rem; margin-bottom: 0.15rem; }
 /* Application Specific Styles */
 /* ============================= */
 
-/* Body */
-body {
-    background: linear-gradient(135deg, #FFF9E6 0%, #FFE5F5 50%, #F3E5FF 100%);
-    background-attachment: fixed;
-}
-
 /* Progress Bar */
 .progress {
     height: 20px;
-    background-color: #F3E5F5;
-}
-
-.progress-bar {
-    background: linear-gradient(90deg, #9C27B0, #FF6F00, #FFD600);
 }
 
 /* Toast Messages */

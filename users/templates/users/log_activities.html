@@ -6,10 +6,10 @@
 <div class="row g-2">
     <!-- LEFT COLUMN: Interactive Calendar -->
     <div class="col-lg-8">
-        <div class="card" style="border: 2px solid #9C27B0;">
+        <div class="card">
             <div class="card-body p-3">
-                <h2 class="h5 mb-2" style="color: #9C27B0;">📅 Select Date to Log Activities</h2>
-                <p class="small text-muted">Click a date to view and manage entries for that day</p>
+                <h2 class="h5 mb-2">Select Date to Log Activities</h2>
+                <p class="small">Click a date to view and manage entries for that day</p>
                 
                 <!-- Calendar will be rendered here -->
                 <div id="activityCalendar" class="mb-3"></div>
@@ -19,34 +19,34 @@
     
     <!-- RIGHT COLUMN: Date Entries Panel -->
     <div class="col-lg-4">
-        <div class="card" style="border: 2px solid #9C27B0;">
+        <div class="card">
             <div class="card-body p-2">
-                <h2 class="h5 mb-2" style="color: #9C27B0;" id="entriesDateTitle">📊 Entries for <span id="selectedDateDisplay">{{ selected_date|date:"M d, Y" }}</span></h2>
+                <h2 class="h5 mb-2" id="entriesDateTitle">Entries for <span id="selectedDateDisplay">{{ selected_date|date:"M d, Y" }}</span></h2>
                 
                 <!-- Single Add/Edit Button with Dropdown Menu -->
                 <div class="dropdown d-grid mb-3">
-                    <button class="btn btn-sm" style="background: #9C27B0; color: white;" type="button" id="addEditDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span id="addEditButtonText">➕ Add</span>
+                    <button class="btn btn-sm" type="button" id="addEditDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="addEditButtonText">Add</span>
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="addEditDropdown">
                         <li>
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#weightModal">
-                                ⚖️ Weight & Body Stats
+                                Weight & Body Stats
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mealModal">
-                                🍎 Meal
+                                Meal
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exerciseModal">
-                                💪 Exercise
+                                Exercise
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#fertilityModal">
-                                🌸 Fertility
+                                Fertility
                             </a>
                         </li>
                     </ul>
@@ -57,64 +57,64 @@
                 <!-- Entries for Selected Date -->
                 <div id="dateEntriesContainer">
                     <!-- Weight Entry -->
-                    <div class="card mb-2" style="border-left: 3px solid #9C27B0;">
+                    <div class="card mb-2">
                         <div class="card-body p-2">
-                            <div class="fw-bold small mb-1" style="color: #9C27B0;">⚖️ Weight</div>
+                            <div class="fw-bold small mb-1">Weight</div>
                             <div id="weightEntries">
                                 {% if recent_weight %}
                                     {% for entry in recent_weight %}
                                         <div class="small">{{ entry.weight_display }}</div>
                                     {% endfor %}
                                 {% else %}
-                                    <div class="small text-muted fst-italic">No entries</div>
+                                    <div class="small fst-italic">No entries</div>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                     
                     <!-- Meals Entry -->
-                    <div class="card mb-2" style="border-left: 3px solid #E91E63;">
+                    <div class="card mb-2">
                         <div class="card-body p-2">
-                            <div class="fw-bold small mb-1" style="color: #E91E63;">🍎 Meals</div>
+                            <div class="fw-bold small mb-1">Meals</div>
                             <div id="mealEntries">
                                 {% if recent_meals %}
                                     {% for meal in recent_meals %}
                                         <div class="small">{{ meal.get_meal_type_display }} - {{ meal.calories }} kcal</div>
                                     {% endfor %}
                                 {% else %}
-                                    <div class="small text-muted fst-italic">No entries</div>
+                                    <div class="small fst-italic">No entries</div>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                     
                     <!-- Exercise Entry -->
-                    <div class="card mb-2" style="border-left: 3px solid #FF6F00;">
+                    <div class="card mb-2">
                         <div class="card-body p-2">
-                            <div class="fw-bold small mb-1" style="color: #FF6F00;">💪 Exercise</div>
+                            <div class="fw-bold small mb-1">Exercise</div>
                             <div id="exerciseEntries">
                                 {% if recent_exercise %}
                                     {% for ex in recent_exercise %}
                                         <div class="small">{{ ex.get_exercise_type_display }} - {{ ex.duration_minutes }} min</div>
                                     {% endfor %}
                                 {% else %}
-                                    <div class="small text-muted fst-italic">No entries</div>
+                                    <div class="small fst-italic">No entries</div>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                     
                     <!-- Fertility Entry -->
-                    <div class="card mb-2" style="border-left: 3px solid #00C853;">
+                    <div class="card mb-2">
                         <div class="card-body p-2">
-                            <div class="fw-bold small mb-1" style="color: #00C853;">🌸 Fertility</div>
+                            <div class="fw-bold small mb-1">Fertility</div>
                             <div id="fertilityEntries">
                                 {% if recent_fertility %}
                                     {% for fert in recent_fertility %}
                                         <div class="small">Logged</div>
                                     {% endfor %}
                                 {% else %}
-                                    <div class="small text-muted fst-italic">No entries</div>
+                                    <div class="small fst-italic">No entries</div>
                                 {% endif %}
                             </div>
                         </div>
@@ -131,9 +131,9 @@
 <div class="modal fade" id="weightModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="background: linear-gradient(135deg, #9C27B0, #E91E63); color: white;">
-                <h5 class="modal-title">⚖️ Log Weight & Body Stats</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            <div class="modal-header">
+                <h5 class="modal-title">Log Weight & Body Stats</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form method="post" action="{% url 'log_activities' %}?type=weight" id="weightForm">
@@ -144,7 +144,7 @@
                         <label for="{{ weight_form.date.id_for_label }}" class="form-label">{{ weight_form.date.label }}</label>
                         {{ weight_form.date }}
                         {% if weight_form.date.errors %}
-                            <div class="text-danger small">{{ weight_form.date.errors }}</div>
+                            <div class="text-secondary small">{{ weight_form.date.errors }}</div>
                         {% endif %}
                     </div>
                     
@@ -158,14 +158,14 @@
                                     <label for="{{ weight_form.weight_stones.id_for_label }}" class="form-label small">Stones</label>
                                     {{ weight_form.weight_stones }}
                                     {% if weight_form.weight_stones.errors %}
-                                        <div class="text-danger small">{{ weight_form.weight_stones.errors }}</div>
+                                        <div class="text-secondary small">{{ weight_form.weight_stones.errors }}</div>
                                     {% endif %}
                                 </div>
                                 <div class="col-6">
                                     <label for="{{ weight_form.weight_pounds.id_for_label }}" class="form-label small">Pounds</label>
                                     {{ weight_form.weight_pounds }}
                                     {% if weight_form.weight_pounds.errors %}
-                                        <div class="text-danger small">{{ weight_form.weight_pounds.errors }}</div>
+                                        <div class="text-secondary small">{{ weight_form.weight_pounds.errors }}</div>
                                     {% endif %}
                                 </div>
                             </div>
@@ -178,7 +178,7 @@
                             <label for="{{ weight_form.weight.id_for_label }}" class="form-label">Weight (kg)</label>
                             {{ weight_form.weight }}
                             {% if weight_form.weight.errors %}
-                                <div class="text-danger small">{{ weight_form.weight.errors }}</div>
+                                <div class="text-secondary small">{{ weight_form.weight.errors }}</div>
                             {% endif %}
                         </div>
                         {{ weight_form.weight_stones }}
@@ -189,7 +189,7 @@
                             <label for="{{ weight_form.weight.id_for_label }}" class="form-label">Weight (lb)</label>
                             {{ weight_form.weight }}
                             {% if weight_form.weight.errors %}
-                                <div class="text-danger small">{{ weight_form.weight.errors }}</div>
+                                <div class="text-secondary small">{{ weight_form.weight.errors }}</div>
                             {% endif %}
                         </div>
                         {{ weight_form.weight_stones }}
@@ -201,7 +201,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" form="weightForm" class="btn" style="background: #9C27B0; color: white;">💾 Save</button>
+                <button type="submit" form="weightForm" class="btn">Save</button>
             </div>
         </div>
     </div>
@@ -211,9 +211,9 @@
 <div class="modal fade" id="mealModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="background: linear-gradient(135deg, #E91E63, #FF6F00); color: white;">
-                <h5 class="modal-title">🍎 Log Meal</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            <div class="modal-header">
+                <h5 class="modal-title">Log Meal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form method="post" action="{% url 'log_activities' %}?type=meal" id="mealForm">
@@ -224,7 +224,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" form="mealForm" class="btn" style="background: #E91E63; color: white;">💾 Save</button>
+                <button type="submit" form="mealForm" class="btn">Save</button>
             </div>
         </div>
     </div>
@@ -234,9 +234,9 @@
 <div class="modal fade" id="exerciseModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="background: linear-gradient(135deg, #FF6F00, #FFD600); color: white;">
-                <h5 class="modal-title">💪 Log Exercise</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            <div class="modal-header">
+                <h5 class="modal-title">Log Exercise</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form method="post" action="{% url 'log_activities' %}?type=exercise" id="exerciseForm">
@@ -320,7 +320,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" form="exerciseForm" class="btn" style="background: #FF6F00; color: white;">💾 Save</button>
+                <button type="submit" form="exerciseForm" class="btn">Save</button>
             </div>
         </div>
     </div>
@@ -330,9 +330,9 @@
 <div class="modal fade" id="fertilityModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="background: linear-gradient(135deg, #00C853, #9C27B0); color: white;">
-                <h5 class="modal-title">🌸 Log Fertility</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            <div class="modal-header">
+                <h5 class="modal-title">Log Fertility</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form method="post" action="{% url 'log_activities' %}?type=fertility" id="fertilityForm">
@@ -343,7 +343,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" form="fertilityForm" class="btn" style="background: #00C853; color: white;">💾 Save</button>
+                <button type="submit" form="fertilityForm" class="btn">Save</button>
             </div>
         </div>
     </div>
@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function() {
                           (data.fertility && data.fertility.length > 0);
         
         // Update button text
-        const buttonText = hasEntries ? '✏️ Edit' : '➕ Add';
+        const buttonText = hasEntries ? '️ Edit' : ' Add';
         document.getElementById('addEditButtonText').textContent = buttonText;
         
         // Update Weight

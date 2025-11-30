@@ -8,12 +8,12 @@
         {% csrf_token %}
         
         {% if form.errors %}
-            <div style="background:#ffebee;border:2px solid #e57373;border-radius:0.5rem;padding:1rem;margin-bottom:1rem;">
-                <strong style="color:#d32f2f;">Please correct the errors below:</strong>
+            <div >
+                <strong>Please correct the errors below:</strong>
                 {{ form.non_field_errors }}
                 {% for field in form %}
                     {% if field.errors %}
-                        <div style="color:#d32f2f;margin-top:0.5rem;">
+                        <div style="margin-top:0.5rem;">
                             <strong>{{ field.label }}:</strong> {{ field.errors|striptags }}
                         </div>
                     {% endif %}
