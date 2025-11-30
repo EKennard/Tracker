@@ -11,3 +11,9 @@ class HabitLogForm(forms.ModelForm):
             'value': forms.NumberInput(attrs={'class': 'border rounded p-2'}),
             'unit': forms.TextInput(attrs={'class': 'border rounded p-2'}),
         }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Make all fields optional
+        for field in self.fields.values():
+            field.required = False

@@ -12,3 +12,9 @@ class FertilityLogForm(forms.ModelForm):
             'symptoms': forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
             'notes': forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Make all fields optional
+        for field in self.fields.values():
+            field.required = False

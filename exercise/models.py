@@ -37,20 +37,20 @@ class ExerciseLog(models.Model):
         ('tai_chi', 'Tai Chi'),
         ('other', 'Other'),
     ]
-    exercise_type = models.CharField(max_length=100, choices=EXERCISE_TYPE_CHOICES)
-    duration_minutes = models.DecimalField(max_digits=5, decimal_places=2)
+    exercise_type = models.CharField(max_length=100, choices=EXERCISE_TYPE_CHOICES, blank=True, null=True)
+    duration_minutes = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     DISTANCE_LOGGED_CHOICES = [
         ('miles', 'Miles'), ('kilometers', 'Kilometres')]
     distance_unit = models.CharField(max_length=20, choices=DISTANCE_LOGGED_CHOICES, blank=True, null=True)
     distance_logged = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     RATING_CHOICES = [(i, str(i)) for i in range(1, 11)]
-    rating = models.IntegerField(choices=RATING_CHOICES)
+    rating = models.IntegerField(choices=RATING_CHOICES, blank=True, null=True)
     INTENSITY_CHOICES = [
         ('low', 'Low'),
         ('medium', 'Medium'),
         ('high', 'High'),
     ]
-    intensity = models.CharField(max_length=50, choices=INTENSITY_CHOICES)
+    intensity = models.CharField(max_length=50, choices=INTENSITY_CHOICES, blank=True, null=True)
     EMOJI_CHOICES = [
         ('😀', 'Very Satisfied'),
         ('🙂', 'Satisfied'),
@@ -59,8 +59,8 @@ class ExerciseLog(models.Model):
         ('😫', 'Exhausted'),
     ]
     emoji = models.CharField(max_length=2, choices=EMOJI_CHOICES, blank=True, null=True)
-    calories_burned = models.IntegerField()
-    notes = models.TextField()
+    calories_burned = models.IntegerField(blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.profile.user.username} - {self.exercise_type} on {self.date}"

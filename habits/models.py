@@ -6,7 +6,7 @@ from django.utils import timezone
 # Create your models here.
 class HabitLog(models.Model):
 	profile = models.ForeignKey('users.UserProfile', on_delete=models.CASCADE, related_name='habit_logs')
-	habit_name = models.CharField(max_length=100)
+	habit_name = models.CharField(max_length=100, blank=True, null=True)
 	date = models.DateField(default=timezone.now)
 	modified_at = models.DateTimeField(auto_now=True)
 	is_active = models.BooleanField(default=True)

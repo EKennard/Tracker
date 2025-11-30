@@ -14,3 +14,9 @@ class NutritionLogForm(forms.ModelForm):
             'fats': forms.NumberInput(attrs={'class': 'border rounded p-2'}),
             'description': forms.Textarea(attrs={'class': 'border rounded p-2', 'rows': 2}),
         }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Make all fields optional
+        for field in self.fields.values():
+            field.required = False
