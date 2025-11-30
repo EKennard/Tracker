@@ -111,17 +111,18 @@ def dashboard(request):
     
     # Convert weight entries to display unit - only actual logged entries
     weight_data = []
-    for entry in weight_entries:
-        weight_lb = entry['weight']
-        date_str = entry['date'].strftime('%Y-%m-%d')
-        converted_weight = float(weight_lb)
-        
-        if profile.weight_unit == 'st':
-            converted_weight = float(weight_lb) / 14.0
-        elif profile.weight_unit == 'kg':
-            converted_weight = float(weight_lb) * 0.453592
-        
-        weight_data.append({'date': date_str, 'weight': converted_weight})
+    if weight_entries:
+        for entry in weight_entries:
+            weight_lb = entry['weight']
+            date_str = entry['date'].strftime('%Y-%m-%d')
+            converted_weight = float(weight_lb)
+            
+            if profile.weight_unit == 'st':
+                converted_weight = float(weight_lb) / 14.0
+            elif profile.weight_unit == 'kg':
+                converted_weight = float(weight_lb) * 0.453592
+            
+            weight_data.append({'date': date_str, 'weight': converted_weight})
     elif profile.starting_weight:
         # If no weight data exists, show starting weight as a placeholder
         start_date = profile.user.date_joined.strftime('%Y-%m-%d')
