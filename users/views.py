@@ -189,10 +189,19 @@ def dashboard(request):
     friend_ids = [f.id for f in friends]
     friend_activities = GlobalActivity.objects.filter(profile_id__in=friend_ids).order_by('-created_at')[:5]
     
-    # Goal weight for display
+    # Goal weight for display and chart
     goal_weight = None
+    goal_weight_numeric = None
     if hasattr(profile, 'goal_weight') and profile.goal_weight:
         goal_weight = format_weight_for_display(profile.goal_weight)
+        # Convert goal weight to display unit for chart
+        goal_weight_lb = float(profile.goal_weight)
+        if profile.weight_unit == 'st':
+            goal_weight_numeric = goal_weight_lb / 14.0
+        elif profile.weight_unit == 'kg':
+            goal_weight_numeric = goal_weight_lb * 0.453592
+        else:
+            goal_weight_numeric = goal_weight_lb
     
     return render(request, 'users/dashboard_new.html', {
         'profile': profile,
@@ -203,6 +212,7 @@ def dashboard(request):
         'weight_lost': weight_lost,
         'weight_progress_percent': weight_progress_percent,
         'goal_weight': goal_weight,
+        'goal_weight_numeric': goal_weight_numeric,
         'weight_data_json': json.dumps(weight_data),
         'activity_stream': activity_stream,
         'activity_count': activity_count,
@@ -214,7 +224,6 @@ def dashboard(request):
         'total_workouts': total_workouts,
         'weight_unit': display_unit,
         'height_unit': profile.height_unit,
-        'goal_weight': getattr(profile, 'goal', None),
     })
 
 
