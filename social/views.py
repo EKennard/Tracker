@@ -31,9 +31,10 @@ def social_hub(request):
     
     # Get group invitations
     pending_invitations = GroupInvitation.objects.filter(
-        invitee=profile,
-        status='pending'
-    ).select_related('group', 'inviter')
+        to_user=profile,
+        accepted=False,
+        declined=False
+    ).select_related('group', 'from_user')
     
     # Get recent activities from friends
     friend_ids = [f.id for f in friends]
