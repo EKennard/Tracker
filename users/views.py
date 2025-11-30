@@ -103,6 +103,9 @@ def dashboard(request):
         if weight_kg > 0 and height_m > 0:
             current_bmi = weight_kg / (height_m ** 2)
     
+    # Get proper display unit label (define this early)
+    display_unit = 'st' if profile.weight_unit == 'st' else profile.weight_unit
+    
     # Get weight data for chart - use ALL HealthMetrics entries ordered by date
     weight_data = list(all_metrics.values('date', 'weight').order_by('date'))
     
@@ -132,9 +135,6 @@ def dashboard(request):
         elif profile.weight_unit == 'kg':
             starting_weight_numeric = starting_weight_numeric * 0.453592
         weight_data = [{'date': start_date, 'weight': starting_weight_numeric}]
-    
-    # Get proper display unit label
-    display_unit = 'st' if profile.weight_unit == 'st' else profile.weight_unit
     
     # Unified activity stream - combine all activities
     from itertools import chain
