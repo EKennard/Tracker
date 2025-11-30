@@ -66,9 +66,9 @@
         </div>
     </div>
     
-    <!-- RIGHT COLUMN: Recent Entries Summary -->
+    <!-- RIGHT COLUMN: Today's Entries Summary -->
     <div class="col-lg-3">
-        <h2 class="h5 mb-2" style="color: #9C27B0;">📊 Recent Entries</h2>
+        <h2 class="h5 mb-2" style="color: #9C27B0;">📊 Today's Entries</h2>
         
         <!-- Recent Weight -->
         <div class="card mb-2" style="border: 1px solid #9C27B0;">
@@ -127,7 +127,64 @@
             <div class="modal-body">
                 <form method="post" action="{% url 'log_activities' %}?type=weight" id="weightForm">
                     {% csrf_token %}
-                    {{ weight_form.as_p }}
+                    
+                    <!-- Date Field -->
+                    <div class="mb-3">
+                        <label for="{{ weight_form.date.id_for_label }}" class="form-label">{{ weight_form.date.label }}</label>
+                        {{ weight_form.date }}
+                        {% if weight_form.date.errors %}
+                            <div class="text-danger small">{{ weight_form.date.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Weight Field(s) -->
+                    {% if weight_unit == 'st' %}
+                        <!-- Stones and Pounds -->
+                        <div class="mb-3">
+                            <label class="form-label">Weight</label>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <label for="{{ weight_form.weight_stones.id_for_label }}" class="form-label small">Stones</label>
+                                    {{ weight_form.weight_stones }}
+                                    {% if weight_form.weight_stones.errors %}
+                                        <div class="text-danger small">{{ weight_form.weight_stones.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-6">
+                                    <label for="{{ weight_form.weight_pounds.id_for_label }}" class="form-label small">Pounds</label>
+                                    {{ weight_form.weight_pounds }}
+                                    {% if weight_form.weight_pounds.errors %}
+                                        <div class="text-danger small">{{ weight_form.weight_pounds.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <small class="form-text text-muted">Enter your weight in stones and pounds (e.g., 12 stones 5 pounds)</small>
+                        </div>
+                        {{ weight_form.weight }}
+                    {% elif weight_unit == 'kg' %}
+                        <!-- Kilograms -->
+                        <div class="mb-3">
+                            <label for="{{ weight_form.weight.id_for_label }}" class="form-label">Weight (kg)</label>
+                            {{ weight_form.weight }}
+                            {% if weight_form.weight.errors %}
+                                <div class="text-danger small">{{ weight_form.weight.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {{ weight_form.weight_stones }}
+                        {{ weight_form.weight_pounds }}
+                    {% else %}
+                        <!-- Pounds -->
+                        <div class="mb-3">
+                            <label for="{{ weight_form.weight.id_for_label }}" class="form-label">Weight (lb)</label>
+                            {{ weight_form.weight }}
+                            {% if weight_form.weight.errors %}
+                                <div class="text-danger small">{{ weight_form.weight.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {{ weight_form.weight_stones }}
+                        {{ weight_form.weight_pounds }}
+                    {% endif %}
+                    
                     <input type="hidden" name="form_type" value="weight">
                 </form>
             </div>

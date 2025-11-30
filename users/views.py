@@ -524,10 +524,22 @@ def log_activities(request):
         form_type = request.POST.get('form_type')
         
         if form_type == 'weight':
-            form = HealthMetricsForm(request.POST)
+            form = HealthMetricsForm(request.POST, user_profile=profile)
             if form.is_valid():
                 entry = form.save(commit=False)
                 entry.user_profile = profile
+                
+                # Convert weight from user's preferred unit to pounds for storage
+                # Note: For stones, the form's clean() method already handles conversion
+                entered_weight = float(entry.weight)
+                if profile.weight_unit == 'kg':
+                    # Convert kg to lb (1 kg = 2.20462 lb)
+                    entry.weight = entered_weight * 2.20462
+                elif profile.weight_unit == 'lb':
+                    # Weight is already in lb, no conversion needed
+                    pass
+                # For stones, weight is already converted to lb in form's clean() method
+                
                 entry.save()
                 messages.success(request, '✅ Weight logged successfully!')
                 return redirect('log_activities')
@@ -568,18 +580,19 @@ def log_activities(request):
                 messages.success(request, '✅ Fertility data logged successfully!')
                 return redirect('log_activities')
     
-    # Get recent entries for each category
+    # Get today's entries for each category
     from metrics.models import HealthMetrics
     from meals.models import NutritionLog
     from exercise.models import ExerciseLog
     from habits.models import HabitLog as HabitLogModel
     from fertility.models import FertilityLog as FertilityLogModel
     
-    recent_weight = HealthMetrics.objects.filter(user_profile=profile).order_by('-date')[:5]
-    recent_meals = NutritionLog.objects.filter(profile=profile).order_by('-date')[:5]
-    recent_exercise = ExerciseLog.objects.filter(profile=profile).order_by('-date')[:5]
-    recent_habits = HabitLogModel.objects.filter(profile=profile).order_by('-date')[:5]
-    recent_fertility = FertilityLogModel.objects.filter(profile=profile).order_by('-date')[:5]
+    today = date.today()
+    recent_weight = HealthMetrics.objects.filter(user_profile=profile, date=today).order_by('-date')
+    recent_meals = NutritionLog.objects.filter(profile=profile, date=today).order_by('-date')
+    recent_exercise = ExerciseLog.objects.filter(profile=profile, date=today).order_by('-date')
+    recent_habits = HabitLogModel.objects.filter(profile=profile, date=today).order_by('-date')
+    recent_fertility = FertilityLogModel.objects.filter(profile=profile, date=today).order_by('-date')
     
     # Format recent weight entries with user's preferred unit
     for entry in recent_weight:
@@ -597,7 +610,7 @@ def log_activities(request):
     context = {
         'profile': profile,
         'selected_date': selected_date,
-        'weight_form': HealthMetricsForm(initial={'date': selected_date}),
+        'weight_form': HealthMetricsForm(initial={'date': selected_date}, user_profile=profile),
         'meal_form': NutritionLogForm(initial={'date': selected_date}),
         'exercise_form': ExerciseLogForm(initial={'date': selected_date}),
         'habit_form': HabitLogForm(initial={'date': selected_date}),

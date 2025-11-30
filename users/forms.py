@@ -84,13 +84,19 @@ class UserProfileForm(forms.ModelForm):
             pounds = cleaned_data.get('weight_pounds_extra', 0)
             if stones is None or stones == '':
                 raise forms.ValidationError('Please enter weight in stones.')
-            # Convert to total pounds, then store
+            # Convert to total pounds for storage (but keep weight_unit as 'st' for display preference)
             total_pounds = (stones * 14) + (pounds or 0)
             cleaned_data['starting_weight'] = total_pounds
-            # Update weight_unit to 'lb' since we're storing in pounds
-            cleaned_data['weight_unit'] = 'lb'
+            # Keep weight_unit as 'st' for user preference display
+        elif weight_unit == 'kg':
+            # Using kg - convert to pounds for internal storage
+            kg_weight = cleaned_data.get('starting_weight')
+            if not kg_weight:
+                raise forms.ValidationError('Please enter your starting weight.')
+            # Convert kg to lb for storage
+            cleaned_data['starting_weight'] = float(kg_weight) * 2.20462
         else:
-            # Using kg or lb - require starting_weight field
+            # Using lb - require starting_weight field (no conversion needed)
             if not cleaned_data.get('starting_weight'):
                 raise forms.ValidationError('Please enter your starting weight.')
         

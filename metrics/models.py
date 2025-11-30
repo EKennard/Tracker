@@ -10,12 +10,12 @@ class HealthMetrics(models.Model):
     date = models.DateField(default=timezone.now)
     modified_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
-    height = models.DecimalField(max_digits=5, decimal_places=2)
+    height = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     weight = models.DecimalField(max_digits=5, decimal_places=2)
         # activity_level field removed: no users.ActivityLevel model exists
-    basal_metabolic_rate = models.FloatField()
-    daily_caloric_needs = models.FloatField()
-    body_fat_percentage = models.FloatField()
+    basal_metabolic_rate = models.FloatField(null=True, blank=True)
+    daily_caloric_needs = models.FloatField(null=True, blank=True)
+    body_fat_percentage = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.user_profile.user.username} - {self.date}"

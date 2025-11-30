@@ -15,10 +15,30 @@
         <label>Date</label>
         {{ metrics_form.date }}
       </div>
+      {% if weight_unit == 'st' %}
+      <div style="grid-column: span 2;">
+        <label>Weight (Stones & Pounds) *</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+          <div>
+            <label style="font-size: 0.85rem; color: #666;">Stones</label>
+            {{ metrics_form.weight_stones }}
+          </div>
+          <div>
+            <label style="font-size: 0.85rem; color: #666;">Pounds</label>
+            {{ metrics_form.weight_pounds }}
+          </div>
+        </div>
+        <small style="color: #666; font-size: 0.85rem;">Enter your weight in stones and pounds (e.g., 12 stones 5 pounds)</small>
+        {{ metrics_form.weight }}
+      </div>
+      {% else %}
       <div>
         <label>Weight ({{ weight_unit }}) *</label>
         {{ metrics_form.weight }}
+        {{ metrics_form.weight_stones }}
+        {{ metrics_form.weight_pounds }}
       </div>
+      {% endif %}
       <div>
         <label>Body Fat %</label>
         {{ metrics_form.body_fat_percentage }}

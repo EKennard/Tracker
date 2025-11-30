@@ -62,21 +62,22 @@ def metrics_summary(request):
         calculated_body_fat = max(5, min(50, calculated_body_fat))
     
     if request.method == 'POST':
-        metrics_form = HealthMetricsForm(request.POST, prefix='metrics')
+        metrics_form = HealthMetricsForm(request.POST, prefix='metrics', user_profile=profile)
         measurement_form = MeasurementForm(request.POST, prefix='measurement')
         if metrics_form.is_valid():
             m = metrics_form.save(commit=False)
             m.user_profile = profile
             
             # Convert weight from user's preferred unit to pounds for storage
+            # Note: For stones, the form's clean() method already handles conversion
             entered_weight = float(m.weight)
             if profile.weight_unit == 'kg':
                 # Convert kg to lb (1 kg = 2.20462 lb)
                 m.weight = entered_weight * 2.20462
-            elif profile.weight_unit == 'st':
-                # Convert stones to lb (1 stone = 14 lb)
-                m.weight = entered_weight * 14.0
-            # else weight is already in lb, no conversion needed
+            elif profile.weight_unit == 'lb':
+                # Weight is already in lb, no conversion needed
+                pass
+            # For stones, weight is already converted to lb in form's clean() method
             
             # Auto-fill BMR and calories if not provided
             if not m.basal_metabolic_rate and calculated_bmr:
@@ -94,7 +95,7 @@ def metrics_summary(request):
             meas.save()
             return redirect('metrics_summary')
     else:
-        metrics_form = HealthMetricsForm(prefix='metrics')
+        metrics_form = HealthMetricsForm(prefix='metrics', user_profile=profile)
         measurement_form = MeasurementForm(prefix='measurement')
     
     # Format weight display for all metrics based on user preference
