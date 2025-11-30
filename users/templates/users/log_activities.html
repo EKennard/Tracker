@@ -262,7 +262,76 @@
             <div class="modal-body">
                 <form method="post" action="{% url 'log_activities' %}?type=exercise" id="exerciseForm">
                     {% csrf_token %}
-                    {{ exercise_form.as_p }}
+                    
+                    <!-- Date Field -->
+                    <div class="mb-3">
+                        <label for="{{ exercise_form.date.id_for_label }}" class="form-label">{{ exercise_form.date.label }}</label>
+                        {{ exercise_form.date }}
+                    </div>
+                    
+                    <!-- Exercise Type -->
+                    <div class="mb-3">
+                        <label for="{{ exercise_form.exercise_type.id_for_label }}" class="form-label">{{ exercise_form.exercise_type.label }}</label>
+                        {{ exercise_form.exercise_type }}
+                    </div>
+                    
+                    <!-- Duration: Hours and Minutes -->
+                    <div class="mb-3">
+                        <label class="form-label">Duration</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <label for="{{ exercise_form.duration_hours.id_for_label }}" class="form-label small">Hours</label>
+                                {{ exercise_form.duration_hours }}
+                            </div>
+                            <div class="col-6">
+                                <label for="{{ exercise_form.duration_minutes.id_for_label }}" class="form-label small">Minutes</label>
+                                {{ exercise_form.duration_minutes }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Distance Logged -->
+                    <div class="mb-3">
+                        <label for="{{ exercise_form.distance_logged.id_for_label }}" class="form-label">{{ exercise_form.distance_logged.label }}</label>
+                        {{ exercise_form.distance_logged }}
+                    </div>
+                    
+                    <!-- Distance Unit -->
+                    <div class="mb-3">
+                        <label for="{{ exercise_form.distance_unit.id_for_label }}" class="form-label">{{ exercise_form.distance_unit.label }}</label>
+                        {{ exercise_form.distance_unit }}
+                    </div>
+                    
+                    <!-- Rating -->
+                    <div class="mb-3">
+                        <label for="{{ exercise_form.rating.id_for_label }}" class="form-label">{{ exercise_form.rating.label }}</label>
+                        {{ exercise_form.rating }}
+                    </div>
+                    
+                    <!-- Intensity -->
+                    <div class="mb-3">
+                        <label for="{{ exercise_form.intensity.id_for_label }}" class="form-label">{{ exercise_form.intensity.label }}</label>
+                        {{ exercise_form.intensity }}
+                    </div>
+                    
+                    <!-- Emoji -->
+                    <div class="mb-3">
+                        <label for="{{ exercise_form.emoji.id_for_label }}" class="form-label">{{ exercise_form.emoji.label }}</label>
+                        {{ exercise_form.emoji }}
+                    </div>
+                    
+                    <!-- Calories Burned -->
+                    <div class="mb-3">
+                        <label for="{{ exercise_form.calories_burned.id_for_label }}" class="form-label">{{ exercise_form.calories_burned.label }}</label>
+                        {{ exercise_form.calories_burned }}
+                    </div>
+                    
+                    <!-- Notes -->
+                    <div class="mb-3">
+                        <label for="{{ exercise_form.notes.id_for_label }}" class="form-label">{{ exercise_form.notes.label }}</label>
+                        {{ exercise_form.notes }}
+                    </div>
+                    
                     <input type="hidden" name="form_type" value="exercise">
                 </form>
             </div>
