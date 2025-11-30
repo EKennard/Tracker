@@ -106,30 +106,47 @@ def dashboard(request):
     display_unit = 'st' if profile.weight_unit == 'st' else profile.weight_unit
     
     # Get weight data for chart - use ALL HealthMetrics entries ordered by date
-    weight_data = list(all_metrics.values('date', 'weight').order_by('date'))
+    from datetime import datetime, timedelta
+    weight_entries = list(all_metrics.values('date', 'weight').order_by('date'))
     
-    # Debug: Print weight data
-    print(f"DEBUG: Found {len(weight_data)} weight entries")
-    for entry in weight_data:
-        print(f"  Date: {entry['date']}, Weight (lb): {entry['weight']}")
-    
-    # Convert all weights for display based on user preference (as numeric for chart)
-    for entry in weight_data:
+    # Convert weight entries to display unit and create a lookup dictionary
+    weight_by_date = {}
+    for entry in weight_entries:
         weight_lb = entry['weight']
-        # Convert date to string for JSON serialization
-        entry['date'] = entry['date'].strftime('%Y-%m-%d')
+        date_str = entry['date'].strftime('%Y-%m-%d')
         if profile.weight_unit == 'st':
-            entry['weight'] = float(weight_lb) / 14.0  # Chart needs numeric
+            weight_by_date[date_str] = float(weight_lb) / 14.0
         elif profile.weight_unit == 'kg':
-            entry['weight'] = float(weight_lb) * 0.453592
+            weight_by_date[date_str] = float(weight_lb) * 0.453592
         else:
-            entry['weight'] = float(weight_lb)
-        print(f"  After conversion: Date: {entry['date']}, Weight: {entry['weight']} {display_unit}")
+            weight_by_date[date_str] = float(weight_lb)
     
-    # If no weight data exists, show starting weight as a placeholder
-    if not weight_data and profile.starting_weight:
+    # Generate complete date range for chart (last 365 days to cover all period options)
+    weight_data = []
+    if weight_by_date:
+        today = datetime.now().date()
+        start_date = today - timedelta(days=365)
+        
+        # Get the earliest actual entry date
+        earliest_entry = min(datetime.strptime(d, '%Y-%m-%d').date() for d in weight_by_date.keys())
+        start_date = max(start_date, earliest_entry)
+        
+        current_date = start_date
+        last_known_weight = None
+        
+        while current_date <= today:
+            date_str = current_date.strftime('%Y-%m-%d')
+            if date_str in weight_by_date:
+                # Actual entry exists for this date
+                last_known_weight = weight_by_date[date_str]
+                weight_data.append({'date': date_str, 'weight': last_known_weight})
+            elif last_known_weight is not None:
+                # Fill forward with last known weight
+                weight_data.append({'date': date_str, 'weight': last_known_weight})
+            current_date += timedelta(days=1)
+    elif profile.starting_weight:
+        # If no weight data exists, show starting weight as a placeholder
         start_date = profile.user.date_joined.strftime('%Y-%m-%d')
-        # Convert starting weight to display unit (numeric for chart)
         starting_weight_numeric = float(profile.starting_weight)
         if profile.weight_unit == 'st':
             starting_weight_numeric = starting_weight_numeric / 14.0
