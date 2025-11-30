@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import json
 
 from meals.models import NutritionLog
 from metrics.models import HealthMetrics, Measurement
@@ -115,6 +116,8 @@ def dashboard(request):
     # Convert all weights for display based on user preference (as numeric for chart)
     for entry in weight_data:
         weight_lb = entry['weight']
+        # Convert date to string for JSON serialization
+        entry['date'] = entry['date'].strftime('%Y-%m-%d')
         if profile.weight_unit == 'st':
             entry['weight'] = float(weight_lb) / 14.0  # Chart needs numeric
         elif profile.weight_unit == 'kg':
@@ -204,7 +207,7 @@ def dashboard(request):
         'weight_lost': weight_lost,
         'weight_progress_percent': weight_progress_percent,
         'goal_weight': goal_weight,
-        'weight_data': weight_data,
+        'weight_data_json': json.dumps(weight_data),
         'activity_stream': activity_stream,
         'activity_count': activity_count,
         'friend_count': friend_count,

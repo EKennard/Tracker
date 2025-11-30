@@ -252,7 +252,7 @@
 <!-- Chart.js for mini weight chart -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const weightData = {{ weight_data|safe }};
+    const weightData = {{ weight_data_json|safe }};
     
     if (weightData && weightData.length > 0) {
         const ctx = document.getElementById('miniWeightChart').getContext('2d');
