@@ -73,7 +73,7 @@
                 <div class="small mb-1"><strong>Username:</strong> {{ user.username }}</div>
                 <div class="small mb-1"><strong>Email:</strong> {{ user.email|default:"Not set" }}</div>
                 <div class="small mb-2"><strong>Member Since:</strong> {{ user.date_joined|date:"M d, Y" }}</div>
-                <a href="{% url 'password_change' %}" class="btn btn-sm w-100" style="background: #E91E63; color: white;">🔑 Change Password</a>
+                <a href="{% url 'account_change_password' %}" class="btn btn-sm w-100" style="background: #E91E63; color: white;">🔑 Change Password</a>
             </div>
         </div>
         
