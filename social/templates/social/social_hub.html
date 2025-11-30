@@ -37,7 +37,7 @@
             <div class="card-body p-2">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h3 class="h6 mb-0" > Friends ({{ friends.count }})</h3>
-                    <button class="btn btn-sm"  data-bs-toggle="modal" data-bs-target="#searchModal">+ Find</button>
+                    <button class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#searchModal">+ Find</button>
                 </div>
                 {% if friends %}
                     {% for friend in friends|slice:":10" %}
@@ -93,7 +93,7 @@
             <div class="card-body p-2">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h3 class="h6 mb-0" > My Groups ({{ user_groups.count }})</h3>
-                    <a href="{% url 'groups' %}" class="btn btn-sm" >View All</a>
+                    <a href="{% url 'groups' %}" class="btn btn-primary btn-sm" >View All</a>
                 </div>
                 {% if user_groups %}
                     {% for group in user_groups|slice:":5" %}

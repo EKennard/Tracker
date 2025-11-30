@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 
-                <a href="{% url 'profile_view' %}" class="btn btn-sm w-100">View Profile</a>
+                <a href="{% url 'profile_view' %}" class="btn btn-primary btn-sm w-100">View Profile</a>
             </div>
         </div>
         
@@ -41,7 +41,7 @@
                 {% if current_bmi %}
                 <div class="small mb-2"><strong>BMI:</strong> {{ current_bmi|floatformat:1 }}</div>
                 {% endif %}
-                <a href="{% url 'log_activities' %}" class="btn btn-sm w-100">Log Weight</a>
+                <a href="{% url 'log_activities' %}" class="btn btn-success btn-sm w-100">Log Weight</a>
             </div>
         </div>
         
@@ -82,7 +82,7 @@
             <div class="card-body p-2">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h2 class="h5 mb-0">Your Activity Feed</h2>
-                    <a href="{% url 'log_activities' %}" class="btn btn-sm">+ Log New</a>
+                    <a href="{% url 'log_activities' %}" class="btn btn-primary btn-sm">+ Log New</a>
                 </div>
                 
                 {% if activity_stream %}
@@ -107,7 +107,7 @@
                     <div class="text-center py-4">
                         <p class="mb-2">No activities logged yet</p>
                         <p class="small mb-3">Start tracking your wellness journey!</p>
-                        <a href="{% url 'log_activities' %}" class="btn btn-sm">Log Your First Activity</a>
+                        <a href="{% url 'log_activities' %}" class="btn btn-primary btn-sm">Log Your First Activity</a>
                         
                         <!-- Quick Start Guide -->
                         <div class="mt-4 text-start">
@@ -155,7 +155,7 @@
             <div class="card-body p-2">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h3 class="h6 mb-0">Friends</h3>
-                    <a href="{% url 'social_hub' %}" class="btn btn-sm">View All</a>
+                    <a href="{% url 'social_hub' %}" class="btn btn-info btn-sm">View All</a>
                 </div>
                 
                 {% if friend_activities %}
@@ -179,8 +179,8 @@
             <div class="card-body p-2">
                 <h3 class="h6 mb-2">Quick Actions</h3>
                 <div class="d-flex flex-column gap-1">
-                    <a href="{% url 'log_activities' %}" class="btn btn-sm w-100 text-start">Log Activities</a>
-                    <a href="{% url 'social_hub' %}" class="btn btn-sm w-100 text-start">Social Hub</a>
+                    <a href="{% url 'log_activities' %}" class="btn btn-success btn-sm w-100 text-start">Log Activities</a>
+                    <a href="{% url 'social_hub' %}" class="btn btn-info btn-sm w-100 text-start">Social Hub</a>
                 </div>
             </div>
         </div>
