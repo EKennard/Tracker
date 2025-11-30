@@ -270,8 +270,18 @@
         
         const ctx = document.getElementById('miniWeightChart').getContext('2d');
         
-        // Take last N data points based on period
-        const recentData = weightData.slice(-period);
+        // Filter data by date range (last N days)
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const startDate = new Date(today);
+        startDate.setDate(startDate.getDate() - period + 1);
+        
+        const recentData = weightData.filter(d => {
+            const entryDate = new Date(d.date);
+            entryDate.setHours(0, 0, 0, 0);
+            return entryDate >= startDate && entryDate <= today;
+        });
+        
         const labels = recentData.map(d => {
             const date = new Date(d.date);
             return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
