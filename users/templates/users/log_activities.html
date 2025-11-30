@@ -259,12 +259,16 @@
                         <label class="form-label">Duration</label>
                         <div class="row g-2">
                             <div class="col-6">
-                                <label for="{{ exercise_form.duration_hours.id_for_label }}" class="form-label small">Hours</label>
-                                {{ exercise_form.duration_hours }}
+                                <div>
+                                    <label for="{{ exercise_form.duration_hours.id_for_label }}" class="form-label small">Hours</label>
+                                    {{ exercise_form.duration_hours }}
+                                </div>
                             </div>
                             <div class="col-6">
-                                <label for="{{ exercise_form.duration_minutes.id_for_label }}" class="form-label small">Minutes</label>
-                                {{ exercise_form.duration_minutes }}
+                                <div>
+                                    <label for="{{ exercise_form.duration_minutes.id_for_label }}" class="form-label small">Minutes</label>
+                                    {{ exercise_form.duration_minutes }}
+                                </div>
                             </div>
                         </div>
                     </div>
