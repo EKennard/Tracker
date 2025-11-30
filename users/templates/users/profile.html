@@ -177,7 +177,7 @@
     </tbody>
   </table>
   <div style="margin-top:1rem;text-align:center;">
-    <a href="/metrics/summary/" class="button"> View All Metrics</a>
+    <a href="{% url 'metrics_summary' %}" class="button"> View All Metrics</a>
   </div>
 </div>
 {% endif %}
@@ -209,14 +209,14 @@
     </tbody>
   </table>
   <div style="margin-top:1rem;text-align:center;">
-    <a href="/metrics/summary/" class="button"> View All Measurements</a>
+    <a href="{% url 'metrics_summary' %}" class="button"> View All Measurements</a>
   </div>
 </div>
 {% endif %}
 
 <div style="text-align:center;margin-top:2rem;">
-  <a href="/users/dashboard/" class="button" style="margin-right:0.5rem;"> Back to Dashboard</a>
-  <a href="/users/edit-profile/" class="button" >️ Edit Profile</a>
+  <a href="{% url 'user_dashboard' %}" class="button" style="margin-right:0.5rem;"> Back to Dashboard</a>
+  <a href="{% url 'edit_profile' %}" class="button" >️ Edit Profile</a>
 </div>
 
 {% endblock %}
