@@ -193,15 +193,18 @@ def dashboard(request):
     goal_weight = None
     goal_weight_numeric = None
     if hasattr(profile, 'goal_weight') and profile.goal_weight:
-        goal_weight = format_weight_for_display(profile.goal_weight)
-        # Convert goal weight to display unit for chart
-        goal_weight_lb = float(profile.goal_weight)
-        if profile.weight_unit == 'st':
-            goal_weight_numeric = goal_weight_lb / 14.0
-        elif profile.weight_unit == 'kg':
-            goal_weight_numeric = goal_weight_lb * 0.453592
-        else:
-            goal_weight_numeric = goal_weight_lb
+        try:
+            goal_weight = format_weight_for_display(profile.goal_weight)
+            # Convert goal weight to display unit for chart
+            goal_weight_lb = float(profile.goal_weight)
+            if profile.weight_unit == 'st':
+                goal_weight_numeric = goal_weight_lb / 14.0
+            elif profile.weight_unit == 'kg':
+                goal_weight_numeric = goal_weight_lb * 0.453592
+            else:
+                goal_weight_numeric = goal_weight_lb
+        except (AttributeError, TypeError, ValueError):
+            pass
     
     return render(request, 'users/dashboard_new.html', {
         'profile': profile,
