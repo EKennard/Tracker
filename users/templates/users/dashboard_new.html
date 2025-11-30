@@ -265,6 +265,9 @@
     let weightChart = null;
     let currentPeriod = 7;
     
+    console.log('Total weight data points:', weightData.length);
+    console.log('Weight data sample:', weightData.slice(0, 10));
+    
     function renderChart(period) {
         if (!weightData || weightData.length === 0) return;
         
@@ -280,6 +283,13 @@
             const entryDate = new Date(d.date);
             entryDate.setHours(0, 0, 0, 0);
             return entryDate >= startDate && entryDate <= today;
+        });
+        
+        console.log(`Rendering chart for ${period} days:`, {
+            startDate: startDate.toISOString().split('T')[0],
+            today: today.toISOString().split('T')[0],
+            filteredDataPoints: recentData.length,
+            dates: recentData.map(d => d.date)
         });
         
         const labels = recentData.map(d => {

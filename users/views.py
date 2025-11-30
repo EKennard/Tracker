@@ -127,22 +127,20 @@ def dashboard(request):
         today = datetime.now().date()
         start_date = today - timedelta(days=365)
         
-        # Get the earliest actual entry date
+        # Get the earliest actual entry date and its weight
         earliest_entry = min(datetime.strptime(d, '%Y-%m-%d').date() for d in weight_by_date.keys())
-        start_date = max(start_date, earliest_entry)
+        first_weight = weight_by_date[earliest_entry.strftime('%Y-%m-%d')]
         
         current_date = start_date
-        last_known_weight = None
+        last_known_weight = first_weight  # Use first entry weight for all dates before first entry
         
         while current_date <= today:
             date_str = current_date.strftime('%Y-%m-%d')
             if date_str in weight_by_date:
-                # Actual entry exists for this date
+                # Actual entry exists for this date - update the weight
                 last_known_weight = weight_by_date[date_str]
-                weight_data.append({'date': date_str, 'weight': last_known_weight})
-            elif last_known_weight is not None:
-                # Fill forward with last known weight
-                weight_data.append({'date': date_str, 'weight': last_known_weight})
+            # Always append a data point for every date in range
+            weight_data.append({'date': date_str, 'weight': last_known_weight})
             current_date += timedelta(days=1)
     elif profile.starting_weight:
         # If no weight data exists, show starting weight as a placeholder
