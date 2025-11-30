@@ -23,23 +23,38 @@
             <div class="card-body p-2">
                 <h2 class="h5 mb-2" style="color: #9C27B0;" id="entriesDateTitle">📊 Entries for <span id="selectedDateDisplay">{{ selected_date|date:"M d, Y" }}</span></h2>
                 
-                <!-- Add Entry Buttons -->
-                <div class="d-grid gap-2 mb-3">
-                    <button class="btn btn-sm" style="background: #9C27B0; color: white;" data-bs-toggle="modal" data-bs-target="#weightModal">
-                        ⚖️ Add Weight
+                <!-- Single Add/Edit Button with Dropdown Menu -->
+                <div class="dropdown d-grid mb-3">
+                    <button class="btn btn-sm" style="background: #9C27B0; color: white;" type="button" id="addEditDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="addEditButtonText">➕ Add</span>
                     </button>
-                    <button class="btn btn-sm" style="background: #E91E63; color: white;" data-bs-toggle="modal" data-bs-target="#mealModal">
-                        🍎 Add Meal
-                    </button>
-                    <button class="btn btn-sm" style="background: #FF6F00; color: white;" data-bs-toggle="modal" data-bs-target="#exerciseModal">
-                        💪 Add Exercise
-                    </button>
-                    <button class="btn btn-sm" style="background: #FFD600; color: #333;" data-bs-toggle="modal" data-bs-target="#habitModal">
-                        ✅ Add Habit
-                    </button>
-                    <button class="btn btn-sm" style="background: #00C853; color: white;" data-bs-toggle="modal" data-bs-target="#fertilityModal">
-                        🌸 Add Fertility
-                    </button>
+                    <ul class="dropdown-menu w-100" aria-labelledby="addEditDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#weightModal">
+                                ⚖️ Weight & Body Stats
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mealModal">
+                                🍎 Meal
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exerciseModal">
+                                💪 Exercise
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#habitModal">
+                                ✅ Habit
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#fertilityModal">
+                                🌸 Fertility
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 
                 <hr>
@@ -405,6 +420,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateEntriesDisplay(data) {
+        // Check if there are any entries to determine button text
+        const hasEntries = (data.weight && data.weight.length > 0) ||
+                          (data.meals && data.meals.length > 0) ||
+                          (data.exercise && data.exercise.length > 0) ||
+                          (data.habits && data.habits.length > 0) ||
+                          (data.fertility && data.fertility.length > 0);
+        
+        // Update button text
+        const buttonText = hasEntries ? '✏️ Edit' : '➕ Add';
+        document.getElementById('addEditButtonText').textContent = buttonText;
+        
         // Update Weight
         const weightContainer = document.getElementById('weightEntries');
         if (data.weight && data.weight.length > 0) {
