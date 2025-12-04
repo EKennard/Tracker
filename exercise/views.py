@@ -19,11 +19,8 @@ def exercise_log(request):
         if not distance:
             return None
         
-        # Normalize stored unit to match profile units (kilometers -> km, miles -> mi)
-        stored_unit = 'km' if stored_unit == 'kilometers' else 'mi'
-        
-        # If stored unit matches preference, no conversion needed
-        if stored_unit == profile.distance_unit:
+        # Units are now consistent (km/mi), so check if conversion needed
+        if not stored_unit or stored_unit == profile.distance_unit:
             return float(distance)
         
         # Convert between km and mi
@@ -37,24 +34,15 @@ def exercise_log(request):
         return float(distance)
     
     if request.method == 'POST':
-        form = ExerciseLogForm(request.POST)
+        form = ExerciseLogForm(request.POST, user_profile=profile)
         if form.is_valid():
             log = form.save(commit=False)
             log.profile = profile
-            
-            # Map user's preferred unit to model's expected format
-            if log.distance_unit:
-                # Convert 'km' to 'kilometers' and 'mi' to 'miles' for storage
-                if log.distance_unit == 'km':
-                    log.distance_unit = 'kilometers'
-                elif log.distance_unit == 'mi':
-                    log.distance_unit = 'miles'
-            
             log.save()
             return redirect('exercise_log')
     else:
         # Pre-populate form with user's preferred distance unit
-        form = ExerciseLogForm(initial={'distance_unit': profile.distance_unit})
+        form = ExerciseLogForm(initial={'distance_unit': profile.distance_unit}, user_profile=profile)
     
     # Add converted distance display to each log
     for log in logs:

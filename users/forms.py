@@ -106,23 +106,29 @@ class UserProfileForm(forms.ModelForm):
             if not cleaned_data.get('starting_weight'):
                 raise forms.ValidationError('Please enter your starting weight.')
         
-        # Handle height based on unit
+        # Handle height based on unit - ALWAYS STORE IN CM
         if height_unit == 'in':
             # Check if user provided feet/inches (which means they want feet/inches display)
             feet = cleaned_data.get('height_feet')
             inches = cleaned_data.get('height_inches', 0)
             if feet is not None and feet != '':
-                # Using feet/inches - convert to total inches for storage
+                # Using feet/inches - convert to cm for storage
                 try:
                     total_inches = (float(feet) * 12) + float(inches or 0)
-                    cleaned_data['height'] = total_inches
+                    # Convert inches to cm (1 inch = 2.54 cm)
+                    cleaned_data['height'] = total_inches * 2.54
                 except (ValueError, TypeError):
                     raise forms.ValidationError('Invalid height value.')
-                # Keep height_unit as 'in' since we're storing in inches
             elif not cleaned_data.get('height'):
                 raise forms.ValidationError('Please enter height in feet.')
+            else:
+                # Direct inch input - convert to cm
+                try:
+                    cleaned_data['height'] = float(cleaned_data['height']) * 2.54
+                except (ValueError, TypeError):
+                    raise forms.ValidationError('Invalid height value.')
         elif height_unit == 'cm':
-            # Using cm - require height field
+            # Using cm - require height field (no conversion needed)
             if not cleaned_data.get('height'):
                 raise forms.ValidationError('Please enter your height.')
         

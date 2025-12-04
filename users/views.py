@@ -394,15 +394,10 @@ def profile_view(request):
         # Calculate BMI
         weight_for_bmi = latest_metric.weight
         if weight_for_bmi and profile.height:
-            if profile.height_unit == 'cm':
-                height_m = float(profile.height) / 100
-            else:  # inches
-                height_m = float(profile.height) * 0.0254
-            
-            weight_kg = float(weight_for_bmi) * 0.453592
-            
-            if weight_kg > 0 and height_m > 0:
-                current_bmi = weight_kg / (height_m ** 2)
+            # Height is always stored in cm
+            height_m = float(profile.height) / 100
+            weight_kg = float(weight_for_bmi) * 0.453592  # lb to kg
+            current_bmi = weight_kg / (height_m ** 2)
     
     # Get recent metrics (last 5)
     recent_metrics = all_metrics.order_by('-date')[:5]
@@ -463,12 +458,12 @@ def edit_profile(request):
             initial_data['weight_stones'] = context['weight_stones_value']
             initial_data['weight_pounds_extra'] = context['weight_pounds_value']
         
-        # Height conversions
+        # Height conversions - height is always stored in cm
         if profile.height_unit == 'cm':
             context['height_cm_value'] = round(float(profile.height), 2)
         elif profile.height_unit == 'in':
-            # Convert to feet and inches
-            total_inches = float(profile.height)
+            # Convert cm to feet and inches for display
+            total_inches = float(profile.height) / 2.54
             context['height_feet_value'] = int(total_inches // 12)
             context['height_inches_value'] = round(total_inches % 12, 1)
             initial_data['height_feet'] = context['height_feet_value']
@@ -541,7 +536,7 @@ def log_activities(request):
                 return redirect('log_activities')
                 
         elif form_type == 'exercise':
-            form = ExerciseLogForm(request.POST)
+            form = ExerciseLogForm(request.POST, user_profile=profile)
             if form.is_valid():
                 entry = form.save(commit=False)
                 entry.profile = profile
@@ -587,7 +582,7 @@ def log_activities(request):
         'selected_date': selected_date,
         'weight_form': HealthMetricsForm(initial={'date': selected_date}, user_profile=profile),
         'meal_form': NutritionLogForm(initial={'date': selected_date}),
-        'exercise_form': ExerciseLogForm(initial={'date': selected_date}),
+        'exercise_form': ExerciseLogForm(initial={'date': selected_date}, user_profile=profile),
         'fertility_form': FertilityLogForm(initial={'date': selected_date}),
         'recent_weight': recent_weight,
         'recent_meals': recent_meals,
@@ -595,6 +590,7 @@ def log_activities(request):
         'recent_fertility': recent_fertility,
         'weight_unit': profile.weight_unit,
         'height_unit': profile.height_unit,
+        'distance_unit': profile.distance_unit,
     }
     
     return render(request, 'users/log_activities.html', context)

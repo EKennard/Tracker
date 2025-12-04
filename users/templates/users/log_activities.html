@@ -274,13 +274,16 @@
                     
                     <!-- Distance Logged -->
                     <div class="mb-3">
-                        <label for="{{ exercise_form.distance_logged.id_for_label }}" class="form-label">{{ exercise_form.distance_logged.label }}</label>
-                        {{ exercise_form.distance_logged }}
+                        <label for="{{ exercise_form.distance_logged.id_for_label }}" class="form-label">Distance {% if distance_unit %}({{ distance_unit }}){% endif %}</label>
+                        <div class="input-group">
+                            {{ exercise_form.distance_logged }}
+                            <span class="input-group-text">{{ distance_unit|default:"km/mi" }}</span>
+                        </div>
+                        <small class="form-text text-muted">Your preferred unit: {{ profile.get_distance_unit_display }}</small>
                     </div>
                     
-                    <!-- Distance Unit -->
-                    <div class="mb-3">
-                        <label for="{{ exercise_form.distance_unit.id_for_label }}" class="form-label">{{ exercise_form.distance_unit.label }}</label>
+                    <!-- Distance Unit (Hidden - defaults to user preference) -->
+                    <div style="display: none;">
                         {{ exercise_form.distance_unit }}
                     </div>
                     

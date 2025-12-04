@@ -43,10 +43,15 @@ class ExerciseLogForm(forms.ModelForm):
         }
     
     def __init__(self, *args, **kwargs):
+        user_profile = kwargs.pop('user_profile', None)
         super().__init__(*args, **kwargs)
         # Make all fields optional
         for field in self.fields.values():
             field.required = False
+        
+        # Set default distance unit from user profile
+        if user_profile and not self.instance.pk:
+            self.initial['distance_unit'] = user_profile.distance_unit
         
         # If editing existing entry, split duration_minutes into hours and minutes
         if self.instance and self.instance.pk and self.instance.duration_minutes:

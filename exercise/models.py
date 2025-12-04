@@ -40,7 +40,7 @@ class ExerciseLog(models.Model):
     exercise_type = models.CharField(max_length=100, choices=EXERCISE_TYPE_CHOICES, blank=True, null=True)
     duration_minutes = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     DISTANCE_LOGGED_CHOICES = [
-        ('miles', 'Miles'), ('kilometers', 'Kilometres')]
+        ('km', 'Kilometres'), ('mi', 'Miles')]
     distance_unit = models.CharField(max_length=20, choices=DISTANCE_LOGGED_CHOICES, blank=True, null=True)
     distance_logged = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     RATING_CHOICES = [(i, str(i)) for i in range(1, 11)]

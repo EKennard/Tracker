@@ -25,10 +25,8 @@ def metrics_summary(request):
         # Convert to metric for calculations
         weight_kg = float(profile.starting_weight) * 0.453592  # lb to kg
         
-        if profile.height_unit == 'cm':
-            height_cm = float(profile.height)
-        else:  # inches
-            height_cm = float(profile.height) * 2.54
+        # Height is always stored in cm
+        height_cm = float(profile.height)
         
         age = profile.age
         
